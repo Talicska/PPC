@@ -16,4 +16,6 @@ public class Machine {
 	public void setCylinders(ArrayList<MagnetCylinder> cylinders) {
 		this.cylinders = cylinders;
 	}
+
+    asd
 }
