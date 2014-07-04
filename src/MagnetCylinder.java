@@ -15,5 +15,7 @@ public class MagnetCylinder {
 	public void setGirth(double girth) {
 		this.girth = girth;
 	}
+
+    girth az faszmeret
 	
 }
