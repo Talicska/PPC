@@ -20,9 +20,7 @@ public class PPC {
             e.printStackTrace();
         }
 
-        //
-        int i=materials.size();
-        while(i-->0)
+        for(int i=0;i<materials.size();i++)
             System.out.println(materials.get(i).getName() +" "+ materials.get(i).getPrice());
 
     }
