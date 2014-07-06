@@ -1,7 +1,7 @@
 
 public class DyeParent {
 	protected String name;
-	protected int price;
+	protected double price;
 	protected int cylinder_volume;
 	protected int cover;
 	
@@ -11,7 +11,7 @@ public class DyeParent {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 	public void setPrice(int price) {
@@ -30,7 +30,7 @@ public class DyeParent {
 		this.cover = cover;
 	}
 
-    public DyeParent(String name, int price, int cylinder_volume, int cover) {
+    public DyeParent(String name, double price, int cylinder_volume, int cover) {
         this.name = name;
         this.price = price;
         this.cylinder_volume = cylinder_volume;
