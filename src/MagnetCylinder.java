@@ -16,7 +16,6 @@ public class MagnetCylinder {
 		this.girth = girth;
 	}
 
-    girth az faszmeret
 
 	
 }
