@@ -7,30 +7,42 @@ import java.util.ArrayList;
 
 public class PPCDB {
 
+    public static final String DATABASE = "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB";     //your own
+    private static Connection conn=null;
 
-    private static Connection conn;
-
-    public PPCDB() {
+    public void open(){
+        try {
+            conn = DriverManager.getConnection(DATABASE);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void close(){
+        if(conn!=null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    public static ArrayList<Material> getMaterials() throws SQLException{
-
-        ArrayList<Material> materials = new ArrayList<Material>();
-
+    public PPCDB() {
         try{
             Class.forName("org.sqlite.JDBC");
         }catch (ClassNotFoundException cnfe){
             System.out.println("Could not find the JDBC driver!");
             System.exit(1);
         }
+        open();
+    }
 
-        conn = DriverManager.getConnection("jdbc:sqlite:D:/IntelliJP/PPC/PPCDB");   //your own
+    public static ArrayList<Material> getMaterials() throws SQLException{
 
-        if(conn==null)
-            System.out.println("Error: Can't connect to the database!");
+        ArrayList<Material> materials = new ArrayList<Material>();
 
         Statement stm = conn.createStatement();
-        ResultSet rs=stm.executeQuery("select name_mat, price_mat from Material");
+        ResultSet rs = stm.executeQuery("select name_mat, price_mat from Material");
 
         while(rs.next()){
             materials.add(new Material(rs.getString("name_mat"), rs.getDouble("price_mat")));
