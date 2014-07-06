@@ -29,7 +29,11 @@ public class DyeParent {
 	public void setCover(int cover) {
 		this.cover = cover;
 	}
-	
-	
-	
+
+    public DyeParent(String name, int price, int cylinder_volume, int cover) {
+        this.name = name;
+        this.price = price;
+        this.cylinder_volume = cylinder_volume;
+        this.cover = cover;
+    }
 }

@@ -10,6 +10,8 @@ public class PPCDB {
 
     private static Connection conn;
 
+    public PPCDB() {
+    }
 
     public static ArrayList<Material> getMaterials() throws SQLException{
         PreparedStatement ps;
@@ -39,7 +41,6 @@ public class PPCDB {
 
         while(rs.next()){
             materials.add(new Material(rs.getString("name_mat"), rs.getDouble("price_mat")));
-
         }
 
         return materials;

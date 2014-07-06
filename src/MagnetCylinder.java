@@ -16,6 +16,8 @@ public class MagnetCylinder {
 		this.girth = girth;
 	}
 
-
-	
+    public MagnetCylinder(int teeth, double girth) {
+        this.teeth = teeth;
+        this.girth = girth;
+    }
 }

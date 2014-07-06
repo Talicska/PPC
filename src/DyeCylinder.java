@@ -15,4 +15,9 @@ public class DyeCylinder {
 	public void setPercent(int percent) {
 		this.percent = percent;
 	}
+
+    public DyeCylinder(int volume, int percent) {
+        this.volume = volume;
+        this.percent = percent;
+    }
 }
