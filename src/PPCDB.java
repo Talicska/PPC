@@ -22,7 +22,7 @@ public class PPCDB {
             System.exit(1);
         }
 
-        conn = DriverManager.getConnection("jdbc:sqlite:D:/IntelliJP/PPC/PPCDB");
+        conn = DriverManager.getConnection("jdbc:sqlite:D:/IntelliJP/PPC/PPCDB");   //sajatod ird be
 
         if(conn==null)
             System.out.println("conn 0");
