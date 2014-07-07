@@ -7,20 +7,20 @@ import java.util.Vector;
  */
 public class PPC {
 
-    public static void main(String[] args) {
+    private static ArrayList<Dye> dyes = new ArrayList<Dye>();
+    private static ArrayList<DyeCylinder> dyecyls = new ArrayList<DyeCylinder>();
+    private static Etalon etalonObj;
+    private static ArrayList<Lakk> lakks = new ArrayList<Lakk>();
+    private static ArrayList<Machine> machines = new ArrayList<Machine>();
+    private static ArrayList<MagnetCylinder> magnetcylinders = new ArrayList<MagnetCylinder>();
+    private static ArrayList<Material> materials = new ArrayList<Material>();
+    private static ArrayList<Metal> metals = new ArrayList<Metal>();
 
-        System.out.println("Hello");
+
+    private static boolean init() {      //return true if successful
 
         PPCDB database = new PPCDB();
-
-        ArrayList<Dye> dyes = new ArrayList<Dye>();
-        ArrayList<DyeCylinder> dyecyls = new ArrayList<DyeCylinder>();
         Vector<Vector<Double>> etalonMatrix = new Vector<Vector<Double>>();
-        ArrayList<Lakk> lakks = new ArrayList<Lakk>();
-        ArrayList<Machine> machines = new ArrayList<Machine>();
-        ArrayList<MagnetCylinder> magnetcylinders = new ArrayList<MagnetCylinder>();
-        ArrayList<Material> materials = new ArrayList<Material>();
-        ArrayList<Metal> metals = new ArrayList<Metal>();
 
         try {
             dyes = database.getDyes();
@@ -31,15 +31,33 @@ public class PPC {
             magnetcylinders = database.getMagnetCylinders();
             materials = database.getMaterials();
             metals = database.getMetals();
-
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
 
-        Etalon etalonObj = new Etalon(etalonMatrix);
+        etalonObj = new Etalon(etalonMatrix);
 
-        for (int i = 0; i < etalonObj.getEtalonMatrix().size();i++){
-            for(int j=0;j< etalonObj.getEtalonMatrix().get(i).size();j++) {
+        return true;
+    }
+
+    private void listAll(){
+
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println("Hello");
+        if (!init()) {
+            System.out.println("Initialization error!");
+            System.exit(1);
+        }
+
+
+
+
+        for (int i = 0; i < etalonObj.getEtalonMatrix().size(); i++) {
+            for (int j = 0; j < etalonObj.getEtalonMatrix().get(i).size(); j++) {
                 System.out.print(etalonObj.getEtalonMatrix().get(i).get(j) + " ");
             }
             System.out.print("\n");
