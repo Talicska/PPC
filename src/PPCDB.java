@@ -68,7 +68,7 @@ public class PPCDB {
     }
 
     public static Vector<Vector<Double>> getEtalon() throws SQLException {
-
+        //asdasd
     }
 
     public static ArrayList<Lakk> getLakks() throws SQLException {
