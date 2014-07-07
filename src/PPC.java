@@ -20,7 +20,7 @@ public class PPC {
     private static boolean init() {      //return true if successful
 
         PPCDB database = new PPCDB();
-        Vector<Vector<Double>> etalonMatrix = new Vector<Vector<Double>>();
+        Vector<Vector<Double>> etalonMatrix;
 
         try {
             dyes = database.getDyes();
