@@ -21,6 +21,8 @@ public class Machine {
         this.cylinders = cylinders;
     }
 
+    public void addCylinder(MagnetCylinder cylinder) { cylinders.add(cylinder); }
+
     public Machine(String name, ArrayList<MagnetCylinder> cylinders) {
         this.name = name;
         this.cylinders = cylinders;

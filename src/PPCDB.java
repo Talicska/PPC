@@ -8,7 +8,7 @@ import java.util.Vector;
 
 public class PPCDB {
 
-    public static final String DATABASE = "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB";     //your own
+    public static final String DATABASE = "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB";     //your own
     private static Connection conn = null;
 
     public void open() {
@@ -156,6 +156,29 @@ public class PPCDB {
         }
 
         return metals;
+    }
+
+    public static ArrayList<Machine> fillMachineMagCylinders( ArrayList<Machine> machines, ArrayList<MagnetCylinder> magnetcylinders) throws SQLException {
+
+        Statement stm = conn.createStatement();
+        ResultSet rs = stm.executeQuery("select Machine.name_machine, MagnetCylinder.teeth from Machine JOIN Machine_MagnetCylinder JOIN MagnetCylinder ON Machine.id_machine = Machine_MagnetCylinder.id_machine AND Machine_MagnetCylinder.id_magnet_cylinder = MagnetCylinder.id_magnet_cylinder");
+
+        for (int i = 0; i < machines.size(); i++) {
+
+            while (rs.next()) {
+
+                if (machines.get(i).getName().equals(rs.getString("name_machine"))){
+                    for (int j = 0; j < magnetcylinders.size(); j++){
+                        if (magnetcylinders.get(j).getTeeth().equals(rs.getInt("teeth")){
+                            machines.get(i).addCylinder(magnetcylinders.get(j));
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        return machines;
     }
 
 
