@@ -17,7 +17,6 @@ public class PPC {
     private static ArrayList<Material> materials = new ArrayList<Material>();
     private static ArrayList<Metal> metals = new ArrayList<Metal>();
 
-
     private static boolean init() {      //return true if successful
 
         PPCDB database = new PPCDB();
