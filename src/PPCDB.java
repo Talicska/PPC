@@ -4,6 +4,7 @@
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class PPCDB {
 
@@ -66,7 +67,9 @@ public class PPCDB {
         return dyecyls;
     }
 
-    //etalon ..................
+    public static Vector<Vector<Double>> getEtalon() throws SQLException {
+
+    }
 
     public static ArrayList<Lakk> getLakks() throws SQLException {
 
