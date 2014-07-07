@@ -44,6 +44,5 @@ public class PPC {
             }
             System.out.print("\n");
         }
-
     }
 }
