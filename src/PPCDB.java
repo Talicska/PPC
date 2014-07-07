@@ -68,7 +68,22 @@ public class PPCDB {
     }
 
     public static Vector<Vector<Double>> getEtalon() throws SQLException {
-        //asdasd
+
+        Vector<Vector<Double>> etalonMatrix = new Vector<Vector<Double>>();
+
+        Vector<Double> line = new Vector<Double>();
+
+        Statement stm = conn.createStatement();
+        ResultSet rs = stm.executeQuery("select amount, dye0_price, dye1_price, dye2_price, " +
+                "dye3_price, dye4_price, dye5_price, dye6_price, dye7_price from Etalon");
+
+        while (rs.next()) {
+            for (int i = 0; i < 9; i++)
+                line.add(rs.getDouble(i + 1));
+            etalonMatrix.add((Vector)line.clone());
+            line.clear();
+        }
+        return etalonMatrix;
     }
 
     public static ArrayList<Lakk> getLakks() throws SQLException {

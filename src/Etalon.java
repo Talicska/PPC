@@ -10,8 +10,11 @@ public class Etalon {
     public final double etalonSizeY = 150;
     public final double etalonMaterialPrice = 0.305;
 
-    private Vector<Vector<Double>> etalonMatrix;
+    private Vector<Vector<Double>> etalonMatrix = new Vector<Vector<Double>>();
 
+    public Vector<Vector<Double>> getEtalonMatrix() {
+        return etalonMatrix;
+    }
 
     public Etalon(Vector<Vector<Double>> etalonMatrix) {
         this.etalonMatrix = etalonMatrix;
