@@ -8,7 +8,7 @@ import java.util.Vector;
 
 public class PPCDB {
 
-    public static final String DATABASE = "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB";     //your own
+    public static final String DATABASE = "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB";     //your own
     private static Connection conn = null;
 
     public void open() {
@@ -161,8 +161,7 @@ public class PPCDB {
         Statement stm = conn.createStatement();
         ResultSet rs = stm.executeQuery("select m.name_machine, mc.teeth from Machine m " +
                 "INNER JOIN Machine_MagnetCylinder mmc ON m.id_machine = mmc.id_machine " +
-                "INNER JOIN MagnetCylinder mc ON mmc.id_magnet_cylinder = mc.id_magnet_cylinder");
-
+                "INNER JOIN MagnetCylinder mc ON mmc.id_magnet_cylinder = mc.id_magnet_cylinder ORDER BY mc.teeth");
 
         while (rs.next()) {
             for (int i = 0; i < machines.size(); i++) {
