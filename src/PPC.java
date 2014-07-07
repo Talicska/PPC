@@ -27,7 +27,7 @@ public class PPC {
             dyecylinders = database.getDyeCylinders();
             etalonMatrix = database.getEtalon();
             lakks = database.getLakks();
-            machines = database.getMachine();
+            machines = database.getMachines();
             magnetcylinders = database.getMagnetCylinders();
             materials = database.getMaterials();
             metals = database.getMetals();
