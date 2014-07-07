@@ -114,8 +114,6 @@ public class PPCDB {
         return machines;
     }
 
-    //machine magnet cyl ............
-
     public static ArrayList<MagnetCylinder> getMagnetCylinders() throws SQLException {
 
         ArrayList<MagnetCylinder> magcyls = new ArrayList<MagnetCylinder>();
