@@ -1,10 +1,11 @@
+/**
+ * Created by Prof on 2014.07.06..
+ */
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-/**
- * Created by Prof on 2014.07.06..
- */
 public class PPC {
 
     private static ArrayList<Dye> dyes = new ArrayList<Dye>();
