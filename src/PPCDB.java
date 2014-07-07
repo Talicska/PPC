@@ -108,7 +108,7 @@ public class PPCDB {
         ResultSet rs = stm.executeQuery("select name_machine from Machine");
 
         while (rs.next()) {
-            machines.add(new Machine(rs.getString("name_machine"), null));
+            machines.add(new Machine(rs.getString("name_machine")));
         }
 
         return machines;
@@ -161,19 +161,25 @@ public class PPCDB {
     public static ArrayList<Machine> fillMachineMagCylinders( ArrayList<Machine> machines, ArrayList<MagnetCylinder> magnetcylinders) throws SQLException {
 
         Statement stm = conn.createStatement();
-        ResultSet rs = stm.executeQuery("select Machine.name_machine, MagnetCylinder.teeth from Machine JOIN Machine_MagnetCylinder JOIN MagnetCylinder ON Machine.id_machine = Machine_MagnetCylinder.id_machine AND Machine_MagnetCylinder.id_magnet_cylinder = MagnetCylinder.id_magnet_cylinder");
+        ResultSet rs = stm.executeQuery("select m.name_machine, mc.teeth from Machine m " +
+                "INNER JOIN Machine_MagnetCylinder mmc ON m.id_machine = mmc.id_machine " +
+                "INNER JOIN MagnetCylinder mc ON mmc.id_magnet_cylinder = mc.id_magnet_cylinder");
 
-        for (int i = 0; i < machines.size(); i++) {
 
-            while (rs.next()) {
-
+        while (rs.next()) {
+            for (int i = 0; i < machines.size(); i++) {
                 if (machines.get(i).getName().equals(rs.getString("name_machine"))){
+                    System.out.println(machines.get(i).getName());
                     for (int j = 0; j < magnetcylinders.size(); j++){
-                        if (magnetcylinders.get(j).getTeeth().equals(rs.getInt("teeth")){
+                        if (magnetcylinders.get(j).getTeeth() == rs.getInt("teeth")){
+                            System.out.println("found one cylinder!");
+                            System.out.println(magnetcylinders.get(j).getTeeth());
                             machines.get(i).addCylinder(magnetcylinders.get(j));
+                            System.out.println("added");
                             break;
                         }
                     }
+                    break;
                 }
             }
         }

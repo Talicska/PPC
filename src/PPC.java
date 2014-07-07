@@ -31,6 +31,8 @@ public class PPC {
             magnetcylinders = database.getMagnetCylinders();
             materials = database.getMaterials();
             metals = database.getMetals();
+
+            machines = database.fillMachineMagCylinders(machines, magnetcylinders);
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -62,9 +64,13 @@ public class PPC {
         for(int i=0;i<lakks.size();i++){
             System.out.println(lakks.get(i).getName()+" "+lakks.get(i).getPrice());
         }
-        System.out.println("\nMachines");
+        System.out.println("\nMachines and applicable magnet cylinders");
         for(int i=0;i<machines.size();i++){
             System.out.println(machines.get(i).getName());
+            for (int j=0; j < machines.get(i).getCylinders().size(); j++){
+                System.out.print(machines.get(i).getCylinders().get(j).getTeeth() + " ");
+            }
+            System.out.println();
         }
         System.out.println("\nMagnetcylinders");
         for(int i=0;i<magnetcylinders.size();i++){
