@@ -21,7 +21,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         this.getContentPane().setLayout(null);
         dimension = new Dimension(width, height);
         this.setPreferredSize(dimension);
-        Locale myLocale = Locale.ENGLISH;
+        this.setTitle("PPC - Print Price Calculator");
 
         JMenu fileMenu = new JMenu("Fájl");        //menu
         JMenuItem newItem = new JMenuItem("Új");
