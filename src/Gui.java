@@ -12,42 +12,33 @@ public class Gui extends JFrame {
 
     public Gui() {
 
-
-
-        // set grid layout for the frame
         this.getContentPane().setLayout(null);
 
-        //
-        JPanel p1 = new JPanel();
-        JPanel p2 = new JPanel();
-        p1.setSize(600, 600);
-        p1.setBackground(Color.red);
-        p2.setLayout(new GridBagLayout());
-        p2.setSize(200, 600);
-        p2.setBackground(Color.yellow);
+        JPanel panel1 = new JPanel();   //left panel
+        panel1.setBounds(0,0,600, 600);
+        panel1.setBackground(Color.red);
+
+        JPanel panel2 = new JPanel();   //right panel
+        panel2.setBounds(600,0,200, 600);
+        panel2.setBackground(Color.yellow);
+
+        JButton b1 = new JButton("b1");
+        JButton b2 = new JButton("b2");
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-
-
-        JButton b1 = new JButton("asdas");
-
-        b1.setBounds(20, 20, 500, 50);
-        //p2.add(b1);
-
-        //p1.add(tabbedPane);
-
-        JComponent panel1 = new JPanel();
-        JButton button1 = new JButton("OK");
-        panel1.add(button1);
-
-        JComponent panel2 = new JPanel();
-        tabbedPane.addTab("Tab1", panel1);
-        tabbedPane.addTab("Tab2", panel2);
+        JComponent tab1 = new JPanel();
+        JComponent tab2 = new JPanel();
+        tabbedPane.addTab("Tab1", tab1);
+        tabbedPane.addTab("Tab2", tab2);
         tabbedPane.setSize(600, 600);
-        //this.add(tabbedPane);
-        this.add(p1);
-        this.add(p2);
-        p2.add(b1);
+
+        tab1.add(b1);
+        panel2.add(b2);
+
+        this.add(tabbedPane);
+        this.add(panel1);
+        this.add(panel2);
+
     }
 
 }
