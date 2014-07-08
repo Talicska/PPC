@@ -111,7 +111,7 @@ public class PPC {
         }
         System.out.println("Database loaded!");
 
-        loadGui(800, 600, 60, 60);
+        loadGui(1000, 600, 60, 60);
         System.out.println("User interface loaded!");
 
         //listAll();

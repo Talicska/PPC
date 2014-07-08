@@ -3,14 +3,16 @@
  */
 
 import java.awt.*;
-import java.awt.geom.Arc2D;
+import java.awt.Color;
+import java.util.Locale;
 import java.util.Vector;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
     private Dimension dimension;
-    private int width = 800;
+    private int width = 1000;
     private int height = 572;
     private int menuheight = 22;
 
@@ -19,6 +21,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         this.getContentPane().setLayout(null);
         dimension = new Dimension(width, height);
         this.setPreferredSize(dimension);
+        Locale myLocale = Locale.ENGLISH;
 
         JMenu fileMenu = new JMenu("Fájl");        //menu
         JMenuItem newItem = new JMenuItem("Új");
@@ -38,11 +41,11 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         menu.add(aboutMenu);
 
         /*JPanel panel1 = new JPanel();               //left panel
-        panel1.setBounds(0, 25, 600, height-menuheight);
+        panel1.setBounds(0, 25, 700, height-menuheight);
         panel1.setBackground(Color.red);*/
 
         JPanel panel2 = new JPanel();               //right panel
-        panel2.setBounds(600, 25, 200, height - menuheight);
+        panel2.setBounds(700, 25, 300, height - menuheight);
         panel2.setBackground(Color.yellow);
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, 0);      //tabs
@@ -52,7 +55,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tabbedPane.addTab("<html><body><table width='90'>Alapanyagok</table></body></html>", tab1);
         tabbedPane.addTab("<html><body><table width='90'>Egyebek</table></body></html>", tab2);
         tabbedPane.addTab("<html><body><table width='90'>Etalon</table></body></html>", tab3);
-        tabbedPane.setBounds(0, menuheight, 600, height - menuheight);
+        tabbedPane.setBounds(0, menuheight, 700, height - menuheight);
 
         JButton b1 = new JButton("b1");             //buttons
         JButton b2 = new JButton("b2");
@@ -86,31 +89,37 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JLabel labelOtherCost = new JLabel("Egyéb költség");
         JLabel labelSummary = new JLabel("Összesítés");
 
-        Vector<String> columnNames=new Vector<String>();        //Etalon
+        Vector<String> columnNames = new Vector<String>();        //Etalon
         columnNames.addElement("Mennyiség");
-        columnNames.addElement("0");
-        columnNames.addElement("1");
-        columnNames.addElement("2");
-        columnNames.addElement("3");
-        columnNames.addElement("4");
-        columnNames.addElement("5");
-        columnNames.addElement("6");
-        columnNames.addElement("7");
+        columnNames.addElement("0 szín");
+        columnNames.addElement("1 szín");
+        columnNames.addElement("2 szín");
+        columnNames.addElement("3 szín");
+        columnNames.addElement("4 szín");
+        columnNames.addElement("5 szín");
+        columnNames.addElement("6 szín");
+        columnNames.addElement("7 szín");
 
-        JTable table = new JTable(PPC.getEtalonObj().getEtalonMatrix(), columnNames);
+        JTable table = new JTable(PPC.getEtalonObj().getEtalonMatrix(), columnNames);   //így kell egyáltalán?
         tab3.setLayout(null);
-        tab3.setBackground(Color.blue);
-        table.setBounds(0, 30, 400, 600);
+        tab3.setBackground(Color.blue);                 //lássam mekkora a table
+        table.getTableHeader().setBounds(0, 0, 695, 30);
+        table.setBounds(0, 30, 695, 320);               //legyen nagy vagy legyen alatta hely?
+
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();        //jobbra igazit
+        rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+        table.getTableHeader().setForeground(Color.blue);                               //legyen már ocsmány
+        for (int i = 0; i < 9; i++)
+            table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+
         tab3.add(table.getTableHeader());
         tab3.add(table);
-
 
         panel2.add(labelAmount);
         this.add(tabbedPane);
         //this.add(panel1);         //not needed anymore, left in just in case
         this.add(panel2);
         this.add(menu);
-
 
     }
 
