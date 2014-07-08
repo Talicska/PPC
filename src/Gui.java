@@ -5,7 +5,7 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class Gui extends JFrame {
+public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
 
     public Gui() {
