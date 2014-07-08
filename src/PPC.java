@@ -95,7 +95,11 @@ public class PPC {
         }
         System.out.println("Welcome!");
 
-        listAll();
+        //listAll();
+        Gui mygui=new Gui();
+        mygui.setSize(600,600);
+        mygui.setLocation(60,60);
+        mygui.setVisible(true);
 
 
 
