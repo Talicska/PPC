@@ -37,14 +37,53 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
         /*JPanel panel1 = new JPanel();               //left panel
         panel1.setBounds(0, 25, 600, height-menuheight);
-        panel1.setBackground(Color.red);
+        panel1.setBackground(Color.red);*/
 
         JPanel panel2 = new JPanel();               //right panel
         panel2.setBounds(600, 25, 200, height-menuheight);
-        panel2.setBackground(Color.yellow);*/
+        panel2.setBackground(Color.yellow);
 
         JButton b1 = new JButton("b1");             //buttons
         JButton b2 = new JButton("b2");
+
+        JLabel labelMaterial = new JLabel("Alapanyag");         //labels
+        JLabel labelAmount = new JLabel("Darabszám");
+        JLabel labelWidth = new JLabel("Szélesség");
+        JLabel labelHeight = new JLabel("Magasság");
+        JLabel labelSideGap = new JLabel("Szélén");
+        JLabel labelBetweenGap = new JLabel("Pályák közt");
+        JLabel labelTracks = new JLabel("Pályák");
+
+        JLabel labelDyeType = new JLabel("Festéktípus");
+        JLabel labelDyeCylinder = new JLabel("Henger");
+        JLabel labelDyeCover = new JLabel("Lefedettség");
+        JLabel labelPregCover = new JLabel("Lefedettség");
+        JLabel labelDomborCost = new JLabel("Költség");
+
+        JLabel labelClicheCost = new JLabel("Kliséköltség");
+        JLabel labelStancCost = new JLabel("Stancköltség");
+        JLabel labelPackingCost = new JLabel("Kiszerelési költség");
+        JLabel labelPackingTime = new JLabel("Kiszerelési idő");
+        JLabel labelRollWidth = new JLabel("Tekercs szélesség");
+        JLabel labelAmountPerRoll = new JLabel("Db/tekercs");
+
+        JLabel labelMachine = new JLabel("Géptípus");
+        JLabel labelTitle = new JLabel("Címke neve");
+        JLabel labelClient = new JLabel("Megrendelő");
+        JLabel labelDiscount = new JLabel("Kedvezmény");
+        JLabel labelEuro = new JLabel("Euro árfolyam");
+        JLabel labelOtherCost = new JLabel("Egyéb költség");
+        JLabel labelSummary = new JLabel("Összesítés");
+
+
+
+
+
+
+
+
+
+
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);      //tabs
         JComponent tab1 = new JPanel();
@@ -56,11 +95,12 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tabbedPane.setBounds(0, menuheight, 600, height-menuheight);
 
         tab1.add(b1);
-
+        panel2.add(labelAmount);
         this.add(tabbedPane);
         //this.add(panel1);         //not needed anymore, left in just in case
-        //this.add(panel2);
+        this.add(panel2);
         this.add(menu);
+
 
     }
 
