@@ -32,9 +32,28 @@ public class Gui extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // set grid layout for the frame
-        this.getContentPane().setLayout(new GridLayout(1, 1));
+        this.getContentPane().setLayout(new BorderLayout(1,1));
+
+        //
+        JPanel p1 =new JPanel();
+        JPanel p2=new JPanel();
+        p1.setSize(600,600);
+        p1.setBackground(Color.red);
+        p2.setSize(200,600);
+        p2.setBackground(Color.yellow);
+
+
+
+
+        //
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+
+
+        JButton b1=new JButton("asdas");
+        //b1.set
+        p2.add(b1);
+        //p1.add(tabbedPane);
 
         JComponent panel1 = new JPanel();
         JButton button1 = new JButton("OK");
@@ -43,8 +62,11 @@ public class Gui extends JFrame {
         JComponent panel2 = new JPanel();
         tabbedPane.addTab("Tab1", panel1);
         tabbedPane.addTab("Tab2", panel2);
-
-        this.getContentPane().add(tabbedPane);
+        tabbedPane.setSize(600,600);
+        this.add(tabbedPane);
+        this.add(p1);
+        this.add(p2);
+        p2.add(b1);
 
         /*JComponent panel1 = new JComponent()
         tabbedPane.addTab("Tab 1", panel1);
