@@ -58,7 +58,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         panel2.add(b2);
 
         this.add(tabbedPane);
-        this.add(panel1);
+        //this.add(panel1);         //not needed anymore, left in just in case
         this.add(panel2);
         this.add(menu);
 
