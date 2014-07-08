@@ -18,6 +18,10 @@ public class PPC {
     private static ArrayList<Material> materials = new ArrayList<Material>();
     private static ArrayList<Metal> metals = new ArrayList<Metal>();
 
+    public static Etalon getEtalonObj() {
+        return etalonObj;
+    }
+
     private static Gui guiObj;
 
     private static boolean init() {      //return true if successful

@@ -3,6 +3,7 @@
  */
 
 import java.awt.*;
+import java.awt.geom.Arc2D;
 import java.util.Vector;
 import javax.swing.*;
 
@@ -85,17 +86,21 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JLabel labelOtherCost = new JLabel("Egyéb költség");
         JLabel labelSummary = new JLabel("Összesítés");
 
+        Vector<String> columnNames=new Vector<String>();        //Etalon
+        columnNames.addElement("Mennyiség");
+        columnNames.addElement("0");
+        columnNames.addElement("1");
+        columnNames.addElement("2");
+        columnNames.addElement("3");
+        columnNames.addElement("4");
+        columnNames.addElement("5");
+        columnNames.addElement("6");
+        columnNames.addElement("7");
 
-        //JTable table = new JTable(5,3);                    //táblát helyben kell tölteni
-        //public JTable(Object rowData[][], Object columnNames[])
-
-        Object rowData[][] = {{"Row1-Column1", "Row1-Column2", "Row1-Column3"},
-                {"Row2-Column1", "Row2-Column2", "Row2-Column3"}};
-        Object columnNames[] = {"Mennyiség", "0", "1", "2", "3", "4", "5", "6", "7"};
-        JTable table = new JTable(rowData, columnNames);
-        tab3.setLayout(new GridBagLayout());
+        JTable table = new JTable(PPC.getEtalonObj().getEtalonMatrix(), columnNames);
+        tab3.setLayout(null);
         tab3.setBackground(Color.blue);
-        //table.setBounds(10, 50, 300, 300);
+        table.setBounds(0, 30, 400, 600);
         tab3.add(table.getTableHeader());
         tab3.add(table);
 
