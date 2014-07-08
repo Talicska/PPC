@@ -31,7 +31,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JMenuItem aboutItem = new JMenuItem ("A PPC névjegye");
         aboutMenu.add (aboutItem);
         JMenuBar menu = new JMenuBar();
-        menu.setBounds(0,0,800,menuheight);
+        menu.setBounds(0,0,width,menuheight);
         menu.add(fileMenu);
         menu.add(aboutMenu);
 
