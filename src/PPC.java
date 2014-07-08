@@ -2,6 +2,7 @@
  * Created by Prof on 2014.07.06..
  */
 
+import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -50,6 +51,7 @@ public class PPC {
         guiObj.setSize(sizeX,sizeY);
         guiObj.setLocation(locX,locY);
         guiObj.setVisible(true);
+        guiObj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private static void listAll(){
