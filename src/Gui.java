@@ -29,17 +29,30 @@ public class Gui extends JFrame {
         JMenuItem aboutItem = new JMenuItem ("About");
         helpMenu.add (aboutItem);*/
 
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JTabbedPane tabbedPane = new JTabbedPane();
-        ImageIcon icon = null; //createImageIcon("images/middle.gif");
+        // set grid layout for the frame
+        this.getContentPane().setLayout(new GridLayout(1, 1));
 
-        JPanel panel1 = new JPanel();
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+
+        JComponent panel1 = new JPanel();
+        JButton button1 = new JButton("OK");
+        panel1.add(button1);
+
+        JComponent panel2 = new JPanel();
+        tabbedPane.addTab("Tab1", panel1);
+        tabbedPane.addTab("Tab2", panel2);
+
+        this.getContentPane().add(tabbedPane);
+
+        /*JComponent panel1 = new JComponent()
         tabbedPane.addTab("Tab 1", panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
-        JPanel panel2 = new JPanel();
+        JComponent panel2 = new JPanel();
         tabbedPane.addTab("Tab 2", panel2);
-        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);*/
 
         /*JComponent panel3 = makeTextPanel("Panel #3");
         tabbedPane.addTab("Tab 3", icon, panel3,
@@ -94,14 +107,6 @@ public class Gui extends JFrame {
         panel.setLayout(new GridLayout(1, 1));
         panel.add(filler);
         return panel;
-    }
-
-    public static void main (String[] args) {
-        JFrame frame = new JFrame ("MyPanel");
-        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add (new Gui());
-        frame.pack();
-        frame.setVisible (true);
     }
 }
 
