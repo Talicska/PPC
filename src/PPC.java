@@ -46,24 +46,24 @@ public class PPC {
         return true;
     }
 
-    private  static void loadGui(int sizeX, int sizeY, int locX, int locY){
-        guiObj=new Gui();
-        guiObj.setSize(sizeX,sizeY);
-        guiObj.setLocation(locX,locY);
+    private static void loadGui(int sizeX, int sizeY, int locX, int locY) {
+        guiObj = new Gui();
+        guiObj.setSize(sizeX, sizeY);
+        guiObj.setLocation(locX, locY);
         guiObj.setVisible(true);
         guiObj.setResizable(false);
         guiObj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private static void listAll(){
+    private static void listAll() {
 
         System.out.println("\nDyes");
-        for(int i=0;i<dyes.size();i++){
-            System.out.println(dyes.get(i).getName()+" "+dyes.get(i).getPrice());
+        for (int i = 0; i < dyes.size(); i++) {
+            System.out.println(dyes.get(i).getName() + " " + dyes.get(i).getPrice());
         }
         System.out.println("\nDyecylinders");
-        for(int i=0;i<dyecylinders.size();i++){
-            System.out.println(dyecylinders.get(i).getVolume()+" "+dyecylinders.get(i).getPercent());
+        for (int i = 0; i < dyecylinders.size(); i++) {
+            System.out.println(dyecylinders.get(i).getVolume() + " " + dyecylinders.get(i).getPercent());
         }
         System.out.println("\nEtalon");
         for (int i = 0; i < etalonObj.getEtalonMatrix().size(); i++) {
@@ -73,28 +73,28 @@ public class PPC {
             System.out.print("\n");
         }
         System.out.println("\nLakks");
-        for(int i=0;i<lakks.size();i++){
-            System.out.println(lakks.get(i).getName()+" "+lakks.get(i).getPrice());
+        for (int i = 0; i < lakks.size(); i++) {
+            System.out.println(lakks.get(i).getName() + " " + lakks.get(i).getPrice());
         }
         System.out.println("\nMachines and applicable magnet cylinders");
-        for(int i=0;i<machines.size();i++){
+        for (int i = 0; i < machines.size(); i++) {
             System.out.println(machines.get(i).getName());
-            for (int j=0; j < machines.get(i).getCylinders().size(); j++){
+            for (int j = 0; j < machines.get(i).getCylinders().size(); j++) {
                 System.out.print(machines.get(i).getCylinders().get(j).getTeeth() + " ");
             }
             System.out.println();
         }
         System.out.println("\nMagnetcylinders");
-        for(int i=0;i<magnetcylinders.size();i++){
-            System.out.println(magnetcylinders.get(i).getTeeth()+" "+magnetcylinders.get(i).getGirth());
+        for (int i = 0; i < magnetcylinders.size(); i++) {
+            System.out.println(magnetcylinders.get(i).getTeeth() + " " + magnetcylinders.get(i).getGirth());
         }
         System.out.println("\nMaterials");
-        for(int i=0;i<materials.size();i++){
-            System.out.println(materials.get(i).getName()+" "+materials.get(i).getPrice());
+        for (int i = 0; i < materials.size(); i++) {
+            System.out.println(materials.get(i).getName() + " " + materials.get(i).getPrice());
         }
         System.out.println("\nMetals");
-        for(int i=0;i<metals.size();i++){
-            System.out.println(metals.get(i).getName()+" "+metals.get(i).getPrice());
+        for (int i = 0; i < metals.size(); i++) {
+            System.out.println(metals.get(i).getName() + " " + metals.get(i).getPrice());
         }
     }
 
@@ -107,7 +107,7 @@ public class PPC {
         }
         System.out.println("Database loaded!");
 
-        loadGui(800,600,60,60);
+        loadGui(800, 600, 60, 60);
         System.out.println("User interface loaded!");
 
         //listAll();

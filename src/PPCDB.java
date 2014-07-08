@@ -82,7 +82,7 @@ public class PPCDB {
         while (rs.next()) {
             for (int i = 0; i < 9; i++)
                 line.add(rs.getDouble(i + 1));
-            etalonMatrix.add((Vector)line.clone());
+            etalonMatrix.add((Vector) line.clone());
             line.clear();
         }
         return etalonMatrix;
@@ -158,7 +158,7 @@ public class PPCDB {
         return metals;
     }
 
-    public static ArrayList<Machine> fillMachineMagCylinders( ArrayList<Machine> machines, ArrayList<MagnetCylinder> magnetcylinders) throws SQLException {
+    public static ArrayList<Machine> fillMachineMagCylinders(ArrayList<Machine> machines, ArrayList<MagnetCylinder> magnetcylinders) throws SQLException {
 
         Statement stm = conn.createStatement();
         ResultSet rs = stm.executeQuery("select m.name_machine, mc.teeth from Machine m " +
@@ -167,9 +167,9 @@ public class PPCDB {
 
         while (rs.next()) {
             for (int i = 0; i < machines.size(); i++) {
-                if (machines.get(i).getName().equals(rs.getString("name_machine"))){
-                    for (int j = 0; j < magnetcylinders.size(); j++){
-                        if (magnetcylinders.get(j).getTeeth() == rs.getInt("teeth")){
+                if (machines.get(i).getName().equals(rs.getString("name_machine"))) {
+                    for (int j = 0; j < magnetcylinders.size(); j++) {
+                        if (magnetcylinders.get(j).getTeeth() == rs.getInt("teeth")) {
                             machines.get(i).addCylinder(magnetcylinders.get(j));
                             break;
                         }
