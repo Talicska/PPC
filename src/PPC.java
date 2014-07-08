@@ -51,6 +51,7 @@ public class PPC {
         guiObj.setSize(sizeX,sizeY);
         guiObj.setLocation(locX,locY);
         guiObj.setVisible(true);
+        guiObj.setResizable(false);
         guiObj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -106,7 +107,7 @@ public class PPC {
         }
         System.out.println("Database loaded!");
 
-        loadGui(800,600,60,60);
+        loadGui(800,628,60,60);
         System.out.println("User interface loaded!");
 
         //listAll();

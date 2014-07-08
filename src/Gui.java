@@ -8,13 +8,16 @@ import javax.swing.*;
 public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
     private Dimension dimension;
+    private int width=800;
+    private int height=600;
+    private int menuheight=25;
 
     public Gui() {
 
         this.getContentPane().setLayout(null);
-        dimension= new Dimension(800,600);
+        dimension= new Dimension(width,height);
 
-        JMenu fileMenu = new JMenu ("Fájl");
+        JMenu fileMenu = new JMenu ("Fájl");        //menu
         JMenuItem newItem = new JMenuItem ("Új");
         fileMenu.add (newItem);
         JMenuItem saveItem = new JMenuItem ("Mentés");
@@ -27,35 +30,36 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JMenuItem aboutItem = new JMenuItem ("A PPC névjegye");
         aboutMenu.add (aboutItem);
         JMenuBar menu = new JMenuBar();
+        menu.setBounds(0,0,800,menuheight);
         menu.add(fileMenu);
         menu.add(aboutMenu);
 
-        JPanel panel1 = new JPanel();   //left panel
-        panel1.setBounds(0, 0, 600, 600);
+        JPanel panel1 = new JPanel();               //left panel
+        panel1.setBounds(0, 25, 600, height-menuheight);
         panel1.setBackground(Color.red);
 
-        JPanel panel2 = new JPanel();   //right panel
-        panel2.setBounds(600, 0, 200, 600);
+        JPanel panel2 = new JPanel();               //right panel
+        panel2.setBounds(600, 25, 200, height-menuheight);
         panel2.setBackground(Color.yellow);
 
-        JButton b1 = new JButton("b1");
+        JButton b1 = new JButton("b1");             //buttons
         JButton b2 = new JButton("b2");
 
-        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);      //tabs
         JComponent tab1 = new JPanel();
         JComponent tab2 = new JPanel();
         JComponent tab3 = new JPanel();
         tabbedPane.addTab("Alapanyagok", tab1);
-        tabbedPane.addTab("Tab2", tab2);
-        tabbedPane.addTab("Tab2", tab3);
-        tabbedPane.setSize(600, 600);
+        tabbedPane.addTab("Egyebek", tab2);
+        tabbedPane.addTab("Etalon", tab3);
+        tabbedPane.setBounds(0, menuheight, 600, height-menuheight);
 
         tab1.add(b1);
         panel2.add(b2);
 
-        //this.add(tabbedPane);
-        //this.add(panel1);
-        //this.add(panel2);
+        this.add(tabbedPane);
+        this.add(panel1);
+        this.add(panel2);
         this.add(menu);
 
     }
