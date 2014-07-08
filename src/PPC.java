@@ -17,6 +17,8 @@ public class PPC {
     private static ArrayList<Material> materials = new ArrayList<Material>();
     private static ArrayList<Metal> metals = new ArrayList<Metal>();
 
+    private static Gui guiObj;
+
     private static boolean init() {      //return true if successful
 
         PPCDB database = new PPCDB();
@@ -41,6 +43,13 @@ public class PPC {
         etalonObj = new Etalon(etalonMatrix);
 
         return true;
+    }
+
+    private  static void loadGui(int sizeX, int sizeY, int locX, int locY){
+        guiObj=new Gui();
+        guiObj.setSize(sizeX,sizeY);
+        guiObj.setLocation(locX,locY);
+        guiObj.setVisible(true);
     }
 
     private static void listAll(){
@@ -93,15 +102,12 @@ public class PPC {
             System.out.println("Initialization error!");
             System.exit(1);
         }
-        System.out.println("Welcome!");
+        System.out.println("Database loaded!");
+
+        loadGui(600,600,60,60);
+        System.out.println("User interface loaded!");
 
         //listAll();
-        Gui mygui=new Gui();
-        mygui.setSize(600,600);
-        mygui.setLocation(60,60);
-        mygui.setVisible(true);
-
-
 
     }
 }
