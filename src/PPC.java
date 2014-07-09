@@ -23,6 +23,7 @@ public class PPC {
     }
 
     private static Gui guiObj;
+    private static Calculator calcObj;
 
     private static boolean init() {      //return true if successful
 
