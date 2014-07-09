@@ -107,8 +107,8 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
         /*DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();        //jobbra igazit
         rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
-        table.getTableHeader().setForeground(Color.blue);                               //legyen már ocsmány
-        for (int i = 0; i < 9; i++)
+        table.getTableHeader().setForeground(Color.blue);                               //formázott cellába nem enged beleírni, error
+        for (int i = 0; i < 9; i++)                                                         //kell saját TableModel hogy a táblából visszaírás menjen
             table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
 */
         tab3.add(table.getTableHeader());
