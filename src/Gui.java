@@ -6,7 +6,10 @@ import java.awt.*;
 import java.awt.Color;
 import java.util.Vector;
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
 
 public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
@@ -99,20 +102,31 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         columnNames.addElement("6 szín");
         columnNames.addElement("7 szín");
 
-        JTable table = new JTable(new InteractiveTableModel(PPC.getEtalonObj().getEtalonMatrix(), columnNames));
-        //table.getModel().addTableModelListener(InteractiveTableModel());
+        InteractiveTableModel model = new InteractiveTableModel(PPC.getEtalonObj().getEtalonMatrix(), columnNames);
+        model.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                System.out.println("sdasd");
+            }
+        });
+        JTable table = new JTable(model);
+
         tab3.setLayout(null);
         tab3.setBackground(Color.blue);
         table.getTableHeader().setBounds(0, 0, 695, 30);
         table.setBounds(0, 30, 695, 320);               //legyen nagy vagy legyen alatta hely?
 
-        /*DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();        //jobbra igazit
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();        //jobbra igazit
         rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
         table.getTableHeader().setForeground(Color.blue);                               //formázott cellába nem enged beleírni, error
         for (int i = 0; i < 9; i++)                                                         //kell saját TableModel hogy a táblából visszaírás menjen, félig kész
             table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
-*/
+
         tab3.add(table.getTableHeader());
+
+
+
+
         tab3.add(table);
 
         panel2.add(labelAmount);
@@ -120,6 +134,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         //this.add(panel1);         //not needed anymore, left in just in case
         this.add(panel2);
         this.add(menu);
+        table.setValueAt(1,3,3);
 
     }
 
