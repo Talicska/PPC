@@ -115,6 +115,9 @@ public class PPC {
         loadGui(1000, 600, 60, 60);
         System.out.println("User interface loaded!");
 
+        calcObj = new Calculator(dyes, dyecylinders, etalonObj, lakks, machines, magnetcylinders, materials, metals);
+        calcObj.calculate();;
+
         //listAll();
 
     }

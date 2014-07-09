@@ -32,7 +32,7 @@ public class Calculator {
 
     }
 
-    private void searchRoll(int machineIndex, double height, int magnetCylinderIndex){
+    private void searchMagnetCylinder(int machineIndex, double height, int magnetCylinderIndex){
 
         double min = 1000;
         int pieces = 0;
@@ -61,9 +61,13 @@ public class Calculator {
             this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1);
             this.verticalGap = rest/pieces;
         }
-
     }
 
+    public void calculate() {
 
-
+        //Choosing magnet cylinder
+        searchMagnetCylinder(0, 150, 0);
+        System.out.println(chosenMagnetCylinder.getTeeth() + " " + chosenMagnetCylinder.getGirth());
+        System.out.println(verticalGap);
+    }
 }
