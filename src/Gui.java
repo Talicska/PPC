@@ -105,12 +105,12 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         table.getTableHeader().setBounds(0, 0, 695, 30);
         table.setBounds(0, 30, 695, 320);               //legyen nagy vagy legyen alatta hely?
 
-        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();        //jobbra igazit
+        /*DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();        //jobbra igazit
         rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
         table.getTableHeader().setForeground(Color.blue);                               //legyen már ocsmány
         for (int i = 0; i < 9; i++)
             table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
-
+*/
         tab3.add(table.getTableHeader());
         tab3.add(table);
 
