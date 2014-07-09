@@ -99,16 +99,17 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         columnNames.addElement("6 szín");
         columnNames.addElement("7 szín");
 
-        JTable table = new JTable(PPC.getEtalonObj().getEtalonMatrix(), columnNames);   //így kell egyáltalán?
+        JTable table = new JTable(new InteractiveTableModel(PPC.getEtalonObj().getEtalonMatrix(), columnNames));
+        //table.getModel().addTableModelListener(InteractiveTableModel());
         tab3.setLayout(null);
-        tab3.setBackground(Color.blue);                 //lássam mekkora a table
+        tab3.setBackground(Color.blue);
         table.getTableHeader().setBounds(0, 0, 695, 30);
         table.setBounds(0, 30, 695, 320);               //legyen nagy vagy legyen alatta hely?
 
         /*DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();        //jobbra igazit
         rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
         table.getTableHeader().setForeground(Color.blue);                               //formázott cellába nem enged beleírni, error
-        for (int i = 0; i < 9; i++)                                                         //kell saját TableModel hogy a táblából visszaírás menjen
+        for (int i = 0; i < 9; i++)                                                         //kell saját TableModel hogy a táblából visszaírás menjen, félig kész
             table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
 */
         tab3.add(table.getTableHeader());
