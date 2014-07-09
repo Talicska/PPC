@@ -14,29 +14,31 @@ public class InteractiveTableModel extends DefaultTableModel {
     protected Vector<String> columnNames;
     protected Vector<Vector<Double>> dataVector;
 
-    public InteractiveTableModel(Vector<Vector<Double>> dataVector,Vector<String> columnNames) {
+    public InteractiveTableModel(final Vector<Vector<Double>> dataVector,Vector<String> columnNames) {
         super(dataVector,columnNames);
         this.columnNames = columnNames;
         this.dataVector = dataVector;
-        /*this.addTableModelListener(new TableModelListener() {
+        this.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
                 int row = e.getFirstRow();
                 int column = e.getColumn();
-                setValueAt(15,row,column);
-                System.out.println("asdasd");
+                //PPC.getEtalonObj().setElement(dataVector.get(row).get(column),row,column);
+
+                System.out.println("Value changed!");
+                System.out.println(PPC.getEtalonObj().getEtalonMatrix().get(row).get(column));
 
             }
-        });*/
+        });
     }
 
     /*public String getColumnName(int column) {
         return columnNames.get(column);
     }*/
 
-    public boolean isCellEditable(int row, int column) {
+    /*public boolean isCellEditable(int row, int column) {
         return true;
-    }
+    }*/
 
    /* public Class getColumnClass(int column) {
         return Double.class;

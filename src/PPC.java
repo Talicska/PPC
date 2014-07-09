@@ -22,6 +22,10 @@ public class PPC {
         return etalonObj;
     }
 
+    public static void setEtalonObj(Etalon etalonObj) {
+        PPC.etalonObj = etalonObj;
+    }
+
     private static Gui guiObj;
     private static Calculator calcObj;
 

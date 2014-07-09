@@ -103,12 +103,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         columnNames.addElement("7 szín");
 
         InteractiveTableModel model = new InteractiveTableModel(PPC.getEtalonObj().getEtalonMatrix(), columnNames);
-        model.addTableModelListener(new TableModelListener() {
-            @Override
-            public void tableChanged(TableModelEvent e) {
-                System.out.println("sdasd");
-            }
-        });
+
         JTable table = new JTable(model);
 
         tab3.setLayout(null);
@@ -134,7 +129,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         //this.add(panel1);         //not needed anymore, left in just in case
         this.add(panel2);
         this.add(menu);
-        table.setValueAt(1,3,3);
+
 
     }
 
