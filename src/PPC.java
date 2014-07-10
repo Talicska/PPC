@@ -9,23 +9,6 @@ import java.util.Vector;
 
 public class PPC {
 
-    private static ArrayList<Dye> dyes = new ArrayList<Dye>();
-    private static ArrayList<DyeCylinder> dyecylinders = new ArrayList<DyeCylinder>();
-    private static Etalon etalonObj;
-    private static ArrayList<Lakk> lakks = new ArrayList<Lakk>();
-    private static ArrayList<Machine> machines = new ArrayList<Machine>();
-    private static ArrayList<MagnetCylinder> magnetcylinders = new ArrayList<MagnetCylinder>();
-    private static ArrayList<Material> materials = new ArrayList<Material>();
-    private static ArrayList<Metal> metals = new ArrayList<Metal>();
-
-    public static Etalon getEtalonObj() {
-        return etalonObj;
-    }
-
-    public static void setEtalonObj(Etalon etalonObj) {
-        PPC.etalonObj = etalonObj;
-    }
-
     private static Gui guiObj;
     public static Calculator calcObj;
 
@@ -74,7 +57,7 @@ public class PPC {
         guiObj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private static void listAll() {
+    /*private static void listAll() {
 
         System.out.println("\nDyes");
         for (int i = 0; i < dyes.size(); i++) {
@@ -115,7 +98,7 @@ public class PPC {
         for (int i = 0; i < metals.size(); i++) {
             System.out.println(metals.get(i).getName() + " " + metals.get(i).getPrice());
         }
-    }
+    }*/
 
     public static void main(String[] args) {
 
@@ -130,7 +113,6 @@ public class PPC {
         loadGui(1000, 600, 60, 60);
         System.out.println("User interface loaded!");
 
-        calcObj = new Calculator(dyes, dyecylinders, etalonObj, lakks, machines, magnetcylinders, materials, metals);
         calcObj.calculate();
 
         //listAll();

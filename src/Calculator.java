@@ -224,4 +224,16 @@ public class Calculator {
         }*/
 
     }
+
+    private ArrayList<Material> getMaterials(){
+        return materials;
+    }
+
+    public static Etalon getEtalonObj() {
+        return etalonObj;
+    }
+
+    public static void setEtalonObj(Etalon etalonObj) {
+        Calculator.etalonObj = etalonObj;
+    }
 }
