@@ -46,6 +46,8 @@ public class InteractiveTableModel extends DefaultTableModel {
 
     @Override
     public Class getColumnClass(int column) {
+        if( column == 0)
+            return Integer.class;
         return Double.class;
     }
 

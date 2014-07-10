@@ -5,6 +5,7 @@
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.EventObject;
 import java.util.Locale;
@@ -24,6 +25,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private int menuheight = 22;
 
     private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);
+    private NumberFormat df = DecimalFormat.getIntegerInstance();
 
     public Gui() {
 
@@ -141,7 +143,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
         table.setDefaultRenderer(Double.class, new PriceRenderer(priceformat));
         table.setDefaultEditor(Double.class, new PriceEditor(priceformat));
-        table.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer());
+        table.getColumnModel().getColumn(0).setCellRenderer(new AmountRenderer(df));
+
+
 
         /*DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();        //jobbra igazit
         rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -221,5 +225,20 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         }
     }
 
+    private static class AmountRenderer extends DefaultTableCellRenderer{
+
+        private NumberFormat formatter;
+
+        public AmountRenderer(NumberFormat formatter){
+            this.formatter = formatter;
+            this.formatter.setMinimumFractionDigits(0);
+            this.formatter.setMaximumFractionDigits(0);
+        }
+
+        @Override
+        public void setValue(Object value) {
+            setText((value == null) ? "" : formatter.format(value));
+        }
+    }
 }
 
