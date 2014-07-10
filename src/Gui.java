@@ -149,7 +149,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         columnNames.addElement("6 szín");
         columnNames.addElement("7 szín");
 
-        InteractiveTableModel model = new InteractiveTableModel(PPC.getEtalonObj().getEtalonMatrix(), columnNames);
+        InteractiveTableModel model = new InteractiveTableModel(PPC.calcObj.getEtalonObj().getEtalonMatrix(), columnNames);
 
         JTable table = new JTable(model){
             @Override

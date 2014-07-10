@@ -22,7 +22,7 @@ public class InteractiveTableModel extends DefaultTableModel {
                 int row = e.getFirstRow();
                 int column = e.getColumn();
                 System.out.println("Value changed!");
-                System.out.println(PPC.getEtalonObj().getEtalonMatrix().get(row).get(column));
+                System.out.println(PPC.calcObj.getEtalonObj().getEtalonMatrix().get(row).get(column));
 
             }
         });
