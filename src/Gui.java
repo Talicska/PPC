@@ -44,7 +44,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private JButton buttonAddDye;
 
 
-    private List listDye;
+    private List listDyeType;
 
 
 
@@ -82,9 +82,13 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         panel1.setBounds(0, 25, 700, height-menuheight);
         panel1.setBackground(Color.red);*/
 
+        Color mycolor = new Color(174,198,207);
+
         JPanel panel2 = new JPanel();                                                   //right panel
         panel2.setBounds(700, 25, 300, height - menuheight);
-        panel2.setBackground(Color.yellow);
+        panel2.setBackground(mycolor);
+
+
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, 0);                   //tabs
         JComponent tab1 = new JPanel();
@@ -222,8 +226,8 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         labelDyeCylinder.setBounds(370, 30, 70, 25);
         tab1.add(labelDyeCylinder);
         comboDyeCylinder = new JComboBox();
-        //for(int i =0;i<PPC.calcObj.getAllDyeTypes().get(0).size();i++)        //nem tömb????
-        //    PPC.calcObj.getAllDyeTypes().get(0).getDyeCylinder()
+        for(int i =0;i<PPC.calcObj.getDyecylinders().size();i++)
+            comboDyeCylinder.addItem(PPC.calcObj.getDyecylinders().get(i).getVolume());
         tab1.add(comboDyeCylinder);
         comboDyeCylinder.setBounds(445,32,80,21);
         JLabel labelGM = new JLabel("g/m2");
@@ -245,10 +249,10 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         buttonAddDye.setBounds(585,32, 100,46);
         tab1.add(buttonAddDye);
 
-        listDye = new List();
-        listDye.setBounds(370, 85, 200, 200);
-        tab1.add(listDye);
-        listDye.add("asd");
+        listDyeType = new List();
+        listDyeType.setBounds(370, 85, 200, 200);
+        tab1.add(listDyeType);
+
 
         JLabel labelPregCover = new JLabel("Lefedettség");
         JLabel labelDomborCost = new JLabel("Költség");
@@ -268,7 +272,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JLabel labelOtherCost = new JLabel("Egyéb költség");
         JLabel labelSummary = new JLabel("Összesítés");
 
-        Vector<String> columnNames = new Vector<String>();                                      //Etalon
+        Vector<String> columnNames = new Vector<String>();                                      //tab3
         columnNames.addElement("Mennyiség");
         columnNames.addElement("0 szín");
         columnNames.addElement("1 szín");
@@ -303,12 +307,14 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
                 return result;
             }
         };
-        table.setRowHeight(24);
+        table.setRowHeight(20);
 
-
+        Color mybackground = new Color(200,225,255);
+        tabbedPane.setBackground(Color.RED);
+        tabbedPane.setBackgroundAt(1,Color.BLUE);
         tab3.setBackground(Color.blue);
         table.getTableHeader().setBounds(0, 0, 695, 30);
-        table.setBounds(0, 30, 695, 480);
+        table.setBounds(0, 30, 695, 400);
 
         table.setDefaultRenderer(Double.class, new PriceRenderer(priceformat));
         table.setDefaultEditor(Double.class, new PriceEditor(priceformat));
