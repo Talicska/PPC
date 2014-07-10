@@ -28,6 +28,8 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private JComboBox comboMaterial;                                                        //objects
     private JComboBox comboMachine;
     private JComboBox comboCylinder;
+    private JComboBox comboDyeType;
+    private JComboBox comboDyeCylinder;
 
 
 
@@ -194,7 +196,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         //
         //
 
-        JSeparator separator2 = new JSeparator();
+        JSeparator separator2 = new JSeparator();                                           //tab1 vertical separator
         separator2.setOrientation(SwingConstants.VERTICAL);
         separator2.setBounds(348,5,2,500);
         tab1.add(separator2);
@@ -203,25 +205,23 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         separator3.setBounds(352,5,2,500);
         tab1.add(separator3);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         JLabel labelDyeType = new JLabel("Festéktípus");
+        labelDyeType.setBounds(370, 5, 70, 25);
+        tab1.add(labelDyeType);
+        comboDyeType = new JComboBox();
+        for(int i=0;i<PPC.calcObj.getAllDyeTypes().size();i++)
+            comboDyeType.addItem(PPC.calcObj.getAllDyeTypes().get(i).getName());
+        tab1.add(comboDyeType);
+        comboDyeType.setBounds(445,7,250,21);
+
         JLabel labelDyeCylinder = new JLabel("Henger");
+        labelDyeCylinder.setBounds(370, 30, 70, 25);
+        tab1.add(labelDyeCylinder);
+
         JLabel labelDyeCover = new JLabel("Lefedettség");
+        labelDyeCover.setBounds(370, 55, 70, 25);
+        tab1.add(labelDyeCover);
+
         JLabel labelPregCover = new JLabel("Lefedettség");
         JLabel labelDomborCost = new JLabel("Költség");
 

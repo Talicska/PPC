@@ -41,7 +41,7 @@ public class Calculator {
         this.materials = materials;
         this.metals = metals;
 
-        ArrayList<DyeParent> allDyeTypes = new ArrayList<DyeParent>();
+        allDyeTypes = new ArrayList<DyeParent>();
         allDyeTypes.addAll(dyes);
         allDyeTypes.addAll(lakks);
         allDyeTypes.addAll(metals);
