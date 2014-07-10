@@ -39,6 +39,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private JTextField textFSideGap;
     private JTextField textFBetweenGap;
     private JTextField textFTracks;
+    private JTextField textFDyeCover;
+
+    private JButton buttonAddDye;
 
 
 
@@ -211,8 +214,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         comboDyeType = new JComboBox();
         for(int i=0;i<PPC.calcObj.getAllDyeTypes().size();i++)
             comboDyeType.addItem(PPC.calcObj.getAllDyeTypes().get(i).getName());
+        comboDyeType.addItem("Egyéb szín");
         tab1.add(comboDyeType);
-        comboDyeType.setBounds(445,7,250,21);
+        comboDyeType.setBounds(445,7,240,21);
 
         JLabel labelDyeCylinder = new JLabel("Henger");
         labelDyeCylinder.setBounds(370, 30, 70, 25);
@@ -220,10 +224,26 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         comboDyeCylinder = new JComboBox();
         //for(int i =0;i<PPC.calcObj.getAllDyeTypes().get(0).size();i++)        //nem tömb????
         //    PPC.calcObj.getAllDyeTypes().get(0).getDyeCylinder()
+        tab1.add(comboDyeCylinder);
+        comboDyeCylinder.setBounds(445,32,80,21);
+        JLabel labelGM = new JLabel("g/m2");
+        labelGM.setBounds(530,32,30,20);
+        tab1.add(labelGM);
 
         JLabel labelDyeCover = new JLabel("Lefedettség");
         labelDyeCover.setBounds(370, 55, 70, 25);
         tab1.add(labelDyeCover);
+        textFDyeCover = new JTextField();
+        textFDyeCover.setBounds(445, 57, 80, 21);
+        textFDyeCover.setHorizontalAlignment(SwingConstants.RIGHT);
+        tab1.add(textFDyeCover);
+        JLabel labelPercent = new JLabel("%");
+        labelPercent.setBounds(530, 57 ,30,20);
+        tab1.add(labelPercent);
+
+        buttonAddDye = new JButton("+");                        //kajálok baz
+        buttonAddDye.setBounds(600,50, 50,50);
+        tab1.add(buttonAddDye);
 
         JLabel labelPregCover = new JLabel("Lefedettség");
         JLabel labelDomborCost = new JLabel("Költség");
