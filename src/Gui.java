@@ -106,6 +106,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         textFAmount = new JTextField();
         textFAmount.setBounds(80, 32, 80, 21);
         tab1.add(textFAmount);
+        JLabel labelDb1 = new JLabel("db");
+        labelDb1.setBounds(165, 32 ,30,20);
+        tab1.add(labelDb1);
 
         JLabel labelWidth = new JLabel("Szélesség");
         labelWidth.setBounds(5, 55, 70, 25);
@@ -113,6 +116,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         textFWidth = new JTextField();
         textFWidth.setBounds(80, 57, 80, 21);
         tab1.add(textFWidth);
+        JLabel labelMm1 = new JLabel("mm");
+        labelMm1.setBounds(165, 57 ,30,20);
+        tab1.add(labelMm1);
 
         JLabel labelHeight = new JLabel("Magasság");
         labelHeight.setBounds(5, 80, 70, 25);
@@ -120,6 +126,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         textFHeight = new JTextField();
         textFHeight.setBounds(80, 82, 80, 21);
         tab1.add(textFHeight);
+        JLabel labelMm2 = new JLabel("mm");
+        labelMm2.setBounds(165, 82 ,30,20);
+        tab1.add(labelMm2);
 
         JLabel labelTracks = new JLabel("Pályák");
         labelTracks.setBounds(5, 105, 70, 25);
@@ -127,6 +136,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         textFTracks = new JTextField();
         textFTracks.setBounds(80, 107, 80, 21);
         tab1.add(textFTracks);
+        JLabel labelDb2 = new JLabel("db");
+        labelDb2.setBounds(165, 107 ,30,20);
+        tab1.add(labelDb2);
 
         JLabel labelGaps = new JLabel("Rések");
         labelGaps.setBounds(5, 130, 70, 25);
@@ -138,6 +150,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         textFSideGap = new JTextField();
         textFSideGap.setBounds(90, 157, 70, 21);
         tab1.add(textFSideGap);
+        JLabel labelMm3 = new JLabel("mm");
+        labelMm3.setBounds(165, 157 ,30,20);
+        tab1.add(labelMm3);
 
         JLabel labelBetweenGap = new JLabel("Pályák közt");
         labelBetweenGap.setBounds(15, 180, 70, 25);
@@ -145,6 +160,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         textFBetweenGap = new JTextField();
         textFBetweenGap.setBounds(90, 182, 70, 21);
         tab1.add(textFBetweenGap);
+        JLabel labelMm4 = new JLabel("mm");
+        labelMm4.setBounds(165, 182 ,30,20);
+        tab1.add(labelMm4);
 
 
         JLabel labelDyeType = new JLabel("Festéktípus");
