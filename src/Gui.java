@@ -25,7 +25,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private int menuheight = 22;
 
     private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);
-    private NumberFormat df = DecimalFormat.getIntegerInstance();
+    private NumberFormat df = DecimalFormat.getIntegerInstance(Locale.ENGLISH);
 
     public Gui() {
 
