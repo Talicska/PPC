@@ -178,7 +178,6 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
         public PriceRenderer(NumberFormat formatter) {
             this.formatter = formatter;
-            //this.formatter.s
             this.formatter.setMinimumFractionDigits(4);
             this.setHorizontalAlignment(SwingConstants.RIGHT);
         }
@@ -208,7 +207,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
             try {
                 return new Double(Double.parseDouble(textField.getText()));
             } catch (NumberFormatException e) {
-                System.out.println("asd");
+                System.out.println("Input error");
                 return Double.valueOf(0);
             }
         }
