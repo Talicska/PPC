@@ -88,7 +88,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         panel2.setBounds(700, 25, 300, height - menuheight);
         panel2.setBackground(mycolor);
 
-
+        UIManager.put("TabbedPane.selected", Color.pink);
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, 0);                   //tabs
         JComponent tab1 = new JPanel();
@@ -101,6 +101,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tabbedPane.addTab("<html><body><table width='90'>Etalon</table></body></html>", tab3);
         tab3.setLayout(null);
         tabbedPane.setBounds(0, menuheight, 700, height - menuheight);
+
+
+        SwingUtilities.updateComponentTreeUI(tabbedPane);
 
         JLabel labelMaterial = new JLabel("Alapanyag");                                 //labels and co.
         labelMaterial.setBounds(5, 5, 70, 25);
@@ -309,10 +312,12 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         };
         table.setRowHeight(20);
 
+
+
         Color mybackground = new Color(200,225,255);
         tabbedPane.setBackground(Color.RED);
         tabbedPane.setBackgroundAt(1,Color.BLUE);
-        tab3.setBackground(Color.blue);
+        tab3.setBackground(mybackground);
         table.getTableHeader().setBounds(0, 0, 695, 30);
         table.setBounds(0, 30, 695, 400);
 
