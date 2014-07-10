@@ -27,12 +27,21 @@ public class PPC {
     }
 
     private static Gui guiObj;
-    private static Calculator calcObj;
+    public static Calculator calcObj;
 
     private static boolean init() {      //return true if successful
 
         PPCDB database = new PPCDB();
         Vector<Vector<Double>> etalonMatrix;
+
+        ArrayList<Dye> dyes;
+        ArrayList<DyeCylinder> dyecylinders;
+        Etalon etalonObj;
+        ArrayList<Lakk> lakks;
+        ArrayList<Machine> machines;
+        ArrayList<MagnetCylinder> magnetcylinders;
+        ArrayList<Material> materials;
+        ArrayList<Metal> metals;
 
         try {
             dyes = database.getDyes();
@@ -51,6 +60,7 @@ public class PPC {
         }
 
         etalonObj = new Etalon(etalonMatrix);
+        calcObj = new Calculator(dyes, dyecylinders, etalonObj, lakks, machines, magnetcylinders, materials, metals);
 
         return true;
     }

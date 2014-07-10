@@ -25,29 +25,6 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
     private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);      //for Etalon table
     private NumberFormat amountformat = DecimalFormat.getIntegerInstance(Locale.ENGLISH);
-    /*Label labelMaterial = new JLabel("Alapanyag");         //labels and textfields
-        labelMaterial.setBounds(0, 5, 70, 25);
-        tab1.add(labelMaterial);
-        labelMaterial.setBackground(Color.cyan);
-        labelMaterial.setOpaque(true);
-        JLabel labelAmount = new JLabel("Darabszám");
-        labelAmount.setBounds(0, 30, 70, 25);
-        tab1.add(labelAmount);
-        JLabel labelWidth = new JLabel("Szélesség");
-        labelWidth.setBounds(0, 55, 70, 25);
-        tab1.add(labelWidth);
-        JLabel labelHeight = new JLabel("Magasság");
-        labelHeight.setBounds(0, 80, 70, 25);
-        tab1.add(labelHeight);
-        JLabel labelSideGap = new JLabel("Szélén");
-        labelSideGap.setBounds(0, 105, 70, 25);
-        tab1.add(labelSideGap);
-        JLabel labelBetweenGap = new JLabel("Pályák közt");
-        labelBetweenGap.setBounds(0, 130, 70, 25);
-        tab1.add(labelBetweenGap);
-        JLabel labelTracks = new JLabel("Pályák");
-        labelTracks.setBounds(0, 155, 70, 25);
-        tab1.add(labelTracks*/
 
     private JComboBox comboMaterial;
     private JTextField textFAmount;
@@ -113,31 +90,31 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JButton b2 = new JButton("b2");
 
         JLabel labelMaterial = new JLabel("Alapanyag");         //labels and co.
-        labelMaterial.setBounds(0, 5, 70, 25);
+        labelMaterial.setBounds(5, 5, 70, 25);
         tab1.add(labelMaterial);
         labelMaterial.setBackground(Color.cyan);
         labelMaterial.setOpaque(true);
         comboMaterial = new JComboBox();
         tab1.add(comboMaterial);
-        comboMaterial.setBounds(70,5,180,25);
+        comboMaterial.setBounds(80,7,250,21);
 
         JLabel labelAmount = new JLabel("Darabszám");
-        labelAmount.setBounds(0, 30, 70, 25);
+        labelAmount.setBounds(5, 30, 70, 25);
         tab1.add(labelAmount);
         JLabel labelWidth = new JLabel("Szélesség");
-        labelWidth.setBounds(0, 55, 70, 25);
+        labelWidth.setBounds(5, 55, 70, 25);
         tab1.add(labelWidth);
         JLabel labelHeight = new JLabel("Magasság");
-        labelHeight.setBounds(0, 80, 70, 25);
+        labelHeight.setBounds(5, 80, 70, 25);
         tab1.add(labelHeight);
         JLabel labelSideGap = new JLabel("Szélén");
-        labelSideGap.setBounds(0, 105, 70, 25);
+        labelSideGap.setBounds(5, 105, 70, 25);
         tab1.add(labelSideGap);
         JLabel labelBetweenGap = new JLabel("Pályák közt");
-        labelBetweenGap.setBounds(0, 130, 70, 25);
+        labelBetweenGap.setBounds(5, 130, 70, 25);
         tab1.add(labelBetweenGap);
         JLabel labelTracks = new JLabel("Pályák");
-        labelTracks.setBounds(0, 155, 70, 25);
+        labelTracks.setBounds(5, 155, 70, 25);
         tab1.add(labelTracks);
 
         JLabel labelDyeType = new JLabel("Festéktípus");
