@@ -217,6 +217,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JLabel labelDyeCylinder = new JLabel("Henger");
         labelDyeCylinder.setBounds(370, 30, 70, 25);
         tab1.add(labelDyeCylinder);
+        comboDyeCylinder = new JComboBox();
+        //for(int i =0;i<PPC.calcObj.getAllDyeTypes().get(0).size();i++)        //nem tömb????
+        //    PPC.calcObj.getAllDyeTypes().get(0).getDyeCylinder()
 
         JLabel labelDyeCover = new JLabel("Lefedettség");
         labelDyeCover.setBounds(370, 55, 70, 25);
