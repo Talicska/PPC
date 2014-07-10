@@ -49,7 +49,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         this.setPreferredSize(dimension);
         this.setTitle("PPC - Print Price Calculator");
 
-        JMenu fileMenu = new JMenu("Fájl");        //menu
+        JMenu fileMenu = new JMenu("Fájl");                                             //menu
         JMenuItem newItem = new JMenuItem("Új");
         fileMenu.add(newItem);
         JMenuItem saveItem = new JMenuItem("Mentés");
@@ -66,15 +66,15 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         menu.add(fileMenu);
         menu.add(aboutMenu);
 
-        /*JPanel panel1 = new JPanel();               //left panel
+        /*JPanel panel1 = new JPanel();                                                 //left panel
         panel1.setBounds(0, 25, 700, height-menuheight);
         panel1.setBackground(Color.red);*/
 
-        JPanel panel2 = new JPanel();               //right panel
+        JPanel panel2 = new JPanel();                                                   //right panel
         panel2.setBounds(700, 25, 300, height - menuheight);
         panel2.setBackground(Color.yellow);
 
-        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, 0);      //tabs
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, 0);                   //tabs
         JComponent tab1 = new JPanel();
         JComponent tab2 = new JPanel();
         JComponent tab3 = new JPanel();
@@ -86,14 +86,12 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tab3.setLayout(null);
         tabbedPane.setBounds(0, menuheight, 700, height - menuheight);
 
-        JButton b1 = new JButton("b1");             //buttons
+        JButton b1 = new JButton("b1");                                                 //buttons
         JButton b2 = new JButton("b2");
 
-        JLabel labelMaterial = new JLabel("Alapanyag");         //labels and co.
+        JLabel labelMaterial = new JLabel("Alapanyag");                                 //labels and co.
         labelMaterial.setBounds(5, 5, 70, 25);
         tab1.add(labelMaterial);
-        labelMaterial.setBackground(Color.cyan);
-        labelMaterial.setOpaque(true);
         comboMaterial = new JComboBox();
         for(int i=0;i<PPC.calcObj.getMaterials().size();i++)
             comboMaterial.addItem(PPC.calcObj.getMaterials().get(i).getName());
@@ -105,6 +103,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tab1.add(labelAmount);
         textFAmount = new JTextField();
         textFAmount.setBounds(80, 32, 80, 21);
+        textFAmount.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFAmount);
         JLabel labelDb1 = new JLabel("db");
         labelDb1.setBounds(165, 32 ,30,20);
@@ -115,6 +114,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tab1.add(labelWidth);
         textFWidth = new JTextField();
         textFWidth.setBounds(80, 57, 80, 21);
+        textFWidth.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFWidth);
         JLabel labelMm1 = new JLabel("mm");
         labelMm1.setBounds(165, 57 ,30,20);
@@ -125,6 +125,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tab1.add(labelHeight);
         textFHeight = new JTextField();
         textFHeight.setBounds(80, 82, 80, 21);
+        textFHeight.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFHeight);
         JLabel labelMm2 = new JLabel("mm");
         labelMm2.setBounds(165, 82 ,30,20);
@@ -135,6 +136,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tab1.add(labelTracks);
         textFTracks = new JTextField();
         textFTracks.setBounds(80, 107, 80, 21);
+        textFTracks.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFTracks);
         JLabel labelDb2 = new JLabel("db");
         labelDb2.setBounds(165, 107 ,30,20);
@@ -147,8 +149,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JLabel labelSideGap = new JLabel("Szélén");
         labelSideGap.setBounds(15, 155, 70, 25);
         tab1.add(labelSideGap);
-        textFSideGap = new JTextField();
+        textFSideGap = new JTextField("5");
         textFSideGap.setBounds(90, 157, 70, 21);
+        textFSideGap.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFSideGap);
         JLabel labelMm3 = new JLabel("mm");
         labelMm3.setBounds(165, 157 ,30,20);
@@ -157,8 +160,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JLabel labelBetweenGap = new JLabel("Pályák közt");
         labelBetweenGap.setBounds(15, 180, 70, 25);
         tab1.add(labelBetweenGap);
-        textFBetweenGap = new JTextField();
+        textFBetweenGap = new JTextField("3");
         textFBetweenGap.setBounds(90, 182, 70, 21);
+        textFBetweenGap.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFBetweenGap);
         JLabel labelMm4 = new JLabel("mm");
         labelMm4.setBounds(165, 182 ,30,20);
@@ -186,7 +190,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JLabel labelOtherCost = new JLabel("Egyéb költség");
         JLabel labelSummary = new JLabel("Összesítés");
 
-        Vector<String> columnNames = new Vector<String>();        //Etalon
+        Vector<String> columnNames = new Vector<String>();                                      //Etalon
         columnNames.addElement("Mennyiség");
         columnNames.addElement("0 szín");
         columnNames.addElement("1 szín");
