@@ -2,7 +2,7 @@
 public class DyeParent {
     protected String name;
     protected double price;
-    protected int cylinder_volume;
+    protected DyeCylinder dyeCylinder;
     protected int cover;
 
     public String getName() {
@@ -21,12 +21,12 @@ public class DyeParent {
         this.price = price;
     }
 
-    public int getCylinder_volume() {
-        return cylinder_volume;
+    public DyeCylinder getDyeCylinder() {
+        return dyeCylinder;
     }
 
-    public void setCylinder_volume(int cylinderVolume) {
-        cylinder_volume = cylinderVolume;
+    public void setDyeCylinder(DyeCylinder dyeCylinder) {
+        this.dyeCylinder = dyeCylinder;
     }
 
     public int getCover() {
@@ -37,10 +37,10 @@ public class DyeParent {
         this.cover = cover;
     }
 
-    public DyeParent(String name, double price, int cylinder_volume, int cover) {
+    public DyeParent(String name, double price, DyeCylinder dyeCylinder, int cover) {
         this.name = name;
         this.price = price;
-        this.cylinder_volume = cylinder_volume;
+        this.dyeCylinder = dyeCylinder;
         this.cover = cover;
     }
 }

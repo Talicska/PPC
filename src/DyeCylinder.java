@@ -1,13 +1,13 @@
 
 public class DyeCylinder {
-    private int volume;
+    private double volume;
     private int percent;
 
-    public int getVolume() {
+    public double getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(double volume) {
         this.volume = volume;
     }
 
@@ -19,7 +19,7 @@ public class DyeCylinder {
         this.percent = percent;
     }
 
-    public DyeCylinder(int volume, int percent) {
+    public DyeCylinder(double volume, int percent) {
         this.volume = volume;
         this.percent = percent;
     }

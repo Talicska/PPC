@@ -49,7 +49,7 @@ public class PPCDB {
         ResultSet rs = stm.executeQuery("select name_dye, price_dye from Dye");
 
         while (rs.next()) {
-            dyes.add(new Dye(rs.getString("name_dye"), rs.getDouble("price_dye"), 0, 0));     //parameters given by user
+            dyes.add(new Dye(rs.getString("name_dye"), rs.getDouble("price_dye"), null, 0));     //parameters given by user
         }
 
         return dyes;
@@ -63,7 +63,7 @@ public class PPCDB {
         ResultSet rs = stm.executeQuery("select volume, percent from DyeCylinder");
 
         while (rs.next()) {
-            dyecyls.add(new DyeCylinder(rs.getInt("volume"), rs.getInt("percent")));
+            dyecyls.add(new DyeCylinder(rs.getDouble("volume"), rs.getInt("percent")));
         }
 
         return dyecyls;
@@ -96,7 +96,7 @@ public class PPCDB {
         ResultSet rs = stm.executeQuery("select name_lakk, price_lakk from Lakk");
 
         while (rs.next()) {
-            lakks.add(new Lakk(rs.getString("name_lakk"), rs.getDouble("price_lakk"), 0, 0));
+            lakks.add(new Lakk(rs.getString("name_lakk"), rs.getDouble("price_lakk"), null, 0));
         }
 
         return lakks;
@@ -152,7 +152,7 @@ public class PPCDB {
         ResultSet rs = stm.executeQuery("select name_metal, price_metal from Metal");
 
         while (rs.next()) {
-            metals.add(new Metal(rs.getString("name_metal"), rs.getDouble("price_metal"), 0, 0));
+            metals.add(new Metal(rs.getString("name_metal"), rs.getDouble("price_metal"), null, 0));
         }
 
         return metals;
