@@ -89,6 +89,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         panel2.setBackground(mycolor);
 
         UIManager.put("TabbedPane.selected", Color.pink);
+        UIManager.put("TabbedPane.contentAreaColor", new Color(0, 0, 0));
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, 0);                   //tabs
         JComponent tab1 = new JPanel();
@@ -101,6 +102,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tabbedPane.addTab("<html><body><table width='90'>Etalon</table></body></html>", tab3);
         tab3.setLayout(null);
         tabbedPane.setBounds(0, menuheight, 700, height - menuheight);
+        /*tabbedPane.setUI(new javax.swing.plaf.metal.MetalTabbedPaneUI(){
+            protected void paintContentBorder(Graphics g,int tabPlacement,int selectedIndex){}
+        });*/
 
 
         SwingUtilities.updateComponentTreeUI(tabbedPane);
