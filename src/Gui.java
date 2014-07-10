@@ -17,16 +17,16 @@ import javax.swing.text.JTextComponent;
 
 public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
-    private Dimension dimension;
+    private Dimension dimension;                                                            //dimensions
     private int width = 1000;
     private int height = 572;
     private int menuheight = 22;
-    private int labelHeight = 25;
 
     private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);      //for Etalon table
     private NumberFormat amountformat = DecimalFormat.getIntegerInstance(Locale.ENGLISH);
 
-    private JComboBox comboMaterial;
+    private JComboBox comboMaterial;                                                        //objects
+
     private JTextField textFAmount;
     private JTextField textFWidth;
     private JTextField textFHeight;
@@ -103,21 +103,49 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JLabel labelAmount = new JLabel("Darabszám");
         labelAmount.setBounds(5, 30, 70, 25);
         tab1.add(labelAmount);
+        textFAmount = new JTextField();
+        textFAmount.setBounds(80, 32, 80, 21);
+        tab1.add(textFAmount);
+
         JLabel labelWidth = new JLabel("Szélesség");
         labelWidth.setBounds(5, 55, 70, 25);
         tab1.add(labelWidth);
+        textFWidth = new JTextField();
+        textFWidth.setBounds(80, 57, 80, 21);
+        tab1.add(textFWidth);
+
         JLabel labelHeight = new JLabel("Magasság");
         labelHeight.setBounds(5, 80, 70, 25);
         tab1.add(labelHeight);
-        JLabel labelSideGap = new JLabel("Szélén");
-        labelSideGap.setBounds(5, 105, 70, 25);
-        tab1.add(labelSideGap);
-        JLabel labelBetweenGap = new JLabel("Pályák közt");
-        labelBetweenGap.setBounds(5, 130, 70, 25);
-        tab1.add(labelBetweenGap);
+        textFHeight = new JTextField();
+        textFHeight.setBounds(80, 82, 80, 21);
+        tab1.add(textFHeight);
+
         JLabel labelTracks = new JLabel("Pályák");
-        labelTracks.setBounds(5, 155, 70, 25);
+        labelTracks.setBounds(5, 105, 70, 25);
         tab1.add(labelTracks);
+        textFTracks = new JTextField();
+        textFTracks.setBounds(80, 107, 80, 21);
+        tab1.add(textFTracks);
+
+        JLabel labelGaps = new JLabel("Rések");
+        labelGaps.setBounds(5, 130, 70, 25);
+        tab1.add(labelGaps);
+
+        JLabel labelSideGap = new JLabel("Szélén");
+        labelSideGap.setBounds(15, 155, 70, 25);
+        tab1.add(labelSideGap);
+        textFSideGap = new JTextField();
+        textFSideGap.setBounds(90, 157, 70, 21);
+        tab1.add(textFSideGap);
+
+        JLabel labelBetweenGap = new JLabel("Pályák közt");
+        labelBetweenGap.setBounds(15, 180, 70, 25);
+        tab1.add(labelBetweenGap);
+        textFBetweenGap = new JTextField();
+        textFBetweenGap.setBounds(90, 182, 70, 21);
+        tab1.add(textFBetweenGap);
+
 
         JLabel labelDyeType = new JLabel("Festéktípus");
         JLabel labelDyeCylinder = new JLabel("Henger");
