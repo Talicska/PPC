@@ -36,37 +36,56 @@ public class Calculator {
 
         double min = 1000;
         int pieces = 0;
+        this.verticalGap = 1;
 
         if (magnetCylinderIndex == 0){	// Auto: the program chooses the ideal applicable cylinder
                                         // to reach the lowest (but bigger or equal than 2) vertical gap
             if (machines.get(machineIndex).getCylinders().size() > 1){ // more than 1 applicable cylinder for the chosen machine
-                for (int i = 0; i < machines.get(machineIndex).getCylinders().size(); i++){
-                    pieces = (int) (machines.get(machineIndex).getCylinders().get(i).getGirth()/height);
-                    double rest = machines.get(machineIndex).getCylinders().get(i).getGirth()%height;
-                    if (rest/pieces >= 2 && rest/pieces < min){
-                        min = rest/pieces;
-                        this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(i);
-                        this.verticalGap = min;
+                int j = 0;
+                while(min >= 1000 && this.verticalGap < 2) {
+                    for (int i = 0; i < machines.get(machineIndex).getCylinders().size(); i++) {
+                        System.out.println(machines.get(machineIndex).getName());
+                        System.out.println(machines.get(machineIndex).getCylinders().size());
+                        pieces = (int) (machines.get(machineIndex).getCylinders().get(i).getGirth() / height) - j;
+                        double rest = machines.get(machineIndex).getCylinders().get(i).getGirth() % height;
+                        if (rest / pieces >= 2 && rest / pieces < min) {
+                            System.out.println("min: " + min);
+                            min = rest / pieces;
+                            this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(i);
+                            this.verticalGap = min;
+                            System.out.println("Vertikalis heza valtozas: " + this.verticalGap);
+                            System.out.println("darab per henger: " + pieces);
+                        }
                     }
+                    j++;
                 }
             }else{ // only 1 applicable cylinder for the chosen machine
-                pieces = (int) (machines.get(machineIndex).getCylinders().get(0).getGirth()/height);
-                double rest = machines.get(machineIndex).getCylinders().get(0).getGirth()%height;
-                this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(0);
-                this.verticalGap = rest/pieces;
+                int j = 0;
+                while(this.verticalGap < 2) {
+                    pieces = (int) (machines.get(machineIndex).getCylinders().get(0).getGirth() / height) - j;
+                    double rest = machines.get(machineIndex).getCylinders().get(0).getGirth() % height;
+                    this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(0);
+                    this.verticalGap = rest / pieces;
+                    j++;
+                }
             }
         }else{ // we want to use a specific applicable cylinder
-            pieces = (int) (machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth()/height);
-            double rest = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth()%height;
-            this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1);
-            this.verticalGap = rest/pieces;
+            int j = 0;
+            while(this.verticalGap < 2) {
+                pieces = (int) (machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth()/height) - j;
+                double rest = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth()%height;
+                this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1);
+                this.verticalGap = rest/pieces;
+                j++;
+                System.out.println("darab per henger: " + pieces);
+            }
         }
     }
 
     public void calculate() {
 
         //Choosing magnet cylinder
-        searchMagnetCylinder(0, 150, 0);
+        searchMagnetCylinder(1, 25, 0);
         System.out.println(chosenMagnetCylinder.getTeeth() + " " + chosenMagnetCylinder.getGirth());
         System.out.println(verticalGap);
     }
