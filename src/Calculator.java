@@ -225,7 +225,7 @@ public class Calculator {
 
     }
 
-    private ArrayList<Material> getMaterials(){
+    public ArrayList<Material> getMaterials(){
         return materials;
     }
 

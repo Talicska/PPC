@@ -95,6 +95,8 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         labelMaterial.setBackground(Color.cyan);
         labelMaterial.setOpaque(true);
         comboMaterial = new JComboBox();
+        for(int i=0;i<PPC.calcObj.getMaterials().size();i++)
+            comboMaterial.addItem(PPC.calcObj.getMaterials().get(i).getName());
         tab1.add(comboMaterial);
         comboMaterial.setBounds(80,7,250,21);
 
