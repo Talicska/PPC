@@ -190,13 +190,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
             comboCylinder.addItem(PPC.calcObj.getMachines().get(0).getCylinders().get(i).getTeeth());
         comboCylinder.setBounds(225,222,100,21);
 
-
-
-
-
-
-
-
+        //géptípus alatti rész
+        //
+        //
 
         JSeparator separator2 = new JSeparator();
         separator2.setOrientation(SwingConstants.VERTICAL);
@@ -279,11 +275,12 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
                 return result;
             }
         };
+        table.setRowHeight(24);
 
 
         tab3.setBackground(Color.blue);
         table.getTableHeader().setBounds(0, 0, 695, 30);
-        table.setBounds(0, 30, 695, 320);
+        table.setBounds(0, 30, 695, 480);
 
         table.setDefaultRenderer(Double.class, new PriceRenderer(priceformat));
         table.setDefaultEditor(Double.class, new PriceEditor(priceformat));
