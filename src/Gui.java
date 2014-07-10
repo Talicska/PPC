@@ -4,12 +4,17 @@
 
 import java.awt.*;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.text.NumberFormat;
+import java.util.EventObject;
+import java.util.Locale;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
+import javax.swing.text.JTextComponent;
 
 public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
@@ -17,6 +22,8 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private int width = 1000;
     private int height = 572;
     private int menuheight = 22;
+
+    private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);
 
     public Gui() {
 
@@ -104,20 +111,52 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
         InteractiveTableModel model = new InteractiveTableModel(PPC.getEtalonObj().getEtalonMatrix(), columnNames);
 
-        JTable table = new JTable(model);
+        JTable table = new JTable(model){
+            @Override
+            public boolean editCellAt(int row, int column, EventObject e) {
+                boolean result = super.editCellAt(row, column, e);
+                final Component editor = getEditorComponent();
+                if (editor == null || !(editor instanceof JTextComponent)) {
+                    return result;
+                }
+                if (e instanceof MouseEvent) {
+                    EventQueue.invokeLater(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            ((JTextComponent) editor).selectAll();
+                        }
+                    });
+                } else {
+                    ((JTextComponent) editor).selectAll();
+                }
+                return result;
+            }
+        };
 
         tab3.setLayout(null);
         tab3.setBackground(Color.blue);
         table.getTableHeader().setBounds(0, 0, 695, 30);
         table.setBounds(0, 30, 695, 320);               //legyen nagy vagy legyen alatta hely?
 
-        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();        //jobbra igazit
+        table.setDefaultRenderer(Double.class, new PriceRenderer(priceformat));
+        table.setDefaultEditor(Double.class, new PriceEditor(priceformat));
+        table.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer());
+
+        /*DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();        //jobbra igazit
         rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+        //rightRenderer.
         table.getTableHeader().setForeground(Color.blue);                               //formázott cellába nem enged beleírni, error
         for (int i = 0; i < 9; i++)                                                         //kell saját TableModel hogy a táblából visszaírás menjen, félig kész
             table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+*/
 
         tab3.add(table.getTableHeader());
+
+
+
+
+
 
 
 
@@ -131,6 +170,56 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         this.add(menu);
 
 
+    }
+
+    private static class PriceRenderer extends DefaultTableCellRenderer {
+
+        private NumberFormat formatter;
+
+        public PriceRenderer(NumberFormat formatter) {
+            this.formatter = formatter;
+            //this.formatter.s
+            this.formatter.setMinimumFractionDigits(4);
+            this.setHorizontalAlignment(SwingConstants.RIGHT);
+        }
+
+        @Override
+        public void setValue(Object value) {
+            setText((value == null) ? "" : formatter.format(value));
+        }
+    }
+
+    private static class PriceEditor extends DefaultCellEditor {
+
+        private NumberFormat formatter;
+        private JTextField textField;
+
+        public PriceEditor(NumberFormat formatter) {
+            super(new JTextField());
+            this.formatter = formatter;
+            this.formatter.setMinimumFractionDigits(4);
+            this.textField = (JTextField) this.getComponent();
+            textField.setHorizontalAlignment(JTextField.RIGHT);
+            textField.setBorder(null);
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            try {
+                return new Double(Double.parseDouble(textField.getText()));
+            } catch (NumberFormatException e) {
+                System.out.println("asd");
+                return Double.valueOf(0);
+            }
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table,
+                                                     Object value, boolean isSelected, int row, int column) {
+            textField.setText((value == null)
+                    ? "" : formatter.format((Double) value));
+            return textField;
+        }
     }
 
 }

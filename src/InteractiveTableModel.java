@@ -2,12 +2,16 @@
  * Created by Talicska on 2014.07.09..
  */
 
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.util.EventObject;
 import java.util.Vector;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.text.JTextComponent;
 
 public class InteractiveTableModel extends DefaultTableModel {
 
@@ -40,9 +44,12 @@ public class InteractiveTableModel extends DefaultTableModel {
         return true;
     }*/
 
-   /* public Class getColumnClass(int column) {
+    @Override
+    public Class getColumnClass(int column) {
         return Double.class;
-    }*/
+    }
+
+
 
     /*public Object getValueAt(int row, int column) {
         return dataVector.get(row).get(column);
