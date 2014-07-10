@@ -31,6 +31,8 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
         this.getContentPane().setLayout(null);
         dimension = new Dimension(width, height);
+        priceformat.setGroupingUsed(false);
+        df.setGroupingUsed(false);
         this.setPreferredSize(dimension);
         this.setTitle("PPC - Print Price Calculator");
 
@@ -144,6 +146,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         table.setDefaultRenderer(Double.class, new PriceRenderer(priceformat));
         table.setDefaultEditor(Double.class, new PriceEditor(priceformat));
         table.getColumnModel().getColumn(0).setCellRenderer(new AmountRenderer(df));
+        table.getColumnModel().getColumn(0).setCellEditor(new AmountEditor(df));
 
 
 
@@ -231,6 +234,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
         public AmountRenderer(NumberFormat formatter){
             this.formatter = formatter;
+            setHorizontalAlignment(SwingConstants.RIGHT);
             this.formatter.setMinimumFractionDigits(0);
             this.formatter.setMaximumFractionDigits(0);
         }
@@ -238,6 +242,39 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         @Override
         public void setValue(Object value) {
             setText((value == null) ? "" : formatter.format(value));
+        }
+    }
+
+    private static class AmountEditor extends DefaultCellEditor{
+        private NumberFormat formatter;
+        private JTextField textField;
+
+        public AmountEditor(NumberFormat formatter) {
+            super(new JTextField());
+            this.formatter = formatter;
+            this.formatter.setMinimumFractionDigits(0);
+            this.formatter.setMaximumFractionDigits(0);
+            this.textField = (JTextField) this.getComponent();
+            textField.setHorizontalAlignment(JTextField.RIGHT);
+            textField.setBorder(null);
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            try {
+                return new Integer((textField.getText()));
+            } catch (NumberFormatException e) {
+                System.out.println("Input error");
+                return Integer.valueOf(0);
+            }
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table,
+                                                     Object value, boolean isSelected, int row, int column) {
+            textField.setText((value == null)
+                    ? "" : formatter.format( value));
+            return textField;
         }
     }
 }
