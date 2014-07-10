@@ -7,9 +7,9 @@ import java.util.ArrayList;
  */
 public class Calculator {
 
-    public static int MAX_NUMBER_OF_DYES = 7;
-    public static int MAX_NUMBER_OF_LAKKS = 1;
-    public static int MAX_NUMBER_OF_METALS = 2;
+    private static final int MAX_NUMBER_OF_DYES = 7;
+    private static final int MAX_NUMBER_OF_LAKKS = 1;
+    private static final int MAX_NUMBER_OF_METALS = 2;
     //public static double TEKERCSAR = 2.1;
 
     private static ArrayList<Dye> dyes = new ArrayList<Dye>();
@@ -228,6 +228,48 @@ public class Calculator {
     public ArrayList<Material> getMaterials(){
         return materials;
     }
+
+    public static ArrayList<Machine> getMachines() {
+        return machines;
+    }
+
+    public double getVerticalGap() {
+        return verticalGap;
+    }
+
+    public MagnetCylinder getChosenMagnetCylinder() {
+        return chosenMagnetCylinder;
+    }
+
+    public static ArrayList<Metal> getMetals() {
+        return metals;
+    }
+
+    public static ArrayList<MagnetCylinder> getMagnetcylinders() {
+        return magnetcylinders;
+    }
+
+    public static ArrayList<Lakk> getLakks() {
+        return lakks;
+    }
+
+    public static ArrayList<DyeCylinder> getDyecylinders() {
+        return dyecylinders;
+    }
+
+    public static ArrayList<Dye> getDyes() {
+        return dyes;
+    }
+
+    public ArrayList<DyeParent> getAllDyeTypes() {
+        return allDyeTypes;
+    }
+
+    public ArrayList<DyeParent> getAddedDyes() {
+        return addedDyes;
+    }
+
+
 
     public static Etalon getEtalonObj() {
         return etalonObj;
