@@ -26,6 +26,10 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private NumberFormat amountformat = DecimalFormat.getIntegerInstance(Locale.ENGLISH);
 
     private JComboBox comboMaterial;                                                        //objects
+    private JComboBox comboMachine;
+    private JComboBox comboCylinder;
+
+
 
     private JTextField textFAmount;
     private JTextField textFWidth;
@@ -168,6 +172,47 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         labelMm4.setBounds(165, 182 ,30,20);
         tab1.add(labelMm4);
 
+        JSeparator separator1 = new JSeparator();
+        separator1.setBounds(5,212,320,2);
+        tab1.add(separator1);
+
+        JLabel labelMachine = new JLabel("Géptípus");
+        labelMachine.setBounds(5, 220, 70, 25);
+        tab1.add(labelMachine);
+        comboMachine = new JComboBox();
+        for(int i=0;i<PPC.calcObj.getMachines().size();i++)
+            comboMachine.addItem(PPC.calcObj.getMachines().get(i).getName());
+        tab1.add(comboMachine);
+        comboMachine.setBounds(80,222,120,21);
+        comboCylinder = new JComboBox();
+        tab1.add(comboCylinder);
+        for(int i=0;i<PPC.calcObj.getMachines().get(0).getCylinders().size();i++)
+            comboCylinder.addItem(PPC.calcObj.getMachines().get(0).getCylinders().get(i).getTeeth());
+        comboCylinder.setBounds(225,222,100,21);
+
+
+
+
+        JSeparator separator2 = new JSeparator();
+        separator2.setOrientation(SwingConstants.VERTICAL);
+        separator2.setBounds(349,5,2,500);
+        tab1.add(separator2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         JLabel labelDyeType = new JLabel("Festéktípus");
         JLabel labelDyeCylinder = new JLabel("Henger");
@@ -182,7 +227,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JLabel labelRollWidth = new JLabel("Tekercs szélesség");
         JLabel labelAmountPerRoll = new JLabel("Db/tekercs");
 
-        JLabel labelMachine = new JLabel("Géptípus");
+
         JLabel labelTitle = new JLabel("Címke neve");
         JLabel labelClient = new JLabel("Megrendelő");
         JLabel labelDiscount = new JLabel("Kedvezmény");
