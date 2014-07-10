@@ -82,14 +82,17 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         panel1.setBounds(0, 25, 700, height-menuheight);
         panel1.setBackground(Color.red);*/
 
-        Color mycolor = new Color(174,198,207);
+        //Color mainColor = new Color(116,174,153);
+        //Color borderColor = new Color(69, 116, 133);
+        //Color MiscColor = new Color(39,88,107);
+        //UIManager.put("TabbedPane.selected", mainColor);
+        //UIManager.put("TabbedPane.contentAreaColor", borderColor);
 
         JPanel panel2 = new JPanel();                                                   //right panel
         panel2.setBounds(700, 25, 300, height - menuheight);
-        panel2.setBackground(mycolor);
+        //panel2.setBackground(mainColor);
 
-        UIManager.put("TabbedPane.selected", Color.pink);
-        UIManager.put("TabbedPane.contentAreaColor", new Color(0, 0, 0));
+
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, 0);                   //tabs
         JComponent tab1 = new JPanel();
@@ -102,12 +105,18 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tabbedPane.addTab("<html><body><table width='90'>Etalon</table></body></html>", tab3);
         tab3.setLayout(null);
         tabbedPane.setBounds(0, menuheight, 700, height - menuheight);
-        /*tabbedPane.setUI(new javax.swing.plaf.metal.MetalTabbedPaneUI(){
-            protected void paintContentBorder(Graphics g,int tabPlacement,int selectedIndex){}
-        });*/
 
 
-        SwingUtilities.updateComponentTreeUI(tabbedPane);
+        //Color mybackground = new Color(200,225,255);
+        //tabbedPane.setBackground(new Color(39,88,107));
+        //tabbedPane.setBackgroundAt(1,Color.BLUE);
+        //tab1.setBackground(mainColor);
+        //tab2.setBackground(mainColor);
+        //tab3.setBackground(mainColor);
+
+
+
+        //SwingUtilities.updateComponentTreeUI(tabbedPane);
 
         JLabel labelMaterial = new JLabel("Alapanyag");                                 //labels and co.
         labelMaterial.setBounds(5, 5, 70, 25);
@@ -318,10 +327,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
 
 
-        Color mybackground = new Color(200,225,255);
-        tabbedPane.setBackground(Color.RED);
-        tabbedPane.setBackgroundAt(1,Color.BLUE);
-        tab3.setBackground(mybackground);
+
         table.getTableHeader().setBounds(0, 0, 695, 30);
         table.setBounds(0, 30, 695, 400);
 
