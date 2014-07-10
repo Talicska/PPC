@@ -114,6 +114,7 @@ public class PPC {
             System.out.println("Initialization error!");
             System.exit(1);
         }
+
         System.out.println("Database loaded!");
 
         loadGui(1000, 600, 60, 60);

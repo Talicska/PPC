@@ -11,6 +11,7 @@ import java.util.EventObject;
 import java.util.Locale;
 import java.util.Vector;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.JTextComponent;
 
@@ -20,9 +21,47 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private int width = 1000;
     private int height = 572;
     private int menuheight = 22;
+    private int labelHeight = 25;
 
-    private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);
+    private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);      //for Etalon table
     private NumberFormat amountformat = DecimalFormat.getIntegerInstance(Locale.ENGLISH);
+    /*Label labelMaterial = new JLabel("Alapanyag");         //labels and textfields
+        labelMaterial.setBounds(0, 5, 70, 25);
+        tab1.add(labelMaterial);
+        labelMaterial.setBackground(Color.cyan);
+        labelMaterial.setOpaque(true);
+        JLabel labelAmount = new JLabel("Darabszám");
+        labelAmount.setBounds(0, 30, 70, 25);
+        tab1.add(labelAmount);
+        JLabel labelWidth = new JLabel("Szélesség");
+        labelWidth.setBounds(0, 55, 70, 25);
+        tab1.add(labelWidth);
+        JLabel labelHeight = new JLabel("Magasság");
+        labelHeight.setBounds(0, 80, 70, 25);
+        tab1.add(labelHeight);
+        JLabel labelSideGap = new JLabel("Szélén");
+        labelSideGap.setBounds(0, 105, 70, 25);
+        tab1.add(labelSideGap);
+        JLabel labelBetweenGap = new JLabel("Pályák közt");
+        labelBetweenGap.setBounds(0, 130, 70, 25);
+        tab1.add(labelBetweenGap);
+        JLabel labelTracks = new JLabel("Pályák");
+        labelTracks.setBounds(0, 155, 70, 25);
+        tab1.add(labelTracks*/
+
+    private JComboBox comboMaterial;
+    private JTextField textFAmount;
+    private JTextField textFWidth;
+    private JTextField textFHeight;
+    private JTextField textFSideGap;
+    private JTextField textFBetweenGap;
+    private JTextField textFTracks;
+
+
+
+
+
+
 
     public Gui() {
 
@@ -63,20 +102,43 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JComponent tab2 = new JPanel();
         JComponent tab3 = new JPanel();
         tabbedPane.addTab("<html><body><table width='90'>Alapanyagok</table></body></html>", tab1);
+        tab1.setLayout(null);
         tabbedPane.addTab("<html><body><table width='90'>Egyebek</table></body></html>", tab2);
+        tab2.setLayout(null);
         tabbedPane.addTab("<html><body><table width='90'>Etalon</table></body></html>", tab3);
+        tab3.setLayout(null);
         tabbedPane.setBounds(0, menuheight, 700, height - menuheight);
 
         JButton b1 = new JButton("b1");             //buttons
         JButton b2 = new JButton("b2");
 
-        JLabel labelMaterial = new JLabel("Alapanyag");         //labels
+        JLabel labelMaterial = new JLabel("Alapanyag");         //labels and co.
+        labelMaterial.setBounds(0, 5, 70, 25);
+        tab1.add(labelMaterial);
+        labelMaterial.setBackground(Color.cyan);
+        labelMaterial.setOpaque(true);
+        comboMaterial = new JComboBox();
+        tab1.add(comboMaterial);
+        comboMaterial.setBounds(70,5,180,25);
+
         JLabel labelAmount = new JLabel("Darabszám");
+        labelAmount.setBounds(0, 30, 70, 25);
+        tab1.add(labelAmount);
         JLabel labelWidth = new JLabel("Szélesség");
+        labelWidth.setBounds(0, 55, 70, 25);
+        tab1.add(labelWidth);
         JLabel labelHeight = new JLabel("Magasság");
+        labelHeight.setBounds(0, 80, 70, 25);
+        tab1.add(labelHeight);
         JLabel labelSideGap = new JLabel("Szélén");
+        labelSideGap.setBounds(0, 105, 70, 25);
+        tab1.add(labelSideGap);
         JLabel labelBetweenGap = new JLabel("Pályák közt");
+        labelBetweenGap.setBounds(0, 130, 70, 25);
+        tab1.add(labelBetweenGap);
         JLabel labelTracks = new JLabel("Pályák");
+        labelTracks.setBounds(0, 155, 70, 25);
+        tab1.add(labelTracks);
 
         JLabel labelDyeType = new JLabel("Festéktípus");
         JLabel labelDyeCylinder = new JLabel("Henger");
@@ -135,7 +197,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
             }
         };
 
-        tab3.setLayout(null);
+
         tab3.setBackground(Color.blue);
         table.getTableHeader().setBounds(0, 0, 695, 30);
         table.setBounds(0, 30, 695, 320);
@@ -150,7 +212,6 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tab3.add(table.getTableHeader());
         tab3.add(table);
 
-        panel2.add(labelAmount);
         this.add(tabbedPane);
         //this.add(panel1);         //not needed anymore, left in just in case
         this.add(panel2);
