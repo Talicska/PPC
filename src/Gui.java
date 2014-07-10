@@ -193,10 +193,19 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
 
 
+
+
+
+
+
         JSeparator separator2 = new JSeparator();
         separator2.setOrientation(SwingConstants.VERTICAL);
-        separator2.setBounds(349,5,2,500);
+        separator2.setBounds(348,5,50,500);
         tab1.add(separator2);
+        JSeparator separator3 = new JSeparator();
+        separator3.setOrientation(SwingConstants.VERTICAL);
+        separator3.setBounds(352,5,2,500);
+        tab1.add(separator3);
 
 
 
