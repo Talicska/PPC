@@ -44,6 +44,9 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private JButton buttonAddDye;
 
 
+    private List listDye;
+
+
 
 
 
@@ -94,9 +97,6 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tabbedPane.addTab("<html><body><table width='90'>Etalon</table></body></html>", tab3);
         tab3.setLayout(null);
         tabbedPane.setBounds(0, menuheight, 700, height - menuheight);
-
-        JButton b1 = new JButton("b1");                                                 //buttons
-        JButton b2 = new JButton("b2");
 
         JLabel labelMaterial = new JLabel("Alapanyag");                                 //labels and co.
         labelMaterial.setBounds(5, 5, 70, 25);
@@ -241,9 +241,14 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         labelPercent.setBounds(530, 57 ,30,20);
         tab1.add(labelPercent);
 
-        buttonAddDye = new JButton("+");                        //kajálok baz
-        buttonAddDye.setBounds(600,50, 50,50);
+        buttonAddDye = new JButton("Hozzáadás");
+        buttonAddDye.setBounds(585,32, 100,46);
         tab1.add(buttonAddDye);
+
+        listDye = new List();
+        listDye.setBounds(370, 85, 200, 200);
+        tab1.add(listDye);
+        listDye.add("asd");
 
         JLabel labelPregCover = new JLabel("Lefedettség");
         JLabel labelDomborCost = new JLabel("Költség");
