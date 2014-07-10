@@ -122,7 +122,7 @@ public class PPC {
         calcObj = new Calculator(dyes, dyecylinders, etalonObj, lakks, machines, magnetcylinders, materials, metals);
         calcObj.calculate();
 
-        listAll();
+        //listAll();
 
     }
 }

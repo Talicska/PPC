@@ -11,10 +11,7 @@ import java.util.EventObject;
 import java.util.Locale;
 import java.util.Vector;
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableModel;
 import javax.swing.text.JTextComponent;
 
 public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
@@ -25,12 +22,14 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private int menuheight = 22;
 
     private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);
-    private NumberFormat df = DecimalFormat.getIntegerInstance();
+    private NumberFormat amountformat = DecimalFormat.getIntegerInstance(Locale.ENGLISH);
 
     public Gui() {
 
         this.getContentPane().setLayout(null);
         dimension = new Dimension(width, height);
+        priceformat.setGroupingUsed(false);
+        amountformat.setGroupingUsed(false);
         this.setPreferredSize(dimension);
         this.setTitle("PPC - Print Price Calculator");
 
@@ -139,32 +138,16 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tab3.setLayout(null);
         tab3.setBackground(Color.blue);
         table.getTableHeader().setBounds(0, 0, 695, 30);
-        table.setBounds(0, 30, 695, 320);               //legyen nagy vagy legyen alatta hely?
+        table.setBounds(0, 30, 695, 320);
 
         table.setDefaultRenderer(Double.class, new PriceRenderer(priceformat));
         table.setDefaultEditor(Double.class, new PriceEditor(priceformat));
-        table.getColumnModel().getColumn(0).setCellRenderer(new AmountRenderer(df));
+        table.getColumnModel().getColumn(0).setCellRenderer(new AmountRenderer(amountformat));
+        table.getColumnModel().getColumn(0).setCellEditor(new AmountEditor(amountformat));
 
-
-
-        /*DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();        //jobbra igazit
-        rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
-        //rightRenderer.
-        table.getTableHeader().setForeground(Color.blue);                               //formázott cellába nem enged beleírni, error
-        for (int i = 0; i < 9; i++)                                                         //kell saját TableModel hogy a táblából visszaírás menjen, félig kész
-            table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
-*/
+        table.getTableHeader().setFont(new Font("headerFont",Font.BOLD,12));
 
         tab3.add(table.getTableHeader());
-
-
-
-
-
-
-
-
-
         tab3.add(table);
 
         panel2.add(labelAmount);
@@ -231,6 +214,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
         public AmountRenderer(NumberFormat formatter){
             this.formatter = formatter;
+            setHorizontalAlignment(SwingConstants.RIGHT);
             this.formatter.setMinimumFractionDigits(0);
             this.formatter.setMaximumFractionDigits(0);
         }
@@ -238,6 +222,39 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         @Override
         public void setValue(Object value) {
             setText((value == null) ? "" : formatter.format(value));
+        }
+    }
+
+    private static class AmountEditor extends DefaultCellEditor{
+        private NumberFormat formatter;
+        private JTextField textField;
+
+        public AmountEditor(NumberFormat formatter) {
+            super(new JTextField());
+            this.formatter = formatter;
+            this.formatter.setMinimumFractionDigits(0);
+            this.formatter.setMaximumFractionDigits(0);
+            this.textField = (JTextField) this.getComponent();
+            textField.setHorizontalAlignment(JTextField.RIGHT);
+            textField.setBorder(null);
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            try {
+                return new Integer((textField.getText()));
+            } catch (NumberFormatException e) {
+                System.out.println("Input error");
+                return Integer.valueOf(0);
+            }
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table,
+                                                     Object value, boolean isSelected, int row, int column) {
+            textField.setText((value == null)
+                    ? "" : formatter.format( value));
+            return textField;
         }
     }
 }
