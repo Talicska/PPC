@@ -2,16 +2,10 @@
  * Created by Talicska on 2014.07.09..
  */
 
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.util.EventObject;
 import java.util.Vector;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.text.JTextComponent;
 
 public class InteractiveTableModel extends DefaultTableModel {
 
@@ -27,13 +21,18 @@ public class InteractiveTableModel extends DefaultTableModel {
             public void tableChanged(TableModelEvent e) {
                 int row = e.getFirstRow();
                 int column = e.getColumn();
-                //PPC.getEtalonObj().setElement(dataVector.get(row).get(column),row,column);
-
                 System.out.println("Value changed!");
                 System.out.println(PPC.getEtalonObj().getEtalonMatrix().get(row).get(column));
 
             }
         });
+    }
+
+    @Override
+    public Class getColumnClass(int column) {
+        if( column == 0)
+            return Integer.class;
+        return Double.class;
     }
 
     /*public String getColumnName(int column) {
@@ -43,15 +42,6 @@ public class InteractiveTableModel extends DefaultTableModel {
     /*public boolean isCellEditable(int row, int column) {
         return true;
     }*/
-
-    @Override
-    public Class getColumnClass(int column) {
-        if( column == 0)
-            return Integer.class;
-        return Double.class;
-    }
-
-
 
     /*public Object getValueAt(int row, int column) {
         return dataVector.get(row).get(column);
@@ -70,8 +60,8 @@ public class InteractiveTableModel extends DefaultTableModel {
         return columnNames.size();
     }*/
 
-    public boolean hasEmptyRow() {
-        /*if (dataVector.size() == 0) return false;
+    /*public boolean hasEmptyRow() {
+        if (dataVector.size() == 0) return false;
         AudioRecord audioRecord = (AudioRecord)dataVector.get(dataVector.size() - 1);
         if (audioRecord.getTitle().trim().equals("") &&
                 audioRecord.getArtist().trim().equals("") &&
@@ -79,8 +69,9 @@ public class InteractiveTableModel extends DefaultTableModel {
         {
             return true;
         }
-        else */return false;
-    }
+        else
+            return false;
+    }*/
 
     /*public void addEmptyRow() {
         dataVector.add(new AudioRecord());

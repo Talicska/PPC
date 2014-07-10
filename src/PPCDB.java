@@ -10,7 +10,7 @@ public class PPCDB {
     // "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB"
     // "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB"
 
-    public static final String DATABASE = "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB";     //your own
+    public static final String DATABASE = "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB";     //your own
     private static Connection conn = null;
 
     public void open() {
@@ -52,6 +52,8 @@ public class PPCDB {
             dyes.add(new Dye(rs.getString("name_dye"), rs.getDouble("price_dye"), 0, 0));     //parameters given by user
         }
 
+        stm.close();
+        rs.close();
         return dyes;
     }
 
@@ -66,6 +68,8 @@ public class PPCDB {
             dyecyls.add(new DyeCylinder(rs.getInt("volume"), rs.getInt("percent")));
         }
 
+        stm.close();
+        rs.close();
         return dyecyls;
     }
 
@@ -85,6 +89,9 @@ public class PPCDB {
             etalonMatrix.add((Vector) line.clone());
             line.clear();
         }
+
+        stm.close();
+        rs.close();
         return etalonMatrix;
     }
 
@@ -99,6 +106,8 @@ public class PPCDB {
             lakks.add(new Lakk(rs.getString("name_lakk"), rs.getDouble("price_lakk"), 0, 0));
         }
 
+        stm.close();
+        rs.close();
         return lakks;
     }
 
@@ -113,6 +122,8 @@ public class PPCDB {
             machines.add(new Machine(rs.getString("name_machine")));
         }
 
+        stm.close();
+        rs.close();
         return machines;
     }
 
@@ -127,6 +138,8 @@ public class PPCDB {
             magcyls.add(new MagnetCylinder(rs.getInt("teeth"), rs.getDouble("girth")));
         }
 
+        stm.close();
+        rs.close();
         return magcyls;
     }
 
@@ -141,6 +154,8 @@ public class PPCDB {
             materials.add(new Material(rs.getString("name_mat"), rs.getDouble("price_mat")));
         }
 
+        stm.close();
+        rs.close();
         return materials;
     }
 
@@ -155,6 +170,8 @@ public class PPCDB {
             metals.add(new Metal(rs.getString("name_metal"), rs.getDouble("price_metal"), 0, 0));
         }
 
+        stm.close();
+        rs.close();
         return metals;
     }
 
@@ -179,8 +196,9 @@ public class PPCDB {
             }
         }
 
+        stm.close();
+        rs.close();
         return machines;
     }
-
 
 }
