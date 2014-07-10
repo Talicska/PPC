@@ -10,7 +10,7 @@ public class Calculator {
     private static final int MAX_NUMBER_OF_DYES = 7;
     private static final int MAX_NUMBER_OF_LAKKS = 1;
     private static final int MAX_NUMBER_OF_METALS = 2;
-    //public static double TEKERCSAR = 2.1;
+    private static final double ROLL_PRICE = 2.1;
 
     private static ArrayList<Dye> dyes = new ArrayList<Dye>();
     private static ArrayList<DyeCylinder> dyecylinders = new ArrayList<DyeCylinder>();
@@ -222,6 +222,21 @@ public class Calculator {
         }else{
             pregCheck=0;
         }*/
+
+        //Packing
+        //guiból
+        int amountPerRoll = 2;
+        double rollWidth = 2.2;
+        double packingTime = 4.5;
+        double packingCost = 6000;
+        //--------------------
+
+        double packingSelfCost = 0;
+        double numberOfRolls = 0;
+        if (amountPerRoll!=0 && rollWidth!=0){
+            numberOfRolls = (double)amount/amountPerRoll;
+            packingSelfCost = packingTime * packingCost + numberOfRolls * ROLL_PRICE * rollWidth;
+        }
 
     }
 
