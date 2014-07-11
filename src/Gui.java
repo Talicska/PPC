@@ -22,7 +22,7 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.JTextComponent;
 
-public class Gui extends JFrame implements ActionListener{       // ...ne baszd ossze a kodot!
+public class Gui extends JFrame implements ActionListener {       // ...ne baszd ossze a kodot!
 
     private Dimension dimension;                                                            //dimensions
     private int width = 1000;
@@ -38,7 +38,6 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
     private JComboBox comboDyePreset;
     private JComboBox comboDyeType;
     private JComboBox comboDyeCylinder;
-
 
 
     private JTextField textFAmount;
@@ -66,10 +65,8 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
     private JCheckBox checkDombor;
 
 
-
-
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==buttonGetEuro)
+        if (e.getSource() == buttonGetEuro)
             textFEuro.setText(String.valueOf(new CurrencyConverter().convert()));
     }
 
@@ -115,7 +112,6 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         //panel2.setBackground(mainColor);
 
 
-
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, 0);                   //tabs
         JComponent tab1 = new JPanel();
         JComponent tab2 = new JPanel();
@@ -137,17 +133,16 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         //tab3.setBackground(mainColor);
 
 
-
         //SwingUtilities.updateComponentTreeUI(tabbedPane);
 
         JLabel labelMaterial = new JLabel("Alapanyag");                                 //labels and co.
         labelMaterial.setBounds(5, 5, 70, 25);
         tab1.add(labelMaterial);
         comboMaterial = new JComboBox();
-        for(int i=0;i<PPC.calcObj.getMaterials().size();i++)
+        for (int i = 0; i < PPC.calcObj.getMaterials().size(); i++)
             comboMaterial.addItem(PPC.calcObj.getMaterials().get(i).getName());
         tab1.add(comboMaterial);
-        comboMaterial.setBounds(80,7,250,21);
+        comboMaterial.setBounds(80, 7, 250, 21);
 
         JLabel labelAmount = new JLabel("Darabszám");
         labelAmount.setBounds(5, 30, 70, 25);
@@ -157,7 +152,7 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         textFAmount.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFAmount);
         JLabel labelDb1 = new JLabel("db");
-        labelDb1.setBounds(165, 32 ,30,20);
+        labelDb1.setBounds(165, 32, 30, 20);
         tab1.add(labelDb1);
 
         JLabel labelWidth = new JLabel("Szélesség");
@@ -168,7 +163,7 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         textFWidth.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFWidth);
         JLabel labelMm1 = new JLabel("mm");
-        labelMm1.setBounds(165, 57 ,30,20);
+        labelMm1.setBounds(165, 57, 30, 20);
         tab1.add(labelMm1);
 
         JLabel labelHeight = new JLabel("Magasság");
@@ -179,7 +174,7 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         textFHeight.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFHeight);
         JLabel labelMm2 = new JLabel("mm");
-        labelMm2.setBounds(165, 82 ,30,20);
+        labelMm2.setBounds(165, 82, 30, 20);
         tab1.add(labelMm2);
 
         JLabel labelTracks = new JLabel("Pályák");
@@ -190,7 +185,7 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         textFTracks.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFTracks);
         JLabel labelDb2 = new JLabel("db");
-        labelDb2.setBounds(165, 107 ,30,20);
+        labelDb2.setBounds(165, 107, 30, 20);
         tab1.add(labelDb2);
 
         JLabel labelGaps = new JLabel("Rések");
@@ -205,7 +200,7 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         textFSideGap.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFSideGap);
         JLabel labelMm3 = new JLabel("mm");
-        labelMm3.setBounds(165, 157 ,30,20);
+        labelMm3.setBounds(165, 157, 30, 20);
         tab1.add(labelMm3);
 
         JLabel labelBetweenGap = new JLabel("Pályák közt");
@@ -216,26 +211,26 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         textFBetweenGap.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFBetweenGap);
         JLabel labelMm4 = new JLabel("mm");
-        labelMm4.setBounds(165, 182 ,30,20);
+        labelMm4.setBounds(165, 182, 30, 20);
         tab1.add(labelMm4);
 
         JSeparator separator1 = new JSeparator();
-        separator1.setBounds(5,212,325,2);
+        separator1.setBounds(5, 212, 325, 2);
         tab1.add(separator1);
 
         JLabel labelMachine = new JLabel("Géptípus");
         labelMachine.setBounds(5, 220, 70, 25);
         tab1.add(labelMachine);
         comboMachine = new JComboBox();
-        for(int i=0;i<PPC.calcObj.getMachines().size();i++)
+        for (int i = 0; i < PPC.calcObj.getMachines().size(); i++)
             comboMachine.addItem(PPC.calcObj.getMachines().get(i).getName());
         tab1.add(comboMachine);
-        comboMachine.setBounds(80,222,130,21);
+        comboMachine.setBounds(80, 222, 130, 21);
         comboCylinder = new JComboBox();
         tab1.add(comboCylinder);
-        for(int i=0;i<PPC.calcObj.getMachines().get(0).getCylinders().size();i++)
+        for (int i = 0; i < PPC.calcObj.getMachines().get(0).getCylinders().size(); i++)
             comboCylinder.addItem(PPC.calcObj.getMachines().get(0).getCylinders().get(i).getTeeth());
-        comboCylinder.setBounds(230,222,100,21);
+        comboCylinder.setBounds(230, 222, 100, 21);
 
         //géptípus alatti rész
         //
@@ -243,52 +238,51 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
 
         JSeparator separator2 = new JSeparator();                                           //tab1 vertical separator
         separator2.setOrientation(SwingConstants.VERTICAL);
-        separator2.setBounds(348,5,2,500);
+        separator2.setBounds(348, 5, 2, 500);
         tab1.add(separator2);
         JSeparator separator3 = new JSeparator();
         separator3.setOrientation(SwingConstants.VERTICAL);
-        separator3.setBounds(352,5,2,500);
+        separator3.setBounds(352, 5, 2, 500);
         tab1.add(separator3);
-
 
 
         JLabel labelDyePreset = new JLabel("Összeállítás betöltése");
         labelDyePreset.setBounds(370, 5, 200, 25);
         tab1.add(labelDyePreset);
         comboDyePreset = new JComboBox();
-        comboDyePreset.setBounds(370, 32,225,21);
+        comboDyePreset.setBounds(370, 32, 225, 21);
         tab1.add(comboDyePreset);
 
         //fel kell tölteni comboDyePreset-et
 
         buttonaddDyePreset = new JButton("Betölt");
-        buttonaddDyePreset.setBounds(600,32,85,21);
+        buttonaddDyePreset.setBounds(600, 32, 85, 21);
         tab1.add(buttonaddDyePreset);
 
         JLabel labelDyeAdd = new JLabel("Festéktípus hozzáadása");
         labelDyeAdd.setBounds(370, 65, 200, 25);
         tab1.add(labelDyeAdd);
         comboDyeType = new JComboBox();
-        for(int i=0;i<PPC.calcObj.getAllDyeTypes().size();i++)
+        for (int i = 0; i < PPC.calcObj.getAllDyeTypes().size(); i++)
             comboDyeType.addItem(PPC.calcObj.getAllDyeTypes().get(i).getName());
         comboDyeType.addItem("Egyéb szín");
         tab1.add(comboDyeType);
-        comboDyeType.setBounds(370,92,225,21);
+        comboDyeType.setBounds(370, 92, 225, 21);
 
         buttonAddDye = new JButton("Hozzáad");
-        buttonAddDye.setBounds(600,92, 85,21);
+        buttonAddDye.setBounds(600, 92, 85, 21);
         tab1.add(buttonAddDye);
 
         JLabel labelDyeCylinder = new JLabel("Henger");
         labelDyeCylinder.setBounds(380, 115, 70, 25);
         tab1.add(labelDyeCylinder);
         comboDyeCylinder = new JComboBox();
-        for(int i =0;i<PPC.calcObj.getDyecylinders().size();i++)
+        for (int i = 0; i < PPC.calcObj.getDyecylinders().size(); i++)
             comboDyeCylinder.addItem(PPC.calcObj.getDyecylinders().get(i).getVolume());
         tab1.add(comboDyeCylinder);
-        comboDyeCylinder.setBounds(455,117,65,21);
+        comboDyeCylinder.setBounds(455, 117, 65, 21);
         JLabel labelGM = new JLabel("g/m2");
-        labelGM.setBounds(525,117,30,20);
+        labelGM.setBounds(525, 117, 30, 20);
         tab1.add(labelGM);
 
         JLabel labelDyeCover = new JLabel("Lefedettség");
@@ -299,89 +293,90 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         textFDyeCover.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFDyeCover);
         JLabel labelPercent1 = new JLabel("%");
-        labelPercent1.setBounds(525, 142 ,30,20);
+        labelPercent1.setBounds(525, 142, 30, 20);
         tab1.add(labelPercent1);
 
         listDyeType = new List();
         listDyeType.setBounds(370, 175, 225, 125);
         tab1.add(listDyeType);
-        for(int i=0;i<8;i++)
+        for (int i = 0; i < 8; i++)
             listDyeType.add("Festek   asdas   qwertz");
 
-        checkPreg = new JCheckBox("Prégelés",false);
-        checkPreg.setBounds(370,310,120,25 );
+        checkPreg = new JCheckBox("Prégelés", false);
+        checkPreg.setBounds(370, 310, 120, 25);
         tab1.add(checkPreg);
-        JLabel labelPregCover = new JLabel("Lefedettség",SwingConstants.RIGHT);
-        labelPregCover.setBounds(520,310,75,25);
+        JLabel labelPregCover = new JLabel("Lefedettség", SwingConstants.RIGHT);
+        labelPregCover.setBounds(520, 310, 75, 25);
         tab1.add(labelPregCover);
         textFPregCover = new JTextField();
-        textFPregCover.setBounds(600,312,65,21);
+        textFPregCover.setBounds(600, 312, 65, 21);
         textFPregCover.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFPregCover);
         JLabel labelPercent2 = new JLabel("%");
-        labelPercent2.setBounds(670,312,30,20);
+        labelPercent2.setBounds(670, 312, 30, 20);
         tab1.add(labelPercent2);
 
-        checkDombor = new JCheckBox("Dombornyomás",false);
-        checkDombor.setBounds(370,335,120,25);
+        checkDombor = new JCheckBox("Dombornyomás", false);
+        checkDombor.setBounds(370, 335, 120, 25);
         tab1.add(checkDombor);
-        JLabel labelDomborCost = new JLabel("Költség",SwingConstants.RIGHT);
-        labelDomborCost.setBounds(520,335,75,25);
+        JLabel labelDomborCost = new JLabel("Költség", SwingConstants.RIGHT);
+        labelDomborCost.setBounds(520, 335, 75, 25);
         tab1.add(labelDomborCost);
         textFDomborCost = new JTextField("5000");
-        textFDomborCost.setBounds(600,337,65,21);
+        textFDomborCost.setBounds(600, 337, 65, 21);
         textFDomborCost.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFDomborCost);
-        JLabel labelFt = new JLabel("Ft");
-        labelFt.setBounds(670,337,30,20);
-        tab1.add(labelFt);
+        JLabel labelFt1 = new JLabel("Ft");
+        labelFt1.setBounds(670, 337, 30, 20);
+        tab1.add(labelFt1);
 
         JSeparator separator4 = new JSeparator();
-        separator4.setBounds(370,365,315,2);
+        separator4.setBounds(370, 365, 315, 2);
         tab1.add(separator4);
 
         JLabel labelTitle = new JLabel("Címke neve");
-        labelTitle.setBounds(370, 375, 80,25);
+        labelTitle.setBounds(370, 375, 80, 25);
         tab1.add(labelTitle);
         textFTitle = new JTextField("");
-        textFTitle.setBounds(455,377,230,21);
+        textFTitle.setBounds(455, 377, 230, 21);
         tab1.add(textFTitle);
 
         JLabel labelClient = new JLabel("Megrendelő");
-        labelClient.setBounds(370,400,80,25);
+        labelClient.setBounds(370, 400, 80, 25);
         tab1.add(labelClient);
         textFClient = new JTextField("");
-        textFClient.setBounds(455,402,230,21);
+        textFClient.setBounds(455, 402, 230, 21);
         tab1.add(textFClient);
 
         JLabel labelDiscount = new JLabel("Kedvezmény");
-        labelDiscount.setBounds(370,425,80,25);
+        labelDiscount.setBounds(370, 425, 80, 25);
         tab1.add(labelDiscount);
         textFDiscount = new JTextField("0");
-        textFDiscount.setBounds(455,427,65,21);
+        textFDiscount.setBounds(455, 427, 65, 21);
         textFDiscount.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFDiscount);
         JLabel labelPercent3 = new JLabel("%");
-        labelPercent3.setBounds(525,427,30,20);
+        labelPercent3.setBounds(525, 427, 30, 20);
         tab1.add(labelPercent3);
 
         JSeparator separator5 = new JSeparator();
-        separator5.setBounds(370,460,315,2);
+        separator5.setBounds(370, 460, 315, 2);
         tab1.add(separator5);
 
         JLabel labelEuro = new JLabel("Euro árfolyam");
-        labelEuro.setBounds(370,470,80,25);
+        labelEuro.setBounds(370, 470, 80, 25);
         tab1.add(labelEuro);
         textFEuro = new JTextField("300");
-        textFEuro.setBounds(455,472,65,21);
+        textFEuro.setBounds(455, 472, 65, 21);
         textFEuro.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFEuro);
-        buttonGetEuro = new JButton("getEuro");
+        JLabel labelFt2 = new JLabel("Ft");
+        labelFt2.setBounds(525, 472, 30, 20);
+        tab1.add(labelFt2);
+        buttonGetEuro = new JButton("Lekér");
         buttonGetEuro.addActionListener(this);
-        buttonGetEuro.setBounds(525,472,85,21);
+        buttonGetEuro.setBounds(600, 472, 85, 21);
         tab1.add(buttonGetEuro);
-
-
 
 
         JLabel labelOtherCost = new JLabel("Egyéb költség");
@@ -392,7 +387,6 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         JLabel labelPackingTime = new JLabel("Kiszerelési idő");
         JLabel labelRollWidth = new JLabel("Tekercs szélesség");
         JLabel labelAmountPerRoll = new JLabel("Db/tekercs");
-
 
 
         JLabel labelSummary = new JLabel("Összesítés");
@@ -410,7 +404,7 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
 
         InteractiveTableModel model = new InteractiveTableModel(PPC.calcObj.getEtalonObj().getEtalonMatrix(), columnNames);
 
-        JTable table = new JTable(model){
+        JTable table = new JTable(model) {
             @Override
             public boolean editCellAt(int row, int column, EventObject e) {
                 boolean result = super.editCellAt(row, column, e);
@@ -439,31 +433,29 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         table.setDefaultEditor(Double.class, new PriceEditor(priceformat));
         table.getColumnModel().getColumn(0).setCellRenderer(new AmountRenderer(amountformat));
         table.getColumnModel().getColumn(0).setCellEditor(new AmountEditor(amountformat));
-        table.getTableHeader().setFont(new Font("headerFont",Font.BOLD,12));
+        table.getTableHeader().setFont(new Font("headerFont", Font.BOLD, 12));
 
         tab3.add(table.getTableHeader());
         tab3.add(table);
 
-        JLabel labelEtalonSelfCost = new JLabel("Etalon önköltség:  "+PPC.calcObj.getEtalonObj().getEtalonSelfCost()+" Ft");
-        labelEtalonSelfCost.setBounds(5,445,300,20);
+        JLabel labelEtalonSelfCost = new JLabel("Etalon önköltség:  " + PPC.calcObj.getEtalonObj().getEtalonSelfCost() + " Ft");
+        labelEtalonSelfCost.setBounds(5, 445, 300, 20);
         tab3.add(labelEtalonSelfCost);
-        JLabel labelEtalonMaterialPrice = new JLabel("Etalon anyagköltség:  "+PPC.calcObj.getEtalonObj().getEtalonMaterialPrice() +" Ft");
-        labelEtalonMaterialPrice.setBounds(5,470,300,20);
+        JLabel labelEtalonMaterialPrice = new JLabel("Etalon anyagköltség:  " + PPC.calcObj.getEtalonObj().getEtalonMaterialPrice() + " Ft");
+        labelEtalonMaterialPrice.setBounds(5, 470, 300, 20);
         tab3.add(labelEtalonMaterialPrice);
-        JLabel labelEtalonSizeX = new JLabel("Etalon szélesség:  "+(int)PPC.calcObj.getEtalonObj().getEtalonSizeX() +" mm");
-        labelEtalonSizeX.setBounds(347,445,300,20);
+        JLabel labelEtalonSizeX = new JLabel("Etalon szélesség:  " + (int) PPC.calcObj.getEtalonObj().getEtalonSizeX() + " mm");
+        labelEtalonSizeX.setBounds(347, 445, 300, 20);
         tab3.add(labelEtalonSizeX);
-        JLabel labelEtalonSizeY = new JLabel("Etalon magasság:  "+(int)PPC.calcObj.getEtalonObj().getEtalonSizeY()+" mm");
-        labelEtalonSizeY.setBounds(347,470,300,20);
+        JLabel labelEtalonSizeY = new JLabel("Etalon magasság:  " + (int) PPC.calcObj.getEtalonObj().getEtalonSizeY() + " mm");
+        labelEtalonSizeY.setBounds(347, 470, 300, 20);
         tab3.add(labelEtalonSizeY);
-
 
 
         this.add(tabbedPane);
         //this.add(panel1);         //not needed anymore, left in just in case
         this.add(panel2);
         this.add(menu);
-
 
     }
 
@@ -516,11 +508,11 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         }
     }
 
-    private static class AmountRenderer extends DefaultTableCellRenderer{
+    private static class AmountRenderer extends DefaultTableCellRenderer {
 
         private NumberFormat formatter;
 
-        public AmountRenderer(NumberFormat formatter){
+        public AmountRenderer(NumberFormat formatter) {
             this.formatter = formatter;
             setHorizontalAlignment(SwingConstants.RIGHT);
             this.formatter.setMinimumFractionDigits(0);
@@ -533,7 +525,7 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         }
     }
 
-    private static class AmountEditor extends DefaultCellEditor{
+    private static class AmountEditor extends DefaultCellEditor {
         private NumberFormat formatter;
         private JTextField textField;
 
@@ -561,37 +553,36 @@ public class Gui extends JFrame implements ActionListener{       // ...ne baszd 
         public Component getTableCellEditorComponent(JTable table,
                                                      Object value, boolean isSelected, int row, int column) {
             textField.setText((value == null)
-                    ? "" : formatter.format( value));
+                    ? "" : formatter.format(value));
             return textField;
         }
     }
 
     private static class CurrencyConverter {
 
-        private String url;
+        private String url = "http://rate-exchange.appspot.com/currency?from=EUR&to=HUF";
 
-        public CurrencyConverter(){
-            url = "http://rate-exchange.appspot.com/currency?from=EUR&to=HUF";
-        }
+        public Double convert() {
 
-        public Double convert(){
-            String answer="";
+            String answer = "";
             System.out.println("converting..");
+
             try {
                 URL convert = new URL(url);
                 BufferedReader in = new BufferedReader(new InputStreamReader(convert.openStream()));
                 answer = in.readLine();
                 in.close();
-                answer=answer.replaceFirst("\\D*","");
-                answer=answer.replaceFirst(",\\D*","");
-            }catch (MalformedURLException mue) {
+                answer = answer.replaceFirst("\\D*", "");
+                answer = answer.replaceFirst(",\\D*", "");
+            } catch (MalformedURLException mue) {
                 System.out.println("1.");
-            }
-            catch (IOException ioe) {
+            } catch (IOException ioe) {
                 System.out.println("2.");
             }
 
-            return Double.valueOf(answer);
+            if (answer != "")
+                return Double.valueOf(answer);
+            return new Double(-1);                                          //errorhandling level: MacGyver
 
         }
     }
