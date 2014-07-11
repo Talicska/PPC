@@ -41,6 +41,8 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private JTextField textFBetweenGap;
     private JTextField textFTracks;
     private JTextField textFDyeCover;
+    private JTextField textFPregCover;
+    private JTextField textFDomborCost;
 
     private JButton buttonaddDyePreset;
     private JButton buttonAddDye;
@@ -48,6 +50,8 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
     private List listDyeType;
 
+    private JCheckBox checkPreg;
+    private JCheckBox checkDombor;
 
 
 
@@ -248,19 +252,16 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JLabel labelDyeAdd = new JLabel("Festéktípus hozzáadása");
         labelDyeAdd.setBounds(370, 65, 200, 25);
         tab1.add(labelDyeAdd);
-
-
-
-
-        //JLabel labelDyeType = new JLabel("Festéktípus");
-        //labelDyeType.setBounds(380, 90, 70, 25);
-        //tab1.add(labelDyeType);
         comboDyeType = new JComboBox();
         for(int i=0;i<PPC.calcObj.getAllDyeTypes().size();i++)
             comboDyeType.addItem(PPC.calcObj.getAllDyeTypes().get(i).getName());
         comboDyeType.addItem("Egyéb szín");
         tab1.add(comboDyeType);
         comboDyeType.setBounds(370,92,225,21);
+
+        buttonAddDye = new JButton("Hozzáad");
+        buttonAddDye.setBounds(600,92, 85,21);
+        tab1.add(buttonAddDye);
 
         JLabel labelDyeCylinder = new JLabel("Henger");
         labelDyeCylinder.setBounds(380, 115, 70, 25);
@@ -282,21 +283,47 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         textFDyeCover.setBounds(455, 142, 80, 21);
         textFDyeCover.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFDyeCover);
-        JLabel labelPercent = new JLabel("%");
-        labelPercent.setBounds(540, 142 ,30,20);
-        tab1.add(labelPercent);
-
-        buttonAddDye = new JButton("Hozzáad");
-        buttonAddDye.setBounds(600,92, 85,21);
-        tab1.add(buttonAddDye);
+        JLabel labelPercent1 = new JLabel("%");
+        labelPercent1.setBounds(540, 142 ,30,20);
+        tab1.add(labelPercent1);
 
         listDyeType = new List();
-        listDyeType.setBounds(370, 170, 200, 200);
+        listDyeType.setBounds(370, 175, 225, 125);
         tab1.add(listDyeType);
+        for(int i=0;i<8;i++)
+            listDyeType.add("Festek   asdas   qwertz");
+
+        checkPreg = new JCheckBox("Prégelés",false);
+        checkPreg.setBounds(370,310,120,25 );
+        tab1.add(checkPreg);
+        JLabel labelPregCover = new JLabel("Lefedettség",SwingConstants.RIGHT);
+        labelPregCover.setBounds(520,310,75,25);
+        tab1.add(labelPregCover);
+        textFPregCover = new JTextField();
+        textFPregCover.setBounds(600,312,65,21);
+        textFPregCover.setHorizontalAlignment(SwingConstants.RIGHT);
+        tab1.add(textFPregCover);
+        JLabel labelPercent2 = new JLabel("%");
+        labelPercent2.setBounds(670,312,30,20);
+        tab1.add(labelPercent2);
+
+        checkDombor = new JCheckBox("Dombornyomás",false);
+        checkDombor.setBounds(370,335,120,25);
+        tab1.add(checkDombor);
+        JLabel labelDomborCost = new JLabel("Költség",SwingConstants.RIGHT);
+        labelDomborCost.setBounds(520,335,75,25);
+        tab1.add(labelDomborCost);
+        textFDomborCost = new JTextField("5000");
+        textFDomborCost.setBounds(600,337,65,21);
+        textFDomborCost.setHorizontalAlignment(SwingConstants.RIGHT);
+        tab1.add(textFDomborCost);
+        JLabel labelFt = new JLabel("Ft");
+        labelFt.setBounds(670,337,30,20);
+        tab1.add(labelFt);
 
 
-        JLabel labelPregCover = new JLabel("Lefedettség");
-        JLabel labelDomborCost = new JLabel("Költség");
+
+
 
         JLabel labelClicheCost = new JLabel("Kliséköltség");
         JLabel labelStancCost = new JLabel("Stancköltség");
