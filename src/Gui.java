@@ -232,62 +232,66 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
 
 
-        JLabel labelDyePreset = new JLabel("Mi is ez?");
-        labelDyePreset.setBounds(370, 5, 70, 25);
+        JLabel labelDyePreset = new JLabel("Festéklista betöltése");
+        labelDyePreset.setBounds(370, 5, 200, 25);
         tab1.add(labelDyePreset);
         comboDyePreset = new JComboBox();
-        comboDyePreset.setBounds(370, 32,100,21);
+        comboDyePreset.setBounds(370, 32,225,21);
         tab1.add(comboDyePreset);
 
         //fel kell tölteni comboDyePreset-et
 
-        buttonaddDyePreset = new JButton("+");
-        buttonaddDyePreset.setBounds(475,32,21,21);
+        buttonaddDyePreset = new JButton("Betölt");
+        buttonaddDyePreset.setBounds(600,32,85,21);
         tab1.add(buttonaddDyePreset);
+
+        JLabel labelDyeAdd = new JLabel("További festéktípusok hozzáadása");
+        labelDyeAdd.setBounds(370, 65, 200, 25);
+        tab1.add(labelDyeAdd);
 
 
 
 
         JLabel labelDyeType = new JLabel("Festéktípus");
-        labelDyeType.setBounds(370, 5, 70, 25);
+        labelDyeType.setBounds(380, 90, 70, 25);
         tab1.add(labelDyeType);
         comboDyeType = new JComboBox();
         for(int i=0;i<PPC.calcObj.getAllDyeTypes().size();i++)
             comboDyeType.addItem(PPC.calcObj.getAllDyeTypes().get(i).getName());
         comboDyeType.addItem("Egyéb szín");
         tab1.add(comboDyeType);
-        comboDyeType.setBounds(445,7,240,21);
+        comboDyeType.setBounds(455,92,230,21);
 
         JLabel labelDyeCylinder = new JLabel("Henger");
-        labelDyeCylinder.setBounds(370, 30, 70, 25);
+        labelDyeCylinder.setBounds(380, 115, 70, 25);
         tab1.add(labelDyeCylinder);
         comboDyeCylinder = new JComboBox();
         for(int i =0;i<PPC.calcObj.getDyecylinders().size();i++)
             comboDyeCylinder.addItem(PPC.calcObj.getDyecylinders().get(i).getVolume());
         tab1.add(comboDyeCylinder);
-        comboDyeCylinder.setBounds(445,32,80,21);
+        comboDyeCylinder.setBounds(455,117,80,21);
         JLabel labelGM = new JLabel("g/m2");
-        labelGM.setBounds(530,32,30,20);
+        labelGM.setBounds(540,117,30,20);
 
       tab1.add(labelGM);
 
         JLabel labelDyeCover = new JLabel("Lefedettség");
-        labelDyeCover.setBounds(370, 55, 70, 25);
+        labelDyeCover.setBounds(380, 140, 70, 25);
         tab1.add(labelDyeCover);
         textFDyeCover = new JTextField();
-        textFDyeCover.setBounds(445, 57, 80, 21);
+        textFDyeCover.setBounds(455, 142, 80, 21);
         textFDyeCover.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFDyeCover);
         JLabel labelPercent = new JLabel("%");
-        labelPercent.setBounds(530, 57 ,30,20);
+        labelPercent.setBounds(540, 142 ,30,20);
         tab1.add(labelPercent);
 
         buttonAddDye = new JButton("Hozzáadás");
-        buttonAddDye.setBounds(585,32, 100,46);
+        buttonAddDye.setBounds(600,117, 85,21);
         tab1.add(buttonAddDye);
 
         listDyeType = new List();
-        listDyeType.setBounds(370, 85, 200, 200);
+        listDyeType.setBounds(370, 170, 200, 200);
         tab1.add(listDyeType);
 
 
