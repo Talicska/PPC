@@ -1,6 +1,7 @@
 import org.omg.DynamicAny._DynEnumStub;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * Created by Prof on 2014.07.09..
@@ -29,6 +30,8 @@ public class Calculator {
     private int dyeNum = 0;
     private int lakkNum = 0;
     private int metalNum = 0;
+
+    private Vector<Vector<Double>> profitMatrix = new Vector<Vector<Double>>();
 
     public Calculator(ArrayList<Dye> dyes, ArrayList<DyeCylinder> dyecylinders, Etalon etalonObj, ArrayList<Lakk> lakks, ArrayList<Machine> machines,
                       ArrayList<MagnetCylinder> magnetcylinders, ArrayList<Material> materials, ArrayList<Metal> metals){
@@ -170,19 +173,42 @@ public class Calculator {
         return addedDyes.size();
     }
 
-    /*private void transformEtalon(){
+    private void transformEtalon(double width, double height){
 
-        double sizeRate=(width*height)/(etalonWidth*etalonHeight);
+        double sizeRate = (width * height) / (etalonObj.getEtalonSizeX() * etalonObj.getEtalonSizeY());
 
         profitMatrix = new Vector<Vector<Double>>();
-        for (int i=0; i<etalonMatrix.size(); i++){
-            Vector<Double> row=new Vector<Double>();
-            for (int j=0; j<etalonMatrix.get(i).size(); j++){
-                row.add((etalonMatrix.get(i).get(j)-etalonDbPrice)*sizeRate);
+        for (int i = 0; i < etalonObj.getEtalonMatrix().size(); i++){
+            Vector<Double> row = new Vector<Double>();
+            for (int j = 0; j < etalonObj.getEtalonMatrix().get(i).size(); j++){
+                row.add((etalonObj.getEtalonMatrix().get(i).get(j) - etalonObj.getEtalonSelfCost()) * sizeRate);
             }
             profitMatrix.add(row);
         }
-    }*/
+    }
+
+    private double calcArresDbPrice(int amount, double width, double height, int colorNum, double materialSelfCost, int discount){
+        int newAmount=(int)(((width * height) * amount) / (etalonObj.getEtalonSizeX() * etalonObj.getEtalonSizeY()));
+
+        int newAmountIndex = 0;
+        while(newAmountIndex < etalonObj.getEtalonMatrix().size()-1 && etalonObj.getEtalonMatrix().get(newAmountIndex).get(0) < newAmount){
+            newAmountIndex++;
+        }
+
+        if (newAmount <= etalonObj.getEtalonMatrix().get(0).get(0) || newAmount >= etalonObj.getEtalonMatrix().get(etalonObj.getEtalonMatrix().size() - 1).get(0)){
+            return (profitMatrix.get(newAmountIndex).get(colorNum) + (materialSelfCost/amount)) * ((double)(100-discount) / 100);
+        }else{
+            double highPrice = profitMatrix.get(newAmountIndex).get(colorNum);
+            double lowPrice = profitMatrix.get(newAmountIndex - 1).get(colorNum);
+
+            double highDb = etalonObj.getEtalonMatrix().get(newAmountIndex).get(0);;
+            double lowDb = etalonObj.getEtalonMatrix().get(newAmountIndex - 1).get(0);
+            return ((highPrice * ( (newAmount - lowDb) / (highDb - lowDb) ) +
+                    lowPrice * ( (highDb - newAmount) / (highDb - lowDb) )) +
+                    (materialSelfCost / amount))* ((double)(100 - discount) / 100);
+        }
+
+    }
 
     public void calculate(int materialIndex, int amount, double width, double height, int tracks, double sideGap, double betweenGap,
                             int machineIndex, int magnetCylinderIndex, int pregCover, double domborPrice, double clicheCost,
@@ -284,10 +310,11 @@ public class Calculator {
 
         //Profit - árrés
         int colorNum = countColors();
-        /*transformEtalon();
-        //arresDbPrice=calcArresDbPrice(amount, colourNum);
+        transformEtalon(width, height);
+        double profitOnPiece = calcArresDbPrice(amount, width, height, colorNum, materialSelfCost, discount);
+        System.out.println("Darabár: " + profitOnPiece);
 
-        if (pregCheck == 0){
+        /*if (pregCheck == 0){
             arresDbPrice = calcArresDbPrice(amount, colorNum);
         }else{
             arresDbPrice = calcArresDbPrice(amount, colorNum);
