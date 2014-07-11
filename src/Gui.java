@@ -232,7 +232,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
 
 
-        JLabel labelDyePreset = new JLabel("Festéklista betöltése");
+        JLabel labelDyePreset = new JLabel("Összeállítás betöltése");
         labelDyePreset.setBounds(370, 5, 200, 25);
         tab1.add(labelDyePreset);
         comboDyePreset = new JComboBox();
@@ -245,22 +245,22 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         buttonaddDyePreset.setBounds(600,32,85,21);
         tab1.add(buttonaddDyePreset);
 
-        JLabel labelDyeAdd = new JLabel("További festéktípusok hozzáadása");
+        JLabel labelDyeAdd = new JLabel("Festéktípus hozzáadása");
         labelDyeAdd.setBounds(370, 65, 200, 25);
         tab1.add(labelDyeAdd);
 
 
 
 
-        JLabel labelDyeType = new JLabel("Festéktípus");
-        labelDyeType.setBounds(380, 90, 70, 25);
-        tab1.add(labelDyeType);
+        //JLabel labelDyeType = new JLabel("Festéktípus");
+        //labelDyeType.setBounds(380, 90, 70, 25);
+        //tab1.add(labelDyeType);
         comboDyeType = new JComboBox();
         for(int i=0;i<PPC.calcObj.getAllDyeTypes().size();i++)
             comboDyeType.addItem(PPC.calcObj.getAllDyeTypes().get(i).getName());
         comboDyeType.addItem("Egyéb szín");
         tab1.add(comboDyeType);
-        comboDyeType.setBounds(455,92,230,21);
+        comboDyeType.setBounds(370,92,225,21);
 
         JLabel labelDyeCylinder = new JLabel("Henger");
         labelDyeCylinder.setBounds(380, 115, 70, 25);
@@ -286,8 +286,8 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         labelPercent.setBounds(540, 142 ,30,20);
         tab1.add(labelPercent);
 
-        buttonAddDye = new JButton("Hozzáadás");
-        buttonAddDye.setBounds(600,117, 85,21);
+        buttonAddDye = new JButton("Hozzáad");
+        buttonAddDye.setBounds(600,92, 85,21);
         tab1.add(buttonAddDye);
 
         listDyeType = new List();
