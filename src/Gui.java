@@ -4,7 +4,14 @@
 
 import java.awt.*;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.EventObject;
@@ -15,7 +22,7 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.JTextComponent;
 
-public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
+public class Gui extends JFrame implements ActionListener{       // ...ne baszd ossze a kodot!
 
     private Dimension dimension;                                                            //dimensions
     private int width = 1000;
@@ -53,7 +60,6 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private JButton buttonAddDye;
     private JButton buttonGetEuro;
 
-
     private List listDyeType;
 
     private JCheckBox checkPreg;
@@ -62,6 +68,10 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
 
 
 
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==buttonGetEuro)
+            textFEuro.setText(String.valueOf(new CurrencyConverter().convert()));
+    }
 
 
     public Gui() {
@@ -366,6 +376,10 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         textFEuro.setBounds(455,472,65,21);
         textFEuro.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFEuro);
+        buttonGetEuro = new JButton("getEuro");
+        buttonGetEuro.addActionListener(this);
+        buttonGetEuro.setBounds(525,472,85,21);
+        tab1.add(buttonGetEuro);
 
 
 
@@ -552,19 +566,35 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         }
     }
 
-    private static class CurrencyGetter {
+    private static class CurrencyConverter {
 
         private String url;
-        private String answer;
 
-        public CurrencyGetter(){
+        public CurrencyConverter(){
             url = "http://rate-exchange.appspot.com/currency?from=EUR&to=HUF";
-
         }
 
+        public Double convert(){
+            String answer="";
+            System.out.println("converting..");
+            try {
+                URL convert = new URL(url);
+                BufferedReader in = new BufferedReader(new InputStreamReader(convert.openStream()));
+                answer = in.readLine();
+                in.close();
+                answer=answer.replaceFirst("\\D*","");
+                answer=answer.replaceFirst(",\\D*","");
+            }catch (MalformedURLException mue) {
+                System.out.println("1.");
+            }
+            catch (IOException ioe) {
+                System.out.println("2.");
+            }
 
+            return Double.valueOf(answer);
 
-
+        }
     }
+
 }
 
