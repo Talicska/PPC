@@ -156,6 +156,20 @@ public class Calculator {
         return null;
     }
 
+    public boolean isThereLakk(){
+        for (int i = 0; i < addedDyes.size(); i++) {
+            if (addedDyes.get(i).getClass().equals(Lakk.class)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int countColors(){
+        if (isThereLakk()) return addedDyes.size()-1;
+        return addedDyes.size();
+    }
+
     public void calculate() {
         //Choosing magnet cylinder
         searchMagnetCylinder(1, 150, 0);
@@ -204,30 +218,40 @@ public class Calculator {
         ArrayList<DyeParent> dyes = new ArrayList<DyeParent>();
         dyes.add(new Lakk("szilikonos",100,null,0));
         if (dyes.get(0).getClass() == Lakk.class) System.out.println("lakk");
+        System.out.println("Festékköltség: " + dyeSelfCost);
 
+        //guiból
+        double domborPrice = 5000;
+        int domborCheck = 0;
+        //--------------------
         //Self cost of embossing (dombornyomas)
-        /*domborSelfCost=0;
+        double domborSelfCost=0;
         if (domborPrice != 0){
-            domborCost=(int)(amount/1000) * domborPrice * 0.2 + domborPrice;
+            domborSelfCost=(int)(amount/1000) * domborPrice * 0.2 + domborPrice;
             domborCheck=1;
         }else{
             domborCheck=0;
-        }*/
+        }
 
+        //guiból
+        int pregCover = 0;
+        int pregCheck = 0;
+        double pregPrice = 120; //adatbázis, vagy beégetés esetleg gui?
+        //------------------
         //Self cost of pregeles
-        /*pregSumPrice=0;
+        double pregSelfCost=0;
         if (pregCover > 0){
-            pregSumPrice=((width*height)/1000000)*((double)pregCover/100)*amount*pregPrice;
+            pregSelfCost = ((width*height)/1000000) * ((double)pregCover/100) * amount * pregPrice;
             pregCheck=1;
         }else{
             pregCheck=0;
-        }*/
+        }
 
         //Packing
         //guiból
         int amountPerRoll = 2;
         double rollWidth = 2.2;
-        double packingTime = 4.5;
+        double packingTime = 0;
         double packingCost = 6000;
         //--------------------
 
@@ -237,6 +261,30 @@ public class Calculator {
             numberOfRolls = (double)amount/amountPerRoll;
             packingSelfCost = packingTime * packingCost + numberOfRolls * ROLL_PRICE * rollWidth;
         }
+
+        //guiból
+        double clicheCost = 0;
+        double stancCost = 0;
+        double otherCost = 0;
+        //--------------
+        //SUM self cost
+        double sumPrice = dyeSelfCost + materialSelfCost + domborSelfCost + pregSelfCost + clicheCost + stancCost +
+                packingSelfCost + otherCost;
+        System.out.println("Önköltség: " + sumPrice);
+
+
+        //Profit - árrés
+        int colorNum = countColors();
+        /*transformEtalon();
+        //arresDbPrice=calcArresDbPrice(amount, colourNum);
+
+        if (pregCheck == 0){
+            arresDbPrice = calcArresDbPrice(amount, colorNum);
+        }else{
+            arresDbPrice = calcArresDbPrice(amount, colorNum);
+            System.out.println(this.pregCover);
+            arresDbPrice = arresDbPrice * 2.0 * ((double)(100 + pregCover) / 100);
+        }*/
 
     }
 
