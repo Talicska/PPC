@@ -43,9 +43,15 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private JTextField textFDyeCover;
     private JTextField textFPregCover;
     private JTextField textFDomborCost;
+    private JTextField textFTitle;
+    private JTextField textFClient;
+    private JTextField textFDiscount;
+    private JTextField textFOtherCost;
+    private JTextField textFEuro;
 
     private JButton buttonaddDyePreset;
     private JButton buttonAddDye;
+    private JButton buttonGetEuro;
 
 
     private List listDyeType;
@@ -204,7 +210,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tab1.add(labelMm4);
 
         JSeparator separator1 = new JSeparator();
-        separator1.setBounds(5,212,320,2);
+        separator1.setBounds(5,212,325,2);
         tab1.add(separator1);
 
         JLabel labelMachine = new JLabel("Géptípus");
@@ -214,12 +220,12 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         for(int i=0;i<PPC.calcObj.getMachines().size();i++)
             comboMachine.addItem(PPC.calcObj.getMachines().get(i).getName());
         tab1.add(comboMachine);
-        comboMachine.setBounds(80,222,120,21);
+        comboMachine.setBounds(80,222,130,21);
         comboCylinder = new JComboBox();
         tab1.add(comboCylinder);
         for(int i=0;i<PPC.calcObj.getMachines().get(0).getCylinders().size();i++)
             comboCylinder.addItem(PPC.calcObj.getMachines().get(0).getCylinders().get(i).getTeeth());
-        comboCylinder.setBounds(225,222,100,21);
+        comboCylinder.setBounds(230,222,100,21);
 
         //géptípus alatti rész
         //
@@ -270,21 +276,20 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         for(int i =0;i<PPC.calcObj.getDyecylinders().size();i++)
             comboDyeCylinder.addItem(PPC.calcObj.getDyecylinders().get(i).getVolume());
         tab1.add(comboDyeCylinder);
-        comboDyeCylinder.setBounds(455,117,80,21);
+        comboDyeCylinder.setBounds(455,117,65,21);
         JLabel labelGM = new JLabel("g/m2");
-        labelGM.setBounds(540,117,30,20);
-
-      tab1.add(labelGM);
+        labelGM.setBounds(525,117,30,20);
+        tab1.add(labelGM);
 
         JLabel labelDyeCover = new JLabel("Lefedettség");
         labelDyeCover.setBounds(380, 140, 70, 25);
         tab1.add(labelDyeCover);
         textFDyeCover = new JTextField();
-        textFDyeCover.setBounds(455, 142, 80, 21);
+        textFDyeCover.setBounds(455, 142, 65, 21);
         textFDyeCover.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFDyeCover);
         JLabel labelPercent1 = new JLabel("%");
-        labelPercent1.setBounds(540, 142 ,30,20);
+        labelPercent1.setBounds(525, 142 ,30,20);
         tab1.add(labelPercent1);
 
         listDyeType = new List();
@@ -321,9 +326,51 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         labelFt.setBounds(670,337,30,20);
         tab1.add(labelFt);
 
+        JSeparator separator4 = new JSeparator();
+        separator4.setBounds(370,365,315,2);
+        tab1.add(separator4);
+
+        JLabel labelTitle = new JLabel("Címke neve");
+        labelTitle.setBounds(370, 375, 80,25);
+        tab1.add(labelTitle);
+        textFTitle = new JTextField("");
+        textFTitle.setBounds(455,377,230,21);
+        tab1.add(textFTitle);
+
+        JLabel labelClient = new JLabel("Megrendelő");
+        labelClient.setBounds(370,400,80,25);
+        tab1.add(labelClient);
+        textFClient = new JTextField("");
+        textFClient.setBounds(455,402,230,21);
+        tab1.add(textFClient);
+
+        JLabel labelDiscount = new JLabel("Kedvezmény");
+        labelDiscount.setBounds(370,425,80,25);
+        tab1.add(labelDiscount);
+        textFDiscount = new JTextField("0");
+        textFDiscount.setBounds(455,427,65,21);
+        textFDiscount.setHorizontalAlignment(SwingConstants.RIGHT);
+        tab1.add(textFDiscount);
+        JLabel labelPercent3 = new JLabel("%");
+        labelPercent3.setBounds(525,427,30,20);
+        tab1.add(labelPercent3);
+
+        JSeparator separator5 = new JSeparator();
+        separator5.setBounds(370,460,315,2);
+        tab1.add(separator5);
+
+        JLabel labelEuro = new JLabel("Euro árfolyam");
+        labelEuro.setBounds(370,470,80,25);
+        tab1.add(labelEuro);
+        textFEuro = new JTextField("300");
+        textFEuro.setBounds(455,472,65,21);
+        textFEuro.setHorizontalAlignment(SwingConstants.RIGHT);
+        tab1.add(textFEuro);
 
 
 
+
+        JLabel labelOtherCost = new JLabel("Egyéb költség");
 
         JLabel labelClicheCost = new JLabel("Kliséköltség");
         JLabel labelStancCost = new JLabel("Stancköltség");
@@ -333,11 +380,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         JLabel labelAmountPerRoll = new JLabel("Db/tekercs");
 
 
-        JLabel labelTitle = new JLabel("Címke neve");
-        JLabel labelClient = new JLabel("Megrendelő");
-        JLabel labelDiscount = new JLabel("Kedvezmény");
-        JLabel labelEuro = new JLabel("Euro árfolyam");
-        JLabel labelOtherCost = new JLabel("Egyéb költség");
+
         JLabel labelSummary = new JLabel("Összesítés");
 
         Vector<String> columnNames = new Vector<String>();                                      //tab3
@@ -387,16 +430,16 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         tab3.add(table.getTableHeader());
         tab3.add(table);
 
-        JLabel labelEtalonSelfCost = new JLabel("Etalon önköltség: "+PPC.calcObj.getEtalonObj().getEtalonSelfCost()+" Ft");     //külön labelt a számoknak
+        JLabel labelEtalonSelfCost = new JLabel("Etalon önköltség:  "+PPC.calcObj.getEtalonObj().getEtalonSelfCost()+" Ft");
         labelEtalonSelfCost.setBounds(5,445,300,20);
         tab3.add(labelEtalonSelfCost);
-        JLabel labelEtalonMaterialPrice = new JLabel("Etalon anyagköltség: "+PPC.calcObj.getEtalonObj().getEtalonMaterialPrice() +" Ft");
+        JLabel labelEtalonMaterialPrice = new JLabel("Etalon anyagköltség:  "+PPC.calcObj.getEtalonObj().getEtalonMaterialPrice() +" Ft");
         labelEtalonMaterialPrice.setBounds(5,470,300,20);
         tab3.add(labelEtalonMaterialPrice);
-        JLabel labelEtalonSizeX = new JLabel("Etalon szélesség: "+(int)PPC.calcObj.getEtalonObj().getEtalonSizeX() +" cm");
+        JLabel labelEtalonSizeX = new JLabel("Etalon szélesség:  "+(int)PPC.calcObj.getEtalonObj().getEtalonSizeX() +" mm");
         labelEtalonSizeX.setBounds(347,445,300,20);
         tab3.add(labelEtalonSizeX);
-        JLabel labelEtalonSizeY = new JLabel("Etalon magasság: "+(int)PPC.calcObj.getEtalonObj().getEtalonSizeY()+" cm");
+        JLabel labelEtalonSizeY = new JLabel("Etalon magasság:  "+(int)PPC.calcObj.getEtalonObj().getEtalonSizeY()+" mm");
         labelEtalonSizeY.setBounds(347,470,300,20);
         tab3.add(labelEtalonSizeY);
 
@@ -507,6 +550,21 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
                     ? "" : formatter.format( value));
             return textField;
         }
+    }
+
+    private static class CurrencyGetter {
+
+        private String url;
+        private String answer;
+
+        public CurrencyGetter(){
+            url = "http://rate-exchange.appspot.com/currency?from=EUR&to=HUF";
+
+        }
+
+
+
+
     }
 }
 
