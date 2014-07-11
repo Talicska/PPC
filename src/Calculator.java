@@ -180,10 +180,17 @@ public class Calculator {
         profitMatrix = new Vector<Vector<Double>>();
         for (int i = 0; i < etalonObj.getEtalonMatrix().size(); i++){
             Vector<Double> row = new Vector<Double>();
-            for (int j = 0; j < etalonObj.getEtalonMatrix().get(i).size(); j++){
+            for (int j = 1; j < etalonObj.getEtalonMatrix().get(i).size(); j++){ // first column of etalon matrix are the amounts, which we don't transform
                 row.add((etalonObj.getEtalonMatrix().get(i).get(j) - etalonObj.getEtalonSelfCost()) * sizeRate);
             }
             profitMatrix.add(row);
+        }
+
+        for (int i = 0; i < profitMatrix.size(); i++) {
+            for (int j = 0; j < profitMatrix.get(i).size(); j++) {
+                System.out.print(profitMatrix.get(i).get(j) + " ");
+            }
+            System.out.println();
         }
     }
 
@@ -214,17 +221,13 @@ public class Calculator {
                             int machineIndex, int magnetCylinderIndex, int pregCover, double domborPrice, double clicheCost,
                             double stancCost, double packingCost,  double packingTime, double rollWidth, int amountPerRoll,
                             String title, String client, int discount, double euro, double otherCost) {
+
         //Choosing magnet cylinder
         searchMagnetCylinder(machineIndex, height, magnetCylinderIndex);
         System.out.println(chosenMagnetCylinder.getTeeth() + " " + chosenMagnetCylinder.getGirth());
         System.out.println(verticalGap);
 
         //Material cost
-
-        //-----temp: guiból olvassuk ki--------
-
-        //-------------------------------------
-
         double materialPrice = materials.get(materialIndex).getPrice() * euro;
 
         double materialWidth = sideGap + (tracks * width)+ ((tracks - 1) * betweenGap) + sideGap; // sidegap + labelwidth + betweengap + labelwidth + ... + labelwidth + betweengap + labelwidth + sidegap
@@ -282,9 +285,6 @@ public class Calculator {
         }
 
         //Packing
-        //guiból
-        //--------------------
-
         double packingSelfCost = 0;
         double numberOfRolls = 0;
         if (amountPerRoll != 0 && rollWidth != 0){
@@ -292,8 +292,6 @@ public class Calculator {
             packingSelfCost = packingTime * packingCost + numberOfRolls * ROLL_PRICE * rollWidth;
         }
 
-        //guiból
-        //--------------------
         //SUM self cost
         double sumPrice = dyeSelfCost + materialSelfCost + domborSelfCost + pregSelfCost + clicheCost + stancCost +
                 packingSelfCost + otherCost;
