@@ -9,8 +9,23 @@ public class Etalon {
     public final double etalonSizeX = 100;
     public final double etalonSizeY = 150;
     public final double etalonMaterialPrice = 0.305;
-
     private Vector<Vector<Double>> etalonMatrix = new Vector<Vector<Double>>();
+
+    public double getEtalonSelfCost() {
+        return etalonSelfCost;
+    }
+
+    public double getEtalonSizeX() {
+        return etalonSizeX;
+    }
+
+    public double getEtalonSizeY() {
+        return etalonSizeY;
+    }
+
+    public double getEtalonMaterialPrice() {
+        return etalonMaterialPrice;
+    }
 
     public Vector<Vector<Double>> getEtalonMatrix() {
         return etalonMatrix;

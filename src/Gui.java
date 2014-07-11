@@ -376,22 +376,31 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
             }
         };
         table.setRowHeight(20);
-
-
-
-
         table.getTableHeader().setBounds(0, 0, 695, 30);
         table.setBounds(0, 30, 695, 400);
-
         table.setDefaultRenderer(Double.class, new PriceRenderer(priceformat));
         table.setDefaultEditor(Double.class, new PriceEditor(priceformat));
         table.getColumnModel().getColumn(0).setCellRenderer(new AmountRenderer(amountformat));
         table.getColumnModel().getColumn(0).setCellEditor(new AmountEditor(amountformat));
-
         table.getTableHeader().setFont(new Font("headerFont",Font.BOLD,12));
 
         tab3.add(table.getTableHeader());
         tab3.add(table);
+
+        JLabel labelEtalonSelfCost = new JLabel("Etalon önköltség: "+PPC.calcObj.getEtalonObj().getEtalonSelfCost()+" Ft");     //külön labelt a számoknak
+        labelEtalonSelfCost.setBounds(5,445,300,20);
+        tab3.add(labelEtalonSelfCost);
+        JLabel labelEtalonMaterialPrice = new JLabel("Etalon anyagköltség: "+PPC.calcObj.getEtalonObj().getEtalonMaterialPrice() +" Ft");
+        labelEtalonMaterialPrice.setBounds(5,470,300,20);
+        tab3.add(labelEtalonMaterialPrice);
+        JLabel labelEtalonSizeX = new JLabel("Etalon szélesség: "+(int)PPC.calcObj.getEtalonObj().getEtalonSizeX() +" cm");
+        labelEtalonSizeX.setBounds(347,445,300,20);
+        tab3.add(labelEtalonSizeX);
+        JLabel labelEtalonSizeY = new JLabel("Etalon magasság: "+(int)PPC.calcObj.getEtalonObj().getEtalonSizeY()+" cm");
+        labelEtalonSizeY.setBounds(347,470,300,20);
+        tab3.add(labelEtalonSizeY);
+
+
 
         this.add(tabbedPane);
         //this.add(panel1);         //not needed anymore, left in just in case
