@@ -170,23 +170,33 @@ public class Calculator {
         return addedDyes.size();
     }
 
-    public void calculate() {
+    /*private void transformEtalon(){
+
+        double sizeRate=(width*height)/(etalonWidth*etalonHeight);
+
+        profitMatrix = new Vector<Vector<Double>>();
+        for (int i=0; i<etalonMatrix.size(); i++){
+            Vector<Double> row=new Vector<Double>();
+            for (int j=0; j<etalonMatrix.get(i).size(); j++){
+                row.add((etalonMatrix.get(i).get(j)-etalonDbPrice)*sizeRate);
+            }
+            profitMatrix.add(row);
+        }
+    }*/
+
+    public void calculate(int materialIndex, int amount, double width, double height, int tracks, double sideGap, double betweenGap,
+                            int machineIndex, int magnetCylinderIndex, int pregCover, double domborPrice, double clicheCost,
+                            double stancCost, double packingCost,  double packingTime, double rollWidth, int amountPerRoll,
+                            String title, String client, int discount, double euro, double otherCost) {
         //Choosing magnet cylinder
-        searchMagnetCylinder(1, 150, 0);
+        searchMagnetCylinder(machineIndex, height, magnetCylinderIndex);
         System.out.println(chosenMagnetCylinder.getTeeth() + " " + chosenMagnetCylinder.getGirth());
         System.out.println(verticalGap);
 
         //Material cost
 
         //-----temp: guiból olvassuk ki--------
-        int materialIndex = 1;
-        double euro = 300;
-        int amount = 10000;
-        double width = 100;
-        double height = 150;
-        double sideGap = 5;
-        double betweenGap = 3;
-        int tracks = 2;
+
         //-------------------------------------
 
         double materialPrice = materials.get(materialIndex).getPrice() * euro;
@@ -221,7 +231,6 @@ public class Calculator {
         System.out.println("Festékköltség: " + dyeSelfCost);
 
         //guiból
-        double domborPrice = 5000;
         int domborCheck = 0;
         //--------------------
         //Self cost of embossing (dombornyomas)
@@ -234,7 +243,6 @@ public class Calculator {
         }
 
         //guiból
-        int pregCover = 0;
         int pregCheck = 0;
         double pregPrice = 120; //adatbázis, vagy beégetés esetleg gui?
         //------------------
@@ -249,28 +257,29 @@ public class Calculator {
 
         //Packing
         //guiból
-        int amountPerRoll = 2;
-        double rollWidth = 2.2;
-        double packingTime = 0;
-        double packingCost = 6000;
         //--------------------
 
         double packingSelfCost = 0;
         double numberOfRolls = 0;
-        if (amountPerRoll!=0 && rollWidth!=0){
+        if (amountPerRoll != 0 && rollWidth != 0){
             numberOfRolls = (double)amount/amountPerRoll;
             packingSelfCost = packingTime * packingCost + numberOfRolls * ROLL_PRICE * rollWidth;
         }
 
         //guiból
-        double clicheCost = 0;
-        double stancCost = 0;
-        double otherCost = 0;
-        //--------------
+        //--------------------
         //SUM self cost
         double sumPrice = dyeSelfCost + materialSelfCost + domborSelfCost + pregSelfCost + clicheCost + stancCost +
                 packingSelfCost + otherCost;
         System.out.println("Önköltség: " + sumPrice);
+        System.out.println("Festék költség: " + dyeSelfCost);
+        System.out.println("Alapanyagköltség: " + materialSelfCost);
+        System.out.println("Dombornyomás ktg: " + domborSelfCost);
+        System.out.println("Prégelés ktg: " + pregSelfCost);
+        System.out.println("Klisé ktg: " + clicheCost);
+        System.out.println("Stanc ktg: " + stancCost);
+        System.out.println("Kiszerelés ktg: " + packingSelfCost);
+        System.out.println("Egyéb ktg: " + otherCost);
 
 
         //Profit - árrés

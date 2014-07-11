@@ -113,7 +113,39 @@ public class PPC {
         loadGui(1000, 600, 60, 60);
         System.out.println("User interface loaded!");
 
-        calcObj.calculate();
+
+        int materialIndex = 1;
+        int amount = 10000;
+        double width = 100;
+        double height = 150;
+        double sideGap = 5;
+        double betweenGap = 3;
+        int tracks = 2;
+        int machineIndex = 1;
+        int magnetCylinderIndex = 0;
+
+        int pregCover = 0;
+        double domborPrice = 0;
+
+        double clicheCost = 0;
+        double stancCost = 0;
+
+        double packingCost = 6000;
+        double packingTime = 0;
+        double rollWidth = 2.2;
+        int amountPerRoll = 0;
+
+        String title = "Bor ÁSZ";
+        String client = "Damjanich maffia";
+        int discount = 0;
+
+        double euro = 300;
+
+        double otherCost = 0;
+
+        calcObj.calculate(materialIndex, amount, width, height, tracks, sideGap, betweenGap, machineIndex, magnetCylinderIndex,
+                pregCover, domborPrice, clicheCost, stancCost, packingCost, packingTime, rollWidth, amountPerRoll,
+                title, client, discount, euro, otherCost);
 
         //listAll();
 
