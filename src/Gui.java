@@ -28,6 +28,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private JComboBox comboMaterial;                                                        //objects
     private JComboBox comboMachine;
     private JComboBox comboCylinder;
+    private JComboBox comboDyePreset;
     private JComboBox comboDyeType;
     private JComboBox comboDyeCylinder;
 
@@ -41,6 +42,7 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
     private JTextField textFTracks;
     private JTextField textFDyeCover;
 
+    private JButton buttonaddDyePreset;
     private JButton buttonAddDye;
 
 
@@ -228,6 +230,24 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         separator3.setBounds(352,5,2,500);
         tab1.add(separator3);
 
+
+
+        JLabel labelDyePreset = new JLabel("Mi is ez?");
+        labelDyePreset.setBounds(370, 5, 70, 25);
+        tab1.add(labelDyePreset);
+        comboDyePreset = new JComboBox();
+        comboDyePreset.setBounds(370, 32,100,21);
+        tab1.add(comboDyePreset);
+
+        //fel kell tölteni comboDyePreset-et
+
+        buttonaddDyePreset = new JButton("+");
+        buttonaddDyePreset.setBounds(475,32,21,21);
+        tab1.add(buttonaddDyePreset);
+
+
+
+
         JLabel labelDyeType = new JLabel("Festéktípus");
         labelDyeType.setBounds(370, 5, 70, 25);
         tab1.add(labelDyeType);
@@ -248,7 +268,8 @@ public class Gui extends JFrame {       // ...ne baszd ossze a kodot!
         comboDyeCylinder.setBounds(445,32,80,21);
         JLabel labelGM = new JLabel("g/m2");
         labelGM.setBounds(530,32,30,20);
-        tab1.add(labelGM);
+
+      tab1.add(labelGM);
 
         JLabel labelDyeCover = new JLabel("Lefedettség");
         labelDyeCover.setBounds(370, 55, 70, 25);
