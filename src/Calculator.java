@@ -194,7 +194,7 @@ public class Calculator {
         }
     }
 
-    private double calcArresDbPrice(int amount, double width, double height, int colorNum, double materialSelfCost, int discount){
+    private double calcProfitOnPiece(int amount, double width, double height, int colorNum, double materialSelfCost, int discount){
         int newAmount=(int)(((width * height) * amount) / (etalonObj.getEtalonSizeX() * etalonObj.getEtalonSizeY()));
 
         int newAmountIndex = 0;
@@ -309,7 +309,7 @@ public class Calculator {
         //Profit - árrés
         int colorNum = countColors();
         transformEtalon(width, height);
-        double profitOnPiece = calcArresDbPrice(amount, width, height, colorNum, materialSelfCost, discount);
+        double profitOnPiece = calcProfitOnPiece(amount, width, height, colorNum, materialSelfCost, discount);
         System.out.println("Darabár: " + profitOnPiece);
 
         /*if (pregCheck == 0){
