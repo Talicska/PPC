@@ -84,9 +84,13 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
         if (e.getSource() == buttonGetEuro) {
             textFEuro.setText(String.valueOf(new CurrencyConverter().convert()));
-        } else if (e.getSource() == buttonManagePreset) {
+        }
+
+        else if (e.getSource() == buttonManagePreset) {
             GuiDyePreset presetEditor = new GuiDyePreset();
-        } else if (e.getSource() == buttonAddDye) {
+        }
+
+        else if (e.getSource() == buttonAddDye) {
             if ((!textFDyeCover.getText().isEmpty()) && (comboDyeType.getSelectedIndex() >= 0) && (comboDyeCylinder.getSelectedIndex() >= 0)) {
 
                 if (comboDyeType.getSelectedItem().equals(new String("Egyéb szín"))) {
@@ -105,12 +109,17 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
                 flashMyField(textFDyeCover, Color.RED, 200);
             }
 
-        } else if (e.getSource() == comboMachine) {
+        }
+
+        else if (e.getSource() == comboMachine) {
             comboCylinder.removeAllItems();
             int index = comboMachine.getSelectedIndex();
+            comboCylinder.addItem("Auto");
             for (int i = 0; i < PPC.calcObj.getMachines().get(index).getCylinders().size(); i++)
                 comboCylinder.addItem(PPC.calcObj.getMachines().get(index).getCylinders().get(i).getTeeth());
-        } else if (e.getSource() == buttonDelDye) {
+        }
+
+        else if (e.getSource() == buttonDelDye) {
             int index = listDyeType.getSelectedIndex();
             if (index >= 0) {
                 listDyeType.remove(index);
@@ -121,9 +130,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
     }
 
-
     public Gui() {
-
 
         this.getContentPane().setLayout(null);
         dimension = new Dimension(width, height);
@@ -314,14 +321,14 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         labelDb2.setBounds(165, 127, 30, 20);
         tab1.add(labelDb2);
 
-        JLabel labelGaps = new JLabel("Rések");
+        JLabel labelGaps = new JLabel("Hézagok");
         labelGaps.setBounds(5, 150, 70, 25);
         tab1.add(labelGaps);
 
-        JLabel labelSideGap = new JLabel("Szélén");
+        JLabel labelSideGap = new JLabel("Széleken");
         labelSideGap.setBounds(15, 175, 70, 25);
         tab1.add(labelSideGap);
-        textFSideGap = new JTextField("5");
+        textFSideGap = new JTextField("6");
         textFSideGap.setBounds(90, 177, 70, 21);
         textFSideGap.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFSideGap);
@@ -355,6 +362,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         comboMachine.setBounds(80, 243, 145, 21);
         comboCylinder = new JComboBox();
         tab1.add(comboCylinder);
+        comboCylinder.addItem("Auto");
         for (int i = 0; i < PPC.calcObj.getMachines().get(0).getCylinders().size(); i++)
             comboCylinder.addItem(PPC.calcObj.getMachines().get(0).getCylinders().get(i).getTeeth());
         comboCylinder.setBounds(230, 243, 100, 21);
