@@ -74,7 +74,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         }
 
         else if(e.getSource() == buttonManagePreset){
-
+            GuiDyePreset presetEditor = new GuiDyePreset();
         }
 
         else if (e.getSource() == buttonAddDye){
@@ -93,7 +93,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
                     );
                 }
             }else if(textFDyeCover.getText().isEmpty()){
-                flashMyField(textFDyeCover,Color.RED,200,200);
+                flashMyField(textFDyeCover, Color.RED, 200);
             }
 
         }
@@ -515,9 +515,8 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
     }
 
-    public void flashMyField(final JTextField field, final Color flashColor,
-                             final int timerDelay, int totalTime) {
-        final int totalCount = totalTime / timerDelay;
+    public void flashMyField(final JTextField field, final Color flashColor, final int timerDelay) {
+        final int totalCount = 1;
         javax.swing.Timer timer = new javax.swing.Timer(timerDelay, new ActionListener(){
             int count = 0;
 
