@@ -249,7 +249,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         tab1.add(labelMm4);
 
         JSeparator separator1 = new JSeparator();
-        separator1.setBounds(5, 212, 325, 2);
+        separator1.setBounds(5, 212, 325, 1);
         tab1.add(separator1);
 
         JLabel labelMachine = new JLabel("Géptípus");
@@ -273,11 +273,11 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
         JSeparator separator2 = new JSeparator();                                           //tab1 vertical separator
         separator2.setOrientation(SwingConstants.VERTICAL);
-        separator2.setBounds(348, 5, 2, 500);
+        separator2.setBounds(348, 5, 1, 500);
         tab1.add(separator2);
         JSeparator separator3 = new JSeparator();
         separator3.setOrientation(SwingConstants.VERTICAL);
-        separator3.setBounds(352, 5, 2, 500);
+        separator3.setBounds(352, 5, 1, 500);
         tab1.add(separator3);
 
 
@@ -375,7 +375,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         tab1.add(labelFt1);
 
         JSeparator separator4 = new JSeparator();
-        separator4.setBounds(370, 372, 315, 2);
+        separator4.setBounds(370, 372, 315, 1);
         tab1.add(separator4);
 
         JLabel labelTitle = new JLabel("Címke neve");
@@ -404,7 +404,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         tab1.add(labelPercent3);
 
         JSeparator separator5 = new JSeparator();
-        separator5.setBounds(370, 462, 315, 2);
+        separator5.setBounds(370, 462, 315, 1);
         tab1.add(separator5);
 
         JLabel labelEuro = new JLabel("Euro árfolyam");
