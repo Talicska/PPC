@@ -12,8 +12,8 @@ public class InteractiveTableModel extends DefaultTableModel {
     protected Vector<String> columnNames;
     protected Vector<Vector<Double>> dataVector;
 
-    public InteractiveTableModel(final Vector<Vector<Double>> dataVector,Vector<String> columnNames) {
-        super(dataVector,columnNames);
+    public InteractiveTableModel(final Vector<Vector<Double>> dataVector, Vector<String> columnNames) {
+        super(dataVector, columnNames);
         this.columnNames = columnNames;
         this.dataVector = dataVector;
         this.addTableModelListener(new TableModelListener() {
@@ -30,7 +30,7 @@ public class InteractiveTableModel extends DefaultTableModel {
 
     @Override
     public Class getColumnClass(int column) {
-        if( column == 0)
+        if (column == 0)
             return Integer.class;
         return Double.class;
     }

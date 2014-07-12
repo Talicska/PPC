@@ -7,7 +7,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Arc2D;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,6 +19,8 @@ import java.util.Locale;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.JTextComponent;
 
@@ -65,7 +66,6 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JTextField textFPackingSumCost;
 
 
-
     private JTextField textFEuro;
 
     private JButton buttonAddDyePreset;
@@ -84,16 +84,12 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
         if (e.getSource() == buttonGetEuro) {
             textFEuro.setText(String.valueOf(new CurrencyConverter().convert()));
-        }
-
-        else if(e.getSource() == buttonManagePreset){
+        } else if (e.getSource() == buttonManagePreset) {
             GuiDyePreset presetEditor = new GuiDyePreset();
-        }
+        } else if (e.getSource() == buttonAddDye) {
+            if ((!textFDyeCover.getText().isEmpty()) && (comboDyeType.getSelectedIndex() >= 0) && (comboDyeCylinder.getSelectedIndex() >= 0)) {
 
-        else if (e.getSource() == buttonAddDye){
-            if( ( !textFDyeCover.getText().isEmpty()) && (comboDyeType.getSelectedIndex() >=0 ) && (comboDyeCylinder.getSelectedIndex() >= 0)) {
-
-                if(comboDyeType.getSelectedItem().equals(new String("Egyéb szín"))){
+                if (comboDyeType.getSelectedItem().equals(new String("Egyéb szín"))) {
 
                 }
 
@@ -105,50 +101,21 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
                                     PPC.calcObj.getAddedDyes().get(i).getCover() + " %"
                     );
                 }
-            }else if(textFDyeCover.getText().isEmpty()){
+            } else if (textFDyeCover.getText().isEmpty()) {
                 flashMyField(textFDyeCover, Color.RED, 200);
             }
 
-        }
-
-        else if (e.getSource() == comboMachine){
+        } else if (e.getSource() == comboMachine) {
             comboCylinder.removeAllItems();
             int index = comboMachine.getSelectedIndex();
             for (int i = 0; i < PPC.calcObj.getMachines().get(index).getCylinders().size(); i++)
                 comboCylinder.addItem(PPC.calcObj.getMachines().get(index).getCylinders().get(i).getTeeth());
-        }
-
-        else if (e.getSource() == buttonDelDye){
+        } else if (e.getSource() == buttonDelDye) {
             int index = listDyeType.getSelectedIndex();
-            if(index >= 0) {
+            if (index >= 0) {
                 listDyeType.remove(index);
                 PPC.calcObj.removeDye(index);
             }
-        }
-
-        else if (( e.getSource() == textFAmount)  || ( e.getSource() == textFPackingCost)||
-                ( e.getSource() == textFPackingTime)|| ( e.getSource() == textFRollWidth)||
-                ( e.getSource() == textFAmountPerRoll) ){
-
-
-            System.out.println("1");
-            if ( ! ( textFAmount.getText().isEmpty() || textFPackingCost.getText().isEmpty() ||
-                    textFPackingTime.getText().isEmpty() || textFRollWidth.getText().isEmpty() ||
-                    textFAmountPerRoll.getText().isEmpty()) ){
-                System.out.println("2");
-                int amount = Integer.parseInt(textFAmount.getText());
-                double packingcost = Double.parseDouble(textFPackingCost.getText());
-                double packingtime = Double.parseDouble(textFPackingTime.getText());
-                double rollwidth = Double.parseDouble(textFRollWidth.getText());
-                int amountperroll = Integer.parseInt(textFAmountPerRoll.getText());
-
-                double cost= PPC.calcObj.calculatePackingCost(amount,packingcost,packingtime,rollwidth,amountperroll);
-
-                textFPackingSumCost.setText(Double.toString(cost));
-
-            }
-            //
-
         }
 
 
@@ -157,12 +124,85 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
     public Gui() {
 
+
         this.getContentPane().setLayout(null);
         dimension = new Dimension(width, height);
         priceformat.setGroupingUsed(false);
         amountformat.setGroupingUsed(false);
         this.setPreferredSize(dimension);
         this.setTitle("PPC - Print Price Calculator");
+
+        DocumentListener docListener = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if ((e.getDocument() == textFAmount.getDocument()) || (e.getDocument() == textFPackingCost.getDocument()) ||
+                        (e.getDocument() == textFPackingTime.getDocument()) || (e.getDocument() == textFRollWidth.getDocument()) ||
+                        (e.getDocument() == textFAmountPerRoll.getDocument())) {
+
+                    if (!(textFAmount.getText().isEmpty() || textFPackingCost.getText().isEmpty() ||
+                            textFPackingTime.getText().isEmpty() || textFRollWidth.getText().isEmpty() ||
+                            textFAmountPerRoll.getText().isEmpty())) {
+
+                        int amount = Integer.parseInt(textFAmount.getText());
+                        double packingcost = Double.parseDouble(textFPackingCost.getText());
+                        double packingtime = Double.parseDouble(textFPackingTime.getText());
+                        double rollwidth = Double.parseDouble(textFRollWidth.getText());
+                        int amountperroll = Integer.parseInt(textFAmountPerRoll.getText());
+
+                        double cost = PPC.calcObj.calculatePackingCost(amount, packingcost, packingtime, rollwidth, amountperroll);
+
+                        textFPackingSumCost.setText(Integer.toString((int) cost));
+                    }
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if ((e.getDocument() == textFAmount.getDocument()) || (e.getDocument() == textFPackingCost.getDocument()) ||
+                        (e.getDocument() == textFPackingTime.getDocument()) || (e.getDocument() == textFRollWidth.getDocument()) ||
+                        (e.getDocument() == textFAmountPerRoll.getDocument())) {
+
+                    if (!(textFAmount.getText().isEmpty() || textFPackingCost.getText().isEmpty() ||
+                            textFPackingTime.getText().isEmpty() || textFRollWidth.getText().isEmpty() ||
+                            textFAmountPerRoll.getText().isEmpty())) {
+
+                        int amount = Integer.parseInt(textFAmount.getText());
+                        double packingcost = Double.parseDouble(textFPackingCost.getText());
+                        double packingtime = Double.parseDouble(textFPackingTime.getText());
+                        double rollwidth = Double.parseDouble(textFRollWidth.getText());
+                        int amountperroll = Integer.parseInt(textFAmountPerRoll.getText());
+
+                        double cost = PPC.calcObj.calculatePackingCost(amount, packingcost, packingtime, rollwidth, amountperroll);
+
+                        textFPackingSumCost.setText(Integer.toString((int) cost));
+                    }
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if ((e.getDocument() == textFAmount.getDocument()) || (e.getDocument() == textFPackingCost.getDocument()) ||
+                        (e.getDocument() == textFPackingTime.getDocument()) || (e.getDocument() == textFRollWidth.getDocument()) ||
+                        (e.getDocument() == textFAmountPerRoll.getDocument())) {
+
+                    if (!(textFAmount.getText().isEmpty() || textFPackingCost.getText().isEmpty() ||
+                            textFPackingTime.getText().isEmpty() || textFRollWidth.getText().isEmpty() ||
+                            textFAmountPerRoll.getText().isEmpty())) {
+
+                        int amount = Integer.parseInt(textFAmount.getText());
+                        double packingcost = Double.parseDouble(textFPackingCost.getText());
+                        double packingtime = Double.parseDouble(textFPackingTime.getText());
+                        double rollwidth = Double.parseDouble(textFRollWidth.getText());
+                        int amountperroll = Integer.parseInt(textFAmountPerRoll.getText());
+
+                        double cost = PPC.calcObj.calculatePackingCost(amount, packingcost, packingtime, rollwidth, amountperroll);
+
+                        textFPackingSumCost.setText(Integer.toString((int) cost));
+                    }
+                }
+            }
+
+        };
 
         JMenu fileMenu = new JMenu("Fájl");                                             //menu
         JMenuItem newItem = new JMenuItem("Új");
@@ -234,7 +274,8 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         textFAmount = new JTextField();
         textFAmount.setBounds(80, 52, 80, 21);
         textFAmount.setHorizontalAlignment(SwingConstants.RIGHT);
-        textFAmount.addActionListener(this);
+        textFAmount.getDocument().addDocumentListener(docListener);
+
         tab1.add(textFAmount);
         JLabel labelDb1 = new JLabel("db");
         labelDb1.setBounds(165, 52, 30, 20);
@@ -331,8 +372,8 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         textFClicheCost.setBounds(90, 289, 70, 21);
         textFClicheCost.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFClicheCost);
-        JLabel labelFt3=new JLabel("Ft");
-        labelFt3.setBounds(165,289,30,20);
+        JLabel labelFt3 = new JLabel("Ft");
+        labelFt3.setBounds(165, 289, 30, 20);
         tab1.add(labelFt3);
 
         JLabel labelStancCost = new JLabel("Stancköltség");
@@ -342,8 +383,8 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         textFStancCost.setBounds(90, 314, 70, 21);
         textFStancCost.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFStancCost);
-        JLabel labelFt4=new JLabel("Ft");
-        labelFt4.setBounds(165,314,30,20);
+        JLabel labelFt4 = new JLabel("Ft");
+        labelFt4.setBounds(165, 314, 30, 20);
         tab1.add(labelFt4);
 
         JLabel labelOtherCost = new JLabel("Egyéb költség");
@@ -353,8 +394,8 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         textFOtherCost.setBounds(90, 339, 70, 21);
         textFOtherCost.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFOtherCost);
-        JLabel labelFt5=new JLabel("Ft");
-        labelFt5.setBounds(165,339,30,20);
+        JLabel labelFt5 = new JLabel("Ft");
+        labelFt5.setBounds(165, 339, 30, 20);
         tab1.add(labelFt5);
 
         JSeparator separator6 = new JSeparator();
@@ -362,69 +403,65 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         tab1.add(separator6);
 
 
-
         JLabel labelPackingCost = new JLabel("Kiszerelési költség");
         labelPackingCost.setBounds(5, 380, 150, 25);
         tab1.add(labelPackingCost);
         textFPackingCost = new JTextField("6000");
-        textFPackingCost.setBounds(120,382,70,21);
+        textFPackingCost.setBounds(120, 382, 70, 21);
         textFPackingCost.setHorizontalAlignment(SwingConstants.RIGHT);
-        textFPackingCost.addActionListener(this);
+        textFPackingCost.getDocument().addDocumentListener(docListener);
         tab1.add(textFPackingCost);
         JLabel labelFtH = new JLabel("Ft/óra");
-        labelFtH.setBounds(195,382,40,20);
+        labelFtH.setBounds(195, 382, 40, 20);
         tab1.add(labelFtH);
 
         JLabel labelPackingTime = new JLabel("Kiszerelési idő");
         labelPackingTime.setBounds(5, 405, 150, 25);
         tab1.add(labelPackingTime);
         textFPackingTime = new JTextField("0");
-        textFPackingTime.setBounds(120,407,70,21);
+        textFPackingTime.setBounds(120, 407, 70, 21);
         textFPackingTime.setHorizontalAlignment(SwingConstants.RIGHT);
-        textFPackingTime.addActionListener(this);
+        textFPackingTime.getDocument().addDocumentListener(docListener);
         tab1.add(textFPackingTime);
         JLabel labelHour = new JLabel("óra");
-        labelHour.setBounds(195,407,40,20);
+        labelHour.setBounds(195, 407, 40, 20);
         tab1.add(labelHour);
 
         JLabel labelRollWidth = new JLabel("Tekercsszélesség");
         labelRollWidth.setBounds(5, 430, 150, 25);
         tab1.add(labelRollWidth);
         textFRollWidth = new JTextField("0");
-        textFRollWidth.setBounds(120,432,70,21);
+        textFRollWidth.setBounds(120, 432, 70, 21);
         textFRollWidth.setHorizontalAlignment(SwingConstants.RIGHT);
-        textFRollWidth.addActionListener(this);
+        textFRollWidth.getDocument().addDocumentListener(docListener);
         tab1.add(textFRollWidth);
         JLabel labelCm = new JLabel("cm");
-        labelCm.setBounds(195,432,40,20);
+        labelCm.setBounds(195, 432, 40, 20);
         tab1.add(labelCm);
 
         JLabel labelAmountPerRoll = new JLabel("Db/tekercs");
         labelAmountPerRoll.setBounds(5, 455, 150, 25);
         tab1.add(labelAmountPerRoll);
         textFAmountPerRoll = new JTextField("0");
-        textFAmountPerRoll.setBounds(120,457,70,21);
+        textFAmountPerRoll.setBounds(120, 457, 70, 21);
         textFAmountPerRoll.setHorizontalAlignment(SwingConstants.RIGHT);
-        textFAmountPerRoll.addActionListener(this);
+        textFAmountPerRoll.getDocument().addDocumentListener(docListener);
         tab1.add(textFAmountPerRoll);
         JLabel labelDb3 = new JLabel("db");
-        labelDb3.setBounds(195,457,40,20);
+        labelDb3.setBounds(195, 457, 40, 20);
         tab1.add(labelDb3);
 
         JLabel labelPackingSumCost = new JLabel("Kiszerelés összköltsége");
         labelPackingSumCost.setBounds(5, 480, 150, 25);
         tab1.add(labelPackingSumCost);
         textFPackingSumCost = new JTextField("0");
-        textFPackingSumCost.setBounds(150,482,70,21);
+        textFPackingSumCost.setBounds(150, 482, 70, 21);
         textFPackingSumCost.setHorizontalAlignment(SwingConstants.RIGHT);
         textFPackingSumCost.setEditable(false);
         tab1.add(textFPackingSumCost);
         JLabel labelFt6 = new JLabel("Ft");
-        labelFt6.setBounds(225,482,40,20);
+        labelFt6.setBounds(225, 482, 40, 20);
         tab1.add(labelFt6);
-
-
-
 
 
         JSeparator separator2 = new JSeparator();                                           //tab1 vertical separator
@@ -579,9 +616,6 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         tab1.add(buttonGetEuro);
 
 
-
-
-
         JLabel labelSummary = new JLabel("Összesítés");
 
         Vector<String> columnNames = new Vector<String>();                                      //tab3
@@ -654,7 +688,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
     public void flashMyField(final JTextField field, final Color flashColor, final int timerDelay) {
         final int totalCount = 1;
-        javax.swing.Timer timer = new javax.swing.Timer(timerDelay, new ActionListener(){
+        javax.swing.Timer timer = new javax.swing.Timer(timerDelay, new ActionListener() {
             int count = 0;
 
             public void actionPerformed(ActionEvent evt) {
@@ -663,7 +697,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
                 } else {
                     field.setBackground(null);
                     if (count >= totalCount) {
-                        ((Timer)evt.getSource()).stop();
+                        ((Timer) evt.getSource()).stop();
                     }
                 }
                 count++;

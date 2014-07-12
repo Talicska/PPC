@@ -1,11 +1,10 @@
-import org.omg.DynamicAny._DynEnumStub;
-
 import java.util.ArrayList;
 import java.util.Vector;
 
 /**
  * Created by Prof on 2014.07.09..
  */
+
 public class Calculator {
 
     private static final int MAX_NUMBER_OF_DYES = 7;
@@ -34,7 +33,7 @@ public class Calculator {
     private Vector<Vector<Double>> profitMatrix = new Vector<Vector<Double>>();
 
     public Calculator(ArrayList<Dye> dyes, ArrayList<DyeCylinder> dyecylinders, Etalon etalonObj, ArrayList<Lakk> lakks, ArrayList<Machine> machines,
-                      ArrayList<MagnetCylinder> magnetcylinders, ArrayList<Material> materials, ArrayList<Metal> metals){
+                      ArrayList<MagnetCylinder> magnetcylinders, ArrayList<Material> materials, ArrayList<Metal> metals) {
         this.dyes = dyes;
         this.dyecylinders = dyecylinders;
         this.etalonObj = etalonObj;
@@ -50,21 +49,21 @@ public class Calculator {
         allDyeTypes.addAll(metals);
     }
 
-    private void filterRolls(int machineIndex, int magnetCylinderIndex){
+    private void filterRolls(int machineIndex, int magnetCylinderIndex) {
 
     }
 
-    private void searchMagnetCylinder(int machineIndex, double height, int magnetCylinderIndex){
+    private void searchMagnetCylinder(int machineIndex, double height, int magnetCylinderIndex) {
 
         double min = 1000;
         int pieces = 0;
         this.verticalGap = 1;
 
-        if (magnetCylinderIndex == 0){	// Auto: the program chooses the ideal applicable cylinder
-                                        // to reach the lowest (but bigger or equal than 2) vertical gap
-            if (machines.get(machineIndex).getCylinders().size() > 1){ // more than 1 applicable cylinder for the chosen machine
+        if (magnetCylinderIndex == 0) {    // Auto: the program chooses the ideal applicable cylinder
+            // to reach the lowest (but bigger or equal than 2) vertical gap
+            if (machines.get(machineIndex).getCylinders().size() > 1) { // more than 1 applicable cylinder for the chosen machine
                 int j = 0;
-                while(min >= 1000 && this.verticalGap < 2) {
+                while (min >= 1000 && this.verticalGap < 2) {
                     for (int i = 0; i < machines.get(machineIndex).getCylinders().size(); i++) {
                         System.out.println(machines.get(machineIndex).getName());
                         System.out.println(machines.get(machineIndex).getCylinders().size());
@@ -81,9 +80,9 @@ public class Calculator {
                     }
                     j++;
                 }
-            }else{ // only 1 applicable cylinder for the chosen machine
+            } else { // only 1 applicable cylinder for the chosen machine
                 int j = 0;
-                while(this.verticalGap < 2) {
+                while (this.verticalGap < 2) {
                     pieces = (int) (machines.get(machineIndex).getCylinders().get(0).getGirth() / height) - j;
                     double rest = machines.get(machineIndex).getCylinders().get(0).getGirth() % height;
                     this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(0);
@@ -91,25 +90,25 @@ public class Calculator {
                     j++;
                 }
             }
-        }else{ // we want to use a specific applicable cylinder
+        } else { // we want to use a specific applicable cylinder
             int j = 0;
-            while(this.verticalGap < 2) {
-                pieces = (int) (machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth()/height) - j;
-                double rest = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth()%height;
+            while (this.verticalGap < 2) {
+                pieces = (int) (machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth() / height) - j;
+                double rest = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth() % height;
                 this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1);
-                this.verticalGap = rest/pieces;
+                this.verticalGap = rest / pieces;
                 j++;
                 System.out.println("darab per henger: " + pieces);
             }
         }
     }
 
-    public boolean addDye(int chosenDyeIndex, int chosenDyeCylinderIndex, int cover, String otherColorName, double otherColorPrice){
+    public boolean addDye(int chosenDyeIndex, int chosenDyeCylinderIndex, int cover, String otherColorName, double otherColorPrice) {
 
-        if (chosenDyeIndex < allDyeTypes.size()){// Dye from the list
+        if (chosenDyeIndex < allDyeTypes.size()) {// Dye from the list
             if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Lakk.class) && lakkNum < MAX_NUMBER_OF_LAKKS) {
-               DyeParent chosenLakk = allDyeTypes.get(chosenDyeIndex);
-               if (!isDyeAlreadyAdded(chosenLakk.getName())) {
+                DyeParent chosenLakk = allDyeTypes.get(chosenDyeIndex);
+                if (!isDyeAlreadyAdded(chosenLakk.getName())) {
                     chosenLakk.setDyeCylinder(dyecylinders.get(chosenDyeCylinderIndex));
                     chosenLakk.setCover(cover);
                     addedDyes.add(chosenLakk);
@@ -117,7 +116,7 @@ public class Calculator {
                     return true;
                 }
                 return false;
-            }else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Metal.class) && metalNum < MAX_NUMBER_OF_METALS && metalNum+dyeNum < MAX_NUMBER_OF_DYES){
+            } else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Metal.class) && metalNum < MAX_NUMBER_OF_METALS && metalNum + dyeNum < MAX_NUMBER_OF_DYES) {
                 DyeParent chosenMetal = allDyeTypes.get(chosenDyeIndex);
                 if (!isDyeAlreadyAdded(chosenMetal.getName())) {
                     chosenMetal.setDyeCylinder(dyecylinders.get(chosenDyeCylinderIndex));
@@ -127,7 +126,7 @@ public class Calculator {
                     return true;
                 }
                 return false;
-            }else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Dye.class) && metalNum+dyeNum < MAX_NUMBER_OF_DYES){
+            } else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Dye.class) && metalNum + dyeNum < MAX_NUMBER_OF_DYES) {
                 DyeParent chosenDye = allDyeTypes.get(chosenDyeIndex);
                 if (!isDyeAlreadyAdded(chosenDye.getName())) {
                     chosenDye.setDyeCylinder(dyecylinders.get(chosenDyeCylinderIndex));
@@ -138,8 +137,8 @@ public class Calculator {
                 }
                 return false;
             }
-        }else { // other color - direct color
-            if (dyeNum+metalNum < MAX_NUMBER_OF_DYES){
+        } else { // other color - direct color
+            if (dyeNum + metalNum < MAX_NUMBER_OF_DYES) {
                 Dye otherDye = new Dye(otherColorName, otherColorPrice, dyecylinders.get(chosenDyeCylinderIndex), cover);
                 if (!isDyeAlreadyAdded(otherDye.getName())) {
                     addedDyes.add(otherDye);
@@ -152,20 +151,20 @@ public class Calculator {
         return false;
     }
 
-    public void removeDye(int chosenDyeIndex){
-        if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Lakk.class)){
+    public void removeDye(int chosenDyeIndex) {
+        if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Lakk.class)) {
             lakkNum--;
-        }else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Metal.class)){
+        } else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Metal.class)) {
             metalNum--;
-        }else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Dye.class)){
+        } else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Dye.class)) {
             dyeNum--;
         }
         addedDyes.remove(chosenDyeIndex);
     }
 
-    public DyeCylinder searchDyeCylinder(double cylinderVolume){
+    public DyeCylinder searchDyeCylinder(double cylinderVolume) {
         for (int i = 0; i < dyecylinders.size(); i++) {
-            if (dyecylinders.get(i).getVolume() == cylinderVolume){
+            if (dyecylinders.get(i).getVolume() == cylinderVolume) {
                 return dyecylinders.get(i);
             }
         }
@@ -182,7 +181,7 @@ public class Calculator {
         return false;
     }*/
 
-    public boolean isDyeAlreadyAdded(String dyeName){
+    public boolean isDyeAlreadyAdded(String dyeName) {
         System.out.println(dyeName);
         for (int i = 0; i < addedDyes.size(); i++) {
             if (addedDyes.get(i).getName().equals(dyeName)) {
@@ -192,7 +191,7 @@ public class Calculator {
         return false;
     }
 
-    public boolean isThereLakk(){
+    public boolean isThereLakk() {
         for (int i = 0; i < addedDyes.size(); i++) {
             if (addedDyes.get(i).getClass().equals(Lakk.class)) {
                 return true;
@@ -201,19 +200,19 @@ public class Calculator {
         return false;
     }
 
-    public int countColors(){
-        if (isThereLakk()) return addedDyes.size()-1;
+    public int countColors() {
+        if (isThereLakk()) return addedDyes.size() - 1;
         return addedDyes.size();
     }
 
-    private void transformEtalon(double width, double height){
+    private void transformEtalon(double width, double height) {
 
         double sizeRate = (width * height) / (etalonObj.getEtalonSizeX() * etalonObj.getEtalonSizeY());
 
         profitMatrix = new Vector<Vector<Double>>();
-        for (int i = 0; i < etalonObj.getEtalonMatrix().size(); i++){
+        for (int i = 0; i < etalonObj.getEtalonMatrix().size(); i++) {
             Vector<Double> row = new Vector<Double>();
-            for (int j = 1; j < etalonObj.getEtalonMatrix().get(i).size(); j++){ // first column of etalon matrix are the amounts, which we don't transform
+            for (int j = 1; j < etalonObj.getEtalonMatrix().get(i).size(); j++) { // first column of etalon matrix are the amounts, which we don't transform
                 row.add((etalonObj.getEtalonMatrix().get(i).get(j) - etalonObj.getEtalonSelfCost()) * sizeRate);
             }
             profitMatrix.add(row);
@@ -227,43 +226,44 @@ public class Calculator {
         }
     }
 
-    private double calcProfitOnPiece(int amount, double width, double height, int colorNum, double materialSelfCost, int discount){
-        int newAmount=(int)(((width * height) * amount) / (etalonObj.getEtalonSizeX() * etalonObj.getEtalonSizeY()));
+    private double calcProfitOnPiece(int amount, double width, double height, int colorNum, double materialSelfCost, int discount) {
+        int newAmount = (int) (((width * height) * amount) / (etalonObj.getEtalonSizeX() * etalonObj.getEtalonSizeY()));
 
         int newAmountIndex = 0;
-        while(newAmountIndex < etalonObj.getEtalonMatrix().size()-1 && etalonObj.getEtalonMatrix().get(newAmountIndex).get(0) < newAmount){
+        while (newAmountIndex < etalonObj.getEtalonMatrix().size() - 1 && etalonObj.getEtalonMatrix().get(newAmountIndex).get(0) < newAmount) {
             newAmountIndex++;
         }
 
-        if (newAmount <= etalonObj.getEtalonMatrix().get(0).get(0) || newAmount >= etalonObj.getEtalonMatrix().get(etalonObj.getEtalonMatrix().size() - 1).get(0)){
-            return (profitMatrix.get(newAmountIndex).get(colorNum) + (materialSelfCost/amount)) * ((double)(100-discount) / 100);
-        }else{
+        if (newAmount <= etalonObj.getEtalonMatrix().get(0).get(0) || newAmount >= etalonObj.getEtalonMatrix().get(etalonObj.getEtalonMatrix().size() - 1).get(0)) {
+            return (profitMatrix.get(newAmountIndex).get(colorNum) + (materialSelfCost / amount)) * ((double) (100 - discount) / 100);
+        } else {
             double highPrice = profitMatrix.get(newAmountIndex).get(colorNum);
             double lowPrice = profitMatrix.get(newAmountIndex - 1).get(colorNum);
 
-            double highDb = etalonObj.getEtalonMatrix().get(newAmountIndex).get(0);;
+            double highDb = etalonObj.getEtalonMatrix().get(newAmountIndex).get(0);
+            ;
             double lowDb = etalonObj.getEtalonMatrix().get(newAmountIndex - 1).get(0);
-            return ((highPrice * ( (newAmount - lowDb) / (highDb - lowDb) ) +
-                    lowPrice * ( (highDb - newAmount) / (highDb - lowDb) )) +
-                    (materialSelfCost / amount))* ((double)(100 - discount) / 100);
+            return ((highPrice * ((newAmount - lowDb) / (highDb - lowDb)) +
+                    lowPrice * ((highDb - newAmount) / (highDb - lowDb))) +
+                    (materialSelfCost / amount)) * ((double) (100 - discount) / 100);
         }
 
     }
 
-    public double calculatePackingCost(int amount, double packingCost, double packingTime, double rollWidth, int amountPerRoll){
+    public double calculatePackingCost(int amount, double packingCost, double packingTime, double rollWidth, int amountPerRoll) {
         double packingSelfCost = 0;
         double numberOfRolls = 0;
-        if (amountPerRoll != 0 && rollWidth != 0){
-            numberOfRolls = (double)amount/amountPerRoll;
+        if (amountPerRoll != 0 && rollWidth != 0) {
+            numberOfRolls = (double) amount / amountPerRoll;
             packingSelfCost = packingTime * packingCost + numberOfRolls * ROLL_PRICE * rollWidth;
         }
         return packingSelfCost;
     }
 
     public void calculate(int materialIndex, int amount, double width, double height, int tracks, double sideGap, double betweenGap,
-                            int machineIndex, int magnetCylinderIndex, int pregCover, double domborPrice, double clicheCost,
-                            double stancCost, double packingCost, double packingTime, double rollWidth, int amountPerRoll,
-                            String title, String client, int discount, double euro, double otherCost) {
+                          int machineIndex, int magnetCylinderIndex, int pregCover, double domborPrice, double clicheCost,
+                          double stancCost, double packingCost, double packingTime, double rollWidth, int amountPerRoll,
+                          String title, String client, int discount, double euro, double otherCost) {
 
         //Choosing magnet cylinder
         searchMagnetCylinder(machineIndex, height, magnetCylinderIndex);
@@ -273,32 +273,32 @@ public class Calculator {
         //Material cost
         double materialPrice = materials.get(materialIndex).getPrice() * euro;
 
-        double materialWidth = sideGap + (tracks * width)+ ((tracks - 1) * betweenGap) + sideGap; // sidegap + labelwidth + betweengap + labelwidth + ... + labelwidth + betweengap + labelwidth + sidegap
-        double materialHeight = ((double)amount/tracks) * height + (amount/tracks)*verticalGap;
+        double materialWidth = sideGap + (tracks * width) + ((tracks - 1) * betweenGap) + sideGap; // sidegap + labelwidth + betweengap + labelwidth + ... + labelwidth + betweengap + labelwidth + sidegap
+        double materialHeight = ((double) amount / tracks) * height + (amount / tracks) * verticalGap;
 
-        double materialSize = (materialHeight*materialWidth)/1000000;
+        double materialSize = (materialHeight * materialWidth) / 1000000;
         double materialSelfCost = materialSize * materialPrice;
 
         System.out.println(materialSelfCost);
 
         //Dye cost
-        double dyeSelfCost=0;
-        double actual=0;
+        double dyeSelfCost = 0;
+        double actual = 0;
 
-        if (addedDyes == null){
+        if (addedDyes == null) {
             addedDyes = new ArrayList<DyeParent>();
         }
 
-        for (int i=0; i < addedDyes.size(); i++){
+        for (int i = 0; i < addedDyes.size(); i++) {
             actual = addedDyes.get(i).getPrice() / 1000;
             dyeSelfCost = dyeSelfCost + actual * addedDyes.get(i).getDyeCylinder().getVolume() *
-                    ((double)addedDyes.get(i).getDyeCylinder().getPercent()/100)*((width*height)/1000000) *
-                    ((double)addedDyes.get(i).getCover()/100)*amount;
+                    ((double) addedDyes.get(i).getDyeCylinder().getPercent() / 100) * ((width * height) / 1000000) *
+                    ((double) addedDyes.get(i).getCover() / 100) * amount;
 
         }
 
         ArrayList<DyeParent> dyes = new ArrayList<DyeParent>();
-        dyes.add(new Lakk("szilikonos",100,null,0));
+        dyes.add(new Lakk("szilikonos", 100, null, 0));
         if (dyes.get(0).getClass() == Lakk.class) System.out.println("lakk");
         System.out.println("Festékköltség: " + dyeSelfCost);
 
@@ -306,12 +306,12 @@ public class Calculator {
         int domborCheck = 0;
         //--------------------
         //Self cost of embossing (dombornyomas)
-        double domborSelfCost=0;
-        if (domborPrice != 0){
-            domborSelfCost=(int)(amount/1000) * domborPrice * 0.2 + domborPrice;
-            domborCheck=1;
-        }else{
-            domborCheck=0;
+        double domborSelfCost = 0;
+        if (domborPrice != 0) {
+            domborSelfCost = (int) (amount / 1000) * domborPrice * 0.2 + domborPrice;
+            domborCheck = 1;
+        } else {
+            domborCheck = 0;
         }
 
         //guiból
@@ -319,12 +319,12 @@ public class Calculator {
         double pregPrice = 120; //adatbázis, vagy beégetés esetleg gui?
         //------------------
         //Self cost of pregeles
-        double pregSelfCost=0;
-        if (pregCover > 0){
-            pregSelfCost = ((width*height)/1000000) * ((double)pregCover/100) * amount * pregPrice;
-            pregCheck=1;
-        }else{
-            pregCheck=0;
+        double pregSelfCost = 0;
+        if (pregCover > 0) {
+            pregSelfCost = ((width * height) / 1000000) * ((double) pregCover / 100) * amount * pregPrice;
+            pregCheck = 1;
+        } else {
+            pregCheck = 0;
         }
 
         //Packing
@@ -361,7 +361,7 @@ public class Calculator {
 
     }
 
-    public ArrayList<Material> getMaterials(){
+    public ArrayList<Material> getMaterials() {
         return materials;
     }
 
@@ -404,7 +404,6 @@ public class Calculator {
     public ArrayList<DyeParent> getAddedDyes() {
         return addedDyes;
     }
-
 
 
     public static Etalon getEtalonObj() {

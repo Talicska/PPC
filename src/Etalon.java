@@ -35,7 +35,7 @@ public class Etalon {
         this.etalonMatrix = etalonMatrix;
     }
 
-    public void setElement(Double value, int row,int column){
+    public void setElement(Double value, int row, int column) {
         etalonMatrix.get(row).set(column, value);
     }
 }
