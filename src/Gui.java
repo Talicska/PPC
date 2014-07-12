@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Arc2D;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -125,6 +126,31 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
             }
         }
 
+        else if (( e.getSource() == textFAmount)  || ( e.getSource() == textFPackingCost)||
+                ( e.getSource() == textFPackingTime)|| ( e.getSource() == textFRollWidth)||
+                ( e.getSource() == textFAmountPerRoll) ){
+
+
+            System.out.println("1");
+            if ( ! ( textFAmount.getText().isEmpty() || textFPackingCost.getText().isEmpty() ||
+                    textFPackingTime.getText().isEmpty() || textFRollWidth.getText().isEmpty() ||
+                    textFAmountPerRoll.getText().isEmpty()) ){
+                System.out.println("2");
+                int amount = Integer.parseInt(textFAmount.getText());
+                double packingcost = Double.parseDouble(textFPackingCost.getText());
+                double packingtime = Double.parseDouble(textFPackingTime.getText());
+                double rollwidth = Double.parseDouble(textFRollWidth.getText());
+                int amountperroll = Integer.parseInt(textFAmountPerRoll.getText());
+
+                double cost= PPC.calcObj.calculatePackingCost(amount,packingcost,packingtime,rollwidth,amountperroll);
+
+                textFPackingSumCost.setText(Double.toString(cost));
+
+            }
+            //
+
+        }
+
 
     }
 
@@ -208,6 +234,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         textFAmount = new JTextField();
         textFAmount.setBounds(80, 52, 80, 21);
         textFAmount.setHorizontalAlignment(SwingConstants.RIGHT);
+        textFAmount.addActionListener(this);
         tab1.add(textFAmount);
         JLabel labelDb1 = new JLabel("db");
         labelDb1.setBounds(165, 52, 30, 20);
@@ -339,8 +366,10 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelPackingCost = new JLabel("Kiszerelési költség");
         labelPackingCost.setBounds(5, 380, 150, 25);
         tab1.add(labelPackingCost);
-        textFPackingCost = new JTextField("0");
+        textFPackingCost = new JTextField("6000");
         textFPackingCost.setBounds(120,382,70,21);
+        textFPackingCost.setHorizontalAlignment(SwingConstants.RIGHT);
+        textFPackingCost.addActionListener(this);
         tab1.add(textFPackingCost);
         JLabel labelFtH = new JLabel("Ft/óra");
         labelFtH.setBounds(195,382,40,20);
@@ -351,6 +380,8 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         tab1.add(labelPackingTime);
         textFPackingTime = new JTextField("0");
         textFPackingTime.setBounds(120,407,70,21);
+        textFPackingTime.setHorizontalAlignment(SwingConstants.RIGHT);
+        textFPackingTime.addActionListener(this);
         tab1.add(textFPackingTime);
         JLabel labelHour = new JLabel("óra");
         labelHour.setBounds(195,407,40,20);
@@ -361,6 +392,8 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         tab1.add(labelRollWidth);
         textFRollWidth = new JTextField("0");
         textFRollWidth.setBounds(120,432,70,21);
+        textFRollWidth.setHorizontalAlignment(SwingConstants.RIGHT);
+        textFRollWidth.addActionListener(this);
         tab1.add(textFRollWidth);
         JLabel labelCm = new JLabel("cm");
         labelCm.setBounds(195,432,40,20);
@@ -371,6 +404,8 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         tab1.add(labelAmountPerRoll);
         textFAmountPerRoll = new JTextField("0");
         textFAmountPerRoll.setBounds(120,457,70,21);
+        textFAmountPerRoll.setHorizontalAlignment(SwingConstants.RIGHT);
+        textFAmountPerRoll.addActionListener(this);
         tab1.add(textFAmountPerRoll);
         JLabel labelDb3 = new JLabel("db");
         labelDb3.setBounds(195,457,40,20);
@@ -381,6 +416,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         tab1.add(labelPackingSumCost);
         textFPackingSumCost = new JTextField("0");
         textFPackingSumCost.setBounds(150,482,70,21);
+        textFPackingSumCost.setHorizontalAlignment(SwingConstants.RIGHT);
         textFPackingSumCost.setEditable(false);
         tab1.add(textFPackingSumCost);
         JLabel labelFt6 = new JLabel("Ft");
