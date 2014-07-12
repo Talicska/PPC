@@ -73,8 +73,17 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
             textFEuro.setText(String.valueOf(new CurrencyConverter().convert()));
         }
 
+        else if(e.getSource() == buttonManagePreset){
+
+        }
+
         else if (e.getSource() == buttonAddDye){
             if( ( !textFDyeCover.getText().isEmpty()) && (comboDyeType.getSelectedIndex() >=0 ) && (comboDyeCylinder.getSelectedIndex() >= 0)) {
+
+                if(comboDyeType.getSelectedItem().equals(new String("Egyéb szín"))){
+
+                }
+
                 PPC.calcObj.addDye(comboDyeType.getSelectedIndex(), comboDyeCylinder.getSelectedIndex(), Integer.parseInt(textFDyeCover.getText()), "", 0);
                 listDyeType.removeAll();
                 for (int i = 0; i < PPC.calcObj.getAddedDyes().size(); i++) {
@@ -83,7 +92,10 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
                                     PPC.calcObj.getAddedDyes().get(i).getCover() + " %"
                     );
                 }
+            }else if(textFDyeCover.getText().isEmpty()){
+                flashMyField(textFDyeCover,Color.RED,200,200);
             }
+
         }
 
         else if (e.getSource() == comboMachine){
@@ -501,6 +513,27 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         this.add(panel2);
         this.add(menu);
 
+    }
+
+    public void flashMyField(final JTextField field, final Color flashColor,
+                             final int timerDelay, int totalTime) {
+        final int totalCount = totalTime / timerDelay;
+        javax.swing.Timer timer = new javax.swing.Timer(timerDelay, new ActionListener(){
+            int count = 0;
+
+            public void actionPerformed(ActionEvent evt) {
+                if (count % 2 == 0) {
+                    field.setBackground(flashColor);
+                } else {
+                    field.setBackground(null);
+                    if (count >= totalCount) {
+                        ((Timer)evt.getSource()).stop();
+                    }
+                }
+                count++;
+            }
+        });
+        timer.start();
     }
 
     private static class PriceRenderer extends DefaultTableCellRenderer {
