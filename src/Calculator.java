@@ -182,7 +182,6 @@ public class Calculator {
     }*/
 
     public boolean isDyeAlreadyAdded(String dyeName) {
-        System.out.println(dyeName);
         for (int i = 0; i < addedDyes.size(); i++) {
             if (addedDyes.get(i).getName().equals(dyeName)) {
                 return true;
@@ -252,9 +251,10 @@ public class Calculator {
 
     public double calculatePackingCost(int amount, double packingCost, double packingTime, double rollWidth, int amountPerRoll) {
         double packingSelfCost = 0;
-        double numberOfRolls = 0;
+        int numberOfRolls = 0;
         if (amountPerRoll != 0 && rollWidth != 0) {
-            numberOfRolls = (double) amount / amountPerRoll;
+            //numberOfRolls = (double) amount / amountPerRoll;
+            numberOfRolls = amount/amountPerRoll + 1;
             packingSelfCost = packingTime * packingCost + numberOfRolls * ROLL_PRICE * rollWidth;
         }
         return packingSelfCost;
