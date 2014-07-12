@@ -57,6 +57,13 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JTextField textFClicheCost;
     private JTextField textFStancCost;
     private JTextField textFOtherCost;
+    private JTextField textFPackingCost;
+    private JTextField textFPackingTime;
+    private JTextField textFRollWidth;
+    private JTextField textFAmountPerRoll;
+    private JTextField textFPackingSumCost;
+
+
 
     private JTextField textFEuro;
 
@@ -277,7 +284,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
             comboMachine.addItem(PPC.calcObj.getMachines().get(i).getName());
         comboMachine.addActionListener(this);
         tab1.add(comboMachine);
-        comboMachine.setBounds(80, 243, 130, 21);
+        comboMachine.setBounds(80, 243, 145, 21);
         comboCylinder = new JComboBox();
         tab1.add(comboCylinder);
         for (int i = 0; i < PPC.calcObj.getMachines().get(0).getCylinders().size(); i++)
@@ -330,20 +337,55 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
 
         JLabel labelPackingCost = new JLabel("Kiszerelési költség");
-        labelPackingCost.setBounds(5, 380, 70, 25);
+        labelPackingCost.setBounds(5, 380, 150, 25);
         tab1.add(labelPackingCost);
+        textFPackingCost = new JTextField("0");
+        textFPackingCost.setBounds(120,382,70,21);
+        tab1.add(textFPackingCost);
+        JLabel labelFtH = new JLabel("Ft/óra");
+        labelFtH.setBounds(195,382,40,20);
+        tab1.add(labelFtH);
 
         JLabel labelPackingTime = new JLabel("Kiszerelési idő");
-        labelPackingTime.setBounds(5, 405, 70, 25);
+        labelPackingTime.setBounds(5, 405, 150, 25);
         tab1.add(labelPackingTime);
+        textFPackingTime = new JTextField("0");
+        textFPackingTime.setBounds(120,407,70,21);
+        tab1.add(textFPackingTime);
+        JLabel labelHour = new JLabel("óra");
+        labelHour.setBounds(195,407,40,20);
+        tab1.add(labelHour);
 
-        JLabel labelRollWidth = new JLabel("Tekercs szélesség");
-        labelRollWidth.setBounds(5, 430, 70, 25);
+        JLabel labelRollWidth = new JLabel("Tekercsszélesség");
+        labelRollWidth.setBounds(5, 430, 150, 25);
         tab1.add(labelRollWidth);
+        textFRollWidth = new JTextField("0");
+        textFRollWidth.setBounds(120,432,70,21);
+        tab1.add(textFRollWidth);
+        JLabel labelCm = new JLabel("cm");
+        labelCm.setBounds(195,432,40,20);
+        tab1.add(labelCm);
 
         JLabel labelAmountPerRoll = new JLabel("Db/tekercs");
-        labelAmountPerRoll.setBounds(5, 455, 70, 25);
+        labelAmountPerRoll.setBounds(5, 455, 150, 25);
         tab1.add(labelAmountPerRoll);
+        textFAmountPerRoll = new JTextField("0");
+        textFAmountPerRoll.setBounds(120,457,70,21);
+        tab1.add(textFAmountPerRoll);
+        JLabel labelDb3 = new JLabel("db");
+        labelDb3.setBounds(195,457,40,20);
+        tab1.add(labelDb3);
+
+        JLabel labelPackingSumCost = new JLabel("Kiszerelés összköltsége");
+        labelPackingSumCost.setBounds(5, 480, 150, 25);
+        tab1.add(labelPackingSumCost);
+        textFPackingSumCost = new JTextField("0");
+        textFPackingSumCost.setBounds(150,482,70,21);
+        textFPackingSumCost.setEditable(false);
+        tab1.add(textFPackingSumCost);
+        JLabel labelFt6 = new JLabel("Ft");
+        labelFt6.setBounds(225,482,40,20);
+        tab1.add(labelFt6);
 
 
 
