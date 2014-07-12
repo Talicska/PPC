@@ -55,8 +55,9 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JTextField textFOtherCost;
     private JTextField textFEuro;
 
-    private JButton buttonaddDyePreset;
+    private JButton buttonAddDyePreset;
     private JButton buttonAddDye;
+    private JButton buttonDelDye;
     private JButton buttonGetEuro;
 
     private List listDyeType;
@@ -66,18 +67,40 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
 
     public void actionPerformed(ActionEvent e) {
+
         if (e.getSource() == buttonGetEuro) {
             textFEuro.setText(String.valueOf(new CurrencyConverter().convert()));
-        }else if (e.getSource() == buttonAddDye){
-            PPC.calcObj.addDye(comboDyeType.getSelectedIndex(), comboDyeCylinder.getSelectedIndex(), Integer.parseInt(textFDyeCover.getText()) ,"", 0);
-            listDyeType.removeAll();
-            for (int i = 0; i < PPC.calcObj.getAddedDyes().size(); i++){
-                listDyeType.add(PPC.calcObj.getAddedDyes().get(i).getName() + "  " +
-                                PPC.calcObj.getAddedDyes().get(i).getDyeCylinder().getVolume() + " g/m2  " +
-                                PPC.calcObj.getAddedDyes().get(i).getCover() + " %"
-                );
+        }
+
+        else if (e.getSource() == buttonAddDye){
+            if( ( !textFDyeCover.getText().isEmpty()) && (comboDyeType.getSelectedIndex() >=0 ) && (comboDyeCylinder.getSelectedIndex() >= 0)) {
+                PPC.calcObj.addDye(comboDyeType.getSelectedIndex(), comboDyeCylinder.getSelectedIndex(), Integer.parseInt(textFDyeCover.getText()), "", 0);
+                listDyeType.removeAll();
+                for (int i = 0; i < PPC.calcObj.getAddedDyes().size(); i++) {
+                    listDyeType.add(PPC.calcObj.getAddedDyes().get(i).getName() + "  " +
+                                    PPC.calcObj.getAddedDyes().get(i).getDyeCylinder().getVolume() + " g/m2  " +
+                                    PPC.calcObj.getAddedDyes().get(i).getCover() + " %"
+                    );
+                }
             }
         }
+
+        else if (e.getSource() == comboMachine){
+            comboCylinder.removeAllItems();
+            int index = comboMachine.getSelectedIndex();
+            for (int i = 0; i < PPC.calcObj.getMachines().get(index).getCylinders().size(); i++)
+                comboCylinder.addItem(PPC.calcObj.getMachines().get(index).getCylinders().get(i).getTeeth());
+        }
+
+        else if (e.getSource() == buttonDelDye){
+            int index = listDyeType.getSelectedIndex();
+            if(index >= 0) {
+                listDyeType.remove(index);
+                PPC.calcObj.removeDye(index);
+            }
+        }
+
+
     }
 
 
@@ -234,6 +257,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         comboMachine = new JComboBox();
         for (int i = 0; i < PPC.calcObj.getMachines().size(); i++)
             comboMachine.addItem(PPC.calcObj.getMachines().get(i).getName());
+        comboMachine.addActionListener(this);
         tab1.add(comboMachine);
         comboMachine.setBounds(80, 222, 130, 21);
         comboCylinder = new JComboBox();
@@ -265,9 +289,9 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
         //fel kell tölteni comboDyePreset-et
 
-        buttonaddDyePreset = new JButton("Betölt");
-        buttonaddDyePreset.setBounds(600, 32, 85, 21);
-        tab1.add(buttonaddDyePreset);
+        buttonAddDyePreset = new JButton("Betölt");
+        buttonAddDyePreset.setBounds(600, 32, 85, 21);
+        tab1.add(buttonAddDyePreset);
 
         JLabel labelDyeAdd = new JLabel("Festéktípus hozzáadása");
         labelDyeAdd.setBounds(370, 65, 200, 25);
@@ -284,6 +308,11 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         buttonAddDye.addActionListener(this);
         tab1.add(buttonAddDye);
 
+        buttonDelDye = new JButton("Töröl");
+        buttonDelDye.setBounds(600, 175, 85, 21);
+        buttonDelDye.addActionListener(this);
+        tab1.add(buttonDelDye);
+
         JLabel labelDyeCylinder = new JLabel("Henger");
         labelDyeCylinder.setBounds(380, 115, 70, 25);
         tab1.add(labelDyeCylinder);
@@ -299,7 +328,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelDyeCover = new JLabel("Lefedettség");
         labelDyeCover.setBounds(380, 140, 70, 25);
         tab1.add(labelDyeCover);
-        textFDyeCover = new JTextField();
+        textFDyeCover = new JTextField("");
         textFDyeCover.setBounds(455, 142, 65, 21);
         textFDyeCover.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFDyeCover);
@@ -310,8 +339,6 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         listDyeType = new List();
         listDyeType.setBounds(370, 175, 225, 125);
         tab1.add(listDyeType);
-        for (int i = 0; i < 8; i++)
-            listDyeType.add("Festek   asdas   qwertz");
 
         checkPreg = new JCheckBox("Prégelés", false);
         checkPreg.setBounds(370, 310, 120, 25);
@@ -576,7 +603,6 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         public Double convert() {
 
             String answer = "";
-            System.out.println("converting..");
 
             try {
                 URL convert = new URL(url);
