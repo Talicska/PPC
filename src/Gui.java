@@ -64,8 +64,6 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JTextField textFRollWidth;
     private JTextField textFAmountPerRoll;
     private JTextField textFPackingSumCost;
-
-
     private JTextField textFEuro;
 
     private JButton buttonAddDyePreset;
@@ -159,7 +157,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
                         double cost = PPC.calcObj.calculatePackingCost(amount, packingcost, packingtime, rollwidth, amountperroll);
 
                         textFPackingSumCost.setText(Integer.toString((int) cost));
-                    }
+                    }else textFPackingSumCost.setText("0");
                 }
             }
 
@@ -182,7 +180,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
                         double cost = PPC.calcObj.calculatePackingCost(amount, packingcost, packingtime, rollwidth, amountperroll);
 
                         textFPackingSumCost.setText(Integer.toString((int) cost));
-                    }
+                    }else textFPackingSumCost.setText("0");
                 }
             }
 
@@ -205,7 +203,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
                         double cost = PPC.calcObj.calculatePackingCost(amount, packingcost, packingtime, rollwidth, amountperroll);
 
                         textFPackingSumCost.setText(Integer.toString((int) cost));
-                    }
+                    }else textFPackingSumCost.setText("0");
                 }
             }
 
@@ -237,6 +235,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         //Color MiscColor = new Color(39,88,107);
         //UIManager.put("TabbedPane.selected", mainColor);
         //UIManager.put("TabbedPane.contentAreaColor", borderColor);
+
 
         JPanel panel2 = new JPanel();                                                   //right panel
         panel2.setBounds(700, 25, 300, height - menuheight);
@@ -278,7 +277,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelAmount = new JLabel("Darabszám");
         labelAmount.setBounds(5, 50, 70, 25);
         tab1.add(labelAmount);
-        textFAmount = new JTextField();
+        textFAmount = new IntegerField();
         textFAmount.setBounds(80, 52, 80, 21);
         textFAmount.setHorizontalAlignment(SwingConstants.RIGHT);
         textFAmount.getDocument().addDocumentListener(docListener);
@@ -291,7 +290,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelWidth = new JLabel("Szélesség");
         labelWidth.setBounds(5, 75, 70, 25);
         tab1.add(labelWidth);
-        textFWidth = new JTextField();
+        textFWidth = new DoubleField();
         textFWidth.setBounds(80, 77, 80, 21);
         textFWidth.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFWidth);
@@ -302,7 +301,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelHeight = new JLabel("Magasság");
         labelHeight.setBounds(5, 100, 70, 25);
         tab1.add(labelHeight);
-        textFHeight = new JTextField();
+        textFHeight = new DoubleField();
         textFHeight.setBounds(80, 102, 80, 21);
         textFHeight.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFHeight);
@@ -313,7 +312,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelTracks = new JLabel("Pályák");
         labelTracks.setBounds(5, 125, 70, 25);
         tab1.add(labelTracks);
-        textFTracks = new JTextField();
+        textFTracks = new IntegerField();
         textFTracks.setBounds(80, 127, 80, 21);
         textFTracks.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFTracks);
@@ -328,7 +327,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelSideGap = new JLabel("Széleken");
         labelSideGap.setBounds(15, 175, 70, 25);
         tab1.add(labelSideGap);
-        textFSideGap = new JTextField("6");
+        textFSideGap = new DoubleField("6");
         textFSideGap.setBounds(90, 177, 70, 21);
         textFSideGap.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFSideGap);
@@ -339,7 +338,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelBetweenGap = new JLabel("Pályák közt");
         labelBetweenGap.setBounds(15, 200, 70, 25);
         tab1.add(labelBetweenGap);
-        textFBetweenGap = new JTextField("3");
+        textFBetweenGap = new DoubleField("3");
         textFBetweenGap.setBounds(90, 202, 70, 21);
         textFBetweenGap.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFBetweenGap);
@@ -376,7 +375,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelClicheCost = new JLabel("Kliséköltség");
         labelClicheCost.setBounds(5, 287, 80, 25);
         tab1.add(labelClicheCost);
-        textFClicheCost = new JTextField("0");
+        textFClicheCost = new IntegerField("0");
         textFClicheCost.setBounds(90, 289, 70, 21);
         textFClicheCost.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFClicheCost);
@@ -387,7 +386,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelStancCost = new JLabel("Stancköltség");
         labelStancCost.setBounds(5, 312, 80, 25);
         tab1.add(labelStancCost);
-        textFStancCost = new JTextField("0");
+        textFStancCost = new IntegerField("0");
         textFStancCost.setBounds(90, 314, 70, 21);
         textFStancCost.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFStancCost);
@@ -398,7 +397,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelOtherCost = new JLabel("Egyéb költség");
         labelOtherCost.setBounds(5, 337, 80, 25);
         tab1.add(labelOtherCost);
-        textFOtherCost = new JTextField("0");
+        textFOtherCost = new IntegerField("0");
         textFOtherCost.setBounds(90, 339, 70, 21);
         textFOtherCost.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFOtherCost);
@@ -414,7 +413,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelPackingCost = new JLabel("Kiszerelési költség");
         labelPackingCost.setBounds(5, 380, 150, 25);
         tab1.add(labelPackingCost);
-        textFPackingCost = new JTextField("6000");
+        textFPackingCost = new IntegerField("6000");
         textFPackingCost.setBounds(120, 382, 70, 21);
         textFPackingCost.setHorizontalAlignment(SwingConstants.RIGHT);
         textFPackingCost.getDocument().addDocumentListener(docListener);
@@ -426,7 +425,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelPackingTime = new JLabel("Kiszerelési idő");
         labelPackingTime.setBounds(5, 405, 150, 25);
         tab1.add(labelPackingTime);
-        textFPackingTime = new JTextField("0");
+        textFPackingTime = new IntegerField("0");
         textFPackingTime.setBounds(120, 407, 70, 21);
         textFPackingTime.setHorizontalAlignment(SwingConstants.RIGHT);
         textFPackingTime.getDocument().addDocumentListener(docListener);
@@ -438,7 +437,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelRollWidth = new JLabel("Tekercsszélesség");
         labelRollWidth.setBounds(5, 430, 150, 25);
         tab1.add(labelRollWidth);
-        textFRollWidth = new JTextField("0");
+        textFRollWidth = new IntegerField("0");
         textFRollWidth.setBounds(120, 432, 70, 21);
         textFRollWidth.setHorizontalAlignment(SwingConstants.RIGHT);
         textFRollWidth.getDocument().addDocumentListener(docListener);
@@ -450,7 +449,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelAmountPerRoll = new JLabel("Db/tekercs");
         labelAmountPerRoll.setBounds(5, 455, 150, 25);
         tab1.add(labelAmountPerRoll);
-        textFAmountPerRoll = new JTextField("0");
+        textFAmountPerRoll = new IntegerField("0");
         textFAmountPerRoll.setBounds(120, 457, 70, 21);
         textFAmountPerRoll.setHorizontalAlignment(SwingConstants.RIGHT);
         textFAmountPerRoll.getDocument().addDocumentListener(docListener);
@@ -535,7 +534,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelDyeCover = new JLabel("Lefedettség");
         labelDyeCover.setBounds(380, 145, 70, 25);
         tab1.add(labelDyeCover);
-        textFDyeCover = new JTextField("");
+        textFDyeCover = new IntegerField("");
         textFDyeCover.setBounds(455, 147, 65, 21);
         textFDyeCover.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFDyeCover);
@@ -553,7 +552,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelPregCover = new JLabel("Lefedettség", SwingConstants.RIGHT);
         labelPregCover.setBounds(520, 315, 75, 25);
         tab1.add(labelPregCover);
-        textFPregCover = new JTextField();
+        textFPregCover = new DoubleField();
         textFPregCover.setBounds(600, 317, 65, 21);
         textFPregCover.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFPregCover);
@@ -567,7 +566,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelDomborCost = new JLabel("Költség", SwingConstants.RIGHT);
         labelDomborCost.setBounds(520, 340, 75, 25);
         tab1.add(labelDomborCost);
-        textFDomborCost = new JTextField("5000");
+        textFDomborCost = new IntegerField("5000");
         textFDomborCost.setBounds(600, 342, 65, 21);
         textFDomborCost.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFDomborCost);
@@ -596,7 +595,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelDiscount = new JLabel("Kedvezmény");
         labelDiscount.setBounds(370, 430, 80, 25);
         tab1.add(labelDiscount);
-        textFDiscount = new JTextField("0");
+        textFDiscount = new DoubleField("0");
         textFDiscount.setBounds(455, 432, 65, 21);
         textFDiscount.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFDiscount);
@@ -611,7 +610,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelEuro = new JLabel("Euro árfolyam");
         labelEuro.setBounds(370, 470, 80, 25);
         tab1.add(labelEuro);
-        textFEuro = new JTextField("300");
+        textFEuro = new DoubleField("300");
         textFEuro.setBounds(455, 472, 65, 21);
         textFEuro.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFEuro);
