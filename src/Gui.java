@@ -270,79 +270,79 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         tab1.add(separator1);
 
         JLabel labelMachine = new JLabel("Géptípus");
-        labelMachine.setBounds(5, 240, 70, 25);
+        labelMachine.setBounds(5, 241, 70, 25);
         tab1.add(labelMachine);
         comboMachine = new JComboBox();
         for (int i = 0; i < PPC.calcObj.getMachines().size(); i++)
             comboMachine.addItem(PPC.calcObj.getMachines().get(i).getName());
         comboMachine.addActionListener(this);
         tab1.add(comboMachine);
-        comboMachine.setBounds(80, 242, 130, 21);
+        comboMachine.setBounds(80, 243, 130, 21);
         comboCylinder = new JComboBox();
         tab1.add(comboCylinder);
         for (int i = 0; i < PPC.calcObj.getMachines().get(0).getCylinders().size(); i++)
             comboCylinder.addItem(PPC.calcObj.getMachines().get(0).getCylinders().get(i).getTeeth());
-        comboCylinder.setBounds(230, 242, 100, 21);
+        comboCylinder.setBounds(230, 243, 100, 21);
 
         //géptípus alatti rész
 
         JSeparator separator5 = new JSeparator();
-        separator5.setBounds(5, 272, 325, 1);
+        separator5.setBounds(5, 274, 325, 1);
         tab1.add(separator5);
 
         JLabel labelClicheCost = new JLabel("Kliséköltség");
-        labelClicheCost.setBounds(5, 280, 80, 25);
+        labelClicheCost.setBounds(5, 287, 80, 25);
         tab1.add(labelClicheCost);
         textFClicheCost = new JTextField("0");
-        textFClicheCost.setBounds(90, 282, 70, 21);
+        textFClicheCost.setBounds(90, 289, 70, 21);
         textFClicheCost.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFClicheCost);
         JLabel labelFt3=new JLabel("Ft");
-        labelFt3.setBounds(165,282,30,20);
+        labelFt3.setBounds(165,289,30,20);
         tab1.add(labelFt3);
 
         JLabel labelStancCost = new JLabel("Stancköltség");
-        labelStancCost.setBounds(5, 305, 80, 25);
+        labelStancCost.setBounds(5, 312, 80, 25);
         tab1.add(labelStancCost);
         textFStancCost = new JTextField("0");
-        textFStancCost.setBounds(90, 307, 70, 21);
+        textFStancCost.setBounds(90, 314, 70, 21);
         textFStancCost.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFStancCost);
         JLabel labelFt4=new JLabel("Ft");
-        labelFt4.setBounds(165,307,30,20);
+        labelFt4.setBounds(165,314,30,20);
         tab1.add(labelFt4);
 
         JLabel labelOtherCost = new JLabel("Egyéb költség");
-        labelOtherCost.setBounds(5, 330, 80, 25);
+        labelOtherCost.setBounds(5, 337, 80, 25);
         tab1.add(labelOtherCost);
         textFOtherCost = new JTextField("0");
-        textFOtherCost.setBounds(90, 332, 70, 21);
+        textFOtherCost.setBounds(90, 339, 70, 21);
         textFOtherCost.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFOtherCost);
         JLabel labelFt5=new JLabel("Ft");
-        labelFt5.setBounds(165,332,30,20);
+        labelFt5.setBounds(165,339,30,20);
         tab1.add(labelFt5);
 
         JSeparator separator6 = new JSeparator();
-        separator6.setBounds(5, 362, 325, 1);
+        separator6.setBounds(5, 372, 325, 1);
         tab1.add(separator6);
 
 
 
         JLabel labelPackingCost = new JLabel("Kiszerelési költség");
-        labelPackingCost.setBounds(5, 370, 70, 25);
+        labelPackingCost.setBounds(5, 380, 70, 25);
         tab1.add(labelPackingCost);
 
         JLabel labelPackingTime = new JLabel("Kiszerelési idő");
-        labelPackingTime.setBounds(5, 395, 70, 25);
+        labelPackingTime.setBounds(5, 405, 70, 25);
         tab1.add(labelPackingTime);
 
         JLabel labelRollWidth = new JLabel("Tekercs szélesség");
-        labelRollWidth.setBounds(5, 420, 70, 25);
+        labelRollWidth.setBounds(5, 430, 70, 25);
         tab1.add(labelRollWidth);
 
         JLabel labelAmountPerRoll = new JLabel("Db/tekercs");
-        labelAmountPerRoll.setBounds(5, 445, 70, 25);
+        labelAmountPerRoll.setBounds(5, 455, 70, 25);
         tab1.add(labelAmountPerRoll);
 
 
