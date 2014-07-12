@@ -13,11 +13,11 @@ public class Calculator {
     private static final double ROLL_PRICE = 2.1;
 
     private static ArrayList<Dye> dyes = new ArrayList<Dye>();
-    private static ArrayList<DyeCylinder> dyecylinders = new ArrayList<DyeCylinder>();
+    private static ArrayList<DyeCylinder> dyeCylinders = new ArrayList<DyeCylinder>();
     private static Etalon etalonObj;
     private static ArrayList<Lakk> lakks = new ArrayList<Lakk>();
     private static ArrayList<Machine> machines = new ArrayList<Machine>();
-    private static ArrayList<MagnetCylinder> magnetcylinders = new ArrayList<MagnetCylinder>();
+    private static ArrayList<MagnetCylinder> magnetCylinders = new ArrayList<MagnetCylinder>();
     private static ArrayList<Material> materials = new ArrayList<Material>();
     private static ArrayList<Metal> metals = new ArrayList<Metal>();
 
@@ -35,11 +35,11 @@ public class Calculator {
     public Calculator(ArrayList<Dye> dyes, ArrayList<DyeCylinder> dyecylinders, Etalon etalonObj, ArrayList<Lakk> lakks, ArrayList<Machine> machines,
                       ArrayList<MagnetCylinder> magnetcylinders, ArrayList<Material> materials, ArrayList<Metal> metals) {
         this.dyes = dyes;
-        this.dyecylinders = dyecylinders;
+        this.dyeCylinders = dyecylinders;
         this.etalonObj = etalonObj;
         this.lakks = lakks;
         this.machines = machines;
-        this.magnetcylinders = magnetcylinders;
+        this.magnetCylinders = magnetcylinders;
         this.materials = materials;
         this.metals = metals;
 
@@ -109,7 +109,7 @@ public class Calculator {
             if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Lakk.class) && lakkNum < MAX_NUMBER_OF_LAKKS) {
                 DyeParent chosenLakk = allDyeTypes.get(chosenDyeIndex);
                 if (!isDyeAlreadyAdded(chosenLakk.getName())) {
-                    chosenLakk.setDyeCylinder(dyecylinders.get(chosenDyeCylinderIndex));
+                    chosenLakk.setDyeCylinder(dyeCylinders.get(chosenDyeCylinderIndex));
                     chosenLakk.setCover(cover);
                     addedDyes.add(chosenLakk);
                     lakkNum++;
@@ -119,7 +119,7 @@ public class Calculator {
             } else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Metal.class) && metalNum < MAX_NUMBER_OF_METALS && metalNum + dyeNum < MAX_NUMBER_OF_DYES) {
                 DyeParent chosenMetal = allDyeTypes.get(chosenDyeIndex);
                 if (!isDyeAlreadyAdded(chosenMetal.getName())) {
-                    chosenMetal.setDyeCylinder(dyecylinders.get(chosenDyeCylinderIndex));
+                    chosenMetal.setDyeCylinder(dyeCylinders.get(chosenDyeCylinderIndex));
                     chosenMetal.setCover(cover);
                     addedDyes.add(chosenMetal);
                     metalNum++;
@@ -129,7 +129,7 @@ public class Calculator {
             } else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Dye.class) && metalNum + dyeNum < MAX_NUMBER_OF_DYES) {
                 DyeParent chosenDye = allDyeTypes.get(chosenDyeIndex);
                 if (!isDyeAlreadyAdded(chosenDye.getName())) {
-                    chosenDye.setDyeCylinder(dyecylinders.get(chosenDyeCylinderIndex));
+                    chosenDye.setDyeCylinder(dyeCylinders.get(chosenDyeCylinderIndex));
                     chosenDye.setCover(cover);
                     addedDyes.add(chosenDye);
                     dyeNum++;
@@ -139,7 +139,7 @@ public class Calculator {
             }
         } else { // other color - direct color
             if (dyeNum + metalNum < MAX_NUMBER_OF_DYES) {
-                Dye otherDye = new Dye(otherColorName, otherColorPrice, dyecylinders.get(chosenDyeCylinderIndex), cover);
+                Dye otherDye = new Dye(otherColorName, otherColorPrice, dyeCylinders.get(chosenDyeCylinderIndex), cover);
                 if (!isDyeAlreadyAdded(otherDye.getName())) {
                     addedDyes.add(otherDye);
                     dyeNum++;
@@ -163,9 +163,9 @@ public class Calculator {
     }
 
     public DyeCylinder searchDyeCylinder(double cylinderVolume) {
-        for (int i = 0; i < dyecylinders.size(); i++) {
-            if (dyecylinders.get(i).getVolume() == cylinderVolume) {
-                return dyecylinders.get(i);
+        for (int i = 0; i < dyeCylinders.size(); i++) {
+            if (dyeCylinders.get(i).getVolume() == cylinderVolume) {
+                return dyeCylinders.get(i);
             }
         }
         return null;
@@ -254,7 +254,8 @@ public class Calculator {
         int numberOfRolls = 0;
         if (amountPerRoll != 0 && rollWidth != 0) {
             //numberOfRolls = (double) amount / amountPerRoll;
-            numberOfRolls = amount/amountPerRoll + 1;
+            if (amount % amountPerRoll == 0) numberOfRolls = amount/amountPerRoll;
+            else numberOfRolls = amount/amountPerRoll + 1;
             packingSelfCost = packingTime * packingCost + numberOfRolls * ROLL_PRICE * rollWidth;
         }
         return packingSelfCost;
@@ -345,7 +346,7 @@ public class Calculator {
         System.out.println("Egyéb ktg: " + otherCost);
 
 
-        //Profit - árrés
+        //Profit - margin
         int colorNum = countColors();
         transformEtalon(width, height);
         double profitOnPiece = calcProfitOnPiece(amount, width, height, colorNum, materialSelfCost, discount);
@@ -381,16 +382,16 @@ public class Calculator {
         return metals;
     }
 
-    public static ArrayList<MagnetCylinder> getMagnetcylinders() {
-        return magnetcylinders;
+    public static ArrayList<MagnetCylinder> getMagnetCylinders() {
+        return magnetCylinders;
     }
 
     public static ArrayList<Lakk> getLakks() {
         return lakks;
     }
 
-    public static ArrayList<DyeCylinder> getDyecylinders() {
-        return dyecylinders;
+    public static ArrayList<DyeCylinder> getDyeCylinders() {
+        return dyeCylinders;
     }
 
     public static ArrayList<Dye> getDyes() {

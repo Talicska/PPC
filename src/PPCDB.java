@@ -10,7 +10,7 @@ public class PPCDB {
     // "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB"
     // "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB"
 
-    public static final String DATABASE = "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB";     //your own
+    public static final String DATABASE = "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB";     //your own
     private static Connection conn = null;
 
     public void open() {
@@ -59,18 +59,18 @@ public class PPCDB {
 
     public static ArrayList<DyeCylinder> getDyeCylinders() throws SQLException {
 
-        ArrayList<DyeCylinder> dyecyls = new ArrayList<DyeCylinder>();
+        ArrayList<DyeCylinder> dyeCylinders = new ArrayList<DyeCylinder>();
 
         Statement stm = conn.createStatement();
         ResultSet rs = stm.executeQuery("select volume, percent from DyeCylinder");
 
         while (rs.next()) {
-            dyecyls.add(new DyeCylinder(rs.getDouble("volume"), rs.getInt("percent")));
+            dyeCylinders.add(new DyeCylinder(rs.getDouble("volume"), rs.getInt("percent")));
         }
 
         stm.close();
         rs.close();
-        return dyecyls;
+        return dyeCylinders;
     }
 
     public static Vector<Vector<Double>> getEtalon() throws SQLException {
@@ -175,7 +175,7 @@ public class PPCDB {
         return metals;
     }
 
-    public static ArrayList<Machine> fillMachineMagCylinders(ArrayList<Machine> machines, ArrayList<MagnetCylinder> magnetcylinders) throws SQLException {
+    public static ArrayList<Machine> fillMachineMagCylinders(ArrayList<Machine> machines, ArrayList<MagnetCylinder> magnetCylinders) throws SQLException {
 
         Statement stm = conn.createStatement();
         ResultSet rs = stm.executeQuery("select m.name_machine, mc.teeth from Machine m " +
@@ -185,9 +185,9 @@ public class PPCDB {
         while (rs.next()) {
             for (int i = 0; i < machines.size(); i++) {
                 if (machines.get(i).getName().equals(rs.getString("name_machine"))) {
-                    for (int j = 0; j < magnetcylinders.size(); j++) {
-                        if (magnetcylinders.get(j).getTeeth() == rs.getInt("teeth")) {
-                            machines.get(i).addCylinder(magnetcylinders.get(j));
+                    for (int j = 0; j < magnetCylinders.size(); j++) {
+                        if (magnetCylinders.get(j).getTeeth() == rs.getInt("teeth")) {
+                            machines.get(i).addCylinder(magnetCylinders.get(j));
                             break;
                         }
                     }

@@ -18,7 +18,6 @@ import java.util.EventObject;
 import java.util.Locale;
 import java.util.Vector;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -523,8 +522,8 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         labelDyeCylinder.setBounds(380, 120, 70, 25);
         tab1.add(labelDyeCylinder);
         comboDyeCylinder = new JComboBox();
-        for (int i = 0; i < PPC.calcObj.getDyecylinders().size(); i++)
-            comboDyeCylinder.addItem(PPC.calcObj.getDyecylinders().get(i).getVolume());
+        for (int i = 0; i < PPC.calcObj.getDyeCylinders().size(); i++)
+            comboDyeCylinder.addItem(PPC.calcObj.getDyeCylinders().get(i).getVolume());
         tab1.add(comboDyeCylinder);
         comboDyeCylinder.setBounds(455, 122, 65, 21);
         JLabel labelGM = new JLabel("g/m2");

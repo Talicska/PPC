@@ -18,32 +18,32 @@ public class PPC {
         Vector<Vector<Double>> etalonMatrix;
 
         ArrayList<Dye> dyes;
-        ArrayList<DyeCylinder> dyecylinders;
+        ArrayList<DyeCylinder> dyeCylinders;
         Etalon etalonObj;
         ArrayList<Lakk> lakks;
         ArrayList<Machine> machines;
-        ArrayList<MagnetCylinder> magnetcylinders;
+        ArrayList<MagnetCylinder> magnetCylinders;
         ArrayList<Material> materials;
         ArrayList<Metal> metals;
 
         try {
             dyes = database.getDyes();
-            dyecylinders = database.getDyeCylinders();
+            dyeCylinders = database.getDyeCylinders();
             etalonMatrix = database.getEtalon();
             lakks = database.getLakks();
             machines = database.getMachines();
-            magnetcylinders = database.getMagnetCylinders();
+            magnetCylinders = database.getMagnetCylinders();
             materials = database.getMaterials();
             metals = database.getMetals();
 
-            machines = database.fillMachineMagCylinders(machines, magnetcylinders);
+            machines = database.fillMachineMagCylinders(machines, magnetCylinders);
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
 
         etalonObj = new Etalon(etalonMatrix);
-        calcObj = new Calculator(dyes, dyecylinders, etalonObj, lakks, machines, magnetcylinders, materials, metals);
+        calcObj = new Calculator(dyes, dyeCylinders, etalonObj, lakks, machines, magnetCylinders, materials, metals);
 
         return true;
     }
