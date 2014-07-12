@@ -66,8 +66,18 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == buttonGetEuro)
+        if (e.getSource() == buttonGetEuro) {
             textFEuro.setText(String.valueOf(new CurrencyConverter().convert()));
+        }else if (e.getSource() == buttonAddDye){
+            PPC.calcObj.addDye(comboDyeType.getSelectedIndex(), comboDyeCylinder.getSelectedIndex(), Integer.parseInt(textFDyeCover.getText()) ,"", 0);
+            listDyeType.removeAll();
+            for (int i = 0; i < PPC.calcObj.getAddedDyes().size(); i++){
+                listDyeType.add(PPC.calcObj.getAddedDyes().get(i).getName() + "  " +
+                                PPC.calcObj.getAddedDyes().get(i).getDyeCylinder().getVolume() + " g/m2  " +
+                                PPC.calcObj.getAddedDyes().get(i).getCover() + " %"
+                );
+            }
+        }
     }
 
 
@@ -271,6 +281,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
         buttonAddDye = new JButton("Hozzáad");
         buttonAddDye.setBounds(600, 92, 85, 21);
+        buttonAddDye.addActionListener(this);
         tab1.add(buttonAddDye);
 
         JLabel labelDyeCylinder = new JLabel("Henger");

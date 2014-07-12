@@ -104,33 +104,40 @@ public class Calculator {
         }
     }
 
-    public boolean addDye(int chosenDyeIndex, double cylinderVolume, int cover, String otherColorName, double otherColorPrice){
+    public boolean addDye(int chosenDyeIndex, int chosenDyeCylinder, int cover, String otherColorName, double otherColorPrice){
         if (chosenDyeIndex < (dyes.size() + metals.size() + lakks.size())){// Dye from the list
             if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Lakk.class) && lakkNum < MAX_NUMBER_OF_LAKKS) {
                 DyeParent chosenLakk = allDyeTypes.get(chosenDyeIndex);
-                chosenLakk.setDyeCylinder(searchDyeCylinder(cylinderVolume));
+                //chosenLakk.setDyeCylinder(searchDyeCylinder(cylinderVolume));
+                chosenLakk.setDyeCylinder(dyecylinders.get(chosenDyeIndex));
                 chosenLakk.setCover(cover);
                 addedDyes.add(chosenLakk);
                 lakkNum++;
+                System.out.println("added");
                 return true;
             }else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Metal.class) && metalNum < MAX_NUMBER_OF_METALS && metalNum+dyeNum < MAX_NUMBER_OF_DYES){
                 DyeParent chosenMetal = allDyeTypes.get(chosenDyeIndex);
-                chosenMetal.setDyeCylinder(searchDyeCylinder(cylinderVolume));
+                //chosenMetal.setDyeCylinder(searchDyeCylinder(cylinderVolume));
+                chosenMetal.setDyeCylinder(dyecylinders.get(chosenDyeIndex));
                 chosenMetal.setCover(cover);
                 addedDyes.add(chosenMetal);
                 metalNum++;
+                System.out.println("added");
                 return true;
             }else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Dye.class) && metalNum+dyeNum < MAX_NUMBER_OF_DYES){
                 DyeParent chosenDye = allDyeTypes.get(chosenDyeIndex);
-                chosenDye.setDyeCylinder(searchDyeCylinder(cylinderVolume));
+                //chosenDye.setDyeCylinder(searchDyeCylinder(cylinderVolume));
+                chosenDye.setDyeCylinder(dyecylinders.get(chosenDyeIndex));
                 chosenDye.setCover(cover);
                 addedDyes.add(chosenDye);
                 dyeNum++;
+                System.out.println("added");
                 return true;
             }
         }else { // other color - direct color
             if (dyeNum+metalNum < MAX_NUMBER_OF_DYES){
-                Dye otherDye = new Dye(otherColorName, otherColorPrice, searchDyeCylinder(cylinderVolume), cover);
+                //Dye otherDye = new Dye(otherColorName, otherColorPrice, searchDyeCylinder(cylinderVolume), cover);
+                Dye otherDye = new Dye(otherColorName, otherColorPrice, dyecylinders.get(chosenDyeCylinder), cover);
                 addedDyes.add(otherDye);
                 dyeNum++;
                 return true;
