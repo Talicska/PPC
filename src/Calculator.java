@@ -250,9 +250,19 @@ public class Calculator {
 
     }
 
+    public double calculatePackingCost(int amount, double packingCost, double packingTime, double rollWidth, int amountPerRoll){
+        double packingSelfCost = 0;
+        double numberOfRolls = 0;
+        if (amountPerRoll != 0 && rollWidth != 0){
+            numberOfRolls = (double)amount/amountPerRoll;
+            packingSelfCost = packingTime * packingCost + numberOfRolls * ROLL_PRICE * rollWidth;
+        }
+        return packingSelfCost;
+    }
+
     public void calculate(int materialIndex, int amount, double width, double height, int tracks, double sideGap, double betweenGap,
                             int machineIndex, int magnetCylinderIndex, int pregCover, double domborPrice, double clicheCost,
-                            double stancCost, double packingCost,  double packingTime, double rollWidth, int amountPerRoll,
+                            double stancCost, double packingCost, double packingTime, double rollWidth, int amountPerRoll,
                             String title, String client, int discount, double euro, double otherCost) {
 
         //Choosing magnet cylinder
@@ -318,12 +328,8 @@ public class Calculator {
         }
 
         //Packing
-        double packingSelfCost = 0;
-        double numberOfRolls = 0;
-        if (amountPerRoll != 0 && rollWidth != 0){
-            numberOfRolls = (double)amount/amountPerRoll;
-            packingSelfCost = packingTime * packingCost + numberOfRolls * ROLL_PRICE * rollWidth;
-        }
+        double packingSelfCost = calculatePackingCost(amount, packingCost, packingTime, rollWidth, amountPerRoll);
+
 
         //SUM self cost
         double sumPrice = dyeSelfCost + materialSelfCost + domborSelfCost + pregSelfCost + clicheCost + stancCost +
