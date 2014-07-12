@@ -52,7 +52,12 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JTextField textFTitle;
     private JTextField textFClient;
     private JTextField textFDiscount;
+
+
+    private JTextField textFClicheCost;
+    private JTextField textFStancCost;
     private JTextField textFOtherCost;
+
     private JTextField textFEuro;
 
     private JButton buttonAddDyePreset;
@@ -181,107 +186,168 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
         //SwingUtilities.updateComponentTreeUI(tabbedPane);
 
-        JLabel labelMaterial = new JLabel("Alapanyag");                                 //labels and co.
-        labelMaterial.setBounds(5, 5, 70, 25);
+        JLabel labelMaterial = new JLabel("Alapanyag kiválasztása");                                 //labels and co.
+        labelMaterial.setBounds(5, 5, 200, 25);
         tab1.add(labelMaterial);
         comboMaterial = new JComboBox();
         for (int i = 0; i < PPC.calcObj.getMaterials().size(); i++)
             comboMaterial.addItem(PPC.calcObj.getMaterials().get(i).getName());
         tab1.add(comboMaterial);
-        comboMaterial.setBounds(80, 7, 250, 21);
+        comboMaterial.setBounds(5, 27, 325, 21);
 
         JLabel labelAmount = new JLabel("Darabszám");
-        labelAmount.setBounds(5, 30, 70, 25);
+        labelAmount.setBounds(5, 50, 70, 25);
         tab1.add(labelAmount);
         textFAmount = new JTextField();
-        textFAmount.setBounds(80, 32, 80, 21);
+        textFAmount.setBounds(80, 52, 80, 21);
         textFAmount.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFAmount);
         JLabel labelDb1 = new JLabel("db");
-        labelDb1.setBounds(165, 32, 30, 20);
+        labelDb1.setBounds(165, 52, 30, 20);
         tab1.add(labelDb1);
 
         JLabel labelWidth = new JLabel("Szélesség");
-        labelWidth.setBounds(5, 55, 70, 25);
+        labelWidth.setBounds(5, 75, 70, 25);
         tab1.add(labelWidth);
         textFWidth = new JTextField();
-        textFWidth.setBounds(80, 57, 80, 21);
+        textFWidth.setBounds(80, 77, 80, 21);
         textFWidth.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFWidth);
         JLabel labelMm1 = new JLabel("mm");
-        labelMm1.setBounds(165, 57, 30, 20);
+        labelMm1.setBounds(165, 77, 30, 20);
         tab1.add(labelMm1);
 
         JLabel labelHeight = new JLabel("Magasság");
-        labelHeight.setBounds(5, 80, 70, 25);
+        labelHeight.setBounds(5, 100, 70, 25);
         tab1.add(labelHeight);
         textFHeight = new JTextField();
-        textFHeight.setBounds(80, 82, 80, 21);
+        textFHeight.setBounds(80, 102, 80, 21);
         textFHeight.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFHeight);
         JLabel labelMm2 = new JLabel("mm");
-        labelMm2.setBounds(165, 82, 30, 20);
+        labelMm2.setBounds(165, 102, 30, 20);
         tab1.add(labelMm2);
 
         JLabel labelTracks = new JLabel("Pályák");
-        labelTracks.setBounds(5, 105, 70, 25);
+        labelTracks.setBounds(5, 125, 70, 25);
         tab1.add(labelTracks);
         textFTracks = new JTextField();
-        textFTracks.setBounds(80, 107, 80, 21);
+        textFTracks.setBounds(80, 127, 80, 21);
         textFTracks.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFTracks);
         JLabel labelDb2 = new JLabel("db");
-        labelDb2.setBounds(165, 107, 30, 20);
+        labelDb2.setBounds(165, 127, 30, 20);
         tab1.add(labelDb2);
 
         JLabel labelGaps = new JLabel("Rések");
-        labelGaps.setBounds(5, 130, 70, 25);
+        labelGaps.setBounds(5, 150, 70, 25);
         tab1.add(labelGaps);
 
         JLabel labelSideGap = new JLabel("Szélén");
-        labelSideGap.setBounds(15, 155, 70, 25);
+        labelSideGap.setBounds(15, 175, 70, 25);
         tab1.add(labelSideGap);
         textFSideGap = new JTextField("5");
-        textFSideGap.setBounds(90, 157, 70, 21);
+        textFSideGap.setBounds(90, 177, 70, 21);
         textFSideGap.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFSideGap);
         JLabel labelMm3 = new JLabel("mm");
-        labelMm3.setBounds(165, 157, 30, 20);
+        labelMm3.setBounds(165, 177, 30, 20);
         tab1.add(labelMm3);
 
         JLabel labelBetweenGap = new JLabel("Pályák közt");
-        labelBetweenGap.setBounds(15, 180, 70, 25);
+        labelBetweenGap.setBounds(15, 200, 70, 25);
         tab1.add(labelBetweenGap);
         textFBetweenGap = new JTextField("3");
-        textFBetweenGap.setBounds(90, 182, 70, 21);
+        textFBetweenGap.setBounds(90, 202, 70, 21);
         textFBetweenGap.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFBetweenGap);
         JLabel labelMm4 = new JLabel("mm");
-        labelMm4.setBounds(165, 182, 30, 20);
+        labelMm4.setBounds(165, 202, 30, 20);
         tab1.add(labelMm4);
 
         JSeparator separator1 = new JSeparator();
-        separator1.setBounds(5, 212, 325, 1);
+        separator1.setBounds(5, 232, 325, 1);
         tab1.add(separator1);
 
         JLabel labelMachine = new JLabel("Géptípus");
-        labelMachine.setBounds(5, 220, 70, 25);
+        labelMachine.setBounds(5, 240, 70, 25);
         tab1.add(labelMachine);
         comboMachine = new JComboBox();
         for (int i = 0; i < PPC.calcObj.getMachines().size(); i++)
             comboMachine.addItem(PPC.calcObj.getMachines().get(i).getName());
         comboMachine.addActionListener(this);
         tab1.add(comboMachine);
-        comboMachine.setBounds(80, 222, 130, 21);
+        comboMachine.setBounds(80, 242, 130, 21);
         comboCylinder = new JComboBox();
         tab1.add(comboCylinder);
         for (int i = 0; i < PPC.calcObj.getMachines().get(0).getCylinders().size(); i++)
             comboCylinder.addItem(PPC.calcObj.getMachines().get(0).getCylinders().get(i).getTeeth());
-        comboCylinder.setBounds(230, 222, 100, 21);
+        comboCylinder.setBounds(230, 242, 100, 21);
 
         //géptípus alatti rész
-        //
-        //
+
+        JSeparator separator5 = new JSeparator();
+        separator5.setBounds(5, 272, 325, 1);
+        tab1.add(separator5);
+
+        JLabel labelClicheCost = new JLabel("Kliséköltség");
+        labelClicheCost.setBounds(5, 280, 80, 25);
+        tab1.add(labelClicheCost);
+        textFClicheCost = new JTextField("0");
+        textFClicheCost.setBounds(90, 282, 70, 21);
+        textFClicheCost.setHorizontalAlignment(SwingConstants.RIGHT);
+        tab1.add(textFClicheCost);
+        JLabel labelFt3=new JLabel("Ft");
+        labelFt3.setBounds(165,282,30,20);
+        tab1.add(labelFt3);
+
+        JLabel labelStancCost = new JLabel("Stancköltség");
+        labelStancCost.setBounds(5, 305, 80, 25);
+        tab1.add(labelStancCost);
+        textFStancCost = new JTextField("0");
+        textFStancCost.setBounds(90, 307, 70, 21);
+        textFStancCost.setHorizontalAlignment(SwingConstants.RIGHT);
+        tab1.add(textFStancCost);
+        JLabel labelFt4=new JLabel("Ft");
+        labelFt4.setBounds(165,307,30,20);
+        tab1.add(labelFt4);
+
+        JLabel labelOtherCost = new JLabel("Egyéb költség");
+        labelOtherCost.setBounds(5, 330, 80, 25);
+        tab1.add(labelOtherCost);
+        textFOtherCost = new JTextField("0");
+        textFOtherCost.setBounds(90, 332, 70, 21);
+        textFOtherCost.setHorizontalAlignment(SwingConstants.RIGHT);
+        tab1.add(textFOtherCost);
+        JLabel labelFt5=new JLabel("Ft");
+        labelFt5.setBounds(165,332,30,20);
+        tab1.add(labelFt5);
+
+        JSeparator separator6 = new JSeparator();
+        separator6.setBounds(5, 362, 325, 1);
+        tab1.add(separator6);
+
+
+
+        JLabel labelPackingCost = new JLabel("Kiszerelési költség");
+        labelPackingCost.setBounds(5, 370, 70, 25);
+        tab1.add(labelPackingCost);
+
+        JLabel labelPackingTime = new JLabel("Kiszerelési idő");
+        labelPackingTime.setBounds(5, 395, 70, 25);
+        tab1.add(labelPackingTime);
+
+        JLabel labelRollWidth = new JLabel("Tekercs szélesség");
+        labelRollWidth.setBounds(5, 420, 70, 25);
+        tab1.add(labelRollWidth);
+
+        JLabel labelAmountPerRoll = new JLabel("Db/tekercs");
+        labelAmountPerRoll.setBounds(5, 445, 70, 25);
+        tab1.add(labelAmountPerRoll);
+
+
+
+
 
         JSeparator separator2 = new JSeparator();                                           //tab1 vertical separator
         separator2.setOrientation(SwingConstants.VERTICAL);
@@ -415,9 +481,9 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         labelPercent3.setBounds(525, 432, 30, 20);
         tab1.add(labelPercent3);
 
-        JSeparator separator5 = new JSeparator();
-        separator5.setBounds(370, 462, 315, 1);
-        tab1.add(separator5);
+        JSeparator separator7 = new JSeparator();
+        separator7.setBounds(370, 462, 315, 1);
+        tab1.add(separator7);
 
         JLabel labelEuro = new JLabel("Euro árfolyam");
         labelEuro.setBounds(370, 470, 80, 25);
@@ -435,14 +501,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         tab1.add(buttonGetEuro);
 
 
-        JLabel labelOtherCost = new JLabel("Egyéb költség");
 
-        JLabel labelClicheCost = new JLabel("Kliséköltség");
-        JLabel labelStancCost = new JLabel("Stancköltség");
-        JLabel labelPackingCost = new JLabel("Kiszerelési költség");
-        JLabel labelPackingTime = new JLabel("Kiszerelési idő");
-        JLabel labelRollWidth = new JLabel("Tekercs szélesség");
-        JLabel labelAmountPerRoll = new JLabel("Db/tekercs");
 
 
         JLabel labelSummary = new JLabel("Összesítés");
