@@ -58,9 +58,9 @@ public class PPC {
         guiObj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    /*private static void listAll() {
+    private static void listAll() {
 
-        System.out.println("\nDyes");
+        /*System.out.println("\nDyes");
         for (int i = 0; i < dyes.size(); i++) {
             System.out.println(dyes.get(i).getName() + " " + dyes.get(i).getPrice());
         }
@@ -98,8 +98,8 @@ public class PPC {
         System.out.println("\nMetals");
         for (int i = 0; i < metals.size(); i++) {
             System.out.println(metals.get(i).getName() + " " + metals.get(i).getPrice());
-        }
-    }*/
+        }*/
+    }
 
     public static void main(String[] args) {
 

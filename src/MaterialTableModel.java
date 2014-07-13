@@ -63,5 +63,22 @@ public class MaterialTableModel extends AbstractTableModel {
         return null;
     }
 
+    @Override
+    public void setValueAt(Object value, int row, int col){
+        switch (col) {
+            case 0: dataVector.get(row).setName(value.toString());
+                break;
+            case 1: dataVector.get(row).setPrice(new Double(value.toString()).doubleValue());
+                break;
+            default: break;
+        }
+        //
+
+    }
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return true;
+    }
 
 }
