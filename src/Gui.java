@@ -278,7 +278,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         tab1.add(comboMaterial);
         comboMaterial.setBounds(5, 27, 325, 21);
         buttonManageMaterials = new JButton("Kezelés");
-        buttonManageMaterials.setBounds(200,52,85,21);
+        buttonManageMaterials.setBounds(245,52,85,21);
         buttonManageMaterials.addActionListener(this);
         tab1.add(buttonManageMaterials);
 

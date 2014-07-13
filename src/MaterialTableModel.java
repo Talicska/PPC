@@ -20,9 +20,10 @@ public class MaterialTableModel extends AbstractTableModel {
             @Override
             public void tableChanged(TableModelEvent e) {
                 int row = e.getFirstRow();
-                int column = e.getColumn();
+                //int column = e.getColumn();
                 System.out.println("Value changed!");
-                System.out.println(PPC.calcObj.getEtalonObj().getEtalonMatrix().get(row).get(column));
+                System.out.println(PPC.calcObj.getMaterials().get(row).getName()+" "+
+                        PPC.calcObj.getMaterials().get(row).getPrice());
 
             }
         });

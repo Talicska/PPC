@@ -25,7 +25,14 @@ public class GuiMaterials extends JFrame implements ActionListener {
         this.setSize(dimension);
         this.setLocation(200, 200);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("GuiMaterials");
+        this.setTitle("Alapanyagok");
+
+
+        JScrollPane tablePane = new JScrollPane();
+        tablePane.setBounds(0,0,320,375);
+
+
+
 
         Vector<String> columnNames = new Vector<String>();
         columnNames.addElement("Név");
@@ -34,13 +41,16 @@ public class GuiMaterials extends JFrame implements ActionListener {
         MaterialTableModel model = new MaterialTableModel(PPC.calcObj.getMaterials(),columnNames);
         JTable table = new JTable(model);
 
-
-        table.getTableHeader().setBounds(0, 0, 600, 30);
-        table.setBounds(0, 30, 600, 400);
         table.setRowHeight(20);
+        //table.getTableHeader().setBounds(0, 0, 300, 30);
+        table.setBounds(0, 0, 300, 1000);
+        table.getTableHeader().setFont(new Font("headerFont", Font.BOLD, 12));
+        table.getColumnModel().getColumn(0).setPreferredWidth(220);
+        table.getColumnModel().getColumn(1).setPreferredWidth(80);
 
-        this.getContentPane().add(table.getTableHeader());
-        this.getContentPane().add(table);
+        tablePane.getViewport().add(table);
+        this.add(tablePane);
+
 
     }
 }
