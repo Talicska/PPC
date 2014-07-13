@@ -10,7 +10,7 @@ public class PPCDB {
     // "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB"
     // "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB"
 
-    public static final String DATABASE = "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB";     //your own
+    public static final String DATABASE = "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB";     //your own
     private static Connection conn = null;
 
     public void open() {
@@ -41,20 +41,28 @@ public class PPCDB {
         open();
     }
 
-    public static ArrayList<Dye> getDyes() throws SQLException {
+    public static ArrayList<DyeParent> getDyeParents() throws SQLException {
 
-        ArrayList<Dye> dyes = new ArrayList<Dye>();
+        ArrayList<DyeParent> dyeParents = new ArrayList<DyeParent>();
 
         Statement stm = conn.createStatement();
-        ResultSet rs = stm.executeQuery("select name_dye, price_dye from Dye");
+        ResultSet rs = stm.executeQuery("select d.name_dyeparent, d.price_dyeparent, dt.name_dyetype from DyeParent d " +
+                "INNER JOIN DyeType dt ON d.id_dyetype = dt.id_dyetype");
 
         while (rs.next()) {
-            dyes.add(new Dye(rs.getString("name_dye"), rs.getDouble("price_dye"), null, 0));     //parameters given by user
+            if (rs.getString("name_dyetype").equals("Dye")){
+                dyeParents.add(new Dye(rs.getString("name_dyeparent"), rs.getDouble("price_dyeparent"), null, 0));     //parameters given by user
+            }else if (rs.getString("name_dyetype").equals("Lakk")){
+                dyeParents.add(new Lakk(rs.getString("name_dyeparent"), rs.getDouble("price_dyeparent"), null, 0));
+            }else if (rs.getString("name_dyetype").equals("Metal")){
+                dyeParents.add(new Metal(rs.getString("name_dyeparent"), rs.getDouble("price_dyeparent"), null, 0));
+            }
+
         }
 
         stm.close();
         rs.close();
-        return dyes;
+        return dyeParents;
     }
 
     public static void addDyeType(DyeParent dyeType) throws SQLException {
@@ -107,22 +115,6 @@ public class PPCDB {
         stm.close();
         rs.close();
         return etalonMatrix;
-    }
-
-    public static ArrayList<Lakk> getLakks() throws SQLException {
-
-        ArrayList<Lakk> lakks = new ArrayList<Lakk>();
-
-        Statement stm = conn.createStatement();
-        ResultSet rs = stm.executeQuery("select name_lakk, price_lakk from Lakk");
-
-        while (rs.next()) {
-            lakks.add(new Lakk(rs.getString("name_lakk"), rs.getDouble("price_lakk"), null, 0));
-        }
-
-        stm.close();
-        rs.close();
-        return lakks;
     }
 
     public static ArrayList<Machine> getMachines() throws SQLException {
@@ -187,22 +179,6 @@ public class PPCDB {
         stm.execute("INSERT INTO Material (name_mat, price_mat) values ('" + materialName + "','" + materialPrice + "' )");
 
         stm.close();
-    }
-
-    public static ArrayList<Metal> getMetals() throws SQLException {
-
-        ArrayList<Metal> metals = new ArrayList<Metal>();
-
-        Statement stm = conn.createStatement();
-        ResultSet rs = stm.executeQuery("select name_metal, price_metal from Metal");
-
-        while (rs.next()) {
-            metals.add(new Metal(rs.getString("name_metal"), rs.getDouble("price_metal"), null, 0));
-        }
-
-        stm.close();
-        rs.close();
-        return metals;
     }
 
     public static ArrayList<Machine> fillMachineMagCylinders(ArrayList<Machine> machines, ArrayList<MagnetCylinder> magnetCylinders) throws SQLException {

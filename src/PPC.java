@@ -18,24 +18,34 @@ public class PPC {
         database = new PPCDB();
         Vector<Vector<Double>> etalonMatrix;
 
-        ArrayList<Dye> dyes;
+        ArrayList<DyeParent> dyeParents;
+        ArrayList<Dye> dyes = new ArrayList<Dye>();
+        ArrayList<Lakk> lakks = new ArrayList<Lakk>();
+        ArrayList<Metal> metals = new ArrayList<Metal>();
         ArrayList<DyeCylinder> dyeCylinders;
         Etalon etalonObj;
-        ArrayList<Lakk> lakks;
         ArrayList<Machine> machines;
         ArrayList<MagnetCylinder> magnetCylinders;
         Vector<Material> materials;
-        ArrayList<Metal> metals;
+
 
         try {
-            dyes = database.getDyes();
+            dyeParents = database.getDyeParents();
+            for (int i = 0; i < dyeParents.size(); i++){
+                if (dyeParents.get(i).getClass().equals(Dye.class)){
+                    dyes.add((Dye)dyeParents.get(i));
+                }else if (dyeParents.get(i).getClass().equals(Lakk.class)){
+                    lakks.add((Lakk)dyeParents.get(i));
+                }else if (dyeParents.get(i).getClass().equals(Metal.class)){
+                    metals.add((Metal)dyeParents.get(i));
+                }
+            }
+            //classifyDyeParents(dyeParents);
             dyeCylinders = database.getDyeCylinders();
             etalonMatrix = database.getEtalon();
-            lakks = database.getLakks();
             machines = database.getMachines();
             magnetCylinders = database.getMagnetCylinders();
             materials = database.getMaterials();
-            metals = database.getMetals();
 
             machines = database.fillMachineMagCylinders(machines, magnetCylinders);
         } catch (SQLException e) {
