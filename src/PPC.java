@@ -11,10 +11,11 @@ public class PPC {
 
     private static Gui guiObj;
     public static Calculator calcObj;
+    public static PPCDB database;
 
     private static boolean init() {      //return true if successful
 
-        PPCDB database = new PPCDB();
+        database = new PPCDB();
         Vector<Vector<Double>> etalonMatrix;
 
         ArrayList<Dye> dyes;
@@ -147,6 +148,26 @@ public class PPC {
                 pregCover, domborPrice, clicheCost, stancCost, packingCost, packingTime, rollWidth, amountPerRoll,
                 title, client, discount, euro, otherCost);
 
+        /*try{
+            database.addMaterial("Tompos", 1.234);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
+
+        /*try{
+            int teeth = 100;
+            database.addMagnetCylinder(teeth, 3.175 * teeth);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
+
+        /*try{
+            database.addDyeType(new Dye("fosbarna", 1, null, 0));
+            database.addDyeType(new Metal("acélkék", 3000, null, 0));
+            database.addDyeType(new Lakk("nitrohigító", 1000, null, 0));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
         //listAll();
 
     }

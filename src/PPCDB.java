@@ -57,6 +57,20 @@ public class PPCDB {
         return dyes;
     }
 
+    public static void addDyeType(DyeParent dyeType) throws SQLException {
+
+        Statement stm = conn.createStatement();
+        if (dyeType.getClass().equals(Dye.class)) {
+            stm.execute("INSERT INTO Dye (name_dye, price_dye) values ('" + dyeType.getName() + "','" + dyeType.getPrice() + "' )");
+        }else if (dyeType.getClass().equals(Metal.class)){
+            stm.execute("INSERT INTO Metal (name_metal, price_metal) values ('" + dyeType.getName() + "','" + dyeType.getPrice() + "' )");
+        }else if (dyeType.getClass().equals(Lakk.class)){
+            stm.execute("INSERT INTO Lakk (name_lakk, price_lakk) values ('" + dyeType.getName() + "','" + dyeType.getPrice() + "' )");
+        }
+
+        stm.close();
+    }
+
     public static ArrayList<DyeCylinder> getDyeCylinders() throws SQLException {
 
         ArrayList<DyeCylinder> dyeCylinders = new ArrayList<DyeCylinder>();
@@ -143,6 +157,14 @@ public class PPCDB {
         return magcyls;
     }
 
+    public static void addMagnetCylinder (int teeth, double girth) throws SQLException {
+
+        Statement stm = conn.createStatement();
+        stm.execute("INSERT INTO MagnetCylinder (teeth, girth) values ('" + teeth + "','" + girth +"' )");
+
+        stm.close();
+    }
+
     public static ArrayList<Material> getMaterials() throws SQLException {
 
         ArrayList<Material> materials = new ArrayList<Material>();
@@ -157,6 +179,14 @@ public class PPCDB {
         stm.close();
         rs.close();
         return materials;
+    }
+
+    public static void addMaterial (String materialName, double materialPrice) throws SQLException {
+
+        Statement stm = conn.createStatement();
+        stm.execute("INSERT INTO Material (name_mat, price_mat) values ('" + materialName + "','" + materialPrice + "' )");
+
+        stm.close();
     }
 
     public static ArrayList<Metal> getMetals() throws SQLException {
