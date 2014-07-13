@@ -1,12 +1,13 @@
+/**
+ * Created by Talicska on 2014.07.13..
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-/**
- * Created by Talicska on 2014.07.13..
- */
 public class GuiMaterials extends JFrame implements ActionListener {
 
     private Dimension dimension;

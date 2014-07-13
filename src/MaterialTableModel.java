@@ -7,7 +7,6 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import java.util.Vector;
 
-
 public class MaterialTableModel extends AbstractTableModel {
 
     protected Vector<String> columnNames;
@@ -72,7 +71,7 @@ public class MaterialTableModel extends AbstractTableModel {
                 break;
             default: break;
         }
-        //
+        fireTableCellUpdated(row,col);
 
     }
 
