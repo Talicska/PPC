@@ -68,6 +68,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JButton buttonAddDyePreset;
     private JButton buttonAddDye;
     private JButton buttonDelDye;
+    private JButton buttonManageMaterials;
     private JButton buttonManagePreset;
     private JButton buttonGetEuro;
 
@@ -85,6 +86,10 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
         else if (e.getSource() == buttonManagePreset) {
             GuiDyePreset presetEditor = new GuiDyePreset();
+        }
+
+        else if (e.getSource() == buttonManageMaterials){
+            GuiMaterials materialEditor = new GuiMaterials();
         }
 
         else if (e.getSource() == buttonAddDye) {
@@ -272,6 +277,10 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
             comboMaterial.addItem(PPC.calcObj.getMaterials().get(i).getName());
         tab1.add(comboMaterial);
         comboMaterial.setBounds(5, 27, 325, 21);
+        buttonManageMaterials = new JButton("Kezelés");
+        buttonManageMaterials.setBounds(200,52,85,21);
+        buttonManageMaterials.addActionListener(this);
+        tab1.add(buttonManageMaterials);
 
         JLabel labelAmount = new JLabel("Darabszám");
         labelAmount.setBounds(5, 50, 70, 25);
@@ -635,7 +644,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         columnNames.addElement("6 szín");
         columnNames.addElement("7 szín");
 
-        InteractiveTableModel model = new InteractiveTableModel(PPC.calcObj.getEtalonObj().getEtalonMatrix(), columnNames);
+        EtalonTableModel model = new EtalonTableModel(PPC.calcObj.getEtalonObj().getEtalonMatrix(), columnNames);
 
         JTable table = new JTable(model) {
             @Override

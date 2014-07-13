@@ -24,7 +24,7 @@ public class PPC {
         ArrayList<Lakk> lakks;
         ArrayList<Machine> machines;
         ArrayList<MagnetCylinder> magnetCylinders;
-        ArrayList<Material> materials;
+        Vector<Material> materials;
         ArrayList<Metal> metals;
 
         try {

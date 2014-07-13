@@ -18,7 +18,7 @@ public class Calculator {
     private static ArrayList<Lakk> lakks = new ArrayList<Lakk>();
     private static ArrayList<Machine> machines = new ArrayList<Machine>();
     private static ArrayList<MagnetCylinder> magnetCylinders = new ArrayList<MagnetCylinder>();
-    private static ArrayList<Material> materials = new ArrayList<Material>();
+    private static Vector<Material> materials = new Vector<Material>();
     private static ArrayList<Metal> metals = new ArrayList<Metal>();
 
     private MagnetCylinder chosenMagnetCylinder;
@@ -33,7 +33,7 @@ public class Calculator {
     private Vector<Vector<Double>> profitMatrix = new Vector<Vector<Double>>();
 
     public Calculator(ArrayList<Dye> dyes, ArrayList<DyeCylinder> dyecylinders, Etalon etalonObj, ArrayList<Lakk> lakks, ArrayList<Machine> machines,
-                      ArrayList<MagnetCylinder> magnetcylinders, ArrayList<Material> materials, ArrayList<Metal> metals) {
+                      ArrayList<MagnetCylinder> magnetcylinders, Vector<Material> materials, ArrayList<Metal> metals) {
         this.dyes = dyes;
         this.dyeCylinders = dyecylinders;
         this.etalonObj = etalonObj;
@@ -362,7 +362,7 @@ public class Calculator {
 
     }
 
-    public ArrayList<Material> getMaterials() {
+    public Vector<Material> getMaterials() {
         return materials;
     }
 

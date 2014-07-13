@@ -7,12 +7,12 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-public class InteractiveTableModel extends DefaultTableModel {
+public class EtalonTableModel extends DefaultTableModel {
 
     protected Vector<String> columnNames;
     protected Vector<Vector<Double>> dataVector;
 
-    public InteractiveTableModel(final Vector<Vector<Double>> dataVector, Vector<String> columnNames) {
+    public EtalonTableModel(final Vector<Vector<Double>> dataVector, Vector<String> columnNames) {
         super(dataVector, columnNames);
         this.columnNames = columnNames;
         this.dataVector = dataVector;
