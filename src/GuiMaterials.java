@@ -14,6 +14,8 @@ public class GuiMaterials extends JFrame implements ActionListener {
     private int width = 600;
     private int height = 400;
 
+    private JTable table;
+
     private JTextField textFMatName;
     private JTextField textFMatPrice;
 
@@ -24,19 +26,29 @@ public class GuiMaterials extends JFrame implements ActionListener {
 
         if (e.getSource() == buttonAddMat){
 
-            if( ! ( textFMatName.getText().isEmpty() || textFMatPrice.getText().isEmpty())){
+            if ( ! ( textFMatName.getText().isEmpty() || textFMatPrice.getText().isEmpty())){
                 String name = textFMatName.getText();
                 double price = Double.valueOf(textFMatPrice.getText());
                 PPC.calcObj.addMaterial(new Material(name,price));
+                table.addNotify();
                 textFMatName.setText("");
                 textFMatPrice.setText("");
             }else {
-                if(textFMatName.getText().isEmpty()){
+                if (textFMatName.getText().isEmpty()){
                     flashMyField(textFMatName,Color.RED,200);
-                }if(textFMatPrice.getText().isEmpty()){
+                }if (textFMatPrice.getText().isEmpty()){
                     flashMyField(textFMatPrice,Color.RED,200);
                 }
             }
+        }
+
+        else if (e.getSource() == buttonDelMat){
+
+            int index = table.getSelectedRow();
+            if (index>=0) {
+                PPC.calcObj.removeMaterial(index);
+            }
+            table.addNotify();
         }
 
     }
@@ -59,7 +71,7 @@ public class GuiMaterials extends JFrame implements ActionListener {
         columnNames.addElement("Ár");
 
         MaterialTableModel model = new MaterialTableModel(PPC.calcObj.getMaterials(),columnNames);
-        JTable table = new JTable(model);
+        table = new JTable(model);
 
         table.setRowHeight(20);
         //table.getTableHeader().setBounds(0, 0, 300, 30);
