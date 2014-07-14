@@ -14,6 +14,8 @@ public class GuiMaterials extends JFrame implements ActionListener {
     private int width = 600;
     private int height = 400;
 
+    private Gui mainGui;
+
     private JTable table;
 
     private JTextField textFMatName;
@@ -45,15 +47,19 @@ public class GuiMaterials extends JFrame implements ActionListener {
         else if (e.getSource() == buttonDelMat){
 
             int index = table.getSelectedRow();
-            if ( index>=0 && index<table.getRowCount()) {
+            if ( index>=0 && index<table.getRowCount() && PPC.calcObj.getMaterials().size()>1) {
                 PPC.calcObj.removeMaterial(index);
                 table.addNotify();
+                mainGui.getComboMaterial().setSelectedIndex(0);
             }
         }
 
     }
 
-    public GuiMaterials() {
+    public GuiMaterials(Gui mainGui) {
+
+        this.mainGui = mainGui;
+
         this.getContentPane().setLayout(null);
         dimension = new Dimension(width, height);
         this.setVisible(true);

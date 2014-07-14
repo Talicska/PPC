@@ -89,7 +89,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         }
 
         else if (e.getSource() == buttonManageMaterials){
-            GuiMaterials materialEditor = new GuiMaterials();
+            GuiMaterials materialEditor = new GuiMaterials(this);
         }
 
         else if (e.getSource() == buttonAddDye) {
@@ -560,7 +560,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelPregCover = new JLabel("Lefedettség", SwingConstants.RIGHT);
         labelPregCover.setBounds(520, 315, 75, 25);
         tab1.add(labelPregCover);
-        textFPregCover = new DoubleField();
+        textFPregCover = new IntegerField();
         textFPregCover.setBounds(600, 317, 65, 21);
         textFPregCover.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFPregCover);
@@ -700,6 +700,13 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         this.add(menu);
 
     }
+
+    public JComboBox<Material> getComboMaterial(){
+        return comboMaterial;
+    }
+
+
+
 
     public void flashMyField(final JTextField field, final Color flashColor, final int timerDelay) {
         final int totalCount = 1;
