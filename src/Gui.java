@@ -272,9 +272,9 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelMaterial = new JLabel("Alapanyag kiválasztása");                                 //labels and co.
         labelMaterial.setBounds(5, 5, 200, 25);
         tab1.add(labelMaterial);
-        comboMaterial = new JComboBox();
-        for (int i = 0; i < PPC.calcObj.getMaterials().size(); i++)
-            comboMaterial.addItem(PPC.calcObj.getMaterials().get(i).getName());
+        comboMaterial = new JComboBox(PPC.calcObj.getMaterials());
+        //for (int i = 0; i < PPC.calcObj.getMaterials().size(); i++)
+        //    comboMaterial.addItem(PPC.calcObj.getMaterials().get(i).getName());
         tab1.add(comboMaterial);
         comboMaterial.setBounds(5, 27, 325, 21);
         buttonManageMaterials = new JButton("Kezelés");

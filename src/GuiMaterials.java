@@ -17,7 +17,7 @@ public class GuiMaterials extends JFrame implements ActionListener {
     private JTable table;
 
     private JTextField textFMatName;
-    private JTextField textFMatPrice;
+    private DoubleField textFMatPrice;
 
     private JButton buttonAddMat;
     private JButton buttonDelMat;
@@ -45,10 +45,10 @@ public class GuiMaterials extends JFrame implements ActionListener {
         else if (e.getSource() == buttonDelMat){
 
             int index = table.getSelectedRow();
-            if (index>=0) {
+            if ( index>=0 && index<table.getRowCount()) {
                 PPC.calcObj.removeMaterial(index);
+                table.addNotify();
             }
-            table.addNotify();
         }
 
     }
@@ -94,7 +94,7 @@ public class GuiMaterials extends JFrame implements ActionListener {
         JLabel labelMatPrice = new JLabel("Ár");
         labelMatPrice.setBounds(340,70,30,25);
         this.add(labelMatPrice);
-        textFMatPrice = new JTextField();
+        textFMatPrice = new DoubleField();
         textFMatPrice.setBounds(370,72,85,21);
         this.add(textFMatPrice);
         JLabel labelEurM = new JLabel("EUR");
