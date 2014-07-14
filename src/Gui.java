@@ -273,10 +273,9 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         labelMaterial.setBounds(5, 5, 200, 25);
         tab1.add(labelMaterial);
         comboMaterial = new JComboBox(PPC.calcObj.getMaterials());
-        //for (int i = 0; i < PPC.calcObj.getMaterials().size(); i++)
-        //    comboMaterial.addItem(PPC.calcObj.getMaterials().get(i).getName());
         tab1.add(comboMaterial);
         comboMaterial.setBounds(5, 27, 325, 21);
+        comboMaterial.setFont(new Font(Font.MONOSPACED,Font.PLAIN,12));
         buttonManageMaterials = new JButton("Kezelés");
         buttonManageMaterials.setBounds(245,52,85,21);
         buttonManageMaterials.addActionListener(this);
@@ -717,7 +716,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
                 if (count % 2 == 0) {
                     field.setBackground(flashColor);
                 } else {
-                    field.setBackground(null);
+                    field.setBackground(Color.white);
                     if (count >= totalCount) {
                         ((Timer) evt.getSource()).stop();
                     }

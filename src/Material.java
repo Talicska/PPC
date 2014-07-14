@@ -26,6 +26,9 @@ public class Material {
 
     @Override
     public String toString() {
-        return name+" "+price;
+        String string ="";
+
+        string=string.format("%-35s %s %n", name, price);
+        return string;
     }
 }
