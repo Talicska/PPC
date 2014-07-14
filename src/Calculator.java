@@ -366,6 +366,10 @@ public class Calculator {
         materials.add(newMaterial);
     }
 
+    public void removeMaterial(int materialIndex){
+        materials.remove(materialIndex);
+    }
+
     public Vector<Material> getMaterials() {
         return materials;
     }
