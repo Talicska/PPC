@@ -31,10 +31,13 @@ public class GuiMaterials extends JFrame implements ActionListener {
             if ( ! ( textFMatName.getText().isEmpty() || textFMatPrice.getText().isEmpty())){
                 String name = textFMatName.getText();
                 double price = Double.valueOf(textFMatPrice.getText());
-                PPC.calcObj.addMaterial(new Material(name,price));
+                mainGui.getComboMaterial().addItem(new Material(name,price));
                 table.addNotify();
                 textFMatName.setText("");
                 textFMatPrice.setText("");
+                mainGui.getComboMaterial().setSelectedIndex(0);
+                mainGui.getComboMaterial().revalidate();
+                mainGui.getComboMaterial().repaint();
             }else {
                 if (textFMatName.getText().isEmpty()){
                     flashMyField(textFMatName,Color.RED,200);

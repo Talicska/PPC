@@ -28,7 +28,7 @@ public class Material {
     public String toString() {
         String string ="";
 
-        string=string.format("%-35s %s %n", name, price);
+        string=string.format("%-32s %.3f %n", name, price);
         return string;
     }
 }
