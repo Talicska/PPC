@@ -18,8 +18,26 @@ public class GuiMaterials extends JFrame implements ActionListener {
     private JTextField textFMatPrice;
 
     private JButton buttonAddMat;
+    private JButton buttonDelMat;
 
     public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == buttonAddMat){
+
+            if( ! ( textFMatName.getText().isEmpty() || textFMatPrice.getText().isEmpty())){
+                String name = textFMatName.getText();
+                double price = Double.valueOf(textFMatPrice.getText());
+                PPC.calcObj.addMaterial(new Material(name,price));
+                textFMatName.setText("");
+                textFMatPrice.setText("");
+            }else {
+                if(textFMatName.getText().isEmpty()){
+                    flashMyField(textFMatName,Color.RED,200);
+                }if(textFMatPrice.getText().isEmpty()){
+                    flashMyField(textFMatPrice,Color.RED,200);
+                }
+            }
+        }
 
     }
 
@@ -73,9 +91,13 @@ public class GuiMaterials extends JFrame implements ActionListener {
 
         buttonAddMat = new JButton("Hozzáad");
         buttonAddMat.setBounds(505,52,84,21);
+        buttonAddMat.addActionListener(this);
         this.add(buttonAddMat);
 
-
+        buttonDelMat = new JButton("Töröl");
+        buttonDelMat.setBounds(330,300,85,21);
+        buttonDelMat.addActionListener(this);
+        this.add(buttonDelMat);
 
 
 
@@ -85,5 +107,29 @@ public class GuiMaterials extends JFrame implements ActionListener {
         this.add(tablePane);
 
 
+
+
+    }
+
+
+    public void flashMyField(final JTextField field, final Color flashColor, final int timerDelay) {
+        final int totalCount = 1;
+        javax.swing.Timer timer = new javax.swing.Timer(timerDelay, new ActionListener() {
+            int count = 0;
+
+            public void actionPerformed(ActionEvent evt) {
+                if (count % 2 == 0) {
+                    field.setBackground(flashColor);
+                } else {
+                    field.setBackground(null);
+                    if (count >= totalCount) {
+                        ((Timer) evt.getSource()).stop();
+                    }
+                }
+                count++;
+            }
+        });
+        timer.start();
     }
 }
+
