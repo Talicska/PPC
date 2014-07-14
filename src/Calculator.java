@@ -362,6 +362,10 @@ public class Calculator {
 
     }
 
+    public void addMaterial(Material newMaterial){
+        materials.add(newMaterial);
+    }
+
     public Vector<Material> getMaterials() {
         return materials;
     }
