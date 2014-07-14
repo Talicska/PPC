@@ -10,7 +10,7 @@ import java.util.Vector;
 public class MaterialTableModel extends AbstractTableModel {
 
     protected Vector<String> columnNames;
-    protected Vector<Material> dataVector= new Vector();
+    protected Vector<Material> dataVector= new Vector<Material>();
 
     public MaterialTableModel(final Vector<Material> dataVector, Vector<String> columnNames) {
         this.columnNames = columnNames;
@@ -18,11 +18,11 @@ public class MaterialTableModel extends AbstractTableModel {
         this.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
-                int row = e.getFirstRow();
+                //int row = e.getFirstRow();
                 //int column = e.getColumn();
-                System.out.println("Value changed!");
-                System.out.println(PPC.calcObj.getMaterials().get(row).getName()+" "+
-                        PPC.calcObj.getMaterials().get(row).getPrice());
+                //System.out.println("Value changed!");
+                //System.out.println(PPC.calcObj.getMaterials().get(row).getName()+" "+
+                        //PPC.calcObj.getMaterials().get(row).getPrice());
 
             }
         });

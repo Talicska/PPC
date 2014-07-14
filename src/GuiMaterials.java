@@ -3,9 +3,12 @@
  */
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Vector;
 
 public class GuiMaterials extends JFrame implements ActionListener {
@@ -13,6 +16,8 @@ public class GuiMaterials extends JFrame implements ActionListener {
     private Dimension dimension;
     private int width = 600;
     private int height = 400;
+
+    private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);
 
     private Gui mainGui;
 
@@ -31,7 +36,7 @@ public class GuiMaterials extends JFrame implements ActionListener {
             if ( ! ( textFMatName.getText().isEmpty() || textFMatPrice.getText().isEmpty())){
                 String name = textFMatName.getText();
                 double price = Double.valueOf(textFMatPrice.getText());
-                mainGui.getComboMaterial().addItem(new Material(name,price));
+                mainGui.getComboMaterial().addItem(new Material(name, price));
                 table.addNotify();
                 textFMatName.setText("");
                 textFMatPrice.setText("");
@@ -88,7 +93,8 @@ public class GuiMaterials extends JFrame implements ActionListener {
         table.getTableHeader().setFont(new Font("headerFont", Font.BOLD, 12));
         table.getColumnModel().getColumn(0).setPreferredWidth(220);
         table.getColumnModel().getColumn(1).setPreferredWidth(80);
-
+        table.getColumnModel().getColumn(1).setCellRenderer(new PriceRenderer(priceformat));
+        table.getColumnModel().getColumn(1).setCellEditor(new PriceEditor(priceformat));
         JLabel labelNewMat = new JLabel("Alapanyag hozzáadása");
         labelNewMat.setBounds(330,20,200,25);
         this.add(labelNewMat);
@@ -152,5 +158,57 @@ public class GuiMaterials extends JFrame implements ActionListener {
         });
         timer.start();
     }
+
+    private static class PriceRenderer extends DefaultTableCellRenderer {
+
+        private NumberFormat formatter;
+
+        public PriceRenderer(NumberFormat formatter) {
+            this.formatter = formatter;
+            this.formatter.setMinimumFractionDigits(3);
+            this.formatter.setMaximumFractionDigits(3);
+            this.setHorizontalAlignment(SwingConstants.RIGHT);
+        }
+
+        @Override
+        public void setValue(Object value) {
+            setText((value == null) ? "" : formatter.format(value));
+        }
+    }
+
+    private static class PriceEditor extends DefaultCellEditor {
+
+        private NumberFormat formatter;
+        private JTextField textField;
+
+        public PriceEditor(NumberFormat formatter) {
+            super(new JTextField());
+            this.formatter = formatter;
+            this.formatter.setMinimumFractionDigits(3);
+            this.formatter.setMaximumFractionDigits(3);
+            this.textField = (JTextField) this.getComponent();
+            textField.setHorizontalAlignment(JTextField.RIGHT);
+            textField.setBorder(null);
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            try {
+                return new Double(Double.parseDouble(textField.getText()));
+            } catch (NumberFormatException e) {
+                System.out.println("Input error");
+                return Double.valueOf(0);
+            }
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table,
+                                                     Object value, boolean isSelected, int row, int column) {
+            textField.setText((value == null)
+                    ? "" : formatter.format((Double) value));
+            return textField;
+        }
+    }
+
 }
 

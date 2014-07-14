@@ -275,7 +275,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         comboMaterial = new JComboBox(PPC.calcObj.getMaterials());
         tab1.add(comboMaterial);
         comboMaterial.setBounds(5, 27, 325, 21);
-        comboMaterial.setFont(new Font(Font.MONOSPACED,Font.PLAIN,12));
+        comboMaterial.setFont(new Font(Font.MONOSPACED,Font.ROMAN_BASELINE,12));
         buttonManageMaterials = new JButton("Kezelés");
         buttonManageMaterials.setBounds(245,52,85,21);
         buttonManageMaterials.addActionListener(this);
