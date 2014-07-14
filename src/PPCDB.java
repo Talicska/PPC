@@ -10,7 +10,7 @@ public class PPCDB {
     // "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB"
     // "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB"
 
-    public static final String DATABASE = "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB";     //your own
+    public static final String DATABASE = "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB";     //your own
     private static Connection conn = null;
 
     public void open() {
@@ -65,18 +65,48 @@ public class PPCDB {
         return dyeParents;
     }
 
-    public static void addDyeType(DyeParent dyeType) throws SQLException {
+    public static void addDyeParent(DyeParent dyeParent) throws SQLException {
 
         Statement stm = conn.createStatement();
-        if (dyeType.getClass().equals(Dye.class)) {
-            stm.execute("INSERT INTO Dye (name_dye, price_dye) values ('" + dyeType.getName() + "','" + dyeType.getPrice() + "' )");
-        }else if (dyeType.getClass().equals(Metal.class)){
-            stm.execute("INSERT INTO Metal (name_metal, price_metal) values ('" + dyeType.getName() + "','" + dyeType.getPrice() + "' )");
-        }else if (dyeType.getClass().equals(Lakk.class)){
-            stm.execute("INSERT INTO Lakk (name_lakk, price_lakk) values ('" + dyeType.getName() + "','" + dyeType.getPrice() + "' )");
-        }
+
+        int dyeTypeId = getDyeTypeIdFromTypeName(dyeParent.getClass().getTypeName());
+        stm.execute("INSERT INTO DyeParent (name_dyeparent, price_dyeparent, id_dyetype) values ('" + dyeParent.getName() + "','" + dyeParent.getPrice() + "','" + dyeTypeId + "' )");
 
         stm.close();
+    }
+
+    public static int getDyeTypeIdFromTypeName(String dyeType) throws SQLException {
+
+        System.out.println(dyeType);
+
+        Statement stm = conn.createStatement();
+        ResultSet rs = stm.executeQuery("select id_dyetype from DyeType where name_dyetype = '" + dyeType + "'");
+
+        int dyeTypeId = rs.getInt("id_dyetype");
+
+        stm.close();
+        rs.close();
+        return dyeTypeId;
+    }
+
+    public static void clearDyeParents() throws SQLException {
+
+        Statement stm = conn.createStatement();
+        stm.execute("Truncate table DyeParent;");
+        //DELETE * FROM table_name;
+        //ALTER TABLE mytable AUTO_INCREMENT = 1
+
+        stm.close();
+    }
+
+    //refill the table with the modified dyeparent values - for update and delete also
+    public static void refreshDyeParents(ArrayList<DyeParent> dyeParents) throws SQLException{
+        clearDyeParents();
+
+        for (int i = 0; i < dyeParents.size(); i++){
+            addDyeParent(dyeParents.get(i));
+        }
+
     }
 
     public static ArrayList<DyeCylinder> getDyeCylinders() throws SQLException {
@@ -191,6 +221,7 @@ public class PPCDB {
         stm.close();
     }
 
+    //refill the table with the modified material values - for update and delete also
     public static void refreshMaterials(ArrayList<Material> materials) throws SQLException{
         clearMaterials();
 

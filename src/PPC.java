@@ -178,6 +178,12 @@ public class PPC {
         } catch (SQLException e) {
             e.printStackTrace();
         }*/
+
+        /*try{
+            database.addDyeParent(new Lakk("newlakk", 1000, null, 0));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
         //listAll();
 
     }
