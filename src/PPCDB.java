@@ -181,6 +181,25 @@ public class PPCDB {
         stm.close();
     }
 
+    public static void clearMaterials() throws SQLException {
+
+        Statement stm = conn.createStatement();
+        stm.execute("Truncate table Material;");
+        //DELETE * FROM table_name;
+        //ALTER TABLE mytable AUTO_INCREMENT = 1
+
+        stm.close();
+    }
+
+    public static void refreshMaterials(ArrayList<Material> materials) throws SQLException{
+        clearMaterials();
+
+        for (int i = 0; i < materials.size(); i++){
+            addMaterial(materials.get(i).getName(), materials.get(i).getPrice());
+        }
+
+    }
+
     public static ArrayList<Machine> fillMachineMagCylinders(ArrayList<Machine> machines, ArrayList<MagnetCylinder> magnetCylinders) throws SQLException {
 
         Statement stm = conn.createStatement();
