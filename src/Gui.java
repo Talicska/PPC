@@ -33,13 +33,12 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);      //for Etalon table
     private NumberFormat amountformat = DecimalFormat.getIntegerInstance(Locale.ENGLISH);
 
-    private JComboBox comboMaterial;                                                        //objects
-    private JComboBox comboMachine;
-    private JComboBox comboCylinder;
-    private JComboBox comboDyePreset;
-    private JComboBox comboDyeType;
-    private JComboBox comboDyeCylinder;
-
+    private JComboBox<Material> comboMaterial;                                                        //objects
+    private JComboBox<String> comboMachine;
+    private JComboBox<String> comboCylinder;
+    private JComboBox<DyePreset> comboDyePreset;
+    private JComboBox<String> comboDyeType;
+    private JComboBox<Double> comboDyeCylinder;
 
     private JTextField textFAmount;
     private JTextField textFWidth;
@@ -54,7 +53,6 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JTextField textFClient;
     private JTextField textFDiscount;
 
-
     private JTextField textFClicheCost;
     private JTextField textFStancCost;
     private JTextField textFOtherCost;
@@ -65,11 +63,12 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JTextField textFPackingSumCost;
     private JTextField textFEuro;
 
-    private JButton buttonAddDyePreset;
+    private JButton buttonLoadPreset;
     private JButton buttonAddDye;
     private JButton buttonDelDye;
     private JButton buttonManageMaterials;
-    private JButton buttonManagePreset;
+    private JButton buttonDelPreset;
+    private JButton buttonSavePreset;
     private JButton buttonGetEuro;
 
     private List listDyeType;
@@ -77,15 +76,10 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JCheckBox checkPreg;
     private JCheckBox checkDombor;
 
-
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == buttonGetEuro) {
             textFEuro.setText(String.valueOf(new CurrencyConverter().convert()));
-        }
-
-        else if (e.getSource() == buttonManagePreset) {
-            GuiDyePreset presetEditor = new GuiDyePreset();
         }
 
         else if (e.getSource() == buttonManageMaterials){
@@ -118,7 +112,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
             int index = comboMachine.getSelectedIndex();
             comboCylinder.addItem("Auto");
             for (int i = 0; i < PPC.calcObj.getMachines().get(index).getCylinders().size(); i++)
-                comboCylinder.addItem(PPC.calcObj.getMachines().get(index).getCylinders().get(i).getTeeth());
+                comboCylinder.addItem(String.valueOf(PPC.calcObj.getMachines().get(index).getCylinders().get(i).getTeeth()));
         }
 
         else if (e.getSource() == buttonDelDye) {
@@ -127,6 +121,35 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
                 listDyeType.remove(index);
                 PPC.calcObj.removeDye(index);
             }
+        }
+
+        else if (e.getSource() == buttonSavePreset) {
+            if(listDyeType.getItemCount() > 0) {
+
+                //név bekérés ide
+
+                String name = "asda";
+                comboDyePreset.addItem(new DyePreset(name,PPC.calcObj.getAddedDyes()));
+                comboDyePreset.setSelectedIndex(0);
+            }
+        }
+
+        else if (e.getSource() == buttonDelPreset) {
+            if (comboDyePreset.getItemCount() > 0 ) {
+                PPC.removeDyePreset(comboDyePreset.getSelectedIndex());
+                if (comboDyePreset.getItemCount() > 0)
+                    comboDyePreset.setSelectedIndex(0);
+                else
+                    comboDyePreset.setSelectedIndex(-1);
+            }
+        }
+
+        else if (e.getSource() == buttonLoadPreset) {                                                           // Prof szedd össze magad
+            /*if (comboDyePreset.getItemCount() > 0 && comboDyePreset.getSelectedIndex() >= 0) {
+                for (int i=0; i<PPC.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().size();i++)
+
+            }*/
+
         }
 
 
@@ -272,7 +295,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelMaterial = new JLabel("Alapanyag kiválasztása");                                 //labels and co.
         labelMaterial.setBounds(5, 5, 200, 25);
         tab1.add(labelMaterial);
-        comboMaterial = new JComboBox(PPC.calcObj.getMaterials());
+        comboMaterial = new JComboBox<Material>(PPC.calcObj.getMaterials());
         tab1.add(comboMaterial);
         comboMaterial.setBounds(5, 27, 325, 21);
         comboMaterial.setFont(new Font(Font.MONOSPACED,Font.ROMAN_BASELINE,12));
@@ -360,17 +383,17 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelMachine = new JLabel("Géptípus");
         labelMachine.setBounds(5, 241, 70, 25);
         tab1.add(labelMachine);
-        comboMachine = new JComboBox();
+        comboMachine = new JComboBox<String>();
         for (int i = 0; i < PPC.calcObj.getMachines().size(); i++)
             comboMachine.addItem(PPC.calcObj.getMachines().get(i).getName());
         comboMachine.addActionListener(this);
         tab1.add(comboMachine);
         comboMachine.setBounds(80, 243, 145, 21);
-        comboCylinder = new JComboBox();
+        comboCylinder = new JComboBox<String>();
         tab1.add(comboCylinder);
         comboCylinder.addItem("Auto");
         for (int i = 0; i < PPC.calcObj.getMachines().get(0).getCylinders().size(); i++)
-            comboCylinder.addItem(PPC.calcObj.getMachines().get(0).getCylinders().get(i).getTeeth());
+            comboCylinder.addItem(String.valueOf(PPC.calcObj.getMachines().get(0).getCylinders().get(i).getTeeth()));
         comboCylinder.setBounds(230, 243, 100, 21);
 
         //géptípus alatti rész
@@ -491,25 +514,26 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelDyePreset = new JLabel("Összeállítás betöltése");
         labelDyePreset.setBounds(370, 5, 200, 25);
         tab1.add(labelDyePreset);
-        comboDyePreset = new JComboBox();
+        comboDyePreset = new JComboBox<DyePreset>(PPC.getDyePresets());
         comboDyePreset.setBounds(370, 27, 225, 21);
         tab1.add(comboDyePreset);
 
         //fel kell tölteni comboDyePreset-et
 
-        buttonAddDyePreset = new JButton("Betölt");
-        buttonAddDyePreset.setBounds(600, 27, 85, 21);
-        tab1.add(buttonAddDyePreset);
+        buttonLoadPreset = new JButton("Betölt");
+        buttonLoadPreset.setBounds(600, 27, 85, 21);
+        buttonLoadPreset.addActionListener(this);
+        tab1.add(buttonLoadPreset);
 
-        buttonManagePreset = new JButton("Kezelés");
-        buttonManagePreset.setBounds(600, 52, 85, 21);
-        buttonManagePreset.addActionListener(this);
-        tab1.add(buttonManagePreset);
+        buttonDelPreset = new JButton("Töröl");
+        buttonDelPreset.setBounds(600, 52, 85, 21);
+        buttonDelPreset.addActionListener(this);
+        tab1.add(buttonDelPreset);
 
         JLabel labelDyeAdd = new JLabel("Festéktípus hozzáadása");
         labelDyeAdd.setBounds(370, 75, 200, 25);
         tab1.add(labelDyeAdd);
-        comboDyeType = new JComboBox();
+        comboDyeType = new JComboBox<String>();
         for (int i = 0; i < PPC.calcObj.getAllDyeTypes().size(); i++)
             comboDyeType.addItem(PPC.calcObj.getAllDyeTypes().get(i).getName());
         comboDyeType.addItem("Egyéb szín");
@@ -526,10 +550,16 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         buttonDelDye.addActionListener(this);
         tab1.add(buttonDelDye);
 
+        buttonSavePreset = new JButton("Mentés");
+        buttonSavePreset.setBounds(600, 206, 85, 21);
+        buttonSavePreset.addActionListener(this);
+        tab1.add(buttonSavePreset);
+
+
         JLabel labelDyeCylinder = new JLabel("Henger");
         labelDyeCylinder.setBounds(380, 120, 70, 25);
         tab1.add(labelDyeCylinder);
-        comboDyeCylinder = new JComboBox();
+        comboDyeCylinder = new JComboBox<Double>();
         for (int i = 0; i < PPC.calcObj.getDyeCylinders().size(); i++)
             comboDyeCylinder.addItem(PPC.calcObj.getDyeCylinders().get(i).getVolume());
         tab1.add(comboDyeCylinder);
@@ -703,9 +733,6 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     public JComboBox<Material> getComboMaterial(){
         return comboMaterial;
     }
-
-
-
 
     public void flashMyField(final JTextField field, final Color flashColor, final int timerDelay) {
         final int totalCount = 1;

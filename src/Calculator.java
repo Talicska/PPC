@@ -25,7 +25,7 @@ public class Calculator {
     private double verticalGap;
 
     private ArrayList<DyeParent> allDyeTypes;
-    private ArrayList<DyeParent> addedDyes = new ArrayList<DyeParent>();
+    private Vector<DyeParent> addedDyes = new Vector<DyeParent>();
     private int dyeNum = 0;
     private int lakkNum = 0;
     private int metalNum = 0;
@@ -287,7 +287,7 @@ public class Calculator {
         double actual = 0;
 
         if (addedDyes == null) {
-            addedDyes = new ArrayList<DyeParent>();
+            addedDyes = new Vector<DyeParent>();
         }
 
         for (int i = 0; i < addedDyes.size(); i++) {
@@ -410,7 +410,7 @@ public class Calculator {
         return allDyeTypes;
     }
 
-    public ArrayList<DyeParent> getAddedDyes() {
+    public Vector<DyeParent> getAddedDyes() {
         return addedDyes;
     }
 
