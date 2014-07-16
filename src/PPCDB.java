@@ -10,7 +10,7 @@ public class PPCDB {
     // "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB"
     // "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB"
 
-    public static final String DATABASE = "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB";     //your own
+    public static final String DATABASE = "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB";     //your own
     private static Connection conn = null;
 
     public void open() {
@@ -109,9 +109,9 @@ public class PPCDB {
 
     }
 
-    public static ArrayList<DyeCylinder> getDyeCylinders() throws SQLException {
+    public static Vector<DyeCylinder> getDyeCylinders() throws SQLException {
 
-        ArrayList<DyeCylinder> dyeCylinders = new ArrayList<DyeCylinder>();
+        Vector<DyeCylinder> dyeCylinders = new Vector<DyeCylinder>();
 
         Statement stm = conn.createStatement();
         ResultSet rs = stm.executeQuery("select volume, percent from DyeCylinder");
