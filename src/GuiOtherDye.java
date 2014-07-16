@@ -19,8 +19,6 @@ public class GuiOtherDye extends JDialog implements ActionListener {
 
     private Gui mainGui;
 
-    private JTable table;
-
     private JTextField textFName;
     private DoubleField textFPrice;
 
