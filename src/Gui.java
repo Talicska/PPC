@@ -89,7 +89,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         else if (e.getSource() == buttonAddDye) {
             if ((!textFDyeCover.getText().isEmpty()) && (comboDyeType.getSelectedIndex() >= 0) && (comboDyeCylinder.getSelectedIndex() >= 0)) {
 
-                if (((DyeParent)comboDyeType.getSelectedItem()).getName().equals("Egyéb szín")) {
+                if (((DyeParent)comboDyeType.getSelectedItem()).getName().equals("Direkt szín")) {
                     GuiOtherDye otherDye = new GuiOtherDye(this);
 
                 } else {
@@ -99,12 +99,16 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
                     PPC.calcObj.addDye(newDye);
                 }
 
+                String string ="";
+                String name;
+                String volume;
+                String cover;
                 listDyeType.removeAll();
                 for (int i = 0; i < PPC.calcObj.getAddedDyes().size(); i++) {
-                    listDyeType.add(PPC.calcObj.getAddedDyes().get(i).getName() + "  " +
-                                    PPC.calcObj.getAddedDyes().get(i).getDyeCylinder().getVolume() + " g/m2  " +
-                                    PPC.calcObj.getAddedDyes().get(i).getCover() + " %"
-                    );
+                    name = PPC.calcObj.getAddedDyes().get(i).getName().trim();
+                    volume = String.valueOf(PPC.calcObj.getAddedDyes().get(i).getDyeCylinder().getVolume());
+                    cover = String.valueOf(PPC.calcObj.getAddedDyes().get(i).getCover());
+                    listDyeType.add(string.format("%-20s %4sg %3s%%", name, volume, cover));
                 }
             } else if (textFDyeCover.getText().isEmpty()) {
                 flashMyField(textFDyeCover, Color.RED, 200);
@@ -543,9 +547,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         labelDyeAdd.setBounds(370, 75, 200, 25);
         tab1.add(labelDyeAdd);
         comboDyeType = new JComboBox<DyeParent>(PPC.calcObj.getAllDyeTypes());
-        //for (int i = 0; i < PPC.calcObj.getAllDyeTypes().size(); i++)
-        //    comboDyeType.addItem(PPC.calcObj.getAllDyeTypes().get(i).getName());
-        comboDyeType.addItem(new DyeParent("Egyéb szín", 0, null, 0));
+        comboDyeType.addItem(new DyeParent("Direkt szín", 0, null, 0));
         tab1.add(comboDyeType);
         comboDyeType.setBounds(370, 97, 225, 21);
 
@@ -569,8 +571,6 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         labelDyeCylinder.setBounds(380, 120, 70, 25);
         tab1.add(labelDyeCylinder);
         comboDyeCylinder = new JComboBox<DyeCylinder>(PPC.calcObj.getDyeCylinders());
-        //for (int i = 0; i < PPC.calcObj.getDyeCylinders().size(); i++)
-        //    comboDyeCylinder.addItem(PPC.calcObj.getDyeCylinders().get(i).getVolume());
         tab1.add(comboDyeCylinder);
         comboDyeCylinder.setBounds(455, 122, 65, 21);
         JLabel labelGM = new JLabel("g/m2");
@@ -590,6 +590,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
         listDyeType = new List();
         listDyeType.setBounds(370, 180, 225, 125);
+        listDyeType.setFont(new Font(Font.MONOSPACED,Font.ROMAN_BASELINE,12));
         tab1.add(listDyeType);
 
         checkPreg = new JCheckBox("Prégelés", false);
