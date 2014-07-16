@@ -28,7 +28,7 @@ public class Calculator {
 
     private ArrayList<DyeParent> allDyeTypes;
     private Vector<DyePreset> dyePresets = new Vector<DyePreset>();
-    private Vector<DyeParent> addedDyes = new Vector<DyeParent>();
+    private static Vector<DyeParent> addedDyes = new Vector<DyeParent>();
 
     private int dyeNum = 0;
     private int lakkNum = 0;
@@ -155,6 +155,33 @@ public class Calculator {
         return false;
     }
 
+    public boolean addDye(DyeParent dyeParent) {
+
+        if (dyeParent.getClass().equals(Lakk.class) && lakkNum < MAX_NUMBER_OF_LAKKS) {
+            if (!isDyeAlreadyAdded(dyeParent.getName())) {
+                addedDyes.add(dyeParent);
+                lakkNum++;
+                return true;
+            }
+            return false;
+        } else if (dyeParent.getClass().equals(Metal.class) && metalNum < MAX_NUMBER_OF_METALS && metalNum + dyeNum < MAX_NUMBER_OF_DYES) {
+            if (!isDyeAlreadyAdded(dyeParent.getName())) {
+                addedDyes.add(dyeParent);
+                metalNum++;
+                return true;
+            }
+            return false;
+        } else if (dyeParent.getClass().equals(Dye.class) && metalNum + dyeNum < MAX_NUMBER_OF_DYES) {
+            if (!isDyeAlreadyAdded(dyeParent.getName())) {
+                addedDyes.add(dyeParent);
+                dyeNum++;
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
     public void saveDyePreset(DyePreset dyePreset){
         dyePresets.add(dyePreset);
     }
@@ -165,7 +192,8 @@ public class Calculator {
 
     public void addDyePreset(int chosenDyePreset) {
         for (int i = 0; i < dyePresets.get(chosenDyePreset).getDyes().size(); i++){
-            addedDyes.add(dyePresets.get(chosenDyePreset).getDyes().get(i));
+            //addedDyes.add(dyePresets.get(chosenDyePreset).getDyes().get(i));
+            addDye(dyePresets.get(chosenDyePreset).getDyes().get(i));
         }
     }
 
@@ -174,6 +202,7 @@ public class Calculator {
     }
 
     public void removeDye(int chosenDyeIndex) {
+        System.out.println(addedDyes.size()+ " " + chosenDyeIndex);
         if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Lakk.class)) {
             lakkNum--;
         } else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Metal.class)) {
