@@ -70,7 +70,6 @@ public class GuiMaterials extends JFrame implements ActionListener {
 
         this.getContentPane().setLayout(null);
         dimension = new Dimension(width, height);
-        this.setVisible(true);
         this.setResizable(false);
         this.setSize(dimension);
         this.setLocation(200, 200);
@@ -132,6 +131,7 @@ public class GuiMaterials extends JFrame implements ActionListener {
 
         tablePane.getViewport().add(table);
         this.add(tablePane);
+        this.setVisible(true);
 
 
 

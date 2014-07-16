@@ -89,18 +89,15 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         else if (e.getSource() == buttonAddDye) {
             if ((!textFDyeCover.getText().isEmpty()) && (comboDyeType.getSelectedIndex() >= 0) && (comboDyeCylinder.getSelectedIndex() >= 0)) {
 
-                if (comboDyeType.getSelectedItem().equals(new String("Egyéb szín"))) {
-                    System.out.println("egyeb");
+                if (((DyeParent)comboDyeType.getSelectedItem()).getName().equals("Egyéb szín")) {
+                    GuiOtherDye otherDye = new GuiOtherDye(this);
 
+                } else {
+                    DyeParent newDye = (DyeParent)comboDyeType.getSelectedItem();
+                    newDye.setDyeCylinder((DyeCylinder)comboDyeCylinder.getSelectedItem());
+                    newDye.setCover(Integer.valueOf(textFDyeCover.getText()));
+                    PPC.calcObj.addDye(newDye);
                 }
-
-                DyeParent newDye = (DyeParent)comboDyeType.getSelectedItem();
-                newDye.setDyeCylinder((DyeCylinder)comboDyeCylinder.getSelectedItem());
-                newDye.setCover(Integer.valueOf(textFDyeCover.getText()));
-                PPC.calcObj.addDye(newDye);
-                //PPC.calcObj.addDye(comboDyeType.getSelectedIndex(), comboDyeCylinder.getSelectedIndex(), Integer.parseInt(textFDyeCover.getText()), "", 0);
-
-
 
                 listDyeType.removeAll();
                 for (int i = 0; i < PPC.calcObj.getAddedDyes().size(); i++) {
@@ -112,7 +109,6 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
             } else if (textFDyeCover.getText().isEmpty()) {
                 flashMyField(textFDyeCover, Color.RED, 200);
             }
-
         }
 
         else if (e.getSource() == comboMachine) {
@@ -162,18 +158,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
                                     PPC.calcObj.getAddedDyes().get(i).getCover() + " %"
                     );
                 }
-
-                /*for (int i=0; i<PPC.calcObj.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().size();i++){
-
-                    listDyeType.add(PPC.calcObj.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().get(i).getName() + "  " +
-                                    PPC.calcObj.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().get(i).getDyeCylinder().getVolume() + " g/m2  " +
-                                    PPC.calcObj.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().get(i).getCover() + " %"
-                    );
-
-                }*/
-
             }
-
         }
 
 
@@ -751,6 +736,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         //this.add(panel1);         //not needed anymore, left in just in case
         this.add(panel2);
         this.add(menu);
+        this.setVisible(true);
 
     }
 
