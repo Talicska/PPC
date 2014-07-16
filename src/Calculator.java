@@ -205,11 +205,11 @@ public class Calculator {
 
     public void removeDye(int chosenDyeIndex) {
         System.out.println(addedDyes.size()+ " " + chosenDyeIndex);
-        if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Lakk.class)) {
+        if (addedDyes.get(chosenDyeIndex).getClass().equals(Lakk.class)) {
             lakkNum--;
-        } else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Metal.class)) {
+        } else if (addedDyes.get(chosenDyeIndex).getClass().equals(Metal.class)) {
             metalNum--;
-        } else if (allDyeTypes.get(chosenDyeIndex).getClass().equals(Dye.class)) {
+        } else if (addedDyes.get(chosenDyeIndex).getClass().equals(Dye.class)) {
             dyeNum--;
         }
         addedDyes.remove(chosenDyeIndex);
