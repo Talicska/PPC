@@ -12,7 +12,6 @@ public class PPC {
     private static Gui guiObj;
     public static Calculator calcObj;
     public static PPCDB database;
-    private static Vector<DyePreset> dyePresets;
 
     private static boolean init() {      //return true if successful
 
@@ -57,7 +56,7 @@ public class PPC {
         etalonObj = new Etalon(etalonMatrix);
         calcObj = new Calculator(dyes, dyeCylinders, etalonObj, lakks, machines, magnetCylinders, materials, metals);
 
-        dyePresets = new Vector<DyePreset>();                                           //feltölteni adatbázisból
+        //dyePresets = new Vector<DyePreset>();                                           //feltölteni adatbázisból
 
         return true;
     }
@@ -112,18 +111,6 @@ public class PPC {
         for (int i = 0; i < metals.size(); i++) {
             System.out.println(metals.get(i).getName() + " " + metals.get(i).getPrice());
         }*/
-    }
-
-    public static Vector<DyePreset> getDyePresets() {
-        return dyePresets;
-    }
-
-    public static void addDyePreset(DyePreset preset) {
-        dyePresets.addElement(preset);
-    }
-
-    public static void removeDyePreset(int index) {
-        dyePresets.removeElementAt(index);
     }
 
     public static void main(String[] args) {

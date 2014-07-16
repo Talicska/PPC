@@ -125,10 +125,10 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
         else if (e.getSource() == buttonSavePreset) {
             if(listDyeType.getItemCount() > 0) {
-
                 //név bekérés ide
 
                 String name = "asda";
+                PPC.calcObj.saveDyePreset(new DyePreset(name,PPC.calcObj.getAddedDyes()));
                 comboDyePreset.addItem(new DyePreset(name,PPC.calcObj.getAddedDyes()));
                 comboDyePreset.setSelectedIndex(0);
             }
@@ -136,7 +136,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
         else if (e.getSource() == buttonDelPreset) {
             if (comboDyePreset.getItemCount() > 0 ) {
-                PPC.removeDyePreset(comboDyePreset.getSelectedIndex());
+                PPC.calcObj.removeDyePreset(comboDyePreset.getSelectedIndex());
                 if (comboDyePreset.getItemCount() > 0)
                     comboDyePreset.setSelectedIndex(0);
                 else
@@ -145,10 +145,16 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         }
 
         else if (e.getSource() == buttonLoadPreset) {                                                           // Prof szedd össze magad
-            /*if (comboDyePreset.getItemCount() > 0 && comboDyePreset.getSelectedIndex() >= 0) {
-                for (int i=0; i<PPC.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().size();i++)
+            if (comboDyePreset.getItemCount() > 0 && comboDyePreset.getSelectedIndex() >= 0) {
+                for (int i=0; i<PPC.calcObj.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().size();i++){
 
-            }*/
+                    listDyeType.add(PPC.calcObj.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().get(i).getName() + "  " +
+                                    PPC.calcObj.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().get(i).getDyeCylinder().getVolume() + " g/m2  " +
+                                    PPC.calcObj.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().get(i).getCover() + " %"
+                    );
+                }
+
+            }
 
         }
 
@@ -514,7 +520,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelDyePreset = new JLabel("Összeállítás betöltése");
         labelDyePreset.setBounds(370, 5, 200, 25);
         tab1.add(labelDyePreset);
-        comboDyePreset = new JComboBox<DyePreset>(PPC.getDyePresets());
+        comboDyePreset = new JComboBox<DyePreset>(PPC.calcObj.getDyePresets());
         comboDyePreset.setBounds(370, 27, 225, 21);
         tab1.add(comboDyePreset);
 

@@ -1,3 +1,5 @@
+import oracle.jrockit.jfr.settings.PresetFile;
+
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -25,7 +27,9 @@ public class Calculator {
     private double verticalGap;
 
     private ArrayList<DyeParent> allDyeTypes;
+    private Vector<DyePreset> dyePresets = new Vector<DyePreset>();
     private Vector<DyeParent> addedDyes = new Vector<DyeParent>();
+
     private int dyeNum = 0;
     private int lakkNum = 0;
     private int metalNum = 0;
@@ -149,6 +153,24 @@ public class Calculator {
             }
         }
         return false;
+    }
+
+    public void saveDyePreset(DyePreset dyePreset){
+        dyePresets.add(dyePreset);
+    }
+
+    public Vector<DyePreset> getDyePresets() {
+        return dyePresets;
+    }
+
+    public void addDyePreset(int chosenDyePreset) {
+        for (int i = 0; i < dyePresets.get(chosenDyePreset).getDyes().size(); i++){
+            addedDyes.add(dyePresets.get(chosenDyePreset).getDyes().get(i));
+        }
+    }
+
+    public void removeDyePreset(int chosenDyePreset) {
+        dyePresets.remove(chosenDyePreset);
     }
 
     public void removeDye(int chosenDyeIndex) {
@@ -413,7 +435,6 @@ public class Calculator {
     public Vector<DyeParent> getAddedDyes() {
         return addedDyes;
     }
-
 
     public static Etalon getEtalonObj() {
         return etalonObj;
