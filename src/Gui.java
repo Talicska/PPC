@@ -145,13 +145,14 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
         else if (e.getSource() == buttonLoadPreset) {
             if (comboDyePreset.getItemCount() > 0 && comboDyePreset.getSelectedIndex() >= 0) {
+                PPC.calcObj.addDyePreset(comboDyePreset.getSelectedIndex());
                 for (int i=0; i<PPC.calcObj.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().size();i++){
 
                     listDyeType.add(PPC.calcObj.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().get(i).getName() + "  " +
                                     PPC.calcObj.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().get(i).getDyeCylinder().getVolume() + " g/m2  " +
                                     PPC.calcObj.getDyePresets().get(comboDyePreset.getSelectedIndex()).getDyes().get(i).getCover() + " %"
                     );
-                    PPC.calcObj.addDyePreset(comboDyePreset.getSelectedIndex());
+
                 }
 
             }
