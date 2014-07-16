@@ -43,4 +43,9 @@ public class DyeParent {
         this.dyeCylinder = dyeCylinder;
         this.cover = cover;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

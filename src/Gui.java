@@ -37,8 +37,8 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JComboBox<String> comboMachine;
     private JComboBox<String> comboCylinder;
     private JComboBox<DyePreset> comboDyePreset;
-    private JComboBox<String> comboDyeType;
-    private JComboBox<Double> comboDyeCylinder;
+    private JComboBox<DyeParent> comboDyeType;
+    private JComboBox<DyeCylinder> comboDyeCylinder;
 
     private JTextField textFAmount;
     private JTextField textFWidth;
@@ -90,10 +90,18 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
             if ((!textFDyeCover.getText().isEmpty()) && (comboDyeType.getSelectedIndex() >= 0) && (comboDyeCylinder.getSelectedIndex() >= 0)) {
 
                 if (comboDyeType.getSelectedItem().equals(new String("Egyéb szín"))) {
+                    System.out.println("egyeb");
 
                 }
 
-                PPC.calcObj.addDye(comboDyeType.getSelectedIndex(), comboDyeCylinder.getSelectedIndex(), Integer.parseInt(textFDyeCover.getText()), "", 0);
+                DyeParent newDye = (DyeParent)comboDyeType.getSelectedItem();
+                newDye.setDyeCylinder((DyeCylinder)comboDyeCylinder.getSelectedItem());
+                newDye.setCover(Integer.valueOf(textFDyeCover.getText()));
+                PPC.calcObj.addDye(newDye);
+                //PPC.calcObj.addDye(comboDyeType.getSelectedIndex(), comboDyeCylinder.getSelectedIndex(), Integer.parseInt(textFDyeCover.getText()), "", 0);
+
+
+
                 listDyeType.removeAll();
                 for (int i = 0; i < PPC.calcObj.getAddedDyes().size(); i++) {
                     listDyeType.add(PPC.calcObj.getAddedDyes().get(i).getName() + "  " +
@@ -549,10 +557,10 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelDyeAdd = new JLabel("Festéktípus hozzáadása");
         labelDyeAdd.setBounds(370, 75, 200, 25);
         tab1.add(labelDyeAdd);
-        comboDyeType = new JComboBox<String>();
-        for (int i = 0; i < PPC.calcObj.getAllDyeTypes().size(); i++)
-            comboDyeType.addItem(PPC.calcObj.getAllDyeTypes().get(i).getName());
-        comboDyeType.addItem("Egyéb szín");
+        comboDyeType = new JComboBox<DyeParent>(PPC.calcObj.getAllDyeTypes());
+        //for (int i = 0; i < PPC.calcObj.getAllDyeTypes().size(); i++)
+        //    comboDyeType.addItem(PPC.calcObj.getAllDyeTypes().get(i).getName());
+        comboDyeType.addItem(new DyeParent("Egyéb szín", 0, null, 0));
         tab1.add(comboDyeType);
         comboDyeType.setBounds(370, 97, 225, 21);
 
@@ -575,9 +583,9 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JLabel labelDyeCylinder = new JLabel("Henger");
         labelDyeCylinder.setBounds(380, 120, 70, 25);
         tab1.add(labelDyeCylinder);
-        comboDyeCylinder = new JComboBox<Double>();
-        for (int i = 0; i < PPC.calcObj.getDyeCylinders().size(); i++)
-            comboDyeCylinder.addItem(PPC.calcObj.getDyeCylinders().get(i).getVolume());
+        comboDyeCylinder = new JComboBox<DyeCylinder>(PPC.calcObj.getDyeCylinders());
+        //for (int i = 0; i < PPC.calcObj.getDyeCylinders().size(); i++)
+        //    comboDyeCylinder.addItem(PPC.calcObj.getDyeCylinders().get(i).getVolume());
         tab1.add(comboDyeCylinder);
         comboDyeCylinder.setBounds(455, 122, 65, 21);
         JLabel labelGM = new JLabel("g/m2");

@@ -23,4 +23,9 @@ public class DyeCylinder {
         this.volume = volume;
         this.percent = percent;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(volume);
+    }
 }

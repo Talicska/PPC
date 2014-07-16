@@ -22,7 +22,7 @@ public class PPC {
         ArrayList<Dye> dyes = new ArrayList<Dye>();
         ArrayList<Lakk> lakks = new ArrayList<Lakk>();
         ArrayList<Metal> metals = new ArrayList<Metal>();
-        ArrayList<DyeCylinder> dyeCylinders;
+        Vector<DyeCylinder> dyeCylinders;
         Etalon etalonObj;
         ArrayList<Machine> machines;
         ArrayList<MagnetCylinder> magnetCylinders;

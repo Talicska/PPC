@@ -15,7 +15,7 @@ public class Calculator {
     private static final double ROLL_PRICE = 2.1;
 
     private static ArrayList<Dye> dyes = new ArrayList<Dye>();
-    private static ArrayList<DyeCylinder> dyeCylinders = new ArrayList<DyeCylinder>();
+    private static Vector<DyeCylinder> dyeCylinders = new Vector<DyeCylinder>();
     private static Etalon etalonObj;
     private static ArrayList<Lakk> lakks = new ArrayList<Lakk>();
     private static ArrayList<Machine> machines = new ArrayList<Machine>();
@@ -26,7 +26,7 @@ public class Calculator {
     private MagnetCylinder chosenMagnetCylinder;
     private double verticalGap;
 
-    private ArrayList<DyeParent> allDyeTypes;
+    private Vector<DyeParent> allDyeTypes;
     private Vector<DyePreset> dyePresets = new Vector<DyePreset>();
     private static Vector<DyeParent> addedDyes = new Vector<DyeParent>();
 
@@ -36,7 +36,7 @@ public class Calculator {
 
     private Vector<Vector<Double>> profitMatrix = new Vector<Vector<Double>>();
 
-    public Calculator(ArrayList<Dye> dyes, ArrayList<DyeCylinder> dyecylinders, Etalon etalonObj, ArrayList<Lakk> lakks, ArrayList<Machine> machines,
+    public Calculator(ArrayList<Dye> dyes, Vector<DyeCylinder> dyecylinders, Etalon etalonObj, ArrayList<Lakk> lakks, ArrayList<Machine> machines,
                       ArrayList<MagnetCylinder> magnetcylinders, Vector<Material> materials, ArrayList<Metal> metals) {
         this.dyes = dyes;
         this.dyeCylinders = dyecylinders;
@@ -47,7 +47,7 @@ public class Calculator {
         this.materials = materials;
         this.metals = metals;
 
-        allDyeTypes = new ArrayList<DyeParent>();
+        allDyeTypes = new Vector<DyeParent>();
         allDyeTypes.addAll(dyes);
         allDyeTypes.addAll(lakks);
         allDyeTypes.addAll(metals);
@@ -451,7 +451,7 @@ public class Calculator {
         return lakks;
     }
 
-    public static ArrayList<DyeCylinder> getDyeCylinders() {
+    public static Vector<DyeCylinder> getDyeCylinders() {
         return dyeCylinders;
     }
 
@@ -459,7 +459,7 @@ public class Calculator {
         return dyes;
     }
 
-    public ArrayList<DyeParent> getAllDyeTypes() {
+    public Vector<DyeParent> getAllDyeTypes() {
         return allDyeTypes;
     }
 
