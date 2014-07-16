@@ -11,7 +11,7 @@ public class DyePreset {
 
     public DyePreset(String name, Vector<DyeParent> dyes){
         this.name=name;
-        this.dyes=dyes;
+        this.dyes.addAll(dyes);
     }
 
     public String getName() {
@@ -27,7 +27,7 @@ public class DyePreset {
     }
 
     public void setDyes(Vector<DyeParent> dyes) {
-        this.dyes = dyes;
+        this.dyes.addAll(dyes);
     }
 
     @Override

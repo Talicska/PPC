@@ -191,6 +191,8 @@ public class Calculator {
     }
 
     public void addDyePreset(int chosenDyePreset) {
+        System.out.println(dyePresets.get(chosenDyePreset).getName());
+        System.out.println(dyePresets.get(chosenDyePreset).getDyes().size());
         for (int i = 0; i < dyePresets.get(chosenDyePreset).getDyes().size(); i++){
             //addedDyes.add(dyePresets.get(chosenDyePreset).getDyes().get(i));
             addDye(dyePresets.get(chosenDyePreset).getDyes().get(i));
