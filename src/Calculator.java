@@ -1,11 +1,9 @@
-import oracle.jrockit.jfr.settings.PresetFile;
-
-import java.util.ArrayList;
-import java.util.Vector;
-
 /**
  * Created by Prof on 2014.07.09..
  */
+
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class Calculator {
 

@@ -90,7 +90,12 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
             if ((!textFDyeCover.getText().isEmpty()) && (comboDyeType.getSelectedIndex() >= 0) && (comboDyeCylinder.getSelectedIndex() >= 0)) {
 
                 if (((DyeParent)comboDyeType.getSelectedItem()).getName().equals("Direkt szín")) {
-                    GuiOtherDye otherDye = new GuiOtherDye(this);
+
+                    GuiDirectDye otherDye = new GuiDirectDye(this);
+                    DyeParent newDye = otherDye.getNewDye();
+                    if (newDye != null){
+                        PPC.calcObj.addDye(newDye);
+                    }
 
                 } else {
                     DyeParent newDye = (DyeParent)comboDyeType.getSelectedItem();
@@ -743,6 +748,14 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
     public JComboBox<Material> getComboMaterial(){
         return comboMaterial;
+    }
+
+    public JTextField getTextFDyeCover(){
+        return textFDyeCover;
+    }
+
+    public JComboBox getComboDyeCylinder(){
+        return comboDyeCylinder;
     }
 
     public void flashMyField(final JTextField field, final Color flashColor, final int timerDelay) {
