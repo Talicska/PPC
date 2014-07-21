@@ -188,6 +188,19 @@ public class PPC {
         } catch (SQLException e) {
             e.printStackTrace();
         }*/
+
+        /*try{
+            Vector<DyeParent> dyes = new Vector<DyeParent>();
+            //String name, double price, DyeCylinder dyeCylinder, int cover
+            Lakk lakk = new Lakk("Lakk Matt", 3500, new DyeCylinder(3.8, 55), 45);
+            Dye dye = new Dye("UF Sárga", 3930, new DyeCylinder(3.8, 55), 45);
+            dyes.add(lakk);
+            dyes.add(dye);
+            DyePreset dyePreset = new DyePreset("teszt", dyes);
+            database.addDyePreset(dyePreset);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
         //listAll();
 
     }
