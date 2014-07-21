@@ -69,6 +69,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JButton buttonManageMaterials;
     private JButton buttonDelPreset;
     private JButton buttonSavePreset;
+    private JButton buttonResetDye;
     private JButton buttonGetEuro;
 
     private List listDyeType;
@@ -133,6 +134,13 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
             if (index >= 0) {
                 listDyeType.remove(index);
                 PPC.calcObj.removeDye(index);
+            }
+        }
+
+        else if (e.getSource() == buttonResetDye) {
+            if ( listDyeType.getItemCount() > 0){
+                listDyeType.removeAll();
+                PPC.calcObj.resetAddedDyes();
             }
         }
 
@@ -291,7 +299,7 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         JComponent tab1 = new JPanel();
         JComponent tab2 = new JPanel();
         JComponent tab3 = new JPanel();
-        tabbedPane.addTab("<html><body><table width='90'>Alapanyagok</table></body></html>", tab1);
+        tabbedPane.addTab("<html><body><table width='90'>Árképzés</table></body></html>", tab1);
         tab1.setLayout(null);
         tabbedPane.addTab("<html><body><table width='90'>Egyebek</table></body></html>", tab2);
         tab2.setLayout(null);
@@ -561,16 +569,20 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
         buttonAddDye.addActionListener(this);
         tab1.add(buttonAddDye);
 
-        buttonDelDye = new JButton("Töröl");
-        buttonDelDye.setBounds(600, 180, 85, 21);
-        buttonDelDye.addActionListener(this);
-        tab1.add(buttonDelDye);
-
         buttonSavePreset = new JButton("Mentés");
-        buttonSavePreset.setBounds(600, 206, 85, 21);
+        buttonSavePreset.setBounds(600, 180, 85, 21);
         buttonSavePreset.addActionListener(this);
         tab1.add(buttonSavePreset);
 
+        buttonDelDye = new JButton("Töröl");
+        buttonDelDye.setBounds(600, 258, 85, 21);
+        buttonDelDye.addActionListener(this);
+        tab1.add(buttonDelDye);
+
+        buttonResetDye = new JButton("Reset");
+        buttonResetDye.setBounds(600,284,85,21);
+        buttonResetDye.addActionListener(this);
+        tab1.add(buttonResetDye);
 
         JLabel labelDyeCylinder = new JLabel("Henger");
         labelDyeCylinder.setBounds(380, 120, 70, 25);

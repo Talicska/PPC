@@ -164,6 +164,13 @@ public class Calculator {
         return false;
     }
 
+    public void resetAddedDyes (){
+        addedDyes.removeAllElements();
+        dyeNum = 0;
+        lakkNum = 0;
+        metalNum = 0;
+    }
+
     public boolean addDye(DyeParent dyeParent) {
         if (dyeParent.getClass().equals(Lakk.class) && lakkNum < MAX_NUMBER_OF_LAKKS) {
             if (!isDyeAlreadyAdded(dyeParent.getName())) {
