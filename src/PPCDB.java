@@ -11,7 +11,7 @@ public class PPCDB {
     // "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB"
     // "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB"
 
-    public static final String DATABASE = "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB";     //your own
+    public static final String DATABASE = "jdbc:sqlite:PPCDB";     //your own
     private static Connection conn = null;
 
     public void open() {
