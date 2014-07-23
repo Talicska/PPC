@@ -22,6 +22,10 @@ public class DyePreset {
         return dyes;
     }
 
+    public void addDyeParent(DyeParent dyeParent) {
+        this.dyes.add(dyeParent);
+    }
+
     public void setName(String name) {
         this.name = name;
     }

@@ -1,11 +1,9 @@
-import oracle.jrockit.jfr.settings.PresetFile;
-
-import java.util.ArrayList;
-import java.util.Vector;
-
 /**
  * Created by Prof on 2014.07.09..
  */
+
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class Calculator {
 
@@ -37,7 +35,7 @@ public class Calculator {
     private Vector<Vector<Double>> profitMatrix = new Vector<Vector<Double>>();
 
     public Calculator(ArrayList<Dye> dyes, Vector<DyeCylinder> dyecylinders, Etalon etalonObj, ArrayList<Lakk> lakks, ArrayList<Machine> machines,
-                      ArrayList<MagnetCylinder> magnetcylinders, Vector<Material> materials, ArrayList<Metal> metals) {
+                      ArrayList<MagnetCylinder> magnetcylinders, Vector<Material> materials, ArrayList<Metal> metals, Vector<DyePreset> dyePresets) {
         this.dyes = dyes;
         this.dyeCylinders = dyecylinders;
         this.etalonObj = etalonObj;
@@ -46,15 +44,26 @@ public class Calculator {
         this.magnetCylinders = magnetcylinders;
         this.materials = materials;
         this.metals = metals;
+        this.dyePresets = dyePresets;
 
         allDyeTypes = new Vector<DyeParent>();
         allDyeTypes.addAll(dyes);
         allDyeTypes.addAll(lakks);
         allDyeTypes.addAll(metals);
+
+
     }
 
-    private void filterRolls(int machineIndex, int magnetCylinderIndex) {
-
+    private void debugDyePresets(){
+        for (int i = 0; i < dyePresets.size(); i++){
+            System.out.println(dyePresets.get(i).getName());
+            for (int j = 0; j < dyePresets.get(i).getDyes().size(); j++){
+                System.out.println("    " + dyePresets.get(i).getDyes().get(j).getName() + " " +
+                        dyePresets.get(i).getDyes().get(j).getPrice() + " " +
+                        dyePresets.get(i).getDyes().get(j).getDyeCylinder().getVolume() + " " +
+                        dyePresets.get(i).getDyes().get(j).getCover());
+            }
+        }
     }
 
     private void searchMagnetCylinder(int machineIndex, double height, int magnetCylinderIndex) {
@@ -155,8 +164,14 @@ public class Calculator {
         return false;
     }
 
-    public boolean addDye(DyeParent dyeParent) {
+    public void resetAddedDyes (){
+        addedDyes.removeAllElements();
+        dyeNum = 0;
+        lakkNum = 0;
+        metalNum = 0;
+    }
 
+    public boolean addDye(DyeParent dyeParent) {
         if (dyeParent.getClass().equals(Lakk.class) && lakkNum < MAX_NUMBER_OF_LAKKS) {
             if (!isDyeAlreadyAdded(dyeParent.getName())) {
                 addedDyes.add(dyeParent);
@@ -412,6 +427,8 @@ public class Calculator {
             System.out.println(this.pregCover);
             arresDbPrice = arresDbPrice * 2.0 * ((double)(100 + pregCover) / 100);
         }*/
+
+        debugDyePresets();
 
     }
 

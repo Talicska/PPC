@@ -22,6 +22,7 @@ public class PPC {
         ArrayList<Dye> dyes = new ArrayList<Dye>();
         ArrayList<Lakk> lakks = new ArrayList<Lakk>();
         ArrayList<Metal> metals = new ArrayList<Metal>();
+        Vector<DyePreset> dyePresets = new Vector<DyePreset>();
         Vector<DyeCylinder> dyeCylinders;
         Etalon etalonObj;
         ArrayList<Machine> machines;
@@ -40,6 +41,7 @@ public class PPC {
                     metals.add((Metal)dyeParents.get(i));
                 }
             }
+            dyePresets = database.getDyePresets();
             //classifyDyeParents(dyeParents);
             dyeCylinders = database.getDyeCylinders();
             etalonMatrix = database.getEtalon();
@@ -54,7 +56,7 @@ public class PPC {
         }
 
         etalonObj = new Etalon(etalonMatrix);
-        calcObj = new Calculator(dyes, dyeCylinders, etalonObj, lakks, machines, magnetCylinders, materials, metals);
+        calcObj = new Calculator(dyes, dyeCylinders, etalonObj, lakks, machines, magnetCylinders, materials, metals, dyePresets);
 
         //dyePresets = new Vector<DyePreset>();                                           //feltölteni adatbázisból
 
@@ -183,6 +185,19 @@ public class PPC {
 
         /*try{
             database.addDyeParent(new Lakk("newlakk", 1000, null, 0));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
+
+        /*try{
+            Vector<DyeParent> dyes = new Vector<DyeParent>();
+            //String name, double price, DyeCylinder dyeCylinder, int cover
+            Lakk lakk = new Lakk("Lakk Matt", 3500, new DyeCylinder(3.8, 55), 45);
+            Dye dye = new Dye("UF Sárga", 3930, new DyeCylinder(3.8, 55), 45);
+            dyes.add(lakk);
+            dyes.add(dye);
+            DyePreset dyePreset = new DyePreset("teszt", dyes);
+            database.addDyePreset(dyePreset);
         } catch (SQLException e) {
             e.printStackTrace();
         }*/

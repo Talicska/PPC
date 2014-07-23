@@ -4,13 +4,14 @@
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Vector;
 
 public class PPCDB {
     // "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB"
     // "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB"
 
-    public static final String DATABASE = "jdbc:sqlite:D:/IntelliJP/PPC/PPCDB";     //your own
+    public static final String DATABASE = "jdbc:sqlite:D:/Users/Prof/IdeaProjects/PPC/PPCDB";     //your own
     private static Connection conn = null;
 
     public void open() {
@@ -109,6 +110,121 @@ public class PPCDB {
 
     }
 
+    public static Vector<DyePreset> getDyePresets() throws SQLException {
+
+        Vector<DyePreset> dyePresets = new Vector<DyePreset>();
+
+        Statement stm = conn.createStatement();
+        ResultSet rs = stm.executeQuery("select dpr.name_dyepreset, dpr.cover, dpa.name_dyeparent, dpa.price_dyeparent, " +
+                "dc.volume, dc.percent, dt.name_dyetype from DyePreset dpr " +
+                "INNER JOIN DyeParent dpa ON dpr.id_dyeparent = dpa.id_dyeparent " +
+                "INNER JOIN DyeCylinder dc ON dpr.id_dyecylinder = dc.id_dye_cylinder " +
+                "INNER JOIN DyeType dt ON dpa.id_dyetype = dt.id_dyetype");
+
+        while (rs.next()) {
+            int i;
+            for (i = 0; i < dyePresets.size(); i++) {
+                if (dyePresets.get(i).getName().equals(rs.getString("name_dyepreset"))) {
+
+                    DyeParent tmpDyeParent = new DyeParent("", 0, null, 0);
+                    if (rs.getString("name_dyetype").equals("Dye")){
+                        dyePresets.get(i).addDyeParent(new Dye(rs.getString("name_dyeparent"), rs.getDouble("price_dyeparent"),
+                                new DyeCylinder(rs.getDouble("volume"), rs.getInt("percent")), rs.getInt("cover")));
+                    }else if (rs.getString("name_dyetype").equals("Lakk")){
+                        dyePresets.get(i).addDyeParent(new Lakk(rs.getString("name_dyeparent"), rs.getDouble("price_dyeparent"),
+                                new DyeCylinder(rs.getDouble("volume"), rs.getInt("percent")), rs.getInt("cover")));
+                    }else if (rs.getString("name_dyetype").equals("Metal")){
+                        dyePresets.get(i).addDyeParent(new Metal(rs.getString("name_dyeparent"), rs.getDouble("price_dyeparent"),
+                                new DyeCylinder(rs.getDouble("volume"), rs.getInt("percent")), rs.getInt("cover")));
+                    }
+                    break;
+                }
+            }
+            if (i == dyePresets.size()){
+                Vector<DyeParent> dyes = new Vector<DyeParent>();
+
+                if (rs.getString("name_dyetype").equals("Dye")){
+                    Dye newDye = new Dye(rs.getString("name_dyeparent"), rs.getDouble("price_dyeparent"),
+                            new DyeCylinder(rs.getDouble("volume"), rs.getInt("percent")), rs.getInt("cover"));
+                    dyes.add(newDye);
+                }else if (rs.getString("name_dyetype").equals("Lakk")){
+                    Lakk newLakk = new Lakk(rs.getString("name_dyeparent"), rs.getDouble("price_dyeparent"),
+                            new DyeCylinder(rs.getDouble("volume"), rs.getInt("percent")), rs.getInt("cover"));
+                    dyes.add(newLakk);
+                }else if (rs.getString("name_dyetype").equals("Metal")){
+                    Metal newMetal = new Metal(rs.getString("name_dyeparent"), rs.getDouble("price_dyeparent"),
+                            new DyeCylinder(rs.getDouble("volume"), rs.getInt("percent")), rs.getInt("cover"));
+                    dyes.add(newMetal);
+                }
+
+                dyePresets.add(new DyePreset(rs.getString("name_dyepreset"), dyes));
+            }
+        }
+
+        stm.close();
+        rs.close();
+        return dyePresets;
+    }
+
+    public static void addDyePreset(DyePreset dyePreset) throws SQLException {
+
+        Statement stm = conn.createStatement();
+
+        for (int i = 0; i < dyePreset.getDyes().size(); i++){
+            int dyeParentId = getDyeParentIdFromName(dyePreset.getDyes().get(i).getName());
+            int dyeCylinderId = getDyeCylinderIdFromVolume(dyePreset.getDyes().get(i).getDyeCylinder().getVolume());
+            int cover = dyePreset.getDyes().get(i).getCover();
+            stm.execute("INSERT INTO DyePreset (name_dyepreset, id_dyeparent, id_dyecylinder, cover) " +
+                    "values ('" + dyePreset.getName() + "','" + dyeParentId + "','" + dyeCylinderId + "','" + cover + "' )");
+        }
+
+        stm.close();
+    }
+
+    public static int getDyeParentIdFromName(String dyeParentName) throws SQLException {
+
+        Statement stm = conn.createStatement();
+        ResultSet rs = stm.executeQuery("select id_dyeparent from DyeParent where name_dyeparent = '" + dyeParentName + "'");
+
+        int dyeParentId = rs.getInt("id_dyeparent");
+
+        stm.close();
+        rs.close();
+        return dyeParentId;
+    }
+
+    public static int getDyeCylinderIdFromVolume(double volume) throws SQLException {
+
+        Statement stm = conn.createStatement();
+        ResultSet rs = stm.executeQuery("select id_dye_cylinder from DyeCylinder where volume = '" + volume + "'");
+
+        int dyeCylinderId = rs.getInt("id_dye_cylinder");
+
+        stm.close();
+        rs.close();
+        return dyeCylinderId;
+    }
+
+    public static void clearDyePresets() throws SQLException {
+
+        Statement stm = conn.createStatement();
+        stm.execute("Truncate table DyePreset;");
+        //DELETE * FROM table_name;
+        //ALTER TABLE mytable AUTO_INCREMENT = 1
+
+        stm.close();
+    }
+
+    //refill the table with the modified dyepreset values - for update and delete also
+    public static void refreshDyePresets(Vector<DyePreset> dyePresets) throws SQLException{
+        clearDyePresets();
+
+        for (int i = 0; i < dyePresets.size(); i++){
+            addDyePreset(dyePresets.get(i));
+        }
+
+    }
+
     public static Vector<DyeCylinder> getDyeCylinders() throws SQLException {
 
         Vector<DyeCylinder> dyeCylinders = new Vector<DyeCylinder>();
@@ -135,10 +251,20 @@ public class PPCDB {
         ResultSet rs = stm.executeQuery("select amount, dye0_price, dye1_price, dye2_price, " +
                 "dye3_price, dye4_price, dye5_price, dye6_price, dye7_price from Etalon");
 
-        while (rs.next()) {
-            for (int i = 0; i < 9; i++)
+        /*while (rs.next()) {
+            for (int i = 0; i < 9; i++) {
                 line.add(rs.getDouble(i + 1));
+            }
             etalonMatrix.add((Vector) line.clone());
+            line.clear();
+        }*/
+
+        while (rs.next()) {
+            for (int i = 0; i < 9; i++) {
+                line.add(rs.getDouble(i + 1));
+            }
+            Vector<Double> tmp = new Vector<Double>(line);
+            etalonMatrix.add(tmp);
             line.clear();
         }
 
