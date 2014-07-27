@@ -53,6 +53,8 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JTextField textFClient;
     private JTextField textFDiscount;
 
+
+
     private JTextField textFClicheCost;
     private JTextField textFStancCost;
     private JTextField textFOtherCost;
