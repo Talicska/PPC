@@ -66,6 +66,7 @@ public class Gui extends JFrame implements ActionListener {
 
     private JButton buttonLoadPreset;
     private JButton buttonAddDye;
+    private JButton buttonManageDyes;
     private JButton buttonDelDye;
     private JButton buttonManageMaterials;
     private JButton buttonDelPreset;
@@ -85,7 +86,7 @@ public class Gui extends JFrame implements ActionListener {
         }
 
         else if (e.getSource() == buttonManageMaterials){
-            GuiMaterials materialEditor = new GuiMaterials(this);
+            GuiManageMaterials materialEditor = new GuiManageMaterials(this);
         }
 
         else if (e.getSource() == buttonAddDye) {
@@ -120,6 +121,13 @@ public class Gui extends JFrame implements ActionListener {
             } else if (textFDyeCover.getText().isEmpty()) {
                 flashMyField(textFDyeCover, Color.RED, 200);
             }
+        }
+
+        else if (e.getSource() == buttonManageDyes ){
+            GuiManageDyes guiDyes = new GuiManageDyes(this);
+
+
+
         }
 
         else if (e.getSource() == comboMachine) {
@@ -476,7 +484,6 @@ public class Gui extends JFrame implements ActionListener {
         separator6.setBounds(5, 372, 325, 1);
         tab1.add(separator6);
 
-
         JLabel labelPackingCost = new JLabel("Kiszerelési költség");
         labelPackingCost.setBounds(5, 380, 150, 25);
         tab1.add(labelPackingCost);
@@ -537,7 +544,6 @@ public class Gui extends JFrame implements ActionListener {
         labelFt6.setBounds(225, 482, 40, 20);
         tab1.add(labelFt6);
 
-
         JSeparator separator2 = new JSeparator();                                           //tab1 vertical separator
         separator2.setOrientation(SwingConstants.VERTICAL);
         separator2.setBounds(348, 5, 1, 500);
@@ -547,15 +553,12 @@ public class Gui extends JFrame implements ActionListener {
         separator3.setBounds(352, 5, 1, 500);
         tab1.add(separator3);
 
-
         JLabel labelDyePreset = new JLabel("Összeállítás betöltése");
         labelDyePreset.setBounds(370, 5, 200, 25);
         tab1.add(labelDyePreset);
         comboDyePreset = new JComboBox<DyePreset>(PPC.calcObj.getDyePresets());
         comboDyePreset.setBounds(370, 27, 225, 21);
         tab1.add(comboDyePreset);
-
-        //fel kell tölteni comboDyePreset-et
 
         buttonLoadPreset = new JButton("Betölt");
         buttonLoadPreset.setBounds(600, 27, 85, 21);
@@ -572,6 +575,7 @@ public class Gui extends JFrame implements ActionListener {
         tab1.add(labelDyeAdd);
         comboDyeType = new JComboBox<DyeParent>(PPC.calcObj.getAllDyeTypes());
         comboDyeType.addItem(new DyeParent("Direkt szín", 0, null, 0));
+        comboDyeType.setMaximumRowCount(10);
         comboDyeType.addPopupMenuListener(new ComboListener(comboDyeType));
         tab1.add(comboDyeType);
         comboDyeType.setBounds(370, 97, 225, 21);
@@ -580,6 +584,11 @@ public class Gui extends JFrame implements ActionListener {
         buttonAddDye.setBounds(600, 97, 85, 21);
         buttonAddDye.addActionListener(this);
         tab1.add(buttonAddDye);
+
+        buttonManageDyes = new JButton("Kezelés");
+        buttonManageDyes.setBounds(600,123,85,21);
+        buttonManageDyes.addActionListener(this);
+        tab1.add(buttonManageDyes);
 
         buttonSavePreset = new JButton("Mentés");
         buttonSavePreset.setBounds(600, 180, 85, 21);

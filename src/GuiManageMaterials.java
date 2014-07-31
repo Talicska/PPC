@@ -11,7 +11,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Vector;
 
-public class GuiMaterials extends JFrame implements ActionListener {
+public class GuiManageMaterials extends JFrame implements ActionListener {
 
     private Dimension dimension;
     private int width = 600;
@@ -64,7 +64,7 @@ public class GuiMaterials extends JFrame implements ActionListener {
 
     }
 
-    public GuiMaterials(Gui mainGui) {
+    public GuiManageMaterials(Gui mainGui) {
 
         this.mainGui = mainGui;
 
@@ -94,6 +94,7 @@ public class GuiMaterials extends JFrame implements ActionListener {
         table.getColumnModel().getColumn(1).setPreferredWidth(80);
         table.getColumnModel().getColumn(1).setCellRenderer(new PriceRenderer(priceformat));
         table.getColumnModel().getColumn(1).setCellEditor(new PriceEditor(priceformat));
+
         JLabel labelNewMat = new JLabel("Alapanyag hozzáadása");
         labelNewMat.setBounds(330,20,200,25);
         this.add(labelNewMat);
@@ -165,6 +166,7 @@ public class GuiMaterials extends JFrame implements ActionListener {
 
         public PriceRenderer(NumberFormat formatter) {
             this.formatter = formatter;
+            this.formatter.setGroupingUsed(false);
             this.formatter.setMinimumFractionDigits(3);
             this.formatter.setMaximumFractionDigits(3);
             this.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -184,6 +186,7 @@ public class GuiMaterials extends JFrame implements ActionListener {
         public PriceEditor(NumberFormat formatter) {
             super(new JTextField());
             this.formatter = formatter;
+            this.formatter.setGroupingUsed(false);
             this.formatter.setMinimumFractionDigits(3);
             this.formatter.setMaximumFractionDigits(3);
             this.textField = (JTextField) this.getComponent();
