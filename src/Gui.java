@@ -20,6 +20,8 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.JTextComponent;
 
@@ -180,6 +182,10 @@ public class Gui extends JFrame implements ActionListener {
                     listDyeType.add(string.format("%-20s %4sg %3s%%", name, volume, cover));
                 }
             }
+        }
+
+        else if (e.getSource() == comboDyeType) {
+            //comboDyeType.get
         }
 
 
@@ -566,6 +572,7 @@ public class Gui extends JFrame implements ActionListener {
         tab1.add(labelDyeAdd);
         comboDyeType = new JComboBox<DyeParent>(PPC.calcObj.getAllDyeTypes());
         comboDyeType.addItem(new DyeParent("Direkt szín", 0, null, 0));
+        comboDyeType.addPopupMenuListener(new ComboListener(comboDyeType));
         tab1.add(comboDyeType);
         comboDyeType.setBounds(370, 97, 225, 21);
 
@@ -593,6 +600,7 @@ public class Gui extends JFrame implements ActionListener {
         labelDyeCylinder.setBounds(380, 120, 70, 25);
         tab1.add(labelDyeCylinder);
         comboDyeCylinder = new JComboBox<DyeCylinder>(PPC.calcObj.getDyeCylinders());
+        comboDyeCylinder.addPopupMenuListener(new ComboListener(comboDyeCylinder));
         tab1.add(comboDyeCylinder);
         comboDyeCylinder.setBounds(455, 122, 65, 21);
         JLabel labelGM = new JLabel("g/m2");
