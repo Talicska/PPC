@@ -23,7 +23,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.JTextComponent;
 
-public class Gui extends JFrame implements ActionListener {       // ...ne baszd ossze a kodot!
+public class Gui extends JFrame implements ActionListener {
 
     private Dimension dimension;                                                            //dimensions
     private int width = 1000;
@@ -52,9 +52,6 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
     private JTextField textFTitle;
     private JTextField textFClient;
     private JTextField textFDiscount;
-
-
-
     private JTextField textFClicheCost;
     private JTextField textFStancCost;
     private JTextField textFOtherCost;
@@ -148,11 +145,12 @@ public class Gui extends JFrame implements ActionListener {       // ...ne baszd
 
         else if (e.getSource() == buttonSavePreset) {
             if(listDyeType.getItemCount() > 0) {
-                //név bekérés ide
-
-                String name = "asda";
-                comboDyePreset.addItem(new DyePreset(name,PPC.calcObj.getAddedDyes()));
-                comboDyePreset.setSelectedIndex(0);
+                GuiDyePresetName guiName = new GuiDyePresetName(this);
+                String name = guiName.getPresetName();
+                if ( ! name.isEmpty() ){
+                    comboDyePreset.addItem(new DyePreset(name,PPC.calcObj.getAddedDyes()));
+                    comboDyePreset.setSelectedIndex(0);
+                }
             }
         }
 

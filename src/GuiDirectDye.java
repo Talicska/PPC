@@ -3,15 +3,10 @@
  */
 
 import javax.swing.*;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 public class GuiDirectDye extends JDialog implements ActionListener {
 
@@ -146,28 +141,6 @@ public class GuiDirectDye extends JDialog implements ActionListener {
             }
         });
         timer.start();
-    }
-
-    class JTextFieldLimit extends PlainDocument {
-        private int limit;
-        JTextFieldLimit(int limit) {
-            super();
-            this.limit = limit;
-        }
-
-        JTextFieldLimit(int limit, boolean upper) {
-            super();
-            this.limit = limit;
-        }
-
-        public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-            if (str == null)
-                return;
-
-            if ((getLength() + str.length()) <= limit) {
-                super.insertString(offset, str, attr);
-            }
-        }
     }
 
 }
