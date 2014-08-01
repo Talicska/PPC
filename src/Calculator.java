@@ -4,6 +4,7 @@
 
 import java.util.ArrayList;
 import java.util.Vector;
+import java.lang.Math;
 
 public class Calculator {
 
@@ -294,27 +295,23 @@ public class Calculator {
     }
 
     private double calcProfitOnPiece(int amount, double width, double height, int colorNum, double materialSelfCost, int discount) {
-        int newAmount = (int) (((width * height) * amount) / (etalonObj.getEtalonSizeX() * etalonObj.getEtalonSizeY()));
+        double newAmount = ((width * height) * amount) / (etalonObj.getEtalonSizeX() * etalonObj.getEtalonSizeY());
 
         int newAmountIndex = 0;
-        while (newAmountIndex < etalonObj.getEtalonMatrix().size() - 1 && etalonObj.getEtalonMatrix().get(newAmountIndex).get(0) < newAmount) {
+        while (etalonObj.getEtalonMatrix().get(newAmountIndex).get(0) < newAmount && newAmountIndex < etalonObj.getEtalonMatrix().size() - 1) {
+            newAmountIndex++;
+        }
+        if (newAmountIndex == 0) {
             newAmountIndex++;
         }
 
-        if (newAmount <= etalonObj.getEtalonMatrix().get(0).get(0) || newAmount >= etalonObj.getEtalonMatrix().get(etalonObj.getEtalonMatrix().size() - 1).get(0)) {
-            return (profitMatrix.get(newAmountIndex).get(colorNum) + (materialSelfCost / amount)) * ((double) (100 - discount) / 100);
-        } else {
-            double highPrice = profitMatrix.get(newAmountIndex).get(colorNum);
-            double lowPrice = profitMatrix.get(newAmountIndex - 1).get(colorNum);
+        double lowerAmount = etalonObj.getEtalonMatrix().get(newAmountIndex - 1).get(0);
+        double higherAmount = etalonObj.getEtalonMatrix().get(newAmountIndex).get(0);
+        double lowerAmountPrice = profitMatrix.get(newAmountIndex - 1).get(colorNum);
+        double higherAmountPrice = profitMatrix.get(newAmountIndex).get(colorNum);
 
-            double highDb = etalonObj.getEtalonMatrix().get(newAmountIndex).get(0);
-            ;
-            double lowDb = etalonObj.getEtalonMatrix().get(newAmountIndex - 1).get(0);
-            return ((highPrice * ((newAmount - lowDb) / (highDb - lowDb)) +
-                    lowPrice * ((highDb - newAmount) / (highDb - lowDb))) +
-                    (materialSelfCost / amount)) * ((double) (100 - discount) / 100);
-        }
-
+        return ((lowerAmountPrice * Math.pow((higherAmountPrice / lowerAmountPrice),((newAmount - lowerAmount) / (higherAmount - lowerAmount)))) +
+                (materialSelfCost / amount)) * ((double) (100 - discount) / 100);
     }
 
     public double calculatePackingCost(int amount, double packingCost, double packingTime, double rollWidth, int amountPerRoll) {
