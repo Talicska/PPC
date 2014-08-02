@@ -48,6 +48,9 @@ public class GuiManageDyes extends JFrame implements ActionListener {
 
                 mainGui.getComboDyeType().addItem(newDye);
                 table.addNotify();
+                textFDyeName.setText("");
+                textFDyePrice.setText("");
+                mainGui.getComboDyeType().setSelectedIndex(0);
             }else{
                 if (textFDyeName.getText().isEmpty()){
                     flashMyField(textFDyeName,Color.RED,200);
