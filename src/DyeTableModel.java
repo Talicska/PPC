@@ -72,12 +72,15 @@ public class DyeTableModel extends AbstractTableModel {
             default: break;
         }
         fireTableCellUpdated(row,col);
-
     }
 
     @Override
     public boolean isCellEditable(int row, int column) {
         return true;
+    }
+
+    public Vector<DyeParent> getDataVector(){
+        return dataVector;
     }
 
 }

@@ -104,12 +104,6 @@ public class GuiDirectDye extends JDialog implements ActionListener {
         buttonAdd.addActionListener(this);
         this.add(buttonAdd);
 
-
-
-
-
-
-
         this.pack();
         this.setVisible(true);
 
@@ -120,7 +114,6 @@ public class GuiDirectDye extends JDialog implements ActionListener {
             return newDye;
         }
         return null;
-
     }
 
     public void flashMyField(final JTextField field, final Color flashColor, final int timerDelay) {

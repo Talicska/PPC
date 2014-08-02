@@ -104,6 +104,7 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         this.add(labelMatName);
         textFMatName = new JTextField();
         textFMatName.setBounds(370,47,220,21);
+        textFMatName.setDocument(new JTextFieldLimit(34));
         this.add(textFMatName);
 
         JLabel labelMatPrice = new JLabel("Ár");
@@ -126,19 +127,10 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         buttonDelMat.addActionListener(this);
         this.add(buttonDelMat);
 
-
-
-
-
         tablePane.getViewport().add(table);
         this.add(tablePane);
         this.setVisible(true);
-
-
-
-
     }
-
 
     public void flashMyField(final JTextField field, final Color flashColor, final int timerDelay) {
         final int totalCount = 1;

@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Vector;
@@ -87,8 +88,22 @@ public class GuiManageDyes extends JFrame implements ActionListener {
         columnNames.addElement("Név");
         columnNames.addElement("Ár");
 
-        DyeTableModel model = new DyeTableModel(PPC.calcObj.getAllDyeTypes(),columnNames);
-        table = new JTable(model);
+        final DyeTableModel model = new DyeTableModel(PPC.calcObj.getAllDyeTypes(),columnNames);
+        table = new JTable(model){
+            public String getToolTipText(MouseEvent e) {
+                String tip = null;
+                java.awt.Point p = e.getPoint();
+                int rowIndex = rowAtPoint(p);
+                int colIndex = columnAtPoint(p);
+
+                try {
+                    tip = model.getDataVector().get(rowIndex).getClass().toString();
+                } catch (RuntimeException e1) {
+                    //
+                }
+                return tip;
+            }
+        };
         table.setRowHeight(20);
         //table.getTableHeader().setBounds(0, 0, 300, 30);
         table.setBounds(0, 0, 300, 1000);
@@ -107,6 +122,8 @@ public class GuiManageDyes extends JFrame implements ActionListener {
         this.add(labelDyeName);
         textFDyeName = new JTextField();
         textFDyeName.setBounds(370,47,220,21);
+        textFDyeName.setColumns(20);
+        textFDyeName.setDocument(new JTextFieldLimit(20));
         this.add(textFDyeName);
 
         JLabel labelDyePrice = new JLabel("Ár");
