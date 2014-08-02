@@ -26,7 +26,7 @@ public class Calculator {
     private double verticalGap;
 
     private Vector<DyeParent> allDyeTypes;
-    private Vector<DyePreset> dyePresets = new Vector<DyePreset>();
+    private static Vector<DyePreset> dyePresets = new Vector<DyePreset>();
     private static Vector<DyeParent> addedDyes = new Vector<DyeParent>();
 
     private int dyeNum = 0;
@@ -37,21 +37,20 @@ public class Calculator {
 
     public Calculator(ArrayList<Dye> dyes, Vector<DyeCylinder> dyecylinders, Etalon etalonObj, ArrayList<Lakk> lakks, ArrayList<Machine> machines,
                       ArrayList<MagnetCylinder> magnetcylinders, Vector<Material> materials, ArrayList<Metal> metals, Vector<DyePreset> dyePresets) {
-        this.dyes = dyes;
-        this.dyeCylinders = dyecylinders;
-        this.etalonObj = etalonObj;
-        this.lakks = lakks;
-        this.machines = machines;
-        this.magnetCylinders = magnetcylinders;
-        this.materials = materials;
-        this.metals = metals;
-        this.dyePresets = dyePresets;
+        Calculator.dyes = dyes;
+        Calculator.dyeCylinders = dyecylinders;
+        Calculator.etalonObj = etalonObj;
+        Calculator.lakks = lakks;
+        Calculator.machines = machines;
+        Calculator.magnetCylinders = magnetcylinders;
+        Calculator.materials = materials;
+        Calculator.metals = metals;
+        Calculator.dyePresets = dyePresets;
 
         allDyeTypes = new Vector<DyeParent>();
         allDyeTypes.addAll(dyes);
         allDyeTypes.addAll(lakks);
         allDyeTypes.addAll(metals);
-
 
     }
 
@@ -219,7 +218,7 @@ public class Calculator {
         dyePresets.remove(chosenDyePreset);
     }
 
-    public void removeDye(int chosenDyeIndex) {
+    public void removeAddedDye(int chosenDyeIndex) {
         System.out.println(addedDyes.size()+ " " + chosenDyeIndex);
         if (addedDyes.get(chosenDyeIndex).getClass().equals(Lakk.class)) {
             lakkNum--;
@@ -229,6 +228,10 @@ public class Calculator {
             dyeNum--;
         }
         addedDyes.remove(chosenDyeIndex);
+    }
+
+    public void removeDye(int index) {
+        allDyeTypes.remove(index);
     }
 
     public DyeCylinder searchDyeCylinder(double cylinderVolume) {

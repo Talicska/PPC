@@ -20,8 +20,6 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.JTextComponent;
 
@@ -67,6 +65,7 @@ public class Gui extends JFrame implements ActionListener {
     private JButton buttonLoadPreset;
     private JButton buttonAddDye;
     private JButton buttonManageDyes;
+    private JButton buttonDirectDye;
     private JButton buttonDelDye;
     private JButton buttonManageMaterials;
     private JButton buttonDelPreset;
@@ -91,22 +90,33 @@ public class Gui extends JFrame implements ActionListener {
 
         else if (e.getSource() == buttonAddDye) {
             if ((!textFDyeCover.getText().isEmpty()) && (comboDyeType.getSelectedIndex() >= 0) && (comboDyeCylinder.getSelectedIndex() >= 0)) {
+                DyeParent newDye = (DyeParent)comboDyeType.getSelectedItem();
+                newDye.setDyeCylinder((DyeCylinder)comboDyeCylinder.getSelectedItem());
+                newDye.setCover(Integer.valueOf(textFDyeCover.getText()));
+                PPC.calcObj.addDye(newDye);
+                String string ="";
+                String name;
+                String volume;
+                String cover;
+                listDyeType.removeAll();
+                for (int i = 0; i < PPC.calcObj.getAddedDyes().size(); i++) {
+                    name = PPC.calcObj.getAddedDyes().get(i).getName().trim();
+                    volume = String.valueOf(PPC.calcObj.getAddedDyes().get(i).getDyeCylinder().getVolume());
+                    cover = String.valueOf(PPC.calcObj.getAddedDyes().get(i).getCover());
+                    listDyeType.add(string.format("%-20s %4sg %3s%%", name, volume, cover));
+                }
+            } else if (textFDyeCover.getText().isEmpty()) {
+                flashMyField(textFDyeCover, Color.RED, 200);
+            }
+        }
 
-                if (((DyeParent)comboDyeType.getSelectedItem()).getName().equals("Direkt szín")) {
-
-                    GuiDirectDye otherDye = new GuiDirectDye(this);
-                    DyeParent newDye = otherDye.getNewDye();
-                    if (newDye != null){
-                        PPC.calcObj.addDye(newDye);
-                    }
-
-                } else {
-                    DyeParent newDye = (DyeParent)comboDyeType.getSelectedItem();
-                    newDye.setDyeCylinder((DyeCylinder)comboDyeCylinder.getSelectedItem());
-                    newDye.setCover(Integer.valueOf(textFDyeCover.getText()));
+        else if (e.getSource() == buttonDirectDye) {
+            if ((!textFDyeCover.getText().isEmpty()) &&  (comboDyeCylinder.getSelectedIndex() >= 0)) {
+                GuiDirectDye otherDye = new GuiDirectDye(this);
+                DyeParent newDye = otherDye.getNewDye();
+                if (newDye != null){
                     PPC.calcObj.addDye(newDye);
                 }
-
                 String string ="";
                 String name;
                 String volume;
@@ -125,9 +135,6 @@ public class Gui extends JFrame implements ActionListener {
 
         else if (e.getSource() == buttonManageDyes ){
             GuiManageDyes guiDyes = new GuiManageDyes(this);
-
-
-
         }
 
         else if (e.getSource() == comboMachine) {
@@ -142,7 +149,7 @@ public class Gui extends JFrame implements ActionListener {
             int index = listDyeType.getSelectedIndex();
             if (index >= 0) {
                 listDyeType.remove(index);
-                PPC.calcObj.removeDye(index);
+                PPC.calcObj.removeAddedDye(index);
             }
         }
 
@@ -191,11 +198,6 @@ public class Gui extends JFrame implements ActionListener {
                 }
             }
         }
-
-        else if (e.getSource() == comboDyeType) {
-            //comboDyeType.get
-        }
-
 
     }
 
@@ -574,7 +576,6 @@ public class Gui extends JFrame implements ActionListener {
         labelDyeAdd.setBounds(370, 75, 200, 25);
         tab1.add(labelDyeAdd);
         comboDyeType = new JComboBox<DyeParent>(PPC.calcObj.getAllDyeTypes());
-        comboDyeType.addItem(new DyeParent("Direkt szín", 0, null, 0));
         comboDyeType.setMaximumRowCount(10);
         comboDyeType.addPopupMenuListener(new ComboListener(comboDyeType));
         tab1.add(comboDyeType);
@@ -585,8 +586,13 @@ public class Gui extends JFrame implements ActionListener {
         buttonAddDye.addActionListener(this);
         tab1.add(buttonAddDye);
 
+        buttonDirectDye = new JButton("Direkt");
+        buttonDirectDye.setBounds(600,122,85,21);
+        buttonDirectDye.addActionListener(this);
+        tab1.add(buttonDirectDye);
+
         buttonManageDyes = new JButton("Kezelés");
-        buttonManageDyes.setBounds(600,123,85,21);
+        buttonManageDyes.setBounds(600,147,85,21);
         buttonManageDyes.addActionListener(this);
         tab1.add(buttonManageDyes);
 
@@ -596,7 +602,7 @@ public class Gui extends JFrame implements ActionListener {
         tab1.add(buttonSavePreset);
 
         buttonDelDye = new JButton("Töröl");
-        buttonDelDye.setBounds(600, 258, 85, 21);
+        buttonDelDye.setBounds(600, 259, 85, 21);
         buttonDelDye.addActionListener(this);
         tab1.add(buttonDelDye);
 
@@ -722,7 +728,7 @@ public class Gui extends JFrame implements ActionListener {
         columnNames.addElement("6 szín");
         columnNames.addElement("7 szín");
 
-        EtalonTableModel model = new EtalonTableModel(PPC.calcObj.getEtalonObj().getEtalonMatrix(), columnNames);
+        EtalonTableModel model = new EtalonTableModel(Calculator.getEtalonObj().getEtalonMatrix(), columnNames);
 
         JTable table = new JTable(model) {
             @Override
@@ -758,16 +764,16 @@ public class Gui extends JFrame implements ActionListener {
         tab3.add(table.getTableHeader());
         tab3.add(table);
 
-        JLabel labelEtalonSelfCost = new JLabel("Etalon önköltség:  " + PPC.calcObj.getEtalonObj().getEtalonSelfCost() + " Ft");
+        JLabel labelEtalonSelfCost = new JLabel("Etalon önköltség:  " + Calculator.getEtalonObj().getEtalonSelfCost() + " Ft");
         labelEtalonSelfCost.setBounds(5, 445, 300, 20);
         tab3.add(labelEtalonSelfCost);
-        JLabel labelEtalonMaterialPrice = new JLabel("Etalon anyagköltség:  " + PPC.calcObj.getEtalonObj().getEtalonMaterialPrice() + " Ft");
+        JLabel labelEtalonMaterialPrice = new JLabel("Etalon anyagköltség:  " + Calculator.getEtalonObj().getEtalonMaterialPrice() + " Ft");
         labelEtalonMaterialPrice.setBounds(5, 470, 300, 20);
         tab3.add(labelEtalonMaterialPrice);
-        JLabel labelEtalonSizeX = new JLabel("Etalon szélesség:  " + (int) PPC.calcObj.getEtalonObj().getEtalonSizeX() + " mm");
+        JLabel labelEtalonSizeX = new JLabel("Etalon szélesség:  " + (int) Calculator.getEtalonObj().getEtalonSizeX() + " mm");
         labelEtalonSizeX.setBounds(347, 445, 300, 20);
         tab3.add(labelEtalonSizeX);
-        JLabel labelEtalonSizeY = new JLabel("Etalon magasság:  " + (int) PPC.calcObj.getEtalonObj().getEtalonSizeY() + " mm");
+        JLabel labelEtalonSizeY = new JLabel("Etalon magasság:  " + (int) Calculator.getEtalonObj().getEtalonSizeY() + " mm");
         labelEtalonSizeY.setBounds(347, 470, 300, 20);
         tab3.add(labelEtalonSizeY);
 
@@ -782,6 +788,10 @@ public class Gui extends JFrame implements ActionListener {
 
     public JComboBox<Material> getComboMaterial(){
         return comboMaterial;
+    }
+
+    public JComboBox<DyeParent> getComboDyeType(){
+        return comboDyeType;
     }
 
     public JTextField getTextFDyeCover(){

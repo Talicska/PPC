@@ -23,19 +23,51 @@ public class GuiManageDyes extends JFrame implements ActionListener {
 
     private JTable table;
 
-    private JTextField textFMatName;
-    private DoubleField textFMatPrice;
+    private JTextField textFDyeName;
+    private DoubleField textFDyePrice;
 
-    private JButton buttonAddMat;
-    private JButton buttonDelMat;
+    private JRadioButton radioDye;
+    private JRadioButton radioMetal;
+    private JRadioButton radioLakk;
 
-
-
+    private JButton buttonAddDye;
+    private JButton buttonDelDye;
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        if (e.getSource() == buttonAddDye){
+            if ( ! ( textFDyeName.getText().isEmpty() || textFDyePrice.getText().isEmpty() ) ){
+                DyeParent newDye;
+                if (radioDye.isSelected()){
+                    newDye = new Dye(textFDyeName.getText(),Double.parseDouble(textFDyePrice.getText()),null,0);
+                }else if (radioMetal.isSelected()){
+                    newDye = new Metal(textFDyeName.getText(),Double.parseDouble(textFDyePrice.getText()),null,0);
+                }else newDye = new Lakk(textFDyeName.getText(),Double.parseDouble(textFDyePrice.getText()),null,0);
+
+                mainGui.getComboDyeType().addItem(newDye);
+                table.addNotify();
+            }else{
+                if (textFDyeName.getText().isEmpty()){
+                    flashMyField(textFDyeName,Color.RED,200);
+                }
+                if (textFDyePrice.getText().isEmpty()){
+                    flashMyField(textFDyePrice,Color.RED,200);
+                }
+            }
+        }
+
+        else if (e.getSource() == buttonDelDye){
+            int index = table.getSelectedRow();
+            if ( index>=0 && index<table.getRowCount() && PPC.calcObj.getAllDyeTypes().size()>1) {
+                PPC.calcObj.removeDye(index);
+                table.addNotify();
+                mainGui.getComboDyeType().setSelectedIndex(0);
+            }
+        }
+
     }
+
     public GuiManageDyes(Gui mainGui) {
 
         this.mainGui = mainGui;
@@ -66,8 +98,51 @@ public class GuiManageDyes extends JFrame implements ActionListener {
         table.getColumnModel().getColumn(1).setCellRenderer(new PriceRenderer(priceformat));
         table.getColumnModel().getColumn(1).setCellEditor(new PriceEditor(priceformat));
 
+        JLabel labelNewDye = new JLabel("Festéktípus hozzáadása");
+        labelNewDye.setBounds(330,20,200,25);
+        this.add(labelNewDye);
 
+        JLabel labelDyeName = new JLabel("Név");
+        labelDyeName.setBounds(340,45,30,25);
+        this.add(labelDyeName);
+        textFDyeName = new JTextField();
+        textFDyeName.setBounds(370,47,220,21);
+        this.add(textFDyeName);
 
+        JLabel labelDyePrice = new JLabel("Ár");
+        labelDyePrice.setBounds(340,70,30,25);
+        this.add(labelDyePrice);
+        textFDyePrice = new DoubleField();
+        textFDyePrice.setBounds(370,72,85,21);
+        this.add(textFDyePrice);
+        JLabel labelEurM = new JLabel("EUR");
+        labelEurM.setBounds(460,72,45,20);
+        this.add(labelEurM);
+
+        radioDye = new JRadioButton("1");
+        radioDye.setBounds(340,95,50,21);
+        radioDye.setSelected(true);
+        radioMetal = new JRadioButton("2");
+        radioMetal.setBounds(340,116,50,21);
+        radioLakk = new JRadioButton("3");
+        radioLakk.setBounds(340,137,50,21);
+        ButtonGroup radioGroup = new ButtonGroup();
+        radioGroup.add(radioDye);
+        radioGroup.add(radioMetal);
+        radioGroup.add(radioLakk);
+        this.add(radioDye);
+        this.add(radioMetal);
+        this.add(radioLakk);
+
+        buttonAddDye = new JButton("Hozzáad");
+        buttonAddDye.setBounds(415,160,85,21);
+        buttonAddDye.addActionListener(this);
+        this.add(buttonAddDye);
+
+        buttonDelDye = new JButton("Töröl");
+        buttonDelDye.setBounds(330,330,85,21);
+        buttonDelDye.addActionListener(this);
+        this.add(buttonDelDye);
 
         tablePane.getViewport().add(table);
         this.add(tablePane);
