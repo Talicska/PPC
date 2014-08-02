@@ -20,6 +20,8 @@ public class GuiManageDyes extends JFrame implements ActionListener {
 
     private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);
 
+    DyeTableModel model;        //reachable from inner class without being final
+
     private Gui mainGui;
 
     private JTable table;
@@ -91,7 +93,7 @@ public class GuiManageDyes extends JFrame implements ActionListener {
         columnNames.addElement("Név");
         columnNames.addElement("Ár");
 
-        final DyeTableModel model = new DyeTableModel(PPC.calcObj.getAllDyeTypes(),columnNames);
+        model = new DyeTableModel(PPC.calcObj.getAllDyeTypes(),columnNames);
         table = new JTable(model){
             public String getToolTipText(MouseEvent e) {
                 String tip = null;
@@ -100,7 +102,7 @@ public class GuiManageDyes extends JFrame implements ActionListener {
                 int colIndex = columnAtPoint(p);
 
                 try {
-                    tip = model.getDataVector().get(rowIndex).getClass().toString();
+                    tip = getToolTip(rowIndex);
                 } catch (RuntimeException e1) {
                     //
                 }
@@ -168,6 +170,20 @@ public class GuiManageDyes extends JFrame implements ActionListener {
         this.add(tablePane);
         this.setVisible(true);
 
+    }
+
+    public String getToolTip(int rowIndex) {
+        Object obj=model.getDataVector().get(rowIndex).getClass();
+        if (obj == Dye.class) {
+            return "Festék";
+        }
+        if (obj == Metal.class) {
+            return "Metáááál";
+        }
+        if (obj == Lakk.class) {
+            return "Lakk";
+        }
+        return "???";
     }
 
     public void flashMyField(final JTextField field, final Color flashColor, final int timerDelay) {
