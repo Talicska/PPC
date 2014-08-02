@@ -67,7 +67,7 @@ public class MaterialTableModel extends AbstractTableModel {
         switch (col) {
             case 0: dataVector.get(row).setName(value.toString());
                 break;
-            case 1: dataVector.get(row).setPrice(new Double(value.toString()).doubleValue());
+            case 1: dataVector.get(row).setPrice(Double.parseDouble(value.toString()));
                 break;
             default: break;
         }

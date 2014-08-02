@@ -18,11 +18,11 @@ public class DyeTableModel extends AbstractTableModel {
         this.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
-                int row = e.getFirstRow();
-                int column = e.getColumn();
-                System.out.println("Value changed!");
-                System.out.println(PPC.calcObj.getAllDyeTypes().get(row).getName()+" "+
-                PPC.calcObj.getAllDyeTypes().get(row).getPrice());
+                //int row = e.getFirstRow();
+                //int column = e.getColumn();
+                //System.out.println("Value changed!");
+                //System.out.println(PPC.calcObj.getAllDyeTypes().get(row).getName()+" "+
+                //PPC.calcObj.getAllDyeTypes().get(row).getPrice());
 
             }
         });
@@ -67,7 +67,7 @@ public class DyeTableModel extends AbstractTableModel {
         switch (col) {
             case 0: dataVector.get(row).setName(value.toString());
                 break;
-            case 1: dataVector.get(row).setPrice(new Double(value.toString()).doubleValue());
+            case 1: dataVector.get(row).setPrice(Double.parseDouble(value.toString()));
                 break;
             default: break;
         }
