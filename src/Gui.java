@@ -594,7 +594,7 @@ public class Gui extends JFrame implements ActionListener {
         JLabel labelRollWidth = new JLabel("Tekercsszélesség");
         labelRollWidth.setBounds(5, 430, 115, 25);
         tab1.add(labelRollWidth);
-        textFRollWidth = new IntegerField("0");
+        textFRollWidth = new DoubleField("0");
         textFRollWidth.setBounds(120, 432, 70, 21);
         textFRollWidth.setHorizontalAlignment(SwingConstants.RIGHT);
         textFRollWidth.getDocument().addDocumentListener(docListener);
