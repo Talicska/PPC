@@ -334,6 +334,7 @@ public class Gui extends JFrame implements ActionListener {
 
         JPanel panel2 = new JPanel();                                                   //right panel
         panel2.setBounds(700, 25, 300, height - menuheight);
+        panel2.setLayout(null);
         //panel2.setBackground(mainColor);
 
 
@@ -738,8 +739,8 @@ public class Gui extends JFrame implements ActionListener {
 
 
         buttonCalculate = new JButton("Összesítés");
-        buttonCalculate.setPreferredSize(new Dimension(280,25));
-
+        buttonCalculate.setBounds(5,27,283,25);
+        buttonCalculate.addActionListener(this);
         panel2.add(buttonCalculate);
 
         Vector<String> columnNames = new Vector<String>();                                      //tab3
