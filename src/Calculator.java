@@ -86,7 +86,7 @@ public class Calculator {
             //pieces = (int) (machines.get(machineIndex).getCylinders().get(i).getGirth() / height);
             double rest = machines.get(machineIndex).getCylinders().get(i).getGirth() % height;
             System.out.println(rest+" "+pieces+" "+rest / pieces+" "+machines.get(machineIndex).getCylinders().get(i).getGirth());
-            if (rest/(double)pieces >= 2 && rest / (double)pieces < min) {
+            if (rest/pieces >= 2 && rest/pieces < min && machines.get(machineIndex).getCylinders().get(i).getGirth()>height) {
                 min = rest / pieces;
                 this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(i);
                 this.verticalGap = min;
