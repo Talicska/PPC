@@ -418,6 +418,9 @@ public class Calculator {
         int colorNum = countColors();
         transformEtalon(width, height);
         profitOnPiece = calcProfitOnPiece(amount, width, height, colorNum, materialSelfCost, discount);
+        if (pregCover != 0){
+            profitOnPiece = profitOnPiece * 2.0 * ((double)(100 + pregCover) / 100);
+        }
         System.out.println("Darabár: " + profitOnPiece);
 
         /*if (pregCheck == 0){
@@ -527,7 +530,7 @@ public class Calculator {
     public double getProfitOnPiece(){ return profitOnPiece; }
 
     // Eladási összár (Ft)
-    public double getProfit(){ return profitOnPiece * amount; } //komment
+    public double getSumProfit(){ return profitOnPiece * amount; }
 
 
 }
