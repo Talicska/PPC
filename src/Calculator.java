@@ -96,6 +96,9 @@ public class Calculator {
         if(found){
             return true;
         }
+        if(pieces<1){
+            return false;
+        }
         asd( pieces-1, machineIndex, height);
 
         return false;
@@ -114,7 +117,9 @@ public class Calculator {
                 pieces = (int) (machines.get(machineIndex).getCylinders().get(machines.get(machineIndex).getCylinders().size()-1).getGirth() / height);
                 System.out.println("Kezdeti pieces: "+pieces );
 
-                asd(pieces,machineIndex,  height);
+                if(asd(pieces,machineIndex,  height)==false){
+                    System.out.println("FALSE");
+                }
 
 
 
