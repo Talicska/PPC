@@ -72,6 +72,7 @@ public class Gui extends JFrame implements ActionListener {
     private JButton buttonSavePreset;
     private JButton buttonResetDye;
     private JButton buttonGetEuro;
+    private JButton buttonCalculate;
 
     private List listDyeType;
 
@@ -736,7 +737,10 @@ public class Gui extends JFrame implements ActionListener {
         tab1.add(buttonGetEuro);
 
 
-        JLabel labelSummary = new JLabel("Összesítés");
+        buttonCalculate = new JButton("Összesítés");
+        buttonCalculate.setPreferredSize(new Dimension(280,25));
+
+        panel2.add(buttonCalculate);
 
         Vector<String> columnNames = new Vector<String>();                                      //tab3
         columnNames.addElement("Mennyiség");
@@ -855,6 +859,42 @@ public class Gui extends JFrame implements ActionListener {
 
         checkPreg.setSelected(false);
         checkDombor.setSelected(false);
+
+    }
+
+    public boolean checkInput() {
+
+        boolean ready=true;
+
+        if (textFAmount.getText().isEmpty()){
+            ready=false;
+            flashMyField(textFAmount,Color.RED,200);
+        }
+        if (textFWidth.getText().isEmpty()){
+            ready=false;
+            flashMyField(textFWidth,Color.RED,200);
+        }
+        if (textFHeight.getText().isEmpty()){
+            ready=false;
+            flashMyField(textFHeight,Color.RED,200);
+        }
+        if (textFTracks.getText().isEmpty()){
+            ready=false;
+            flashMyField(textFTracks,Color.RED,200);
+        }
+        if (textFSideGap.getText().isEmpty()){
+            ready=false;
+            flashMyField(textFSideGap,Color.RED,200);
+        }
+        if (textFBetweenGap.getText().isEmpty()){
+            ready=false;
+            flashMyField(textFBetweenGap,Color.RED,200);
+        }
+
+        if (ready){
+            return true;
+        }
+        return false;
 
     }
 
