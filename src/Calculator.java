@@ -101,6 +101,8 @@ public class Calculator {
         }
         asd( pieces-1, machineIndex, height);
 
+        if(verticalGap!=1)
+            return true;
         return false;
     }
 
