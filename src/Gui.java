@@ -78,6 +78,12 @@ public class Gui extends JFrame implements ActionListener {
     private JCheckBox checkPreg;
     private JCheckBox checkDombor;
 
+    private JMenuItem newItem;
+    private JMenuItem saveItem;
+    private JMenuItem loadItem;
+    private JMenuItem exitItem;
+    private JMenuItem aboutItem;
+
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == buttonGetEuro) {
@@ -199,6 +205,18 @@ public class Gui extends JFrame implements ActionListener {
             }
         }
 
+        else if (e.getSource() == exitItem) {
+            System.exit(0);
+        }
+
+        else if (e.getSource() == aboutItem) {
+            new GuiAbout();
+        }
+
+        else if (e.getSource() == newItem) {
+            this.reset();
+        }
+
     }
 
     public Gui() {
@@ -283,16 +301,19 @@ public class Gui extends JFrame implements ActionListener {
         };
 
         JMenu fileMenu = new JMenu("Fájl");                                             //menu
-        JMenuItem newItem = new JMenuItem("Új");
+        newItem = new JMenuItem("Új");
+        newItem.addActionListener(this);
         fileMenu.add(newItem);
-        JMenuItem saveItem = new JMenuItem("Mentés");
+        saveItem = new JMenuItem("Mentés");
         fileMenu.add(saveItem);
-        JMenuItem loadItem = new JMenuItem("Betöltés");
+        loadItem = new JMenuItem("Betöltés");
         fileMenu.add(loadItem);
-        JMenuItem exitItem = new JMenuItem("Kilépés");
+        exitItem = new JMenuItem("Kilépés");
+        exitItem.addActionListener(this);
         fileMenu.add(exitItem);
         JMenu aboutMenu = new JMenu("Névjegy");
-        JMenuItem aboutItem = new JMenuItem("A PPC névjegye");
+        aboutItem = new JMenuItem("A PPC névjegye");
+        aboutItem.addActionListener(this);
         aboutMenu.add(aboutItem);
         JMenuBar menu = new JMenuBar();
         menu.setBounds(0, 0, width, menuheight);
@@ -786,6 +807,57 @@ public class Gui extends JFrame implements ActionListener {
 
     }
 
+    public void reset() {
+
+        if(comboMaterial.getItemCount() > 0) {
+            comboMaterial.setSelectedIndex(0);
+        }
+        if(comboMachine.getItemCount() > 0) {
+            comboMachine.setSelectedIndex(0);
+        }
+        if(comboCylinder.getItemCount() > 0) {
+            comboCylinder.setSelectedIndex(0);
+        }
+        if(comboDyePreset.getItemCount() > 0) {
+            comboDyePreset.setSelectedIndex(0);
+        }
+        if(comboDyeType.getItemCount() > 0) {
+            comboDyeType.setSelectedIndex(0);
+        }
+        if(comboDyeCylinder.getItemCount() > 0) {
+            comboDyeCylinder.setSelectedIndex(0);
+        }
+
+        textFAmount.setText("");
+        textFWidth.setText("");
+        textFHeight.setText("");
+        textFSideGap.setText("6");
+        textFBetweenGap.setText("3");
+        textFTracks.setText("");
+        textFDyeCover.setText("");
+        textFPregCover.setText("");
+        textFDomborCost.setText("5000");
+        textFTitle.setText("");
+        textFClient.setText("");
+        textFDiscount.setText("0");
+        textFClicheCost.setText("0");
+        textFStancCost.setText("0");
+        textFOtherCost.setText("0");
+        textFPackingCost.setText("6000");
+        textFPackingTime.setText("0");
+        textFRollWidth.setText("0");
+        textFAmountPerRoll.setText("0");
+        textFPackingSumCost.setText("0");
+        textFEuro.setText("300");
+
+        listDyeType.removeAll();
+        PPC.calcObj.resetAddedDyes();
+
+        checkPreg.setSelected(false);
+        checkDombor.setSelected(false);
+
+    }
+
     public JComboBox<Material> getComboMaterial(){
         return comboMaterial;
     }
@@ -944,7 +1016,7 @@ public class Gui extends JFrame implements ActionListener {
 
             if (answer != "")
                 return Double.valueOf(answer);
-            return new Double(-1);                                          //errorhandling level: MacGyver
+            return (double)-1;                                          //errorhandling level: MacGyver
 
         }
     }
