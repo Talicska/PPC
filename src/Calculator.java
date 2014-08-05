@@ -91,17 +91,17 @@ public class Calculator {
                 int j = 0;
                 while (min >= 1000 && this.verticalGap < 2) {
                     for (int i = 0; i < machines.get(machineIndex).getCylinders().size(); i++) {
-                        System.out.println(machines.get(machineIndex).getName());
-                        System.out.println(machines.get(machineIndex).getCylinders().size());
+                        //System.out.println(machines.get(machineIndex).getName());
+                        //System.out.println(machines.get(machineIndex).getCylinders().size());
                         pieces = (int) (machines.get(machineIndex).getCylinders().get(i).getGirth() / height) - j;
                         double rest = machines.get(machineIndex).getCylinders().get(i).getGirth() % height;
                         if (rest / pieces >= 2 && rest / pieces < min) {
-                            System.out.println("min: " + min);
+                            //System.out.println("min: " + min);
                             min = rest / pieces;
                             this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(i);
                             this.verticalGap = min;
-                            System.out.println("Vertikalis heza valtozas: " + this.verticalGap);
-                            System.out.println("darab per henger: " + pieces);
+                            //System.out.println("Vertikalis heza valtozas: " + this.verticalGap);
+                            //System.out.println("darab per henger: " + pieces);
                         }
                     }
                     j++;
@@ -124,7 +124,7 @@ public class Calculator {
                 this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1);
                 this.verticalGap = rest / pieces;
                 j++;
-                System.out.println("darab per henger: " + pieces);
+                //System.out.println("darab per henger: " + pieces);
             }
         }
     }
@@ -322,12 +322,12 @@ public class Calculator {
             profitMatrix.add(row);
         }
 
-        for (int i = 0; i < profitMatrix.size(); i++) {
+        /*for (int i = 0; i < profitMatrix.size(); i++) {
             for (int j = 0; j < profitMatrix.get(i).size(); j++) {
                 System.out.print(profitMatrix.get(i).get(j) + " ");
             }
             System.out.println();
-        }
+        }*/
     }
 
     private double calcProfitOnPiece(int amount, double width, double height, int colorNum, double materialSelfCost, int discount) {
@@ -410,12 +410,11 @@ public class Calculator {
 
         //Choosing magnet cylinder
         searchMagnetCylinder(machineIndex, height, magnetCylinderIndex);
-        System.out.println(chosenMagnetCylinder.getTeeth() + " " + chosenMagnetCylinder.getGirth());
-        System.out.println(verticalGap);
+        System.out.println("Mágneshenger: " + chosenMagnetCylinder.getTeeth() + " fogas, kerület: " + chosenMagnetCylinder.getGirth());
+        System.out.println("Vertikális hézag: " + verticalGap);
 
         //Material cost
         calculateMaterialCost(materialIndex, amount, width, height, tracks, sideGap, betweenGap, euro);
-        System.out.println(materialSelfCost);
 
         //Dye cost
         calculateDyeCost(width, height);
@@ -442,6 +441,7 @@ public class Calculator {
             profitOnPiece = profitOnPiece * 2.0 * ((double)(100 + pregCover) / 100);
         }
         System.out.println("Darabár: " + profitOnPiece);
+        System.out.println("-------------------------------------");
 
         /*if (pregCheck == 0){
             arresDbPrice = calcArresDbPrice(amount, colorNum);
@@ -451,7 +451,7 @@ public class Calculator {
             arresDbPrice = arresDbPrice * 2.0 * ((double)(100 + pregCover) / 100);
         }*/
 
-        debugDyePresets();
+        //debugDyePresets();
 
     }
 
