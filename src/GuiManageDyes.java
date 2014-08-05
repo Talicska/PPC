@@ -35,6 +35,7 @@ public class GuiManageDyes extends JFrame implements ActionListener {
 
     private JButton buttonAddDye;
     private JButton buttonDelDye;
+    private JButton buttonSortDyes;
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -70,6 +71,11 @@ public class GuiManageDyes extends JFrame implements ActionListener {
                 table.addNotify();
                 mainGui.getComboDyeType().setSelectedIndex(0);
             }
+        }
+
+        else if (e.getSource() == buttonSortDyes){
+            mainGui.sortDyes();
+            model.fireTableDataChanged();
         }
 
     }
@@ -162,9 +168,14 @@ public class GuiManageDyes extends JFrame implements ActionListener {
         this.add(buttonAddDye);
 
         buttonDelDye = new JButton("Töröl");
-        buttonDelDye.setBounds(330,330,85,21);
+        buttonDelDye.setBounds(330,305,85,21);
         buttonDelDye.addActionListener(this);
         this.add(buttonDelDye);
+
+        buttonSortDyes = new JButton("Rendez");
+        buttonSortDyes.setBounds(330,330,85,21);
+        buttonSortDyes.addActionListener(this);
+        this.add(buttonSortDyes);
 
         tablePane.getViewport().add(table);
         this.add(tablePane);
