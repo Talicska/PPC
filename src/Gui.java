@@ -223,7 +223,7 @@ public class Gui extends JFrame implements ActionListener {
                 }
                 double domborPrice=0;
                 if(checkDombor.isSelected()){
-                    domborPrice=Integer.valueOf(textFDomborCost.getText());
+                    domborPrice=Double.valueOf(textFDomborCost.getText());
                 }
                 double clicheCost=0;
                 if( ! textFClicheCost.getText().isEmpty()){
@@ -962,12 +962,10 @@ public class Gui extends JFrame implements ActionListener {
             flashMyField(textFDomborCost,Color.RED,200);
         }
 
-
         if (ready){
             return true;
         }
         return false;
-
     }
 
     public JComboBox<Material> getComboMaterial(){
