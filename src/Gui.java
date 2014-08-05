@@ -208,7 +208,56 @@ public class Gui extends JFrame implements ActionListener {
 
         else if (e.getSource() == buttonCalculate) {
             if (checkInput()){
-
+                int materialIndex = comboMaterial.getSelectedIndex();
+                int amount = Integer.valueOf(textFAmount.getText());
+                double width = Double.valueOf(textFWidth.getText());
+                double height = Double.valueOf(textFHeight.getText());
+                int tracks = Integer.valueOf(textFTracks.getText());
+                double sideGap = Double.valueOf(textFSideGap.getText());
+                double betweenGap = Double.valueOf(textFBetweenGap.getText());
+                int machineIndex = comboMachine.getSelectedIndex();
+                int magnetCylinderIndex = comboCylinder.getSelectedIndex();
+                int pregCover=0;
+                if(checkPreg.isSelected()){
+                    pregCover=Integer.valueOf(textFPregCover.getText());
+                }
+                double domborPrice=0;
+                if(checkDombor.isSelected()){
+                    domborPrice=Integer.valueOf(textFDomborCost.getText());
+                }
+                double clicheCost=0;
+                if( ! textFClicheCost.getText().isEmpty()){
+                    clicheCost=Double.valueOf(textFClicheCost.getText());
+                }
+                double stancCost=0;
+                if( ! textFStancCost.getText().isEmpty()){
+                    stancCost=Double.valueOf(textFStancCost.getText());
+                }
+                double packingCost=0;
+                if( ! textFPackingCost.getText().isEmpty()){
+                    packingCost=Double.valueOf(textFPackingCost.getText());
+                }
+                double packingTime=0;
+                if( ! textFPackingTime.getText().isEmpty()){
+                    packingTime=Double.valueOf(textFPackingTime.getText());
+                }
+                double rollWidth=0;
+                if( ! textFRollWidth.getText().isEmpty()){
+                    rollWidth=Double.valueOf(textFRollWidth.getText());
+                }
+                int amountPerRoll=0;
+                if( ! textFAmountPerRoll.getText().isEmpty()) {
+                    amountPerRoll = Integer.valueOf(textFAmountPerRoll.getText());
+                }
+                String title=textFTitle.getText();
+                String client=textFClient.getText();
+                int discount=Integer.valueOf(textFDiscount.getText());
+                double euro=Double.valueOf(textFEuro.getText());
+                double otherCost=Double.valueOf(textFOtherCost.getText());
+                PPC.calcObj.calculate(materialIndex, amount, width, height, tracks, sideGap, betweenGap,
+                machineIndex, magnetCylinderIndex, pregCover, domborPrice, clicheCost,
+                stancCost, packingCost, packingTime, rollWidth, amountPerRoll,
+                title, client, discount, euro, otherCost);
 
 
             }
@@ -904,6 +953,15 @@ public class Gui extends JFrame implements ActionListener {
             ready=false;
             flashMyField(textFEuro,Color.RED,200);
         }
+        if (checkPreg.isSelected() && textFPregCover.getText().isEmpty()){
+            ready=false;
+            flashMyField(textFPregCover,Color.RED,200);
+        }
+        if (checkDombor.isSelected() && textFDomborCost.getText().isEmpty()){
+            ready=false;
+            flashMyField(textFDomborCost,Color.RED,200);
+        }
+
 
         if (ready){
             return true;
