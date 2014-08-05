@@ -514,14 +514,15 @@ public class Gui extends JFrame implements ActionListener {
         comboMachine = new JComboBox<String>();
         for (int i = 0; i < PPC.calcObj.getMachines().size(); i++)
             comboMachine.addItem(PPC.calcObj.getMachines().get(i).getName());
+        comboMachine.setSelectedIndex(5);
         comboMachine.addActionListener(this);
         tab1.add(comboMachine);
         comboMachine.setBounds(80, 243, 145, 21);
         comboCylinder = new JComboBox<String>();
         tab1.add(comboCylinder);
         comboCylinder.addItem("Auto");
-        for (int i = 0; i < PPC.calcObj.getMachines().get(0).getCylinders().size(); i++)
-            comboCylinder.addItem(String.valueOf(PPC.calcObj.getMachines().get(0).getCylinders().get(i).getTeeth()));
+        for (int i = 0; i < PPC.calcObj.getMachines().get(comboMachine.getSelectedIndex()).getCylinders().size(); i++)
+            comboCylinder.addItem(String.valueOf(PPC.calcObj.getMachines().get(comboMachine.getSelectedIndex()).getCylinders().get(i).getTeeth()));
         comboCylinder.setBounds(230, 243, 100, 21);
 
         //géptípus alatti rész
@@ -875,8 +876,12 @@ public class Gui extends JFrame implements ActionListener {
         if(comboMaterial.getItemCount() > 0) {
             comboMaterial.setSelectedIndex(0);
         }
-        if(comboMachine.getItemCount() > 0) {
-            comboMachine.setSelectedIndex(0);
+        if(comboMachine.getItemCount() > 6) {
+            comboMachine.setSelectedIndex(5);
+        }else {
+            if (comboMachine.getItemCount() > 0) {
+                comboMachine.setSelectedIndex(0);
+            }
         }
         if(comboCylinder.getItemCount() > 0) {
             comboCylinder.setSelectedIndex(0);

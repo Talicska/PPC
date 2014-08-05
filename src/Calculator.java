@@ -79,6 +79,29 @@ public class Calculator {
         }
     }
 
+    public boolean asd(int pieces,int machineIndex,double height){
+        double min=1000;
+        boolean found=false;
+        for (int i = 0; i < machines.get(machineIndex).getCylinders().size(); i++) {
+            //pieces = (int) (machines.get(machineIndex).getCylinders().get(i).getGirth() / height);
+            double rest = machines.get(machineIndex).getCylinders().get(i).getGirth() % height;
+            System.out.println(rest+" "+pieces+" "+rest / pieces+" "+machines.get(machineIndex).getCylinders().get(i).getGirth());
+
+            if (rest/(double)pieces >= 2 && rest / (double)pieces < min) {
+                min = rest / pieces;
+                this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(i);
+                this.verticalGap = min;
+                found=true;
+            }
+        }
+        if(found){
+            return true;
+        }
+        asd( pieces-1, machineIndex, height);
+
+        return false;
+    }
+
     private void searchMagnetCylinder(int machineIndex, double height, int magnetCylinderIndex) {
 
         double min = 1000;
@@ -88,8 +111,18 @@ public class Calculator {
         if (magnetCylinderIndex == 0) {    // Auto: the program chooses the ideal applicable cylinder
             // to reach the lowest (but bigger or equal than 2) vertical gap
             if (machines.get(machineIndex).getCylinders().size() > 1) { // more than 1 applicable cylinder for the chosen machine
-                int j = 0;
+
+                pieces = (int) (machines.get(machineIndex).getCylinders().get(0).getGirth() / height);
+                double pieces2 = (machines.get(machineIndex).getCylinders().get(0).getGirth() / height);
+
+                asd(pieces,machineIndex,  height);
+
+
+
+
+                /*int j = 0;
                 while (min >= 1000 && this.verticalGap < 2) {
+                    System.out.println(min+this.verticalGap);
                     for (int i = 0; i < machines.get(machineIndex).getCylinders().size(); i++) {
                         //System.out.println(machines.get(machineIndex).getName());
                         //System.out.println(machines.get(machineIndex).getCylinders().size());
@@ -105,7 +138,7 @@ public class Calculator {
                         }
                     }
                     j++;
-                }
+                }*/
             } else { // only 1 applicable cylinder for the chosen machine
                 int j = 0;
                 while (this.verticalGap < 2) {
