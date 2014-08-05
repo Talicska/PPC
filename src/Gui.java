@@ -206,6 +206,14 @@ public class Gui extends JFrame implements ActionListener {
             }
         }
 
+        else if (e.getSource() == buttonCalculate) {
+            if (checkInput()){
+
+
+
+            }
+        }
+
         else if (e.getSource() == exitItem) {
             System.exit(0);
         }
@@ -217,6 +225,7 @@ public class Gui extends JFrame implements ActionListener {
         else if (e.getSource() == newItem) {
             this.reset();
         }
+
 
     }
 
@@ -890,6 +899,10 @@ public class Gui extends JFrame implements ActionListener {
         if (textFBetweenGap.getText().isEmpty()){
             ready=false;
             flashMyField(textFBetweenGap,Color.RED,200);
+        }
+        if (textFEuro.getText().isEmpty()){
+            ready=false;
+            flashMyField(textFEuro,Color.RED,200);
         }
 
         if (ready){
