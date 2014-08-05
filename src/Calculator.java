@@ -86,7 +86,6 @@ public class Calculator {
             //pieces = (int) (machines.get(machineIndex).getCylinders().get(i).getGirth() / height);
             double rest = machines.get(machineIndex).getCylinders().get(i).getGirth() % height;
             System.out.println(rest+" "+pieces+" "+rest / pieces+" "+machines.get(machineIndex).getCylinders().get(i).getGirth());
-
             if (rest/(double)pieces >= 2 && rest / (double)pieces < min) {
                 min = rest / pieces;
                 this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(i);
@@ -112,8 +111,8 @@ public class Calculator {
             // to reach the lowest (but bigger or equal than 2) vertical gap
             if (machines.get(machineIndex).getCylinders().size() > 1) { // more than 1 applicable cylinder for the chosen machine
 
-                pieces = (int) (machines.get(machineIndex).getCylinders().get(0).getGirth() / height);
-                double pieces2 = (machines.get(machineIndex).getCylinders().get(0).getGirth() / height);
+                pieces = (int) (machines.get(machineIndex).getCylinders().get(machines.get(machineIndex).getCylinders().size()-1).getGirth() / height);
+                System.out.println("Kezdeti pieces: "+pieces );
 
                 asd(pieces,machineIndex,  height);
 
