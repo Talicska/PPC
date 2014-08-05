@@ -508,7 +508,7 @@ public class Gui extends JFrame implements ActionListener {
         tab1.add(separator6);
 
         JLabel labelPackingCost = new JLabel("Kiszerelési költség");
-        labelPackingCost.setBounds(5, 380, 150, 25);
+        labelPackingCost.setBounds(5, 380, 115, 25);
         tab1.add(labelPackingCost);
         textFPackingCost = new IntegerField("6000");
         textFPackingCost.setBounds(120, 382, 70, 21);
@@ -520,7 +520,7 @@ public class Gui extends JFrame implements ActionListener {
         tab1.add(labelFtH);
 
         JLabel labelPackingTime = new JLabel("Kiszerelési idő");
-        labelPackingTime.setBounds(5, 405, 150, 25);
+        labelPackingTime.setBounds(5, 405, 115, 25);
         tab1.add(labelPackingTime);
         textFPackingTime = new IntegerField("0");
         textFPackingTime.setBounds(120, 407, 70, 21);
@@ -532,7 +532,7 @@ public class Gui extends JFrame implements ActionListener {
         tab1.add(labelHour);
 
         JLabel labelRollWidth = new JLabel("Tekercsszélesség");
-        labelRollWidth.setBounds(5, 430, 150, 25);
+        labelRollWidth.setBounds(5, 430, 115, 25);
         tab1.add(labelRollWidth);
         textFRollWidth = new IntegerField("0");
         textFRollWidth.setBounds(120, 432, 70, 21);
@@ -544,7 +544,7 @@ public class Gui extends JFrame implements ActionListener {
         tab1.add(labelCm);
 
         JLabel labelAmountPerRoll = new JLabel("Db/tekercs");
-        labelAmountPerRoll.setBounds(5, 455, 150, 25);
+        labelAmountPerRoll.setBounds(5, 455, 115, 25);
         tab1.add(labelAmountPerRoll);
         textFAmountPerRoll = new IntegerField("0");
         textFAmountPerRoll.setBounds(120, 457, 70, 21);
