@@ -12,6 +12,7 @@ public class Calculator {
     private static final int MAX_NUMBER_OF_LAKKS = 1;
     private static final int MAX_NUMBER_OF_METALS = 2;
     private static final double ROLL_PRICE = 2.1;
+    private static final double PREG_PRICE = 120;
 
     private static ArrayList<Dye> dyes = new ArrayList<Dye>();
     private static Vector<DyeCylinder> dyeCylinders = new Vector<DyeCylinder>();
@@ -31,6 +32,9 @@ public class Calculator {
     private double materialSize;
     private double materialSelfCost;
     private double dyeSelfCost;
+    private double packingSelfCost;
+    private double domborSelfCost = 0;
+    private double pregSelfCost = 0;
     private double sumPrice;
     private double profitOnPiece;
 
@@ -336,6 +340,23 @@ public class Calculator {
         materialSelfCost = materialSize * materialPrice;
     }
 
+    public void calculateDyeCost(double width, double height){
+        dyeSelfCost = 0;
+        double actual = 0;
+
+        if (addedDyes == null) {
+            addedDyes = new Vector<DyeParent>();
+        }
+
+        for (int i = 0; i < addedDyes.size(); i++) {
+            actual = addedDyes.get(i).getPrice() / 1000;
+            dyeSelfCost = dyeSelfCost + actual * addedDyes.get(i).getDyeCylinder().getVolume() *
+                    ((double) addedDyes.get(i).getDyeCylinder().getPercent() / 100) * ((width * height) / 1000000) *
+                    ((double) addedDyes.get(i).getCover() / 100) * amount;
+
+        }
+    }
+
     public double calculatePackingCost(int amount, double packingCost, double packingTime, double rollWidth, int amountPerRoll) {
         double packingSelfCost = 0;
         int numberOfRolls = 0;
@@ -346,6 +367,18 @@ public class Calculator {
             packingSelfCost = packingTime * packingCost + numberOfRolls * ROLL_PRICE * rollWidth;
         }
         return packingSelfCost;
+    }
+
+    public void printfSelfCosts(double clicheCost, double stancCost, double otherCost){
+        System.out.println("Festék költség: " + dyeSelfCost);
+        System.out.println("Alapanyagköltség: " + materialSelfCost);
+        System.out.println("Dombornyomás ktg: " + domborSelfCost);
+        System.out.println("Prégelés ktg: " + pregSelfCost);
+        System.out.println("Klisé ktg: " + clicheCost);
+        System.out.println("Stanc ktg: " + stancCost);
+        System.out.println("Egyéb ktg: " + otherCost);
+        System.out.println("Kiszerelés ktg: " + packingSelfCost);
+        System.out.println("-- Önköltség --: " + sumPrice);
     }
 
     public void calculate(int materialIndex, int amount, double width, double height, int tracks, double sideGap, double betweenGap,
@@ -365,63 +398,21 @@ public class Calculator {
         System.out.println(materialSelfCost);
 
         //Dye cost
-        dyeSelfCost = 0;
-        double actual = 0;
+        calculateDyeCost(width, height);
 
-        if (addedDyes == null) {
-            addedDyes = new Vector<DyeParent>();
-        }
+        //Selfcost of embossing (dombornyomas)
+        domborSelfCost = (int) (amount / 1000) * domborPrice * 0.2 + domborPrice;
 
-        for (int i = 0; i < addedDyes.size(); i++) {
-            actual = addedDyes.get(i).getPrice() / 1000;
-            dyeSelfCost = dyeSelfCost + actual * addedDyes.get(i).getDyeCylinder().getVolume() *
-                    ((double) addedDyes.get(i).getDyeCylinder().getPercent() / 100) * ((width * height) / 1000000) *
-                    ((double) addedDyes.get(i).getCover() / 100) * amount;
-
-        }
-
-        //guiból
-        int domborCheck = 0;
-        //--------------------
-        //Self cost of embossing (dombornyomas)
-        double domborSelfCost = 0;
-        if (domborPrice != 0) {
-            domborSelfCost = (int) (amount / 1000) * domborPrice * 0.2 + domborPrice;
-            domborCheck = 1;
-        } else {
-            domborCheck = 0;
-        }
-
-        //guiból
-        int pregCheck = 0;
-        double pregPrice = 120; //adatbázis, vagy beégetés esetleg gui?
-        //------------------
         //Self cost of pregeles
-        double pregSelfCost = 0;
-        if (pregCover > 0) {
-            pregSelfCost = ((width * height) / 1000000) * ((double) pregCover / 100) * amount * pregPrice;
-            pregCheck = 1;
-        } else {
-            pregCheck = 0;
-        }
+        pregSelfCost = ((width * height) / 1000000) * ((double) pregCover / 100) * amount * PREG_PRICE;
 
         //Packing
-        double packingSelfCost = calculatePackingCost(amount, packingCost, packingTime, rollWidth, amountPerRoll);
-
+        packingSelfCost = calculatePackingCost(amount, packingCost, packingTime, rollWidth, amountPerRoll);
 
         //SUM self cost
         sumPrice = dyeSelfCost + materialSelfCost + domborSelfCost + pregSelfCost + clicheCost + stancCost +
                 packingSelfCost + otherCost;
-        System.out.println("Önköltség: " + sumPrice);
-        System.out.println("Festék költség: " + dyeSelfCost);
-        System.out.println("Alapanyagköltség: " + materialSelfCost);
-        System.out.println("Dombornyomás ktg: " + domborSelfCost);
-        System.out.println("Prégelés ktg: " + pregSelfCost);
-        System.out.println("Klisé ktg: " + clicheCost);
-        System.out.println("Stanc ktg: " + stancCost);
-        System.out.println("Kiszerelés ktg: " + packingSelfCost);
-        System.out.println("Egyéb ktg: " + otherCost);
-
+        printfSelfCosts(clicheCost, stancCost, otherCost);
 
         //Profit - margin
         int colorNum = countColors();
@@ -519,6 +510,12 @@ public class Calculator {
 
     // Festékköltség (Ft)
     public double getDyeSelfCost(){ return dyeSelfCost; }
+
+    // Prégelés önköltsége (Ft)
+    public double getPregSelfCost(){ return pregSelfCost; }
+
+    // Dombornyomás önköltsége (Ft)
+    public double getDomborSelfCost(){ return domborSelfCost; }
 
     // Darabonkénti önköltség (Ft)
     public double getSumPriceOnPiece(){ return sumPrice/amount; }
