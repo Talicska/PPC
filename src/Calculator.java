@@ -22,8 +22,17 @@ public class Calculator {
     private static Vector<Material> materials = new Vector<Material>();
     private static ArrayList<Metal> metals = new ArrayList<Metal>();
 
+    private int amount;
+
     private MagnetCylinder chosenMagnetCylinder;
     private double verticalGap;
+    private double materialWidth;
+    private double materialHeight;
+    private double materialSize;
+    private double materialSelfCost;
+    private double dyeSelfCost;
+    private double sumPrice;
+    private double profitOnPiece;
 
     private Vector<DyeParent> allDyeTypes;
     private static Vector<DyePreset> dyePresets = new Vector<DyePreset>();
@@ -317,6 +326,16 @@ public class Calculator {
                 (materialSelfCost / amount)) * ((double) (100 - discount) / 100);
     }
 
+    public void calculateMaterialCost(int materialIndex, int amount, double width, double height, int tracks, double sideGap, double betweenGap, double euro){
+        double materialPrice = materials.get(materialIndex).getPrice() * euro;
+
+        materialWidth = sideGap + (tracks * width) + ((tracks - 1) * betweenGap) + sideGap; // sidegap + labelwidth + betweengap + labelwidth + ... + labelwidth + betweengap + labelwidth + sidegap
+        materialHeight = ((double) amount / tracks) * height + (amount / tracks) * verticalGap;
+
+        materialSize = (materialHeight * materialWidth) / 1000000;
+        materialSelfCost = materialSize * materialPrice;
+    }
+
     public double calculatePackingCost(int amount, double packingCost, double packingTime, double rollWidth, int amountPerRoll) {
         double packingSelfCost = 0;
         int numberOfRolls = 0;
@@ -334,24 +353,19 @@ public class Calculator {
                           double stancCost, double packingCost, double packingTime, double rollWidth, int amountPerRoll,
                           String title, String client, int discount, double euro, double otherCost) {
 
+        this.amount = amount;
+
         //Choosing magnet cylinder
         searchMagnetCylinder(machineIndex, height, magnetCylinderIndex);
         System.out.println(chosenMagnetCylinder.getTeeth() + " " + chosenMagnetCylinder.getGirth());
         System.out.println(verticalGap);
 
         //Material cost
-        double materialPrice = materials.get(materialIndex).getPrice() * euro;
-
-        double materialWidth = sideGap + (tracks * width) + ((tracks - 1) * betweenGap) + sideGap; // sidegap + labelwidth + betweengap + labelwidth + ... + labelwidth + betweengap + labelwidth + sidegap
-        double materialHeight = ((double) amount / tracks) * height + (amount / tracks) * verticalGap;
-
-        double materialSize = (materialHeight * materialWidth) / 1000000;
-        double materialSelfCost = materialSize * materialPrice;
-
+        calculateMaterialCost(materialIndex, amount, width, height, tracks, sideGap, betweenGap, euro);
         System.out.println(materialSelfCost);
 
         //Dye cost
-        double dyeSelfCost = 0;
+        dyeSelfCost = 0;
         double actual = 0;
 
         if (addedDyes == null) {
@@ -365,11 +379,6 @@ public class Calculator {
                     ((double) addedDyes.get(i).getCover() / 100) * amount;
 
         }
-
-        ArrayList<DyeParent> dyes = new ArrayList<DyeParent>();
-        dyes.add(new Lakk("szilikonos", 100, null, 0));
-        if (dyes.get(0).getClass() == Lakk.class) System.out.println("lakk");
-        System.out.println("Festékköltség: " + dyeSelfCost);
 
         //guiból
         int domborCheck = 0;
@@ -401,7 +410,7 @@ public class Calculator {
 
 
         //SUM self cost
-        double sumPrice = dyeSelfCost + materialSelfCost + domborSelfCost + pregSelfCost + clicheCost + stancCost +
+        sumPrice = dyeSelfCost + materialSelfCost + domborSelfCost + pregSelfCost + clicheCost + stancCost +
                 packingSelfCost + otherCost;
         System.out.println("Önköltség: " + sumPrice);
         System.out.println("Festék költség: " + dyeSelfCost);
@@ -417,7 +426,7 @@ public class Calculator {
         //Profit - margin
         int colorNum = countColors();
         transformEtalon(width, height);
-        double profitOnPiece = calcProfitOnPiece(amount, width, height, colorNum, materialSelfCost, discount);
+        profitOnPiece = calcProfitOnPiece(amount, width, height, colorNum, materialSelfCost, discount);
         System.out.println("Darabár: " + profitOnPiece);
 
         /*if (pregCheck == 0){
@@ -446,14 +455,6 @@ public class Calculator {
 
     public static ArrayList<Machine> getMachines() {
         return machines;
-    }
-
-    public double getVerticalGap() {
-        return verticalGap;
-    }
-
-    public MagnetCylinder getChosenMagnetCylinder() {
-        return chosenMagnetCylinder;
     }
 
     public static ArrayList<Metal> getMetals() {
@@ -491,4 +492,45 @@ public class Calculator {
     public static void setEtalonObj(Etalon etalonObj) {
         Calculator.etalonObj = etalonObj;
     }
+
+    // printing in GUI after calculation
+
+    // Mágneshenger (fogas)
+    public MagnetCylinder getChosenMagnetCylinder() {
+        return chosenMagnetCylinder;
+    }
+
+    // Vertikális hézag (mm)
+    public double getVerticalGap() {
+        return verticalGap;
+    }
+
+    // Pályaszélesség (mm)
+    public double getMaterialWidth() { return materialWidth; }
+
+    // Alapanyaghossz (m)
+    public double getMaterialHeight() { return materialHeight/1000; }
+
+    // Alapanyagmennyiség (m2)
+    public double getMaterialSize() { return materialSize; }
+
+    // Alapanyagköltség (Ft)
+    public double getMaterialSelfCost() { return materialSelfCost; }
+
+    // Festékköltség (Ft)
+    public double getDyeSelfCost(){ return dyeSelfCost; }
+
+    // Darabonkénti önköltség (Ft)
+    public double getSumPriceOnPiece(){ return sumPrice/amount; }
+
+    // Összesített önköltség (Ft)
+    public double getSumPrice(){ return sumPrice; }
+
+    // Eladási darabár (Ft)
+    public double getProfitOnPiece(){ return profitOnPiece; }
+
+    // Eladási összár (Ft)
+    public double getProfit(){ return profitOnPiece * amount; }
+
+
 }
