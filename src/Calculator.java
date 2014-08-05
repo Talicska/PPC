@@ -84,7 +84,7 @@ public class Calculator {
         boolean found=false;
         for (int i = 0; i < machines.get(machineIndex).getCylinders().size(); i++) {
             //pieces = (int) (machines.get(machineIndex).getCylinders().get(i).getGirth() / height);
-            double rest = machines.get(machineIndex).getCylinders().get(i).getGirth() % height;
+            double rest = machines.get(machineIndex).getCylinders().get(i).getGirth() - pieces*height;
             System.out.println(rest+" "+pieces+" "+rest / pieces+" "+machines.get(machineIndex).getCylinders().get(i).getGirth());
             if (rest/pieces >= 2 && rest/pieces < min && machines.get(machineIndex).getCylinders().get(i).getGirth()>height) {
                 min = rest / pieces;
