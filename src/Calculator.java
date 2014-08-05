@@ -79,7 +79,7 @@ public class Calculator {
         }
     }
 
-    public boolean asd(int pieces,int machineIndex,double height){
+    public boolean Tompi(int pieces,int machineIndex,double height){
         double min=1000;
         boolean found=false;
         for (int i = 0; i < machines.get(machineIndex).getCylinders().size(); i++) {
@@ -99,7 +99,7 @@ public class Calculator {
         if(pieces<1){
             return false;
         }
-        asd( pieces-1, machineIndex, height);
+        Tompi( pieces-1, machineIndex, height);
 
         if(verticalGap!=1)
             return true;
@@ -119,7 +119,7 @@ public class Calculator {
                 pieces = (int) (machines.get(machineIndex).getCylinders().get(machines.get(machineIndex).getCylinders().size()-1).getGirth() / height);
                 System.out.println("Kezdeti pieces: "+pieces );
 
-                if(asd(pieces,machineIndex,  height)==false){
+                if(Tompi(pieces,machineIndex,  height)==false){
                     System.out.println("FALSE");
                 }
 
