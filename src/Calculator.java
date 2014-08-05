@@ -527,7 +527,7 @@ public class Calculator {
     public double getProfitOnPiece(){ return profitOnPiece; }
 
     // Eladási összár (Ft)
-    public double getProfit(){ return profitOnPiece * amount; }
+    public double getProfit(){ return profitOnPiece * amount; } //komment
 
 
 }
