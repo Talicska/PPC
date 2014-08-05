@@ -74,7 +74,7 @@ public class GuiManageDyes extends JFrame implements ActionListener {
         }
 
         else if (e.getSource() == buttonSortDyes){
-            mainGui.sortDyes();
+            PPC.calcObj.sortDyes();
             model.fireTableDataChanged();
         }
 

@@ -968,26 +968,6 @@ public class Gui extends JFrame implements ActionListener {
         return false;
     }
 
-    public void sortDyes(){
-        Vector<DyeParent> newDyes=new Vector<DyeParent>();
-        Vector<DyeParent> newLakks =new Vector<DyeParent>();
-        Vector<DyeParent> newMetals=new Vector<DyeParent>();
-
-        for(int i=0;i<PPC.calcObj.getAllDyeTypes().size();i++){
-            if(PPC.calcObj.getAllDyeTypes().get(i).getClass() == Dye.class){
-                newDyes.addElement(PPC.calcObj.getAllDyeTypes().get(i));
-            } else if(PPC.calcObj.getAllDyeTypes().get(i).getClass() == Lakk.class){
-                newLakks.addElement(PPC.calcObj.getAllDyeTypes().get(i));
-            }else if(PPC.calcObj.getAllDyeTypes().get(i).getClass() == Metal.class){
-                newMetals.addElement(PPC.calcObj.getAllDyeTypes().get(i));
-            }
-        }
-        PPC.calcObj.getAllDyeTypes().removeAllElements();
-        PPC.calcObj.getAllDyeTypes().addAll(newDyes);
-        PPC.calcObj.getAllDyeTypes().addAll(newLakks);
-        PPC.calcObj.getAllDyeTypes().addAll(newMetals);
-    }
-
     public JComboBox<Material> getComboMaterial(){
         return comboMaterial;
     }
