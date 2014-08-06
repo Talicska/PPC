@@ -33,6 +33,9 @@ public class Gui extends JFrame implements ActionListener {
     private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);      //for Etalon table
     private NumberFormat amountformat = DecimalFormat.getIntegerInstance(Locale.ENGLISH);
 
+    private JPanel panelSum;
+    private JTextArea textASum;
+
     private JComboBox<Material> comboMaterial;                                                        //objects
     private JComboBox<String> comboMachine;
     private JComboBox<String> comboCylinder;
@@ -201,7 +204,7 @@ public class Gui extends JFrame implements ActionListener {
                     name = PPC.calcObj.getAddedDyes().get(i).getName().trim();
                     volume = String.valueOf(PPC.calcObj.getAddedDyes().get(i).getDyeCylinder().getVolume());
                     cover = String.valueOf(PPC.calcObj.getAddedDyes().get(i).getCover());
-                    listDyeType.add(string.format("%-20s %4sg %3s%%", name, volume, cover));
+                    listDyeType.add(String.format("%-20s %4sg %3s%%", name, volume, cover));
                 }
             }
         }
@@ -259,7 +262,7 @@ public class Gui extends JFrame implements ActionListener {
                 stancCost, packingCost, packingTime, rollWidth, amountPerRoll,
                 title, client, discount, euro, otherCost);
 
-
+                summary();
             }
         }
 
@@ -390,10 +393,10 @@ public class Gui extends JFrame implements ActionListener {
         //UIManager.put("TabbedPane.contentAreaColor", borderColor);
 
 
-        JPanel panel2 = new JPanel();                                                   //right panel
-        panel2.setBounds(700, 25, 300, height - menuheight);
-        panel2.setLayout(null);
-        //panel2.setBackground(mainColor);
+        panelSum = new JPanel();                                                   //right panel
+        panelSum.setBounds(700, 25, 300, height - menuheight);
+        panelSum.setLayout(null);
+        //panelSum.setBackground(mainColor);
 
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP, 0);                   //tabs
@@ -696,7 +699,7 @@ public class Gui extends JFrame implements ActionListener {
         JLabel labelDyeCylinder = new JLabel("Henger");
         labelDyeCylinder.setBounds(380, 120, 70, 25);
         tab1.add(labelDyeCylinder);
-        comboDyeCylinder = new JComboBox<DyeCylinder>(PPC.calcObj.getDyeCylinders());
+        comboDyeCylinder = new JComboBox<DyeCylinder>(Calculator.getDyeCylinders());
         comboDyeCylinder.addPopupMenuListener(new ComboListener(comboDyeCylinder));
         tab1.add(comboDyeCylinder);
         comboDyeCylinder.setBounds(455, 122, 65, 21);
@@ -796,11 +799,24 @@ public class Gui extends JFrame implements ActionListener {
         buttonGetEuro.setBounds(600, 472, 85, 21);
         tab1.add(buttonGetEuro);
 
-
         buttonCalculate = new JButton("Összesítés");
         buttonCalculate.setBounds(5,27,283,25);
         buttonCalculate.addActionListener(this);
-        panel2.add(buttonCalculate);
+        panelSum.add(buttonCalculate);
+
+        textASum = new JTextArea("");
+        textASum.setEditable(false);
+        textASum.setBounds(5,52,283,490);
+        textASum.setBackground(Color.RED);
+        textASum.setFont(new Font("Serif", Font.PLAIN, 12));
+        panelSum.add(textASum);
+
+
+
+
+
+
+
 
         Vector<String> columnNames = new Vector<String>();                                      //tab3
         columnNames.addElement("Mennyiség");
@@ -865,7 +881,7 @@ public class Gui extends JFrame implements ActionListener {
 
         this.add(tabbedPane);
         //this.add(panel1);         //not needed anymore, left in just in case
-        this.add(panel2);
+        this.add(panelSum);
         this.add(menu);
         this.setVisible(true);
 
@@ -971,6 +987,36 @@ public class Gui extends JFrame implements ActionListener {
             return true;
         }
         return false;
+    }
+
+    public void summary() {
+
+        textASum.setText(
+                "\n"+
+                "Henger: " + PPC.calcObj.getChosenMagnetCylinder().getTeeth() + " fogas (" + PPC.calcObj.getChosenMagnetCylinder().getGirth() + "mm)\n" +
+                "Vertikális hézag: " + "\n" +
+                "Pályaszélesség: " + "\n" +
+                "Anyaghosszúság: " + "\n" +
+                "Anyagmennyiség: " + "\n" +
+                "\n" +
+                "Anyagköltség: " + "\n" +
+                "Darabár: " + "\n" +
+                "Festékköltség: " + "\n" +
+                "Darabár: " + "\n" +
+                "Prégelés: " + "\n" +
+                "Darabár: " + "\n" +
+                "Dombornyomás: " + "\n" +
+                "Darabár: " + "\n" +
+                "\n" +
+                "Kiszerelés: " + "\n" +
+                "\n" +
+                "Össz önköltség: " + "\n" +
+                "Darabár: " + "\n" +
+                "\n" +
+                "Eladási összár: " + "\n" +
+                "Eladási darabár: " + "\n"
+        );
+
     }
 
     public JComboBox<Material> getComboMaterial(){
