@@ -47,7 +47,7 @@ public class GuiDyePresetName extends JDialog implements ActionListener {
         this.setPreferredSize(dimension);
         this.setLocation(MouseInfo.getPointerInfo().getLocation());
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Összeállítás neve");
+        this.setTitle("Színmodell neve");
 
         textFName = new JTextField("");
         textFName.setBounds(7,5,233,21);

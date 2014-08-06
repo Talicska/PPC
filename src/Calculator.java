@@ -33,6 +33,7 @@ public class Calculator {
     private double materialSelfCost;
     private double dyeSelfCost;
     private double packingSelfCost;
+    private int numberOfRolls = 0;
     private double domborSelfCost = 0;
     private double pregSelfCost = 0;
     private double sumPrice;
@@ -418,7 +419,6 @@ public class Calculator {
 
     public double calculatePackingCost(int amount, double packingCost, double packingTime, double rollWidth, int amountPerRoll) {
         double packingSelfCost = 0;
-        int numberOfRolls = 0;
         if (amountPerRoll != 0 && rollWidth != 0) {
             //numberOfRolls = (double) amount / amountPerRoll;
             if (amount % amountPerRoll == 0) numberOfRolls = amount/amountPerRoll;
@@ -594,6 +594,9 @@ public class Calculator {
     // Kiszerelés költsége (Ft)
     public double getPackingPrice(){ return packingSelfCost; }
 
+    // Tekercsek száma (db)
+    public double getNumberOfRolls(){ return numberOfRolls; }
+
     // Darabonkénti önköltség (Ft)
     public double getSumPriceOnPiece(){ return sumPrice/amount; }
 
@@ -601,10 +604,10 @@ public class Calculator {
     public double getSumPrice(){ return sumPrice; }
 
     // Eladási darabár (Ft)
-    public double getProfitOnPiece(){ return profitOnPiece; }
+    public double getProfitOnPiece(){ return profitOnPiece + packingSelfCost / amount; }
 
     // Eladási összár (Ft)
-    public double getSumProfit(){ return profitOnPiece * amount; }
+    public double getSumProfit(){ return profitOnPiece * amount + packingSelfCost; }
 
 
 }

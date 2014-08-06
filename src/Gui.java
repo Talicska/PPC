@@ -519,7 +519,7 @@ public class Gui extends JFrame implements ActionListener {
         comboMachine = new JComboBox<String>();
         for (int i = 0; i < PPC.calcObj.getMachines().size(); i++)
             comboMachine.addItem(PPC.calcObj.getMachines().get(i).getName());
-        comboMachine.setSelectedIndex(5);
+        comboMachine.setSelectedIndex(6);
         comboMachine.addActionListener(this);
         tab1.add(comboMachine);
         comboMachine.setBounds(80, 243, 145, 21);
@@ -642,7 +642,7 @@ public class Gui extends JFrame implements ActionListener {
         separator3.setBounds(352, 5, 1, 500);
         tab1.add(separator3);
 
-        JLabel labelDyePreset = new JLabel("Összeállítás betöltése");
+        JLabel labelDyePreset = new JLabel("Színmodell betöltése");
         labelDyePreset.setBounds(370, 5, 200, 25);
         tab1.add(labelDyePreset);
         comboDyePreset = new JComboBox<DyePreset>(PPC.calcObj.getDyePresets());
@@ -821,7 +821,7 @@ public class Gui extends JFrame implements ActionListener {
 
         Color color = new Color(174,238,238);
         textASum.setBackground(color);
-        textASum.setFont(new Font("Serif", Font.PLAIN, 15));
+        textASum.setFont(new Font("Arial", Font.PLAIN, 15));
         panelSum.add(textASum);
 
 
@@ -1028,6 +1028,7 @@ public class Gui extends JFrame implements ActionListener {
                 "Darabár: " + sumFormat.format(PPC.calcObj.getDomborSelfCostOnPiece()) + " Ft\n" +
                 "\n" +
                 "Kiszerelés: " + sumFormat.format(PPC.calcObj.getPackingPrice()) + " Ft\n" +
+                "Tekercsek száma: " + sumFormat.format(PPC.calcObj.getNumberOfRolls()) + " db\n" +
                 "\n" +
                 "Össz önköltség: " + sumFormat.format(PPC.calcObj.getSumPrice()) + " Ft\n" +
                 "Darabár: " +  sumFormat.format(PPC.calcObj.getSumPriceOnPiece()) + " Ft\n" +
@@ -1035,10 +1036,17 @@ public class Gui extends JFrame implements ActionListener {
 
         StyledDocument doc = textASum.getStyledDocument();
         Style style = textASum.addStyle("Style1", null);
+
+        //Font font = new Font("Arial", Font.PLAIN, 15);
+        //MutableAttributeSet attrs = textASum.getInputAttributes();
+        //StyleConstants.setFontFamily(attrs, font.getFamily());
+        //StyleConstants.setFontSize(attrs, font.getSize());
+        //StyleConstants.setBold(attrs, (font.getStyle() & Font.BOLD) != 0);
         StyleConstants.setForeground(style, Color.red);
+        //StyleConstants.setForeground(attrs, Color.red);
 
         try { doc.insertString(doc.getLength(), "Eladási összár: " + sumFormat.format(PPC.calcObj.getSumProfit())+ " Ft\n" +
-                "Eladási darabár: " + sumFormat.format(PPC.calcObj.getProfitOnPiece()) + " Ft\n",style); }
+                "Eladási darabár: " + sumFormat.format(PPC.calcObj.getProfitOnPiece()) + " Ft\n", style); }
         catch (BadLocationException e){}
 
     }

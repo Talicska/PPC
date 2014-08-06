@@ -166,11 +166,11 @@ public class PPC {
         System.out.println("User interface loaded!");
 
 
-        int materialIndex = 1;
+        int materialIndex = 0;
         int amount = 10000;
         double width = 100;
         double height = 150;
-        double sideGap = 5;
+        double sideGap = 6;
         double betweenGap = 3;
         int tracks = 2;
         int machineIndex = 1;
