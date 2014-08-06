@@ -570,14 +570,29 @@ public class Calculator {
     // Alapanyagköltség (Ft)
     public double getMaterialSelfCost() { return materialSelfCost; }
 
+    // Alapanyagköltség - darabár (Ft)
+    public double getMaterialSelfCostOnPiece() { return materialSelfCost / amount; }
+
     // Festékköltség (Ft)
     public double getDyeSelfCost(){ return dyeSelfCost; }
+
+    // Festékköltség (Ft) - darabár
+    public double getDyeSelfCostOnPiece(){ return dyeSelfCost / amount; }
 
     // Prégelés önköltsége (Ft)
     public double getPregSelfCost(){ return pregSelfCost; }
 
+    // Prégelés önköltsége (Ft) - darabár
+    public double getPregSelfCostOnPiece(){ return pregSelfCost / amount; }
+
     // Dombornyomás önköltsége (Ft)
     public double getDomborSelfCost(){ return domborSelfCost; }
+
+    // Dombornyomás önköltsége (Ft) - darabár
+    public double getDomborSelfCostOnPiece(){ return domborSelfCost / amount; }
+
+    // Kiszerelés költsége (Ft)
+    public double getPackingPrice(){ return packingSelfCost; }
 
     // Darabonkénti önköltség (Ft)
     public double getSumPriceOnPiece(){ return sumPrice/amount; }
