@@ -21,7 +21,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.text.JTextComponent;
+import javax.swing.text.*;
 
 public class Gui extends JFrame implements ActionListener {
 
@@ -36,7 +36,7 @@ public class Gui extends JFrame implements ActionListener {
     private DecimalFormat sumFormat = new DecimalFormat("#.##");;
 
     private JPanel panelSum;
-    private JTextArea textASum;
+    private JTextPane textASum;
 
     private JComboBox<Material> comboMaterial;                                                        //objects
     private JComboBox<String> comboMachine;
@@ -806,9 +806,18 @@ public class Gui extends JFrame implements ActionListener {
         buttonCalculate.addActionListener(this);
         panelSum.add(buttonCalculate);
 
-        textASum = new JTextArea("");
+        textASum = new JTextPane();
         textASum.setEditable(false);
-        textASum.setBounds(5,52,283,490);
+        textASum.setBounds(5, 52, 283, 490);
+
+
+
+
+
+
+
+
+
 
         Color color = new Color(174,238,238);
         textASum.setBackground(color);
@@ -944,6 +953,8 @@ public class Gui extends JFrame implements ActionListener {
         checkPreg.setSelected(false);
         checkDombor.setSelected(false);
 
+        textASum.setText("");
+
     }
 
     public boolean checkInput() {
@@ -998,6 +1009,7 @@ public class Gui extends JFrame implements ActionListener {
         //double sumPrice = PPC.calcObj.getSumProfit();
         //String sumPriceString = String.valueOf(sumPrice);
 
+
         textASum.setText(
                 "\n"+
                 "Henger: " + PPC.calcObj.getChosenMagnetCylinder().getTeeth() + " fogas (" + PPC.calcObj.getChosenMagnetCylinder().getGirth() + "mm)\n" +
@@ -1019,10 +1031,15 @@ public class Gui extends JFrame implements ActionListener {
                 "\n" +
                 "Össz önköltség: " + sumFormat.format(PPC.calcObj.getSumPrice()) + " Ft\n" +
                 "Darabár: " +  sumFormat.format(PPC.calcObj.getSumPriceOnPiece()) + " Ft\n" +
-                "\n" +
-                "<html><body><b>Eladási összár: </b></body></html>" + sumFormat.format(PPC.calcObj.getSumProfit())+ " Ft\n" +
-                "Eladási darabár: " + sumFormat.format(PPC.calcObj.getProfitOnPiece()) + " Ft\n"
-        );
+                "\n");
+
+        StyledDocument doc = textASum.getStyledDocument();
+        Style style = textASum.addStyle("Style1", null);
+        StyleConstants.setForeground(style, Color.red);
+
+        try { doc.insertString(doc.getLength(), "Eladási összár: " + sumFormat.format(PPC.calcObj.getSumProfit())+ " Ft\n" +
+                "Eladási darabár: " + sumFormat.format(PPC.calcObj.getProfitOnPiece()) + " Ft\n",style); }
+        catch (BadLocationException e){}
 
     }
 
