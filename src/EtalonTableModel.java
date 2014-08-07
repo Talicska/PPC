@@ -47,9 +47,10 @@ public class EtalonTableModel extends DefaultTableModel {
         return dataVector.get(row).get(column);
     }*/
 
-    public void setValueAt(double value, int row, int column) {
-        dataVector.get(row).set(column, value);
-        fireTableCellUpdated(row, column);
+    @Override
+    public void setValueAt(Object value, int row, int column) {
+        super.setValueAt(value, row, column);
+
     }
 
     /*public int getRowCount() {

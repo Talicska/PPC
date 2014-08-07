@@ -72,6 +72,7 @@ public class DyeTableModel extends AbstractTableModel {
             default: break;
         }
         fireTableCellUpdated(row,col);
+        PPCDB.refreshDyeParents(PPC.calcObj.getAllDyeTypes());
     }
 
     @Override
