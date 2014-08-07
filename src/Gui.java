@@ -183,6 +183,7 @@ public class Gui extends JFrame implements ActionListener {
                 if ( ! name.isEmpty() ){
                     comboDyePreset.addItem(new DyePreset(name,PPC.calcObj.getAddedDyes()));
                     comboDyePreset.setSelectedIndex(0);
+                    PPCDB.refreshDyePresets(PPC.calcObj.getDyePresets());
                 }
             }
         }
@@ -194,6 +195,7 @@ public class Gui extends JFrame implements ActionListener {
                     comboDyePreset.setSelectedIndex(0);
                 else
                     comboDyePreset.setSelectedIndex(-1);
+                PPCDB.refreshDyePresets(PPC.calcObj.getDyePresets());
             }
         }
 

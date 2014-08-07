@@ -64,6 +64,7 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
                 PPC.calcObj.removeMaterial(index);
                 table.addNotify();
                 mainGui.getComboMaterial().setSelectedIndex(0);
+                PPCDB.refreshMaterials(PPC.calcObj.getMaterials());
             }
         }
 
@@ -74,6 +75,7 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
                 model.fireTableDataChanged();
                 table.addNotify();
                 table.setRowSelectionInterval(index-1,index-1);
+                PPCDB.refreshMaterials(PPC.calcObj.getMaterials());
             }
         }
 
@@ -84,6 +86,7 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
                 model.fireTableDataChanged();
                 table.addNotify();
                 table.setRowSelectionInterval(index+1,index+1);
+                PPCDB.refreshMaterials(PPC.calcObj.getMaterials());
             }
         }
 

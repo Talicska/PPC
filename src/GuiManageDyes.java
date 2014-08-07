@@ -57,6 +57,7 @@ public class GuiManageDyes extends JFrame implements ActionListener {
                 textFDyeName.setText("");
                 textFDyePrice.setText("");
                 mainGui.getComboDyeType().setSelectedIndex(0);
+                PPCDB.refreshDyeParents(PPC.calcObj.getAllDyeTypes());
             }else{
                 if (textFDyeName.getText().isEmpty()){
                     flashMyField(textFDyeName,Color.RED,200);
@@ -73,12 +74,14 @@ public class GuiManageDyes extends JFrame implements ActionListener {
                 PPC.calcObj.removeDye(index);
                 table.addNotify();
                 mainGui.getComboDyeType().setSelectedIndex(0);
+                PPCDB.refreshDyeParents(PPC.calcObj.getAllDyeTypes());
             }
         }
 
         else if (e.getSource() == buttonSortDyes){
             PPC.calcObj.sortDyes();
             model.fireTableDataChanged();
+            PPCDB.refreshDyeParents(PPC.calcObj.getAllDyeTypes());
         }
 
     }

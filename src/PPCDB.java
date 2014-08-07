@@ -103,13 +103,21 @@ public class PPCDB {
     }
 
     //refill the table with the modified dyeparent values - for update and delete also
-    public static void refreshDyeParents(Vector<DyeParent> dyeParents) throws SQLException{
-        clearDyeParents();
-
-        for (int i = 0; i < dyeParents.size(); i++){
-            addDyeParent(dyeParents.get(i));
+    public static void refreshDyeParents(Vector<DyeParent> dyeParents) {
+        try {
+            clearDyeParents();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
+
+        try {
+            for (int i = 0; i < dyeParents.size(); i++) {
+                addDyeParent(dyeParents.get(i));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Vector<DyePreset> getDyePresets() throws SQLException {
@@ -218,13 +226,21 @@ public class PPCDB {
     }
 
     //refill the table with the modified dyepreset values - for update and delete also
-    public static void refreshDyePresets(Vector<DyePreset> dyePresets) throws SQLException{
-        clearDyePresets();
-
-        for (int i = 0; i < dyePresets.size(); i++){
-            addDyePreset(dyePresets.get(i));
+    public static void refreshDyePresets(Vector<DyePreset> dyePresets){
+        try {
+            clearDyePresets();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
+
+        try {
+            for (int i = 0; i < dyePresets.size(); i++) {
+                addDyePreset(dyePresets.get(i));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Vector<DyeCylinder> getDyeCylinders() throws SQLException {
