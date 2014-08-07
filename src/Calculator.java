@@ -8,9 +8,9 @@ import java.lang.Math;
 
 public class Calculator {
 
-    private static final int MAX_NUMBER_OF_DYES = 7;
-    private static final int MAX_NUMBER_OF_LAKKS = 1;
-    private static final int MAX_NUMBER_OF_METALS = 2;
+    private static final int MAX_NUMBER_OF_DYES = 7000;
+    private static final int MAX_NUMBER_OF_LAKKS = 1000;
+    private static final int MAX_NUMBER_OF_METALS = 2000;
     private static final double ROLL_PRICE = 2.1;
     private static final double PREG_PRICE = 120;
 
