@@ -46,6 +46,9 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
                 mainGui.getComboMaterial().setSelectedIndex(0);
                 mainGui.getComboMaterial().revalidate();
                 mainGui.getComboMaterial().repaint();
+
+                PPCDB.refreshMaterials(PPC.calcObj.getMaterials());
+
             }else {
                 if (textFMatName.getText().isEmpty()){
                     flashMyField(textFMatName,Color.RED,200);

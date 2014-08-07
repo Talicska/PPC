@@ -103,7 +103,7 @@ public class PPCDB {
     }
 
     //refill the table with the modified dyeparent values - for update and delete also
-    public static void refreshDyeParents(ArrayList<DyeParent> dyeParents) throws SQLException{
+    public static void refreshDyeParents(Vector<DyeParent> dyeParents) throws SQLException{
         clearDyeParents();
 
         for (int i = 0; i < dyeParents.size(); i++){
@@ -342,7 +342,8 @@ public class PPCDB {
     public static void clearMaterials() throws SQLException {
 
         Statement stm = conn.createStatement();
-        stm.execute("Truncate table Material;");
+        stm.execute("DELETE * FROM Material;");
+        stm.execute("ALTER TABLE Material AUTO_INCREMENT = 1");
         //DELETE * FROM table_name;
         //ALTER TABLE mytable AUTO_INCREMENT = 1
 
@@ -350,12 +351,20 @@ public class PPCDB {
     }
 
     //refill the table with the modified material values - for update and delete also
-    public static void refreshMaterials(ArrayList<Material> materials) throws SQLException{
-        clearMaterials();
-
-        for (int i = 0; i < materials.size(); i++){
-            addMaterial(materials.get(i).getName(), materials.get(i).getPrice());
+    public static void refreshMaterials(Vector<Material> materials) {
+        try {
+            clearMaterials();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        try {
+        for (int i = 0; i < materials.size(); i++){
+
+                addMaterial(materials.get(i).getName(), materials.get(i).getPrice());
+
+        }} catch (SQLException e) {
+        e.printStackTrace();
+    }
 
     }
 
