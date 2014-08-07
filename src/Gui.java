@@ -78,6 +78,7 @@ public class Gui extends JFrame implements ActionListener {
     private JButton buttonResetDye;
     private JButton buttonGetEuro;
     private JButton buttonCalculate;
+    private JButton buttonExportPdf;
 
     private List listDyeType;
 
@@ -265,7 +266,12 @@ public class Gui extends JFrame implements ActionListener {
                 title, client, discount, euro, otherCost);
 
                 summary();
+                showExportButton();
             }
+        }
+
+        else if (e.getSource() == buttonExportPdf){
+            PPC.calcObj.exportToPdf();
         }
 
         else if (e.getSource() == exitItem) {
@@ -808,20 +814,18 @@ public class Gui extends JFrame implements ActionListener {
 
         textASum = new JEditorPane("text/html", "");
         textASum.setEditable(false);
-        textASum.setBounds(5, 52, 283, 490);
-
-
-
-
-
+        textASum.setBounds(5, 52, 283, 465);
         Color color = new Color(238, 213, 123);
         textASum.setBackground(color);
         textASum.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
         textASum.setFont(new Font("Arial", Font.PLAIN, 15));
         panelSum.add(textASum);
 
-
-
+        buttonExportPdf = new JButton("Exportálás");
+        buttonExportPdf.setBounds(5,517,283,25);
+        buttonExportPdf.setVisible(false);
+        buttonExportPdf.addActionListener(this);
+        panelSum.add(buttonExportPdf);
 
         Vector<String> columnNames = new Vector<String>();                                      //tab3
         columnNames.addElement("Mennyiség");
@@ -946,6 +950,7 @@ public class Gui extends JFrame implements ActionListener {
         checkDombor.setSelected(false);
 
         textASum.setText("");
+        hideExportButton();
 
     }
 
@@ -1027,6 +1032,14 @@ public class Gui extends JFrame implements ActionListener {
                 "Eladási összár: " + sumFormat.format(PPC.calcObj.getSumProfit())+ " Ft<br>" +
                 "<b><font color=\"red\">Eladási darabár: " + sumFormat.format(PPC.calcObj.getProfitOnPiece()) + " Ft</b><br>"
         );
+    }
+
+    public void showExportButton(){
+        buttonExportPdf.setVisible(true);
+    }
+
+    public void hideExportButton(){
+        buttonExportPdf.setVisible(false);
     }
 
     public JComboBox<Material> getComboMaterial(){
