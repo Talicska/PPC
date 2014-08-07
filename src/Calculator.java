@@ -26,6 +26,7 @@ public class Calculator {
     private static ArrayList<Fluo> fluos = new ArrayList<Fluo>();
 
     private int amount;
+    private double otherCost; // added to the sale price (cliche and stanc NOT)
 
     private MagnetCylinder chosenMagnetCylinder;
     private double verticalGap;
@@ -466,6 +467,7 @@ public class Calculator {
                           String title, String client, int discount, double euro, double otherCost) {
 
         this.amount = amount;
+        this.otherCost = otherCost;
 
         //Choosing magnet cylinder
         searchMagnetCylinder(machineIndex, height, magnetCylinderIndex);
@@ -624,10 +626,10 @@ public class Calculator {
     public double getSumPrice(){ return sumPrice; }
 
     // Eladási darabár (Ft)
-    public double getProfitOnPiece(){ return profitOnPiece + packingSelfCost / amount; }
+    public double getProfitOnPiece(){ return profitOnPiece + (packingSelfCost + otherCost ) / amount; }
 
     // Eladási összár (Ft)
-    public double getSumProfit(){ return profitOnPiece * amount + packingSelfCost; }
+    public double getSumProfit(){ return profitOnPiece * amount + packingSelfCost + otherCost; }
 
 
 }
