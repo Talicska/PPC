@@ -5,6 +5,7 @@
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
+import java.util.Objects;
 import java.util.Vector;
 
 public class MaterialTableModel extends AbstractTableModel {
@@ -78,6 +79,22 @@ public class MaterialTableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int row, int column) {
         return true;
+    }
+
+    public void moveRowUp(int rowIndex){
+        if(rowIndex>0){
+            Object row1 = dataVector.get(rowIndex-1);
+            dataVector.set(rowIndex-1,dataVector.get(rowIndex));
+            dataVector.set(rowIndex,(Material)row1);
+        }
+    }
+
+    public void moveRowDown(int rowIndex){
+        if(rowIndex<getRowCount()-1){
+            Object row1 = dataVector.get(rowIndex+1);
+            dataVector.set(rowIndex+1,dataVector.get(rowIndex));
+            dataVector.set(rowIndex,(Material)row1);
+        }
     }
 
 }
