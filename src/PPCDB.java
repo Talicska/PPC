@@ -342,8 +342,9 @@ public class PPCDB {
     public static void clearMaterials() throws SQLException {
 
         Statement stm = conn.createStatement();
-        stm.execute("DELETE * FROM Material;");
-        stm.execute("ALTER TABLE Material AUTO_INCREMENT = 1");
+        //stm.execute("TRUNCATE Material");
+         stm.execute("DELETE FROM Material;");
+        stm.execute("DELETE FROM sqlite_sequence WHERE name = 'Material';");
         //DELETE * FROM table_name;
         //ALTER TABLE mytable AUTO_INCREMENT = 1
 
