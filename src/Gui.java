@@ -605,9 +605,9 @@ public class Gui extends JFrame implements ActionListener {
         textFRollWidth.setHorizontalAlignment(SwingConstants.RIGHT);
         textFRollWidth.getDocument().addDocumentListener(docListener);
         tab1.add(textFRollWidth);
-        JLabel labelCm = new JLabel("cm");
-        labelCm.setBounds(195, 432, 40, 20);
-        tab1.add(labelCm);
+        JLabel labelMm5 = new JLabel("mm");
+        labelMm5.setBounds(195, 432, 40, 20);
+        tab1.add(labelMm5);
 
         JLabel labelAmountPerRoll = new JLabel("Db/tekercs");
         labelAmountPerRoll.setBounds(5, 455, 115, 25);
