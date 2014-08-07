@@ -71,13 +71,14 @@ public class PPC {
 
         Font defaultFont = new Font("Arial", Font.BOLD, 12);
         Font defaultFontTable = new Font("Arial", Font.PLAIN, 12);
+        Font defaultFontCombo = new Font(Font.MONOSPACED,Font.ROMAN_BASELINE,12);
 
         UIManager.put("Button.font", defaultFont);
         UIManager.put("ToggleButton.font", defaultFont);
         UIManager.put("RadioButton.font", defaultFont);
         UIManager.put("CheckBox.font", defaultFont);
         UIManager.put("ColorChooser.font", defaultFont);
-        UIManager.put("ComboBox.font", defaultFont);
+        UIManager.put("ComboBox.font", defaultFontCombo);
         UIManager.put("Label.font", defaultFont);
         UIManager.put("List.font", defaultFont);
         UIManager.put("MenuBar.font", defaultFont);
