@@ -19,11 +19,10 @@ public class EtalonTableModel extends DefaultTableModel {
         this.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
-                int row = e.getFirstRow();
+                /*int row = e.getFirstRow();
                 int column = e.getColumn();
                 System.out.println("Value changed!");
-                System.out.println(PPC.calcObj.getEtalonObj().getEtalonMatrix().get(row).get(column));
-
+                System.out.println(PPC.calcObj.getEtalonObj().getEtalonMatrix().get(row).get(column));*/
             }
         });
     }
@@ -35,49 +34,10 @@ public class EtalonTableModel extends DefaultTableModel {
         return Double.class;
     }
 
-    /*public String getColumnName(int column) {
-        return columnNames.get(column);
-    }*/
-
-    /*public boolean isCellEditable(int row, int column) {
-        return true;
-    }*/
-
-    /*public Object getValueAt(int row, int column) {
-        return dataVector.get(row).get(column);
-    }*/
-
     @Override
     public void setValueAt(Object value, int row, int column) {
         super.setValueAt(value, row, column);
 
     }
 
-    /*public int getRowCount() {
-        return dataVector.size();
-    }
-
-    public int getColumnCount() {
-        return columnNames.size();
-    }*/
-
-    /*public boolean hasEmptyRow() {
-        if (dataVector.size() == 0) return false;
-        AudioRecord audioRecord = (AudioRecord)dataVector.get(dataVector.size() - 1);
-        if (audioRecord.getTitle().trim().equals("") &&
-                audioRecord.getArtist().trim().equals("") &&
-                audioRecord.getAlbum().trim().equals(""))
-        {
-            return true;
-        }
-        else
-            return false;
-    }*/
-
-    /*public void addEmptyRow() {
-        dataVector.add(new AudioRecord());
-        fireTableRowsInserted(
-                dataVector.size() - 1,
-                dataVector.size() - 1);
-    }*/
 }

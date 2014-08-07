@@ -80,6 +80,7 @@ public class Gui extends JFrame implements ActionListener {
     private JButton buttonGetEuro;
     private JButton buttonCalculate;
     private JButton buttonExportPdf;
+    private JButton buttonSaveEtalon;
 
     private List listDyeType;
 
@@ -273,6 +274,10 @@ public class Gui extends JFrame implements ActionListener {
                 summary();
                 showExportButton();
             }
+        }
+
+        else if (e.getSource() == buttonSaveEtalon){
+            PPCDB.refreshEtalon(Calculator.getEtalonObj());
         }
 
         else if (e.getSource() == buttonExportPdf){
@@ -881,18 +886,22 @@ public class Gui extends JFrame implements ActionListener {
         tab3.add(table);
 
         JLabel labelEtalonSelfCost = new JLabel("Etalon önköltség:  " + Calculator.getEtalonObj().getEtalonSelfCost() + " Ft");
-        labelEtalonSelfCost.setBounds(5, 445, 300, 20);
+        labelEtalonSelfCost.setBounds(5, 445, 200, 20);
         tab3.add(labelEtalonSelfCost);
         JLabel labelEtalonMaterialPrice = new JLabel("Etalon anyagköltség:  " + Calculator.getEtalonObj().getEtalonMaterialPrice() + " Ft");
-        labelEtalonMaterialPrice.setBounds(5, 470, 300, 20);
+        labelEtalonMaterialPrice.setBounds(5, 470, 200, 20);
         tab3.add(labelEtalonMaterialPrice);
         JLabel labelEtalonSizeX = new JLabel("Etalon szélesség:  " + (int) Calculator.getEtalonObj().getEtalonSizeX() + " mm");
-        labelEtalonSizeX.setBounds(347, 445, 300, 20);
+        labelEtalonSizeX.setBounds(247, 445, 200, 20);
         tab3.add(labelEtalonSizeX);
         JLabel labelEtalonSizeY = new JLabel("Etalon magasság:  " + (int) Calculator.getEtalonObj().getEtalonSizeY() + " mm");
-        labelEtalonSizeY.setBounds(347, 470, 300, 20);
+        labelEtalonSizeY.setBounds(247, 470, 200, 20);
         tab3.add(labelEtalonSizeY);
 
+        buttonSaveEtalon = new JButton("Mentés");
+        buttonSaveEtalon.setBounds(585,462,85,21);
+        buttonSaveEtalon.addActionListener(this);
+        tab3.add(buttonSaveEtalon);
 
         this.add(tabbedPane);
         //this.add(panel1);         //not needed anymore, left in just in case
