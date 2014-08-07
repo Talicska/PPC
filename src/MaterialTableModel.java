@@ -73,6 +73,7 @@ public class MaterialTableModel extends AbstractTableModel {
             default: break;
         }
         fireTableCellUpdated(row,col);
+        PPCDB.refreshMaterials(PPC.calcObj.getMaterials());
 
     }
 
@@ -96,5 +97,6 @@ public class MaterialTableModel extends AbstractTableModel {
             dataVector.set(rowIndex,(Material)row1);
         }
     }
+
 
 }

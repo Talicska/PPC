@@ -122,6 +122,9 @@ public class GuiManageDyes extends JFrame implements ActionListener {
         table.getColumnModel().getColumn(1).setPreferredWidth(80);
         table.getColumnModel().getColumn(1).setCellRenderer(new PriceRenderer(priceformat));
         table.getColumnModel().getColumn(1).setCellEditor(new PriceEditor(priceformat));
+        table.setRowSelectionAllowed(true);
+        table.setColumnSelectionAllowed(false);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         JLabel labelNewDye = new JLabel("Festéktípus hozzáadása");
         labelNewDye.setBounds(330,20,200,25);

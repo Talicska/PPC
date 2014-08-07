@@ -343,7 +343,7 @@ public class PPCDB {
 
         Statement stm = conn.createStatement();
         //stm.execute("TRUNCATE Material");
-         stm.execute("DELETE FROM Material;");
+        stm.execute("DELETE FROM Material;");
         stm.execute("DELETE FROM sqlite_sequence WHERE name = 'Material';");
         //DELETE * FROM table_name;
         //ALTER TABLE mytable AUTO_INCREMENT = 1
