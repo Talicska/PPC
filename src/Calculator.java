@@ -53,6 +53,8 @@ public class Calculator {
 
     private Vector<Vector<Double>> profitMatrix = new Vector<Vector<Double>>();
 
+    private PdfExporter pdfExporterObj;
+
     public Calculator(ArrayList<Dye> dyes, Vector<DyeCylinder> dyecylinders, Etalon etalonObj, ArrayList<Lakk> lakks, ArrayList<Machine> machines,
                       ArrayList<MagnetCylinder> magnetcylinders, Vector<Material> materials, ArrayList<Metal> metals, Vector<DyePreset> dyePresets,
                       ArrayList<Fluo> fluos) {
@@ -514,6 +516,8 @@ public class Calculator {
 
         //debugDyePresets();
 
+
+        pdfExporterObj = new PdfExporter();
     }
 
     public void addMaterial(Material newMaterial){
