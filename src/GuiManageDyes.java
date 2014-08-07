@@ -30,8 +30,9 @@ public class GuiManageDyes extends JFrame implements ActionListener {
     private DoubleField textFDyePrice;
 
     private JRadioButton radioDye;
-    private JRadioButton radioMetal;
     private JRadioButton radioLakk;
+    private JRadioButton radioMetal;
+    private JRadioButton radioFluo;
 
     private JButton buttonAddDye;
     private JButton buttonDelDye;
@@ -47,7 +48,9 @@ public class GuiManageDyes extends JFrame implements ActionListener {
                     newDye = new Dye(textFDyeName.getText(),Double.parseDouble(textFDyePrice.getText()),null,0);
                 }else if (radioMetal.isSelected()){
                     newDye = new Metal(textFDyeName.getText(),Double.parseDouble(textFDyePrice.getText()),null,0);
-                }else newDye = new Lakk(textFDyeName.getText(),Double.parseDouble(textFDyePrice.getText()),null,0);
+                }else if (radioLakk.isSelected()){
+                    newDye = new Lakk(textFDyeName.getText(),Double.parseDouble(textFDyePrice.getText()),null,0);
+                }else newDye = new Fluo(textFDyeName.getText(),Double.parseDouble(textFDyePrice.getText()),null,0);
 
                 mainGui.getComboDyeType().addItem(newDye);
                 table.addNotify();
@@ -105,13 +108,9 @@ public class GuiManageDyes extends JFrame implements ActionListener {
                 String tip = null;
                 java.awt.Point p = e.getPoint();
                 int rowIndex = rowAtPoint(p);
-                int colIndex = columnAtPoint(p);
-
                 try {
                     tip = getToolTip(rowIndex);
-                } catch (RuntimeException e1) {
-                    //
-                }
+                } catch (RuntimeException ignored) {}
                 return tip;
             }
         };
@@ -147,23 +146,29 @@ public class GuiManageDyes extends JFrame implements ActionListener {
         labelEurM.setBounds(460,72,45,20);
         this.add(labelEurM);
 
-        radioDye = new JRadioButton("1");
-        radioDye.setBounds(340,95,50,21);
+        radioDye = new JRadioButton("Process/direkt");
+        radioDye.setBounds(340,95,160,21);
         radioDye.setSelected(true);
-        radioMetal = new JRadioButton("2");
-        radioMetal.setBounds(340,116,50,21);
-        radioLakk = new JRadioButton("3");
-        radioLakk.setBounds(340,137,50,21);
+        radioLakk = new JRadioButton("Lakk");
+        radioLakk.setBounds(340,116,100,21);
+        radioMetal = new JRadioButton("Metál");
+        radioMetal.setBounds(340,137,100,21);
+        radioFluo = new JRadioButton("Fluo");
+        radioFluo.setBounds(340,158,100,21);
+
         ButtonGroup radioGroup = new ButtonGroup();
         radioGroup.add(radioDye);
-        radioGroup.add(radioMetal);
         radioGroup.add(radioLakk);
+        radioGroup.add(radioMetal);
+        radioGroup.add(radioFluo);
+
         this.add(radioDye);
-        this.add(radioMetal);
         this.add(radioLakk);
+        this.add(radioMetal);
+        this.add(radioFluo);
 
         buttonAddDye = new JButton("Hozzáad");
-        buttonAddDye.setBounds(415,160,85,21);
+        buttonAddDye.setBounds(415,185,85,21);
         buttonAddDye.addActionListener(this);
         this.add(buttonAddDye);
 
@@ -186,13 +191,16 @@ public class GuiManageDyes extends JFrame implements ActionListener {
     public String getToolTip(int rowIndex) {
         Object obj=model.getDataVector().get(rowIndex).getClass();
         if (obj == Dye.class) {
-            return "Festék";
-        }
-        if (obj == Metal.class) {
-            return "Metáááál";
+            return "Process/direkt";
         }
         if (obj == Lakk.class) {
             return "Lakk";
+        }
+        if (obj == Metal.class) {
+            return "Metál";
+        }
+        if (obj == Fluo.class) {
+            return "Fluo";
         }
         return "???";
     }

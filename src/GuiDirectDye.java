@@ -19,8 +19,9 @@ public class GuiDirectDye extends JDialog implements ActionListener {
     private DoubleField textFPrice;
     private JButton buttonAdd;
     private JRadioButton radioDye;
-    private JRadioButton radioMetal;
     private JRadioButton radioLakk;
+    private JRadioButton radioMetal;
+    private JRadioButton radioFluo;
 
     private DyeParent newDye;
 
@@ -33,7 +34,9 @@ public class GuiDirectDye extends JDialog implements ActionListener {
                     newDye = new Dye(textFName.getText(),Double.parseDouble(textFPrice.getText()),null,0);
                 }else if (radioMetal.isSelected()){
                     newDye = new Metal(textFName.getText(),Double.parseDouble(textFPrice.getText()),null,0);
-                }else newDye = new Lakk(textFName.getText(),Double.parseDouble(textFPrice.getText()),null,0);
+                }else if (radioLakk.isSelected()){
+                    newDye = new Lakk(textFName.getText(),Double.parseDouble(textFPrice.getText()),null,0);
+                }else newDye = new Fluo(textFName.getText(),Double.parseDouble(textFPrice.getText()),null,0);
 
                 newDye.setDyeCylinder((DyeCylinder)(mainGui.getComboDyeCylinder().getSelectedItem()));
                 newDye.setCover(Integer.parseInt(mainGui.getTextFDyeCover().getText()));
@@ -84,23 +87,27 @@ public class GuiDirectDye extends JDialog implements ActionListener {
         labelFt.setBounds(145,27,30,20);
         this.add(labelFt);
 
-        radioDye = new JRadioButton("1");
-        radioDye.setBounds(10,50,50,21);
+        radioDye = new JRadioButton("Process/direkt");
+        radioDye.setBounds(10,55,160,21);
         radioDye.setSelected(true);
-        radioMetal = new JRadioButton("2");
-        radioMetal.setBounds(10,71,50,21);
-        radioLakk = new JRadioButton("3");
-        radioLakk.setBounds(10,92,50,21);
+        radioLakk = new JRadioButton("Lakk");
+        radioLakk.setBounds(10,76,100,21);
+        radioMetal = new JRadioButton("Metál");
+        radioMetal.setBounds(10,97,100,21);
+        radioFluo = new JRadioButton("Fluo");
+        radioFluo.setBounds(10,118,100,21);
         ButtonGroup radioGroup = new ButtonGroup();
         radioGroup.add(radioDye);
-        radioGroup.add(radioMetal);
         radioGroup.add(radioLakk);
+        radioGroup.add(radioMetal);
+        radioGroup.add(radioFluo);
         this.add(radioDye);
-        this.add(radioMetal);
         this.add(radioLakk);
+        this.add(radioMetal);
+        this.add(radioFluo);
 
         buttonAdd = new JButton("OK");
-        buttonAdd.setBounds(81,120,85,21);
+        buttonAdd.setBounds(155,120,85,21);
         buttonAdd.addActionListener(this);
         this.add(buttonAdd);
 
