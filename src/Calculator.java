@@ -529,8 +529,8 @@ public class Calculator {
 
     }
 
-    public void exportToPdf(){
-        pdfExporterObj = new PdfExporter(material, width, height, colorNum, stancCost + clicheCost, stancCost, profitOnPiece);
+    public void exportToPdf(String fileName){
+        pdfExporterObj = new PdfExporter(fileName, material, width, height, colorNum, stancCost + clicheCost, stancCost, profitOnPiece);
     }
 
     public void addMaterial(Material newMaterial){

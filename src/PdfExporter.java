@@ -1,7 +1,6 @@
 import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.util.Date;
-
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
@@ -19,9 +18,9 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-
 public class PdfExporter {
-    private static String FILE = "D:\\test.pdf";
+    //private static String FILE = "D:\\test.pdf";
+    private static String fileName;
     private static Material material;
     private static double width;
     private static double height;
@@ -37,7 +36,9 @@ public class PdfExporter {
 
     private static DecimalFormat df = new DecimalFormat("#.##");
 
-    public PdfExporter(Material material, double width, double height, int colorNum, double preCost, double stancCost, double profitOnPiece){
+    public PdfExporter(String fileName, Material material, double width, double height, int colorNum, double preCost, double stancCost, double profitOnPiece){
+        this.fileName = fileName;
+        System.out.println(fileName);
         this.material = material;
         this.width = width;
         this.height = height;
@@ -48,7 +49,8 @@ public class PdfExporter {
 
         try {
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(FILE));
+            //PdfWriter.getInstance(document, new FileOutputStream(FILE));
+            PdfWriter.getInstance(document, new FileOutputStream(fileName));
             document.open();
             addMetaData(document);
             addTitlePage(document);

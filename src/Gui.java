@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -90,6 +91,8 @@ public class Gui extends JFrame implements ActionListener {
     private JMenuItem loadItem;
     private JMenuItem exitItem;
     private JMenuItem aboutItem;
+
+    private JFileChooser chooser;
 
     public void actionPerformed(ActionEvent e) {
 
@@ -271,7 +274,8 @@ public class Gui extends JFrame implements ActionListener {
         }
 
         else if (e.getSource() == buttonExportPdf){
-            PPC.calcObj.exportToPdf();
+            //PPC.calcObj.exportToPdf();
+            drawExportChooser();
         }
 
         else if (e.getSource() == exitItem) {
@@ -1032,6 +1036,21 @@ public class Gui extends JFrame implements ActionListener {
                 "Eladási összár: " + sumFormat.format(PPC.calcObj.getSumProfit())+ " Ft<br>" +
                 "<b><font color=\"red\">Eladási darabár: " + sumFormat.format(PPC.calcObj.getProfitOnPiece()) + " Ft</b><br>"
         );
+    }
+
+    public void drawExportChooser(){
+        chooser = new JFileChooser();
+        chooser.setApproveButtonText("Mentés");
+        chooser.setAcceptAllFileFilterUsed(false);	//Eltünteti az all files-t
+        chooser.setFileFilter(new PdfFilter());
+        chooser.setDialogTitle("Exportálás");
+        chooser.setApproveButtonToolTipText("Árajánlat exportálása");
+        int returnVal = chooser.showOpenDialog(this);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            String fileName=file.getPath()+".pdf";
+            PPC.calcObj.exportToPdf(fileName);
+        }
     }
 
     public void showExportButton(){
