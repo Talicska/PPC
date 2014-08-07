@@ -57,6 +57,8 @@ public class PPCDB {
                 dyeParents.add(new Lakk(rs.getString("name_dyeparent"), rs.getDouble("price_dyeparent"), null, 0));
             }else if (rs.getString("name_dyetype").equals("Metal")){
                 dyeParents.add(new Metal(rs.getString("name_dyeparent"), rs.getDouble("price_dyeparent"), null, 0));
+            }else if (rs.getString("name_dyetype").equals("Fluo")){
+                dyeParents.add(new Fluo(rs.getString("name_dyeparent"), rs.getDouble("price_dyeparent"), null, 0));
             }
 
         }
