@@ -23,6 +23,7 @@ public class PPC {
         ArrayList<Dye> dyes = new ArrayList<Dye>();
         ArrayList<Lakk> lakks = new ArrayList<Lakk>();
         ArrayList<Metal> metals = new ArrayList<Metal>();
+        ArrayList<Fluo> fluos = new ArrayList<Fluo>();
         Vector<DyePreset> dyePresets = new Vector<DyePreset>();
         Vector<DyeCylinder> dyeCylinders;
         Etalon etalonObj;
@@ -40,6 +41,8 @@ public class PPC {
                     lakks.add((Lakk)dyeParents.get(i));
                 }else if (dyeParents.get(i).getClass().equals(Metal.class)){
                     metals.add((Metal)dyeParents.get(i));
+                }else if (dyeParents.get(i).getClass().equals(Fluo.class)){
+                    fluos.add((Fluo)dyeParents.get(i));
                 }
             }
             dyePresets = database.getDyePresets();
@@ -57,7 +60,7 @@ public class PPC {
         }
 
         etalonObj = new Etalon(etalonMatrix);
-        calcObj = new Calculator(dyes, dyeCylinders, etalonObj, lakks, machines, magnetCylinders, materials, metals, dyePresets);
+        calcObj = new Calculator(dyes, dyeCylinders, etalonObj, lakks, machines, magnetCylinders, materials, metals, dyePresets, fluos);
 
         //dyePresets = new Vector<DyePreset>();                                           //feltölteni adatbázisból
 

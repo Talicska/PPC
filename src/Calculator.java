@@ -11,7 +11,8 @@ public class Calculator {
     private static final int MAX_NUMBER_OF_DYES = 7000;
     private static final int MAX_NUMBER_OF_LAKKS = 1000;
     private static final int MAX_NUMBER_OF_METALS = 2000;
-    private static final double ROLL_PRICE = 2.1;
+    private static final int MAX_NUMBER_OF_FLUOS = 1000;
+    private static final double ROLL_PRICE = 0.21;
     private static final double PREG_PRICE = 120;
 
     private static ArrayList<Dye> dyes = new ArrayList<Dye>();
@@ -22,6 +23,7 @@ public class Calculator {
     private static ArrayList<MagnetCylinder> magnetCylinders = new ArrayList<MagnetCylinder>();
     private static Vector<Material> materials = new Vector<Material>();
     private static ArrayList<Metal> metals = new ArrayList<Metal>();
+    private static ArrayList<Fluo> fluos = new ArrayList<Fluo>();
 
     private int amount;
 
@@ -46,11 +48,13 @@ public class Calculator {
     private int dyeNum = 0;
     private int lakkNum = 0;
     private int metalNum = 0;
+    private int fluoNum = 0;
 
     private Vector<Vector<Double>> profitMatrix = new Vector<Vector<Double>>();
 
     public Calculator(ArrayList<Dye> dyes, Vector<DyeCylinder> dyecylinders, Etalon etalonObj, ArrayList<Lakk> lakks, ArrayList<Machine> machines,
-                      ArrayList<MagnetCylinder> magnetcylinders, Vector<Material> materials, ArrayList<Metal> metals, Vector<DyePreset> dyePresets) {
+                      ArrayList<MagnetCylinder> magnetcylinders, Vector<Material> materials, ArrayList<Metal> metals, Vector<DyePreset> dyePresets,
+                      ArrayList<Fluo> fluos) {
         Calculator.dyes = dyes;
         Calculator.dyeCylinders = dyecylinders;
         Calculator.etalonObj = etalonObj;
@@ -60,11 +64,13 @@ public class Calculator {
         Calculator.materials = materials;
         Calculator.metals = metals;
         Calculator.dyePresets = dyePresets;
+        Calculator.fluos = fluos;
 
         allDyeTypes = new Vector<DyeParent>();
         allDyeTypes.addAll(dyes);
         allDyeTypes.addAll(lakks);
         allDyeTypes.addAll(metals);
+        allDyeTypes.addAll(fluos);
 
     }
 
@@ -222,6 +228,7 @@ public class Calculator {
         dyeNum = 0;
         lakkNum = 0;
         metalNum = 0;
+        fluoNum = 0;
     }
 
     public boolean addDye(DyeParent dyeParent) {
@@ -243,6 +250,13 @@ public class Calculator {
             if (!isDyeAlreadyAdded(dyeParent.getName())) {
                 addedDyes.add(dyeParent);
                 dyeNum++;
+                return true;
+            }
+            return false;
+        } else if (dyeParent.getClass().equals(Fluo.class)) {
+            if (!isDyeAlreadyAdded(dyeParent.getName())) {
+                addedDyes.add(dyeParent);
+                fluoNum++;
                 return true;
             }
             return false;
@@ -279,6 +293,8 @@ public class Calculator {
             metalNum--;
         } else if (addedDyes.get(chosenDyeIndex).getClass().equals(Dye.class)) {
             dyeNum--;
+        } else if (addedDyes.get(chosenDyeIndex).getClass().equals(Fluo.class)) {
+            fluoNum--;
         }
         addedDyes.remove(chosenDyeIndex);
     }
@@ -333,6 +349,7 @@ public class Calculator {
         Vector<DyeParent> newDyes=new Vector<DyeParent>();
         Vector<DyeParent> newLakks =new Vector<DyeParent>();
         Vector<DyeParent> newMetals=new Vector<DyeParent>();
+        Vector<DyeParent> newFluos=new Vector<DyeParent>();
 
         for(int i=0;i<PPC.calcObj.getAllDyeTypes().size();i++){
             if(PPC.calcObj.getAllDyeTypes().get(i).getClass() == Dye.class){
@@ -341,12 +358,15 @@ public class Calculator {
                 newLakks.addElement(PPC.calcObj.getAllDyeTypes().get(i));
             }else if(PPC.calcObj.getAllDyeTypes().get(i).getClass() == Metal.class){
                 newMetals.addElement(PPC.calcObj.getAllDyeTypes().get(i));
+            }else if(PPC.calcObj.getAllDyeTypes().get(i).getClass() == Fluo.class){
+                newFluos.addElement(PPC.calcObj.getAllDyeTypes().get(i));
             }
         }
         PPC.calcObj.getAllDyeTypes().removeAllElements();
         PPC.calcObj.getAllDyeTypes().addAll(newDyes);
         PPC.calcObj.getAllDyeTypes().addAll(newLakks);
         PPC.calcObj.getAllDyeTypes().addAll(newMetals);
+        PPC.calcObj.getAllDyeTypes().addAll(newFluos);
     }
 
     private void transformEtalon(double width, double height) {
