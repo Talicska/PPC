@@ -267,6 +267,50 @@ public class PPCDB {
         return dyeCylinders;
     }
 
+    public static void clearEtalon() throws SQLException {
+
+        Statement stm = conn.createStatement();
+        //stm.execute("Truncate table DyeParent;");
+
+        stm.execute("DELETE FROM Etalon;");
+        stm.execute("DELETE FROM sqlite_sequence WHERE name = 'Etalon';");
+
+        //DELETE * FROM table_name;
+        //ALTER TABLE mytable AUTO_INCREMENT = 1
+
+        stm.close();
+    }
+
+    public static void addEtalonRow(Vector<Double> etalonRow) throws SQLException {
+
+        Statement stm = conn.createStatement();
+
+        stm.execute("INSERT INTO Etalon (amount, dye0_price, dye1_price, dye2_price, dye3_price, dye4_price, dye5_price," +
+                " dye6_price, dye7_price) values ('" + etalonRow.get(0) + "','" + etalonRow.get(1) + "','" +
+                etalonRow.get(2) + "','" + etalonRow.get(3) + "','" + etalonRow.get(4) + "','" +
+                etalonRow.get(5) + "','" + etalonRow.get(6) + "','" + etalonRow.get(7) + "','"
+                + etalonRow.get(8) + "' )");
+
+        stm.close();
+    }
+
+    public static void refreshEtalon(Etalon etalonObj) {
+        try {
+            clearEtalon();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            for (int i = 0; i < etalonObj.getEtalonMatrix().size(); i++) {
+                addEtalonRow(etalonObj.getEtalonMatrix().get(i));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static Vector<Vector<Double>> getEtalon() throws SQLException {
 
         Vector<Vector<Double>> etalonMatrix = new Vector<Vector<Double>>();
