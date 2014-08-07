@@ -95,7 +95,11 @@ public class PPCDB {
     public static void clearDyeParents() throws SQLException {
 
         Statement stm = conn.createStatement();
-        stm.execute("Truncate table DyeParent;");
+        //stm.execute("Truncate table DyeParent;");
+
+        stm.execute("DELETE FROM DyeParent;");
+        stm.execute("DELETE FROM sqlite_sequence WHERE name = 'DyeParent';");
+
         //DELETE * FROM table_name;
         //ALTER TABLE mytable AUTO_INCREMENT = 1
 
@@ -218,7 +222,11 @@ public class PPCDB {
     public static void clearDyePresets() throws SQLException {
 
         Statement stm = conn.createStatement();
-        stm.execute("Truncate table DyePreset;");
+        //stm.execute("Truncate table DyePreset;");
+
+        stm.execute("DELETE FROM DyePreset;");
+        stm.execute("DELETE FROM sqlite_sequence WHERE name = 'DyePreset';");
+
         //DELETE * FROM table_name;
         //ALTER TABLE mytable AUTO_INCREMENT = 1
 
