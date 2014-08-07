@@ -33,10 +33,10 @@ public class Gui extends JFrame implements ActionListener {
     private NumberFormat priceformat = NumberFormat.getNumberInstance(Locale.ENGLISH);      //for Etalon table
     private NumberFormat amountformat = DecimalFormat.getIntegerInstance(Locale.ENGLISH);
 
-    private DecimalFormat sumFormat = new DecimalFormat("#.##");;
+    private DecimalFormat sumFormat = new DecimalFormat("#.##");
 
     private JPanel panelSum;
-    private JTextPane textASum;
+    private JEditorPane textASum;
 
     private JComboBox<Material> comboMaterial;                                                        //objects
     private JComboBox<String> comboMachine;
@@ -806,7 +806,7 @@ public class Gui extends JFrame implements ActionListener {
         buttonCalculate.addActionListener(this);
         panelSum.add(buttonCalculate);
 
-        textASum = new JTextPane();
+        textASum = new JEditorPane("text/html", "");
         textASum.setEditable(false);
         textASum.setBounds(5, 52, 283, 490);
 
@@ -814,19 +814,10 @@ public class Gui extends JFrame implements ActionListener {
 
 
 
-
-
-
-
-
-        Color color = new Color(174,238,238);
+        Color color = new Color(238, 213, 123);
         textASum.setBackground(color);
         textASum.setFont(new Font("Arial", Font.PLAIN, 15));
         panelSum.add(textASum);
-
-
-
-
 
 
 
@@ -1009,46 +1000,32 @@ public class Gui extends JFrame implements ActionListener {
         //double sumPrice = PPC.calcObj.getSumProfit();
         //String sumPriceString = String.valueOf(sumPrice);
 
-
         textASum.setText(
-                "\n"+
-                "Henger: " + PPC.calcObj.getChosenMagnetCylinder().getTeeth() + " fogas (" + PPC.calcObj.getChosenMagnetCylinder().getGirth() + "mm)\n" +
-                "Vertikális hézag: " + sumFormat.format(PPC.calcObj.getVerticalGap()) + " mm\n" +
-                "Pályaszélesség: " + sumFormat.format(PPC.calcObj.getMaterialWidth()) + " mm\n" +
-                "Anyaghosszúság: " + sumFormat.format(PPC.calcObj.getMaterialHeight()) + " m\n" +
-                "Anyagmennyiség: " + sumFormat.format(PPC.calcObj.getMaterialSize()) + " m2\n" +
-                "\n" +
-                "Anyagköltség: " + sumFormat.format(PPC.calcObj.getMaterialSelfCost()) + " Ft\n" +
-                "Darabár: " + sumFormat.format(PPC.calcObj.getMaterialSelfCostOnPiece()) + " Ft\n" +
-                "Festékköltség: " + sumFormat.format(PPC.calcObj.getDyeSelfCost()) + " Ft\n" +
-                "Darabár: " + sumFormat.format(PPC.calcObj.getDyeSelfCostOnPiece()) + " Ft\n" +
-                "Prégelés: " + sumFormat.format(PPC.calcObj.getPregSelfCost()) + " Ft\n" +
-                "Darabár: " + sumFormat.format(PPC.calcObj.getPregSelfCostOnPiece()) + " Ft\n" +
-                "Dombornyomás: " + sumFormat.format(PPC.calcObj.getDomborSelfCost()) + " Ft\n" +
-                "Darabár: " + sumFormat.format(PPC.calcObj.getDomborSelfCostOnPiece()) + " Ft\n" +
-                "\n" +
-                "Kiszerelés: " + sumFormat.format(PPC.calcObj.getPackingPrice()) + " Ft\n" +
-                "Tekercsek száma: " + sumFormat.format(PPC.calcObj.getNumberOfRolls()) + " db\n" +
-                "\n" +
-                "Össz önköltség: " + sumFormat.format(PPC.calcObj.getSumPrice()) + " Ft\n" +
-                "Darabár: " +  sumFormat.format(PPC.calcObj.getSumPriceOnPiece()) + " Ft\n" +
-                "\n");
-
-        StyledDocument doc = textASum.getStyledDocument();
-        Style style = textASum.addStyle("Style1", null);
-
-        //Font font = new Font("Arial", Font.PLAIN, 15);
-        //MutableAttributeSet attrs = textASum.getInputAttributes();
-        //StyleConstants.setFontFamily(attrs, font.getFamily());
-        //StyleConstants.setFontSize(attrs, font.getSize());
-        //StyleConstants.setBold(attrs, (font.getStyle() & Font.BOLD) != 0);
-        StyleConstants.setForeground(style, Color.red);
-        //StyleConstants.setForeground(attrs, Color.red);
-
-        try { doc.insertString(doc.getLength(), "Eladási összár: " + sumFormat.format(PPC.calcObj.getSumProfit())+ " Ft\n" +
-                "Eladási darabár: " + sumFormat.format(PPC.calcObj.getProfitOnPiece()) + " Ft\n", style); }
-        catch (BadLocationException e){}
-
+                "<br>"+
+                "Henger: " + PPC.calcObj.getChosenMagnetCylinder().getTeeth() + " fogas (" + PPC.calcObj.getChosenMagnetCylinder().getGirth() + "mm)<br>" +
+                "Vertikális hézag: " + sumFormat.format(PPC.calcObj.getVerticalGap()) + " mm<br>" +
+                "Pályaszélesség: " + sumFormat.format(PPC.calcObj.getMaterialWidth()) + " mm<br>" +
+                "Anyaghosszúság: " + sumFormat.format(PPC.calcObj.getMaterialHeight()) + " m<br>" +
+                "Anyagmennyiség: " + sumFormat.format(PPC.calcObj.getMaterialSize()) + " m2<br>" +
+                "<br>" +
+                "Anyagköltség: " + sumFormat.format(PPC.calcObj.getMaterialSelfCost()) + " Ft<br>" +
+                "Darabár: " + sumFormat.format(PPC.calcObj.getMaterialSelfCostOnPiece()) + " Ft<br>" +
+                "Festékköltség: " + sumFormat.format(PPC.calcObj.getDyeSelfCost()) + " Ft<br>" +
+                "Darabár: " + sumFormat.format(PPC.calcObj.getDyeSelfCostOnPiece()) + " Ft<br>" +
+                "Prégelés: " + sumFormat.format(PPC.calcObj.getPregSelfCost()) + " Ft<br>" +
+                "Darabár: " + sumFormat.format(PPC.calcObj.getPregSelfCostOnPiece()) + " Ft<br>" +
+                "Dombornyomás: " + sumFormat.format(PPC.calcObj.getDomborSelfCost()) + " Ft<br>" +
+                "Darabár: " + sumFormat.format(PPC.calcObj.getDomborSelfCostOnPiece()) + " Ft<br>" +
+                "<br>" +
+                "Kiszerelés: " + sumFormat.format(PPC.calcObj.getPackingPrice()) + " Ft<br>" +
+                "Tekercsek száma: " + sumFormat.format(PPC.calcObj.getNumberOfRolls()) + " db<br>" +
+                "<br>" +
+                "Össz önköltség: " + sumFormat.format(PPC.calcObj.getSumPrice()) + " Ft<br>" +
+                "Darabár: " +  sumFormat.format(PPC.calcObj.getSumPriceOnPiece()) + " Ft<br>" +
+                "<br>" +
+                "Eladási összár: " + sumFormat.format(PPC.calcObj.getSumProfit())+ " Ft<br>" +
+                "<b><font color=\"red\">Eladási darabár: " + sumFormat.format(PPC.calcObj.getProfitOnPiece()) + " Ft</b><br>"
+        );
     }
 
     public JComboBox<Material> getComboMaterial(){
