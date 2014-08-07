@@ -1045,6 +1045,9 @@ public class Gui extends JFrame implements ActionListener {
         chooser.setFileFilter(new PdfFilter());
         chooser.setDialogTitle("Exportálás");
         chooser.setApproveButtonToolTipText("Árajánlat exportálása");
+        File currentLocation = new File("C:\\Users\\"+System.getProperty("user.name")+"\\Desktop");
+        chooser.setCurrentDirectory(currentLocation);
+
         int returnVal = chooser.showOpenDialog(this);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();
