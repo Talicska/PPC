@@ -474,7 +474,7 @@ public class Calculator {
                           double stancCost, double packingCost, double packingTime, double rollWidth, int amountPerRoll,
                           String title, String client, int discount, double euro, double otherCost) {
 
-        this.material = materials.get(machineIndex);
+        this.material = materials.get(materialIndex);
         this.amount = amount;
         this.width = width;
         this.height = height;
