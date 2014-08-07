@@ -25,7 +25,13 @@ public class Calculator {
     private static ArrayList<Metal> metals = new ArrayList<Metal>();
     private static ArrayList<Fluo> fluos = new ArrayList<Fluo>();
 
+    private Material material;
     private int amount;
+    private double width;
+    private double height;
+    private int colorNum;
+    private double stancCost;
+    private double clicheCost;
     private double otherCost; // added to the sale price (cliche and stanc NOT)
 
     private MagnetCylinder chosenMagnetCylinder;
@@ -468,7 +474,12 @@ public class Calculator {
                           double stancCost, double packingCost, double packingTime, double rollWidth, int amountPerRoll,
                           String title, String client, int discount, double euro, double otherCost) {
 
+        this.material = materials.get(machineIndex);
         this.amount = amount;
+        this.width = width;
+        this.height = height;
+        this.stancCost = stancCost;
+        this.clicheCost = clicheCost;
         this.otherCost = otherCost;
 
         //Choosing magnet cylinder
@@ -516,9 +527,10 @@ public class Calculator {
 
         //debugDyePresets();
 
+    }
 
-        pdfExporterObj = new PdfExporter(materials.get(materialIndex), width, height, colorNum,
-                stancCost + clicheCost, stancCost, profitOnPiece);
+    public void exportToPdf(){
+        pdfExporterObj = new PdfExporter(material, width, height, colorNum, stancCost + clicheCost, stancCost, profitOnPiece);
     }
 
     public void addMaterial(Material newMaterial){
