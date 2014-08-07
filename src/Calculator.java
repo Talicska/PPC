@@ -517,7 +517,7 @@ public class Calculator {
         //debugDyePresets();
 
 
-        pdfExporterObj = new PdfExporter();
+        pdfExporterObj = new PdfExporter(materials.get(materialIndex), width, height, colorNum, stancCost + clicheCost, stancCost);
     }
 
     public void addMaterial(Material newMaterial){
