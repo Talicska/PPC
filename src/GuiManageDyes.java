@@ -148,9 +148,9 @@ public class GuiManageDyes extends JFrame implements ActionListener {
         textFDyePrice = new DoubleField();
         textFDyePrice.setBounds(370,72,85,21);
         this.add(textFDyePrice);
-        JLabel labelEurM = new JLabel("EUR");
-        labelEurM.setBounds(460,72,45,20);
-        this.add(labelEurM);
+        JLabel labelFtM = new JLabel("Ft");
+        labelFtM.setBounds(460,72,45,20);
+        this.add(labelFtM);
 
         radioDye = new JRadioButton("Process/direkt");
         radioDye.setBounds(340,95,160,21);
