@@ -191,7 +191,13 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         buttonTop.addActionListener(this);
         this.add(buttonTop);
 
-        buttonUp = new JButton("^");
+        buttonUp = new JButton("");
+        try {
+            Image imgBottom = ImageIO.read(getClass().getResource("resources/up.png"));
+            buttonUp.setIcon(new ImageIcon(imgBottom));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         buttonUp.setBounds(330,180,30,30);
         buttonUp.setMargin(new Insets(0, 0, 0, 0));
 
