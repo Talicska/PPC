@@ -118,8 +118,8 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         //table.getTableHeader().setBounds(0, 0, 300, 30);
         table.setBounds(0, 0, 300, 1000);
         table.getTableHeader().setFont(new Font("headerFont", Font.BOLD, 12));
-        table.getColumnModel().getColumn(0).setPreferredWidth(220);
-        table.getColumnModel().getColumn(1).setPreferredWidth(80);
+        table.getColumnModel().getColumn(0).setPreferredWidth(240);
+        table.getColumnModel().getColumn(1).setPreferredWidth(60);
         table.getColumnModel().getColumn(1).setCellRenderer(new PriceRenderer(priceformat));
         table.getColumnModel().getColumn(1).setCellEditor(new PriceEditor(priceformat));
         table.setRowSelectionAllowed(true);
