@@ -179,7 +179,13 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         buttonAddMat.addActionListener(this);
         this.add(buttonAddMat);
 
-        buttonTop = new JButton("^^");
+        buttonTop = new JButton("");
+        try {
+            Image imgBottom = ImageIO.read(getClass().getResource("resources/top.png"));
+            buttonTop.setIcon(new ImageIcon(imgBottom));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         buttonTop.setBounds(330,140,30,30);
         buttonTop.setMargin(new Insets(0, 0, 0, 0));
         buttonTop.addActionListener(this);
@@ -194,8 +200,8 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
 
         buttonDown = new JButton("");
         try {
-            Image img = ImageIO.read(getClass().getResource("resources/down.png"));
-            buttonDown.setIcon(new ImageIcon(img));
+            Image imgDown = ImageIO.read(getClass().getResource("resources/down.png"));
+            buttonDown.setIcon(new ImageIcon(imgDown));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -205,7 +211,13 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         buttonDown.addActionListener(this);
         this.add(buttonDown);
 
-        buttonBottom = new JButton("ˇˇ");
+        buttonBottom = new JButton("");
+        try {
+            Image imgBottom = ImageIO.read(getClass().getResource("resources/bottom.png"));
+            buttonBottom.setIcon(new ImageIcon(imgBottom));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         buttonBottom.setBounds(330,260,30,30);
         buttonBottom.setMargin(new Insets(0, 0, 0, 0));
         buttonBottom.addActionListener(this);
