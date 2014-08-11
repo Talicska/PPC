@@ -18,6 +18,7 @@ import java.text.NumberFormat;
 import java.util.EventObject;
 import java.util.Locale;
 import java.util.Vector;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -301,6 +302,16 @@ public class Gui extends JFrame implements ActionListener {
     }
 
     public Gui() {
+
+        try {
+            Image image = ImageIO.read(getClass().getClassLoader().getResource("resources/logo.png"));
+            super.setIconImage(image);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
 
         this.getContentPane().setLayout(null);
         dimension = new Dimension(width, height);
