@@ -135,7 +135,7 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         this.add(labelMatName);
         textFMatName = new JTextField();
         textFMatName.setBounds(370,47,220,21);
-        textFMatName.setDocument(new JTextFieldLimit(34));
+        textFMatName.setDocument(new JTextFieldLimit(35));
         this.add(textFMatName);
 
         JLabel labelMatPrice = new JLabel("Ár");
