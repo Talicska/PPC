@@ -38,6 +38,7 @@ public class Gui extends JFrame implements ActionListener {
 
     private JPanel panelSum;
     private JEditorPane textASum;
+    private JEditorPane textABelowButton;
 
     private JComboBox<Material> comboMaterial;                                                        //objects
     private JComboBox<String> comboMachine;
@@ -273,6 +274,7 @@ public class Gui extends JFrame implements ActionListener {
 
                 summary();
                 showExportButton();
+                textABelowButton.setVisible(false);
             }
         }
 
@@ -832,6 +834,12 @@ public class Gui extends JFrame implements ActionListener {
         textASum.setFont(new Font("Arial", Font.PLAIN, 15));
         panelSum.add(textASum);
 
+        textABelowButton = new JEditorPane("text/html", "");
+        textABelowButton.setEditable(false);
+        textABelowButton.setBounds(5,517,283,25);
+        textABelowButton.setBackground(color);
+        panelSum.add(textABelowButton);
+
         buttonExportPdf = new JButton("Exportálás");
         buttonExportPdf.setBounds(5,517,283,25);
         buttonExportPdf.setVisible(false);
@@ -917,7 +925,7 @@ public class Gui extends JFrame implements ActionListener {
             comboMaterial.setSelectedIndex(0);
         }
         if(comboMachine.getItemCount() > 6) {
-            comboMachine.setSelectedIndex(5);
+            comboMachine.setSelectedIndex(6);
         }else {
             if (comboMachine.getItemCount() > 0) {
                 comboMachine.setSelectedIndex(0);
@@ -965,6 +973,7 @@ public class Gui extends JFrame implements ActionListener {
         checkDombor.setSelected(false);
 
         textASum.setText("");
+        textABelowButton.setVisible(true);
         hideExportButton();
 
     }
