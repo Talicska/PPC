@@ -204,8 +204,6 @@ public class Gui extends JFrame implements ActionListener {
         else if (e.getSource() == buttonLoadPreset) {
             if (comboDyePreset.getItemCount() > 0 && comboDyePreset.getSelectedIndex() >= 0) {
                 PPC.calcObj.addDyePreset(comboDyePreset.getSelectedIndex());
-
-                String string ="";
                 String name;
                 String volume;
                 String cover;

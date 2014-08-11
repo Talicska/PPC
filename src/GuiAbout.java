@@ -24,9 +24,10 @@ public class GuiAbout extends JFrame {
         JTextArea aboutText = new JTextArea();
         aboutText.setBackground(null);
         aboutText.setBounds(25, 15, 183, 270);
-        aboutText.setText("PPC - Print Price Calculator\n\n" +
-                "Tompos Ádám\nSzalai Bence\nApostol Gergely\n\n"+
-                "E-mail: raszal90@gmail.com\n\n2012");
+        aboutText.setText("PPC - Print Price Calculator\n" +
+                "Verzió: 2.0\n\n" +
+                "Apostol Gergely\nSzalai Bence\nSzőllős Zsolt\nTompos Ádám\n\n"+
+                "E-mail: mib@vipmail.hu\n\n2012-2014");
         aboutText.setEditable(false);
         this.add(aboutText);
 
