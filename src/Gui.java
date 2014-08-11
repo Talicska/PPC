@@ -638,16 +638,16 @@ public class Gui extends JFrame implements ActionListener {
         labelDb3.setBounds(195, 457, 40, 20);
         tab1.add(labelDb3);
 
-        JLabel labelPackingSumCost = new JLabel("Kiszerelés összköltsége");
-        labelPackingSumCost.setBounds(5, 480, 150, 25);
+        JLabel labelPackingSumCost = new JLabel("Kiszerelés összktg");
+        labelPackingSumCost.setBounds(5, 480, 115, 25);
         tab1.add(labelPackingSumCost);
         textFPackingSumCost = new JTextField("0");
-        textFPackingSumCost.setBounds(150, 482, 70, 21);
+        textFPackingSumCost.setBounds(120, 482, 70, 21);
         textFPackingSumCost.setHorizontalAlignment(SwingConstants.RIGHT);
         textFPackingSumCost.setEditable(false);
         tab1.add(textFPackingSumCost);
         JLabel labelFt6 = new JLabel("Ft");
-        labelFt6.setBounds(225, 482, 40, 20);
+        labelFt6.setBounds(195, 482, 40, 20);
         tab1.add(labelFt6);
 
         JSeparator separator2 = new JSeparator();                                           //tab1 vertical separator
