@@ -8,8 +8,8 @@ import java.awt.*;
 public class GuiAbout extends JFrame {
 
     private Dimension dimension;
-    private int width = 300;
-    private int height = 300;
+    private int width = 280;
+    private int height = 230;
 
     public GuiAbout(){
 
