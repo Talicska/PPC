@@ -2,6 +2,7 @@
  * Created by Talicska on 2014.07.13..
  */
 
+import javax.sql.RowSetInternal;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
@@ -98,5 +99,17 @@ public class MaterialTableModel extends AbstractTableModel {
         }
     }
 
+    public void moveRowTop(int rowIndex){
+        while(rowIndex>0){
+            moveRowUp(rowIndex);
+            rowIndex--;
+        }
+    }
 
+    public void moveRowBottom(int rowIndex){
+        while(rowIndex<getRowCount()-1){
+            moveRowDown(rowIndex);
+            rowIndex++;
+        }
+    }
 }

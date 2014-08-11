@@ -29,8 +29,10 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
 
     private JButton buttonAddMat;
     private JButton buttonDelMat;
+    private JButton buttonTop;
     private JButton buttonUp;
     private JButton buttonDown;
+    private JButton buttonBottom;
 
     public void actionPerformed(ActionEvent e) {
 
@@ -68,6 +70,17 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
             }
         }
 
+        else if (e.getSource() == buttonTop){
+            int index = table.getSelectedRow();
+            if (index > 0 && table.getRowCount() > 1){
+                model.moveRowTop(index);
+                model.fireTableDataChanged();
+                table.addNotify();
+                table.setRowSelectionInterval(0,0);
+                PPCDB.refreshMaterials(PPC.calcObj.getMaterials());
+            }
+        }
+
         else if (e.getSource() == buttonUp){
             int index = table.getSelectedRow();
             if (index > 0 && table.getRowCount() > 1){
@@ -86,6 +99,17 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
                 model.fireTableDataChanged();
                 table.addNotify();
                 table.setRowSelectionInterval(index+1,index+1);
+                PPCDB.refreshMaterials(PPC.calcObj.getMaterials());
+            }
+        }
+
+        else if (e.getSource() == buttonBottom){
+            int index = table.getSelectedRow();
+            if (index >= 0 && index < table.getRowCount()-1 && table.getRowCount() > 1){
+                model.moveRowBottom(index);
+                model.fireTableDataChanged();
+                table.addNotify();
+                table.setRowSelectionInterval(model.getRowCount()-1,model.getRowCount()-1);
                 PPCDB.refreshMaterials(PPC.calcObj.getMaterials());
             }
         }
@@ -153,17 +177,29 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         buttonAddMat.addActionListener(this);
         this.add(buttonAddMat);
 
+        buttonTop = new JButton("^^");
+        buttonTop.setBounds(330,140,30,30);
+        buttonTop.setMargin(new Insets(0, 0, 0, 0));
+        buttonTop.addActionListener(this);
+        this.add(buttonTop);
+
         buttonUp = new JButton("^");
-        buttonUp.setBounds(330,200,30,30);
+        buttonUp.setBounds(330,180,30,30);
         buttonUp.setMargin(new Insets(0, 0, 0, 0));
         buttonUp.addActionListener(this);
         this.add(buttonUp);
 
         buttonDown = new JButton("ˇ");
-        buttonDown.setBounds(330,240,30,30);
+        buttonDown.setBounds(330,220,30,30);
         buttonDown.setMargin(new Insets(0, 0, 0, 0));
         buttonDown.addActionListener(this);
         this.add(buttonDown);
+
+        buttonBottom = new JButton("ˇˇ");
+        buttonBottom.setBounds(330,260,30,30);
+        buttonBottom.setMargin(new Insets(0, 0, 0, 0));
+        buttonBottom.addActionListener(this);
+        this.add(buttonBottom);
 
         buttonDelMat = new JButton("Töröl");
         buttonDelMat.setBounds(330,330,85,21);
