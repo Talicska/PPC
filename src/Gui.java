@@ -700,20 +700,20 @@ public class Gui extends JFrame implements ActionListener {
         buttonManageDyes.addActionListener(this);
         tab1.add(buttonManageDyes);
 
-        buttonSavePreset = new JButton("Mentés");
-        buttonSavePreset.setBounds(600, 180, 85, 21);
-        buttonSavePreset.addActionListener(this);
-        tab1.add(buttonSavePreset);
-
         buttonDelDye = new JButton("Töröl");
-        buttonDelDye.setBounds(600, 259, 85, 21);
+        buttonDelDye.setBounds(600, 234, 85, 21);
         buttonDelDye.addActionListener(this);
         tab1.add(buttonDelDye);
 
         buttonResetDye = new JButton("Reset");
-        buttonResetDye.setBounds(600,284,85,21);
+        buttonResetDye.setBounds(600,259,85,21);
         buttonResetDye.addActionListener(this);
         tab1.add(buttonResetDye);
+
+        buttonSavePreset = new JButton("Mentés");
+        buttonSavePreset.setBounds(600, 284, 85, 21);
+        buttonSavePreset.addActionListener(this);
+        tab1.add(buttonSavePreset);
 
         JLabel labelDyeCylinder = new JLabel("Henger");
         labelDyeCylinder.setBounds(380, 120, 70, 25);

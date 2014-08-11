@@ -30,7 +30,6 @@ public class GuiAbout extends JFrame {
                 "E-mail: mib@vipmail.hu\n\n2012-2014");
         aboutText.setEditable(false);
         this.add(aboutText);
-
         this.setVisible(true);
 
     }
