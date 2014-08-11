@@ -2,11 +2,13 @@
  * Created by Talicska on 2014.07.13..
  */
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Vector;
@@ -186,10 +188,18 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         buttonUp = new JButton("^");
         buttonUp.setBounds(330,180,30,30);
         buttonUp.setMargin(new Insets(0, 0, 0, 0));
+
         buttonUp.addActionListener(this);
         this.add(buttonUp);
 
-        buttonDown = new JButton("ˇ");
+        buttonDown = new JButton("");
+        try {
+            Image img = ImageIO.read(getClass().getResource("resources/down.png"));
+            buttonDown.setIcon(new ImageIcon(img));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         buttonDown.setBounds(330,220,30,30);
         buttonDown.setMargin(new Insets(0, 0, 0, 0));
         buttonDown.addActionListener(this);
