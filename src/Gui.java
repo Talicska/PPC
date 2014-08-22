@@ -905,7 +905,7 @@ public class Gui extends JFrame implements ActionListener {
         JLabel labelEtalonSelfCost = new JLabel("Etalon önköltség:  " + Calculator.getEtalonObj().getEtalonSelfCost() + " Ft");
         labelEtalonSelfCost.setBounds(5, 445, 200, 20);
         tab3.add(labelEtalonSelfCost);
-        JLabel labelEtalonMaterialPrice = new JLabel("Etalon anyagköltség:  " + Calculator.getEtalonObj().getEtalonMaterialPrice() + " Ft");
+        JLabel labelEtalonMaterialPrice = new JLabel("Etalon anyagköltség:  " + Calculator.getEtalonObj().getEtalonMaterialPrice() + " \u20AC");
         labelEtalonMaterialPrice.setBounds(5, 470, 200, 20);
         tab3.add(labelEtalonMaterialPrice);
         JLabel labelEtalonSizeX = new JLabel("Etalon szélesség:  " + (int) Calculator.getEtalonObj().getEtalonSizeX() + " mm");
@@ -1041,11 +1041,11 @@ public class Gui extends JFrame implements ActionListener {
 
         textASum.setText(
                 "<br>"+
-                "Henger: " + PPC.calcObj.getChosenMagnetCylinder().getTeeth() + " fogas (" + PPC.calcObj.getChosenMagnetCylinder().getGirth() + "mm)<br>" +
+                "Henger: " + PPC.calcObj.getChosenMagnetCylinder().getTeeth() + " fogas (" + PPC.calcObj.getChosenMagnetCylinder().getGirth() + " mm)<br>" +
                 "Vertikális hézag: " + sumFormat.format(PPC.calcObj.getVerticalGap()) + " mm<br>" +
                 "Pályaszélesség: " + sumFormat.format(PPC.calcObj.getMaterialWidth()) + " mm<br>" +
                 "Anyaghosszúság: " + sumFormat.format(PPC.calcObj.getMaterialHeight()) + " m<br>" +
-                "Anyagmennyiség: " + sumFormat.format(PPC.calcObj.getMaterialSize()) + " m2<br>" +
+                "Anyagmennyiség: " + sumFormat.format(PPC.calcObj.getMaterialSize()) + " m²<br>" +
                 "<br>" +
                 "Anyagköltség: " + sumFormat.format(PPC.calcObj.getMaterialSelfCost()) + " Ft<br>" +
                 "Darabár: " + sumFormat.format(PPC.calcObj.getMaterialSelfCostOnPiece()) + " Ft<br>" +

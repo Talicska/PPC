@@ -170,7 +170,7 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         textFMatPrice = new DoubleField();
         textFMatPrice.setBounds(370,72,85,21);
         this.add(textFMatPrice);
-        JLabel labelEurM = new JLabel("EUR");
+        JLabel labelEurM = new JLabel("€");
         labelEurM.setBounds(460,72,45,20);
         this.add(labelEurM);
 
