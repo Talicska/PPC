@@ -733,7 +733,7 @@ public class Gui extends JFrame implements ActionListener {
         comboDyeCylinder.addPopupMenuListener(new ComboListener(comboDyeCylinder));
         tab1.add(comboDyeCylinder);
         comboDyeCylinder.setBounds(455, 122, 65, 21);
-        JLabel labelGM = new JLabel("g/m2");
+        JLabel labelGM = new JLabel("g/m\u00B2");
         labelGM.setBounds(525, 122, 30, 20);
         tab1.add(labelGM);
 
