@@ -648,5 +648,4 @@ public class Calculator {
     // Eladási összár (Ft)
     public double getSumProfit(){ return profitOnPiece * amount + packingSelfCost + otherCost; }
 
-
 }
