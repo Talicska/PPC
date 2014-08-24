@@ -90,8 +90,8 @@ public class Gui extends JFrame implements ActionListener {
     private JCheckBox checkDombor;
 
     private JMenuItem newItem;
-    private JMenuItem saveItem;
-    private JMenuItem loadItem;
+    //private JMenuItem saveItem;
+    //private JMenuItem loadItem;
     private JMenuItem exitItem;
     private JMenuItem aboutItem;
 
@@ -310,9 +310,6 @@ public class Gui extends JFrame implements ActionListener {
             e.printStackTrace();
         }
 
-
-
-
         this.getContentPane().setLayout(null);
         dimension = new Dimension(width, height);
         priceformat.setGroupingUsed(false);
@@ -396,10 +393,10 @@ public class Gui extends JFrame implements ActionListener {
         newItem = new JMenuItem("Új");
         newItem.addActionListener(this);
         fileMenu.add(newItem);
-        saveItem = new JMenuItem("Mentés");
+        /*saveItem = new JMenuItem("Mentés");
         fileMenu.add(saveItem);
         loadItem = new JMenuItem("Betöltés");
-        fileMenu.add(loadItem);
+        fileMenu.add(loadItem);*/
         exitItem = new JMenuItem("Kilépés");
         exitItem.addActionListener(this);
         fileMenu.add(exitItem);
@@ -817,7 +814,7 @@ public class Gui extends JFrame implements ActionListener {
         JLabel labelEuro = new JLabel("Euro árfolyam");
         labelEuro.setBounds(370, 470, 80, 25);
         tab1.add(labelEuro);
-        textFEuro = new DoubleField("300");
+        textFEuro = new DoubleField("310");
         textFEuro.setBounds(455, 472, 65, 21);
         textFEuro.setHorizontalAlignment(SwingConstants.RIGHT);
         tab1.add(textFEuro);
@@ -973,7 +970,7 @@ public class Gui extends JFrame implements ActionListener {
         textFRollWidth.setText("0");
         textFAmountPerRoll.setText("0");
         textFPackingSumCost.setText("0");
-        textFEuro.setText("300");
+        textFEuro.setText("310");
 
         listDyeType.removeAll();
         PPC.calcObj.resetAddedDyes();
@@ -1041,7 +1038,8 @@ public class Gui extends JFrame implements ActionListener {
 
         textASum.setText(
                 "<br>"+
-                "Henger: " + PPC.calcObj.getChosenMagnetCylinder().getTeeth() + " fogas (" + PPC.calcObj.getChosenMagnetCylinder().getGirth() + " mm)<br>" +
+                "Henger: " + PPC.calcObj.getChosenMagnetCylinder().getTeeth() +
+                        " fogas (" + PPC.calcObj.getChosenMagnetCylinder().getGirth() + " mm)<br>" +
                 "Vertikális hézag: " + sumFormat.format(PPC.calcObj.getVerticalGap()) + " mm<br>" +
                 "Pályaszélesség: " + sumFormat.format(PPC.calcObj.getMaterialWidth()) + " mm<br>" +
                 "Anyaghosszúság: " + sumFormat.format(PPC.calcObj.getMaterialHeight()) + " m<br>" +

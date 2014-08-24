@@ -1,6 +1,6 @@
 import java.io.FileOutputStream;
 import java.text.DecimalFormat;
-
+import java.text.DecimalFormatSymbols;
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
@@ -19,7 +19,6 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class PdfExporter {
-    //private static String FILE = "D:\\test.pdf";
     private static String fileName;
     private static String title = "";
     private static Material material;
@@ -35,11 +34,17 @@ public class PdfExporter {
     private static Font redFont = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.RED);
     private static Font subFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
     private static Font smallNorm = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
+    private static Font smallBold = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
 
     private static DecimalFormat df = new DecimalFormat("#.##");
 
     public PdfExporter(String fileName,  String title, Material material, double width, double height, int colorNum, double preCost,
                        double stancCost, int amount, double profitOnPiece){
+
+        DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(dfs);
+
         this.fileName = fileName;
         if (!title.equals("")) this.title = " - " + title;
         System.out.println(fileName);
@@ -54,7 +59,6 @@ public class PdfExporter {
 
         try {
             Document document = new Document();
-            //PdfWriter.getInstance(document, new FileOutputStream(FILE));
             PdfWriter.getInstance(document, new FileOutputStream(fileName));
             document.open();
             addMetaData(document);
@@ -66,9 +70,6 @@ public class PdfExporter {
         }
     }
 
-    // iText allows to add metadata to the PDF which can be viewed in your Adobe
-    // Reader
-    // under File -> Properties
     private static void addMetaData(Document document) {
         document.addTitle("Imprenta Nyomdaipari Kft. árajánlata");
         document.addSubject("Árajánlat");
@@ -78,19 +79,56 @@ public class PdfExporter {
     }
 
     private static void addTitlePage(Document document) throws DocumentException {
+
         Paragraph preface = new Paragraph();
 
-        // We add one empty line
         addEmptyLine(preface, 1);
 
-        // Lets write a big header
         Paragraph titlePara = new Paragraph("Árajánlat" + title, catFont);
         titlePara.setAlignment(Element.ALIGN_CENTER);
         preface.add(titlePara);
         addEmptyLine(preface, 2);
 
-        preface.add(new Paragraph("Alapanyag: " + material.getName(), smallNorm));
-        addEmptyLine(preface, 1);
+        Paragraph listPara = new Paragraph();
+        listPara.add(new Phrase("Alapanyag: ", smallBold));
+        listPara.add(new Phrase(material.getName(), smallNorm));
+        addEmptyLine(listPara, 1);
+
+        listPara.add(new Phrase("Címke mérete: ", smallBold));
+        listPara.add(new Phrase(width + " mm x " + height + " mm", smallNorm));
+        addEmptyLine(listPara, 1);
+
+        listPara.add(new Phrase("Színek száma: ", smallBold));
+        listPara.add(new Phrase(colorNum + " C", smallNorm));
+        addEmptyLine(listPara, 1);
+
+        listPara.add(new Phrase("Nyomdai előkészítés: ", smallBold));
+        listPara.add(new Phrase(preCost + " Ft", smallNorm));
+        addEmptyLine(listPara, 1);
+
+        listPara.add(new Phrase("Stanc:  ", smallBold));
+        if (stanc){
+            listPara.add(new Phrase("van ", smallNorm));
+        }else{
+            listPara.add(new Phrase("nincs ", smallNorm));
+        }
+        addEmptyLine(listPara, 1);
+
+        listPara.add(new Phrase("Mennyiség: ", smallBold));
+        listPara.add(new Phrase(df.format(amount) + " db", smallNorm));
+        addEmptyLine(listPara, 1);
+
+        listPara.add(new Phrase("Darabár: ", smallBold));
+        listPara.add(new Phrase(df.format(profitOnPiece) + " Ft", smallNorm));
+        addEmptyLine(listPara, 1);
+
+        listPara.add(new Phrase("Összesen: ", smallBold));
+        listPara.add(new Phrase(df.format(amount * profitOnPiece) + " Ft", smallNorm));
+        addEmptyLine(listPara, 1);
+
+        preface.add(listPara);
+
+        /*addEmptyLine(preface, 1);
         preface.add(new Paragraph("Címke mérete: " + width + " mm x " + height + " mm", smallNorm));
         addEmptyLine(preface, 1);
         preface.add(new Paragraph("Színek száma: " + colorNum + " C", smallNorm));
@@ -103,7 +141,7 @@ public class PdfExporter {
         preface.add(new Paragraph("Mennyiség: " + df.format(amount) + " db", smallNorm));
         addEmptyLine(preface, 1);
         preface.add(new Paragraph("Darabár: " + df.format(profitOnPiece) + " Ft", smallNorm));
-        addEmptyLine(preface, 1);
+        addEmptyLine(preface, 1);*/
 
         // Will create: Report generated by: _name, _date
         /*preface.add(new Paragraph("Report generated by: " + System.getProperty("user.name") + ", " + new Date(), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -119,7 +157,6 @@ public class PdfExporter {
 
         document.add(preface);
 
-        // Start a new page
         document.newPage();
     }
 
