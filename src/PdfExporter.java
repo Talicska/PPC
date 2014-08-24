@@ -21,12 +21,14 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class PdfExporter {
     //private static String FILE = "D:\\test.pdf";
     private static String fileName;
+    private static String title = "";
     private static Material material;
     private static double width;
     private static double height;
     private static int colorNum;
     private static double preCost;
     private static boolean stanc = false;
+    private static int amount;
     private static double profitOnPiece;
 
     private static Font catFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
@@ -36,8 +38,10 @@ public class PdfExporter {
 
     private static DecimalFormat df = new DecimalFormat("#.##");
 
-    public PdfExporter(String fileName, Material material, double width, double height, int colorNum, double preCost, double stancCost, double profitOnPiece){
+    public PdfExporter(String fileName,  String title, Material material, double width, double height, int colorNum, double preCost,
+                       double stancCost, int amount, double profitOnPiece){
         this.fileName = fileName;
+        if (!title.equals("")) this.title = " - " + title;
         System.out.println(fileName);
         this.material = material;
         this.width = width;
@@ -45,6 +49,7 @@ public class PdfExporter {
         this.colorNum = colorNum;
         this.preCost = preCost;
         if (stancCost > 0) stanc = true;
+        this.amount = amount;
         this.profitOnPiece = profitOnPiece;
 
         try {
@@ -79,9 +84,9 @@ public class PdfExporter {
         addEmptyLine(preface, 1);
 
         // Lets write a big header
-        Paragraph title = new Paragraph("Árajánlat", catFont);
-        title.setAlignment(Element.ALIGN_CENTER);
-        preface.add(title);
+        Paragraph titlePara = new Paragraph("Árajánlat" + title, catFont);
+        titlePara.setAlignment(Element.ALIGN_CENTER);
+        preface.add(titlePara);
         addEmptyLine(preface, 2);
 
         preface.add(new Paragraph("Alapanyag: " + material.getName(), smallNorm));
@@ -94,6 +99,8 @@ public class PdfExporter {
         addEmptyLine(preface, 1);
         if (stanc) preface.add(new Paragraph("Stanc: van", smallNorm));
         else preface.add(new Paragraph("Stanc: nincs", smallNorm));
+        addEmptyLine(preface, 1);
+        preface.add(new Paragraph("Mennyiség: " + df.format(amount) + " db", smallNorm));
         addEmptyLine(preface, 1);
         preface.add(new Paragraph("Darabár: " + df.format(profitOnPiece) + " Ft", smallNorm));
         addEmptyLine(preface, 1);

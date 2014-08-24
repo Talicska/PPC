@@ -33,6 +33,7 @@ public class Calculator {
     private double stancCost;
     private double clicheCost;
     private double otherCost; // added to the sale price (cliche and stanc NOT)
+    private String title;
 
     private MagnetCylinder chosenMagnetCylinder;
     private double verticalGap;
@@ -481,6 +482,7 @@ public class Calculator {
         this.stancCost = stancCost;
         this.clicheCost = clicheCost;
         this.otherCost = otherCost;
+        this.title = title;
 
         //Choosing magnet cylinder
         searchMagnetCylinder(machineIndex, height, magnetCylinderIndex);
@@ -530,7 +532,8 @@ public class Calculator {
     }
 
     public void exportToPdf(String fileName){
-        pdfExporterObj = new PdfExporter(fileName, material, width, height, colorNum, stancCost + clicheCost, stancCost, profitOnPiece);
+        pdfExporterObj = new PdfExporter(fileName, title, material, width, height, colorNum, stancCost + clicheCost,
+                stancCost, amount, profitOnPiece);
     }
 
     public void addMaterial(Material newMaterial){
