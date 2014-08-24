@@ -834,7 +834,7 @@ public class Gui extends JFrame implements ActionListener {
         textASum = new JEditorPane("text/html", "");
         textASum.setEditable(false);
         textASum.setBounds(5, 52, 283, 465);
-        Color color = new Color(238, 213, 123);
+        Color color = new Color(202, 191, 227);
         textASum.setBackground(color);
         textASum.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
         textASum.setFont(new Font("Arial", Font.PLAIN, 15));
