@@ -104,7 +104,7 @@ public class Gui extends JFrame implements ActionListener {
         }
 
         else if (e.getSource() == buttonManageMaterials){
-            GuiManageMaterials materialEditor = new GuiManageMaterials(this);
+            new GuiManageMaterials(this);
         }
 
         else if (e.getSource() == buttonAddDye) {
@@ -113,7 +113,6 @@ public class Gui extends JFrame implements ActionListener {
                 newDye.setDyeCylinder((DyeCylinder)comboDyeCylinder.getSelectedItem());
                 newDye.setCover(Integer.valueOf(textFDyeCover.getText()));
                 PPC.calcObj.addDye(newDye);
-                String string ="";
                 String name;
                 String volume;
                 String cover;
@@ -122,7 +121,7 @@ public class Gui extends JFrame implements ActionListener {
                     name = PPC.calcObj.getAddedDyes().get(i).getName().trim();
                     volume = String.valueOf(PPC.calcObj.getAddedDyes().get(i).getDyeCylinder().getVolume());
                     cover = String.valueOf(PPC.calcObj.getAddedDyes().get(i).getCover());
-                    listDyeType.add(string.format("%-20s %4sg %3s%%", name, volume, cover));
+                    listDyeType.add(String.format("%-20s %4sg %3s%%", name, volume, cover));
                 }
             } else if (textFDyeCover.getText().isEmpty()) {
                 flashMyField(textFDyeCover, Color.RED, 200);
@@ -136,7 +135,6 @@ public class Gui extends JFrame implements ActionListener {
                 if (newDye != null){
                     PPC.calcObj.addDye(newDye);
                 }
-                String string ="";
                 String name;
                 String volume;
                 String cover;
@@ -145,7 +143,7 @@ public class Gui extends JFrame implements ActionListener {
                     name = PPC.calcObj.getAddedDyes().get(i).getName().trim();
                     volume = String.valueOf(PPC.calcObj.getAddedDyes().get(i).getDyeCylinder().getVolume());
                     cover = String.valueOf(PPC.calcObj.getAddedDyes().get(i).getCover());
-                    listDyeType.add(string.format("%-20s %4sg %3s%%", name, volume, cover));
+                    listDyeType.add(String.format("%-20s %4sg %3s%%", name, volume, cover));
                 }
             } else if (textFDyeCover.getText().isEmpty()) {
                 flashMyField(textFDyeCover, Color.RED, 200);
@@ -153,15 +151,15 @@ public class Gui extends JFrame implements ActionListener {
         }
 
         else if (e.getSource() == buttonManageDyes ){
-            GuiManageDyes guiDyes = new GuiManageDyes(this);
+            new GuiManageDyes(this);
         }
 
         else if (e.getSource() == comboMachine) {
             comboCylinder.removeAllItems();
             int index = comboMachine.getSelectedIndex();
             comboCylinder.addItem("Auto");
-            for (int i = 0; i < PPC.calcObj.getMachines().get(index).getCylinders().size(); i++)
-                comboCylinder.addItem(String.valueOf(PPC.calcObj.getMachines().get(index).getCylinders().get(i).getTeeth()));
+            for (int i = 0; i < Calculator.getMachines().get(index).getCylinders().size(); i++)
+                comboCylinder.addItem(String.valueOf(Calculator.getMachines().get(index).getCylinders().get(i).getTeeth()));
         }
 
         else if (e.getSource() == buttonDelDye) {
@@ -542,8 +540,8 @@ public class Gui extends JFrame implements ActionListener {
         labelMachine.setBounds(5, 241, 70, 25);
         tab1.add(labelMachine);
         comboMachine = new JComboBox<String>();
-        for (int i = 0; i < PPC.calcObj.getMachines().size(); i++)
-            comboMachine.addItem(PPC.calcObj.getMachines().get(i).getName());
+        for (int i = 0; i < Calculator.getMachines().size(); i++)
+            comboMachine.addItem(Calculator.getMachines().get(i).getName());
         comboMachine.setSelectedIndex(6);
         comboMachine.addActionListener(this);
         tab1.add(comboMachine);
@@ -551,8 +549,8 @@ public class Gui extends JFrame implements ActionListener {
         comboCylinder = new JComboBox<String>();
         tab1.add(comboCylinder);
         comboCylinder.addItem("Auto");
-        for (int i = 0; i < PPC.calcObj.getMachines().get(comboMachine.getSelectedIndex()).getCylinders().size(); i++)
-            comboCylinder.addItem(String.valueOf(PPC.calcObj.getMachines().get(comboMachine.getSelectedIndex()).getCylinders().get(i).getTeeth()));
+        for (int i = 0; i < Calculator.getMachines().get(comboMachine.getSelectedIndex()).getCylinders().size(); i++)
+            comboCylinder.addItem(String.valueOf(Calculator.getMachines().get(comboMachine.getSelectedIndex()).getCylinders().get(i).getTeeth()));
         comboCylinder.setBounds(230, 243, 100, 21);
 
         //géptípus alatti rész
@@ -1039,10 +1037,7 @@ public class Gui extends JFrame implements ActionListener {
             flashMyField(textFDomborCost,Color.RED,200);
         }
 
-        if (ready){
-            return true;
-        }
-        return false;
+        return ready;
     }
 
     public void summary() {
@@ -1174,10 +1169,10 @@ public class Gui extends JFrame implements ActionListener {
         @Override
         public Object getCellEditorValue() {
             try {
-                return new Double(Double.parseDouble(textField.getText()));
+                return Double.parseDouble(textField.getText());
             } catch (NumberFormatException e) {
                 System.out.println("Input error");
-                return Double.valueOf(0);
+                return (double) 0;
             }
         }
 
@@ -1185,7 +1180,7 @@ public class Gui extends JFrame implements ActionListener {
         public Component getTableCellEditorComponent(JTable table,
                                                      Object value, boolean isSelected, int row, int column) {
             textField.setText((value == null)
-                    ? "" : formatter.format((Double) value));
+                    ? "" : formatter.format(value));
             return textField;
         }
     }
@@ -1227,7 +1222,7 @@ public class Gui extends JFrame implements ActionListener {
                 return new Integer((textField.getText()));
             } catch (NumberFormatException e) {
                 System.out.println("Input error");
-                return Integer.valueOf(0);
+                return 0;
             }
         }
 
@@ -1261,7 +1256,7 @@ public class Gui extends JFrame implements ActionListener {
                 System.out.println("2.");
             }
 
-            if (answer != "")
+            if (!answer.equals(""))
                 return Double.valueOf(answer);
             return (double)-1;                                          //errorhandling level: MacGyver
 
