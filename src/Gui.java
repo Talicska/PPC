@@ -7,7 +7,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -433,7 +432,7 @@ public class Gui extends JFrame implements ActionListener {
         JComponent tab3 = new JPanel();
         tabbedPane.addTab("<html><body><table width='90'>Árképzés</table></body></html>", tab1);
         tab1.setLayout(null);
-        tabbedPane.addTab("<html><body><table width='90'>Egyebek</table></body></html>", tab2);
+        tabbedPane.addTab("<html><body><table width='90'>Hengerinfó</table></body></html>", tab2);
         tab2.setLayout(null);
         tabbedPane.addTab("<html><body><table width='90'>Etalon</table></body></html>", tab3);
         tab3.setLayout(null);
@@ -866,8 +865,6 @@ public class Gui extends JFrame implements ActionListener {
         teethInfo.getVerticalScrollBar().setUnitIncrement(16);
         tab2.add(teethInfo);
 
-
-
         Vector<String> columnNames = new Vector<String>();                                      //tab3
         columnNames.addElement("Mennyiség");
         columnNames.addElement("0 szín");
@@ -905,6 +902,8 @@ public class Gui extends JFrame implements ActionListener {
         };
         table.setRowHeight(20);
         table.getTableHeader().setBounds(0, 0, 695, 30);
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
         table.setBounds(0, 30, 695, 400);
         table.setDefaultRenderer(Double.class, new PriceRenderer(priceformat));
         table.setDefaultEditor(Double.class, new PriceEditor(priceformat));
@@ -934,7 +933,6 @@ public class Gui extends JFrame implements ActionListener {
         tab3.add(buttonSaveEtalon);
 
         this.add(tabbedPane);
-        //this.add(panel1);         //not needed anymore, left in just in case
         this.add(panelSum);
         this.add(menu);
         this.setVisible(true);
