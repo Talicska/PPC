@@ -180,6 +180,7 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         this.add(buttonAddMat);
 
         buttonTop = new JButton("");
+        buttonTop.setToolTipText("Mozgatás tetejére");
         try {
             Image imgBottom = ImageIO.read(getClass().getResource("resources/top.png"));
             buttonTop.setIcon(new ImageIcon(imgBottom));
@@ -192,6 +193,7 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         this.add(buttonTop);
 
         buttonUp = new JButton("");
+        buttonUp.setToolTipText("Mozgatás fel");
         try {
             Image imgBottom = ImageIO.read(getClass().getResource("resources/up.png"));
             buttonUp.setIcon(new ImageIcon(imgBottom));
@@ -205,6 +207,7 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         this.add(buttonUp);
 
         buttonDown = new JButton("");
+        buttonDown.setToolTipText("Mozgatás le");
         try {
             Image imgDown = ImageIO.read(getClass().getResource("resources/down.png"));
             buttonDown.setIcon(new ImageIcon(imgDown));
@@ -218,6 +221,7 @@ public class GuiManageMaterials extends JFrame implements ActionListener {
         this.add(buttonDown);
 
         buttonBottom = new JButton("");
+        buttonBottom.setToolTipText("Mozgatás legaljára");
         try {
             Image imgBottom = ImageIO.read(getClass().getResource("resources/bottom.png"));
             buttonBottom.setIcon(new ImageIcon(imgBottom));
