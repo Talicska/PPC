@@ -95,7 +95,7 @@ public class Calculator {
             }
         }
     }
-
+/*
     public boolean Tompi(int pieces,int machineIndex,double height){
         double min=1000;
         boolean found=false;
@@ -161,7 +161,7 @@ public class Calculator {
                         }
                     }
                     j++;
-                }*/
+                }
             } else { // only 1 applicable cylinder for the chosen machine
                 int j = 0;
                 while (this.verticalGap < 2) {
@@ -180,6 +180,45 @@ public class Calculator {
                 pieces--;
             }
             this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1);
+        }
+    }*/
+
+    private void searchMagnetCylinder(int machineIndex, double height, int magnetCylinderIndex){
+        int pieces=0;
+        this.verticalGap=0;
+
+        if(magnetCylinderIndex == 0){    // Auto: the program chooses the ideal applicable cylinder
+            // to reach the lowest (but bigger or equal than 2) vertical gap
+            double min=machines.get(machineIndex).getCylinders().get(machines.get(machineIndex).getCylinders().size()-1).getGirth();
+            pieces=(int)(machines.get(machineIndex).getCylinders().get(machines.get(machineIndex).getCylinders().size()-1).getGirth() / height);
+            //System.out.println("Kezdeti pieces: "+pieces);
+            boolean found=false;
+            while(pieces > 0 && !found){
+                for(int i=0; i<machines.get(machineIndex).getCylinders().size() && !found; i++){
+                    double rest=machines.get(machineIndex).getCylinders().get(i).getGirth() - pieces * height;
+                    //System.out.println(pieces+" "+rest+" "+rest / pieces+" "+machines.get(machineIndex).getCylinders().get(i).getGirth());
+                    if (rest/pieces >= 2 && rest/pieces < min) {
+                        this.chosenMagnetCylinder=machines.get(machineIndex).getCylinders().get(i);
+                        this.verticalGap=rest/pieces;
+                        found=true;
+                    }
+                }
+                pieces--;
+            }
+            if(found == false){
+                System.out.println("Nem fér bele csak a fele");
+            }
+        }else{ // we want to use a specific applicable cylinder
+            this.chosenMagnetCylinder=machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1);
+            pieces=(int)(machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth() / height);
+            while(pieces > 0 && this.verticalGap < 2){
+                double rest=machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth() - pieces * height;
+                this.verticalGap=rest/pieces;
+                pieces--;
+            }
+            if(this.verticalGap == 0){
+                System.out.println("Nem fér bele csak a fele");
+            }
         }
     }
 
