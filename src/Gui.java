@@ -1004,19 +1004,19 @@ public class Gui extends JFrame implements ActionListener {
 
         boolean ready=true;
 
-        if (textFAmount.getText().isEmpty()){
+        if (textFAmount.getText().isEmpty() || Integer.valueOf(textFAmount.getText()) == 0){
             ready=false;
             flashMyField(textFAmount,Color.RED,200);
         }
-        if (textFWidth.getText().isEmpty()){
+        if (textFWidth.getText().isEmpty() || Double.valueOf(textFWidth.getText()) == 0){
             ready=false;
             flashMyField(textFWidth,Color.RED,200);
         }
-        if (textFHeight.getText().isEmpty()){
+        if (textFHeight.getText().isEmpty() || Double.valueOf(textFHeight.getText()) == 0){
             ready=false;
             flashMyField(textFHeight,Color.RED,200);
         }
-        if (textFTracks.getText().isEmpty()){
+        if (textFTracks.getText().isEmpty() || Integer.valueOf(textFTracks.getText()) == 0){
             ready=false;
             flashMyField(textFTracks,Color.RED,200);
         }
