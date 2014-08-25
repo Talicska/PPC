@@ -173,15 +173,13 @@ public class Calculator {
                 }
             }
         } else { // we want to use a specific applicable cylinder
-            int j = 0;
+            pieces = (int) (machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth() / height);
             while (this.verticalGap < 2) {
-                pieces = (int) (machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth() / height) - j;
-                double rest = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth() % height;
-                this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1);
+                double rest = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1).getGirth() - pieces*height;
                 this.verticalGap = rest / pieces;
-                j++;
-                //System.out.println("darab per henger: " + pieces);
+                pieces--;
             }
+            this.chosenMagnetCylinder = machines.get(machineIndex).getCylinders().get(magnetCylinderIndex - 1);
         }
     }
 
