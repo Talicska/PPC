@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -851,6 +852,21 @@ public class Gui extends JFrame implements ActionListener {
         buttonExportPdf.setVisible(false);
         buttonExportPdf.addActionListener(this);
         panelSum.add(buttonExportPdf);
+
+        Image image = null;                                                                     //tab2
+        try {
+            image = ImageIO.read(getClass().getResource("resources/teethinfo.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JLabel label = new JLabel(new ImageIcon(image));
+        JScrollPane teethInfo = new JScrollPane(label);
+        teethInfo.setBounds(4,4,691,505);
+        teethInfo.getVerticalScrollBar().setPreferredSize(new Dimension(9, Integer.MAX_VALUE));
+        teethInfo.getVerticalScrollBar().setUnitIncrement(16);
+        tab2.add(teethInfo);
+
+
 
         Vector<String> columnNames = new Vector<String>();                                      //tab3
         columnNames.addElement("Mennyiség");
