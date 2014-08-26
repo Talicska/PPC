@@ -1,6 +1,8 @@
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
@@ -14,6 +16,7 @@ import com.itextpdf.text.ListItem;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Section;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -31,23 +34,24 @@ public class PdfExporter {
     private static int amount;
     private static double profitOnPiece;
 
+    static BaseFont bf;
+
     private static Font catFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
     private static Font redFont = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.RED);
     private static Font subFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
-    private static Font smallNorm = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
-    private static Font smallBold = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+    private static Font smallNorm;
+    private static Font smallBold;
 
     private static DecimalFormat df = new DecimalFormat("#.##");
 
     private enum choices {UPM, Herma, Budaval, Intercoat, Avery, Lintec};
 
-    public PdfExporter(String fileName,  String title, Material material, double width, double height, int colorNum, int lakkNum,
-                       double cliche, double stancCost, int amount, double profitOnPiece){
+    public PdfExporter(String fileName, String title, Material material, double width, double height, int colorNum, int lakkNum,
+                       double cliche, double stancCost, int amount, double profitOnPiece) {
 
         DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
         dfs.setDecimalSeparator('.');
         df.setDecimalFormatSymbols(dfs);
-
 
         for (choices c : choices.values()) {
             if (material.getName().contains(c.toString())) {
@@ -55,18 +59,18 @@ public class PdfExporter {
             }
         }
 
-        this.fileName = fileName;
-        if (!title.equals("")) this.title = " - " + title;
+        PdfExporter.fileName = fileName;
+        if (!title.equals("")) PdfExporter.title = " - " + title;
         System.out.println(fileName);
-        this.material = material;
-        this.width = width;
-        this.height = height;
-        this.colorNum = colorNum;
-        this.lakkNum = lakkNum;
-        this.cliche = cliche;
-        this.stanc = stancCost;
-        this.amount = amount;
-        this.profitOnPiece = profitOnPiece;
+        PdfExporter.material = material;
+        PdfExporter.width = width;
+        PdfExporter.height = height;
+        PdfExporter.colorNum = colorNum;
+        PdfExporter.lakkNum = lakkNum;
+        PdfExporter.cliche = cliche;
+        PdfExporter.stanc = stancCost;
+        PdfExporter.amount = amount;
+        PdfExporter.profitOnPiece = profitOnPiece;
 
         try {
             Document document = new Document();
@@ -93,47 +97,55 @@ public class PdfExporter {
 
         Paragraph preface = new Paragraph();
 
-        addEmptyLine(preface, 1);
+        try {
+            bf = BaseFont.createFont("c:/windows/fonts/arialuni.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            smallBold = new Font(bf, 12, Font.BOLD);
+            smallNorm = new Font(bf, 12, Font.NORMAL);
 
-        Paragraph titlePara = new Paragraph("Árajánlat" + title, catFont);
-        titlePara.setAlignment(Element.ALIGN_CENTER);
-        preface.add(titlePara);
-        addEmptyLine(preface, 2);
+            addEmptyLine(preface, 1);
 
-        Paragraph listPara = new Paragraph();
-        listPara.add(new Phrase("Alapanyag: ", smallBold));
-        listPara.add(new Phrase(material.getName(), smallNorm));
-        addEmptyLine(listPara, 1);
+            Paragraph titlePara = new Paragraph("Árajánlat" + title, catFont);
+            titlePara.setAlignment(Element.ALIGN_CENTER);
+            preface.add(titlePara);
+            addEmptyLine(preface, 2);
 
-        listPara.add(new Phrase("Címke mérete: ", smallBold));
-        listPara.add(new Phrase(width + " x " + height + " mm", smallNorm));
-        addEmptyLine(listPara, 1);
+            Paragraph listPara = new Paragraph();
+            listPara.add(new Phrase("Alapanyag: ", smallBold));
+            listPara.add(new Phrase(material.getName(), smallNorm));
+            addEmptyLine(listPara, 1);
 
-        listPara.add(new Phrase("Színek száma: ", smallBold));
-        if (lakkNum == 0) listPara.add(new Phrase(colorNum + " C", smallNorm));
-        else listPara.add(new Phrase(colorNum + " C + lakk", smallNorm));
-        addEmptyLine(listPara, 1);
+            listPara.add(new Phrase("Címke mérete: ", smallBold));
+            listPara.add(new Phrase(width + " x " + height + " mm", smallNorm));
+            addEmptyLine(listPara, 1);
 
-        listPara.add(new Phrase("Nyomdai előkészítés: ", smallBold));
-        listPara.add(new Phrase(cliche + " Ft / szín", smallNorm));
-        addEmptyLine(listPara, 1);
+            listPara.add(new Phrase("Színek száma: ", smallBold));
+            if (lakkNum == 0) listPara.add(new Phrase(colorNum + " C", smallNorm));
+            else listPara.add(new Phrase(colorNum + " C + lakk", smallNorm));
+            addEmptyLine(listPara, 1);
 
-        listPara.add(new Phrase("Stanc: ", smallBold));
-        if (stanc == 0) listPara.add(new Phrase("van ", smallNorm));
-        else listPara.add(new Phrase(stanc + " Ft", smallNorm));
-        addEmptyLine(listPara, 1);
+            listPara.add(new Phrase("Nyomdai előkészítés: ", smallBold));
+            listPara.add(new Phrase(cliche + " Ft / szín", smallNorm));
+            addEmptyLine(listPara, 1);
 
-        listPara.add(new Phrase("Mennyiség: ", smallBold));
-        listPara.add(new Phrase(df.format(amount) + " db", smallNorm));
-        addEmptyLine(listPara, 1);
+            listPara.add(new Phrase("Stanc: ", smallBold));
+            if (stanc == 0) listPara.add(new Phrase("van ", smallNorm));
+            else listPara.add(new Phrase(stanc + " Ft", smallNorm));
+            addEmptyLine(listPara, 1);
 
-        listPara.add(new Phrase("Darabár: ", smallBold));
-        listPara.add(new Phrase(df.format(profitOnPiece) + " Ft", smallNorm));
-        addEmptyLine(listPara, 1);
+            listPara.add(new Phrase("Mennyiség: ", smallBold));
+            listPara.add(new Phrase(df.format(amount) + " db", smallNorm));
+            addEmptyLine(listPara, 1);
 
-        listPara.add(new Phrase("Az árak áfa nélkül értendők."));
+            listPara.add(new Phrase("Darabár: ", smallBold));
+            listPara.add(new Phrase(df.format(profitOnPiece) + " Ft", smallNorm));
+            addEmptyLine(listPara, 1);
 
-        preface.add(listPara);
+            listPara.add(new Phrase("Az árak áfa nélkül értendők.", smallNorm));
+
+            preface.add(listPara);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         /*addEmptyLine(preface, 1);
         preface.add(new Paragraph("Címke mérete: " + width + " mm x " + height + " mm", smallNorm));
