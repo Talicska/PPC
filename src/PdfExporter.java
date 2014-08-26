@@ -39,12 +39,21 @@ public class PdfExporter {
 
     private static DecimalFormat df = new DecimalFormat("#.##");
 
+    private enum choices {UPM, Herma, Budaval, Intercoat, Avery, Lintec};
+
     public PdfExporter(String fileName,  String title, Material material, double width, double height, int colorNum, int lakkNum,
                        double cliche, double stancCost, int amount, double profitOnPiece){
 
         DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
         dfs.setDecimalSeparator('.');
         df.setDecimalFormatSymbols(dfs);
+
+
+        for (choices c : choices.values()) {
+            if (material.getName().contains(c.toString())) {
+                material.setName(material.getName().replace(c.toString(), ""));
+            }
+        }
 
         this.fileName = fileName;
         if (!title.equals("")) this.title = " - " + title;
