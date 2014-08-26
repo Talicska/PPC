@@ -547,7 +547,7 @@ public class Calculator {
         printfSelfCosts(clicheCost, stancCost, otherCost);
 
         //Profit - margin
-        int colorNum = countColors();
+        colorNum = countColors();
         transformEtalon(width, height);
         profitOnPiece = calcProfitOnPiece(amount, width, height, colorNum, materialSelfCost, discount);
         if (pregCover != 0){
@@ -569,8 +569,8 @@ public class Calculator {
     }
 
     public void exportToPdf(String fileName){
-        pdfExporterObj = new PdfExporter(fileName, title, material, width, height, colorNum, stancCost + clicheCost,
-                stancCost, amount, profitOnPiece);
+        pdfExporterObj = new PdfExporter(fileName, title, material, width, height, colorNum, lakkNum,
+                clicheCost, stancCost, amount, profitOnPiece);
     }
 
     public void addMaterial(Material newMaterial){

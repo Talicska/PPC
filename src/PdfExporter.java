@@ -25,8 +25,9 @@ public class PdfExporter {
     private static double width;
     private static double height;
     private static int colorNum;
-    private static double preCost;
-    private static boolean stanc = false;
+    private static int lakkNum;
+    private static double cliche;
+    private static double stanc;
     private static int amount;
     private static double profitOnPiece;
 
@@ -38,8 +39,8 @@ public class PdfExporter {
 
     private static DecimalFormat df = new DecimalFormat("#.##");
 
-    public PdfExporter(String fileName,  String title, Material material, double width, double height, int colorNum, double preCost,
-                       double stancCost, int amount, double profitOnPiece){
+    public PdfExporter(String fileName,  String title, Material material, double width, double height, int colorNum, int lakkNum,
+                       double cliche, double stancCost, int amount, double profitOnPiece){
 
         DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
         dfs.setDecimalSeparator('.');
@@ -52,8 +53,9 @@ public class PdfExporter {
         this.width = width;
         this.height = height;
         this.colorNum = colorNum;
-        this.preCost = preCost;
-        if (stancCost > 0) stanc = true;
+        this.lakkNum = lakkNum;
+        this.cliche = cliche;
+        this.stanc = stancCost;
         this.amount = amount;
         this.profitOnPiece = profitOnPiece;
 
@@ -95,23 +97,21 @@ public class PdfExporter {
         addEmptyLine(listPara, 1);
 
         listPara.add(new Phrase("Címke mérete: ", smallBold));
-        listPara.add(new Phrase(width + " mm x " + height + " mm", smallNorm));
+        listPara.add(new Phrase(width + " x " + height + " mm", smallNorm));
         addEmptyLine(listPara, 1);
 
         listPara.add(new Phrase("Színek száma: ", smallBold));
-        listPara.add(new Phrase(colorNum + " C", smallNorm));
+        if (lakkNum == 0) listPara.add(new Phrase(colorNum + " C", smallNorm));
+        else listPara.add(new Phrase(colorNum + " C + lakk", smallNorm));
         addEmptyLine(listPara, 1);
 
         listPara.add(new Phrase("Nyomdai előkészítés: ", smallBold));
-        listPara.add(new Phrase(preCost + " Ft", smallNorm));
+        listPara.add(new Phrase(cliche + " Ft / szín", smallNorm));
         addEmptyLine(listPara, 1);
 
-        listPara.add(new Phrase("Stanc:  ", smallBold));
-        if (stanc){
-            listPara.add(new Phrase("van ", smallNorm));
-        }else{
-            listPara.add(new Phrase("nincs ", smallNorm));
-        }
+        listPara.add(new Phrase("Stanc: ", smallBold));
+        if (stanc == 0) listPara.add(new Phrase("van ", smallNorm));
+        else listPara.add(new Phrase(stanc + " Ft", smallNorm));
         addEmptyLine(listPara, 1);
 
         listPara.add(new Phrase("Mennyiség: ", smallBold));
@@ -122,9 +122,7 @@ public class PdfExporter {
         listPara.add(new Phrase(df.format(profitOnPiece) + " Ft", smallNorm));
         addEmptyLine(listPara, 1);
 
-        listPara.add(new Phrase("Összesen: ", smallBold));
-        listPara.add(new Phrase(df.format(amount * profitOnPiece) + " Ft", smallNorm));
-        addEmptyLine(listPara, 1);
+        listPara.add(new Phrase("Az árak áfa nélkül értendők."));
 
         preface.add(listPara);
 
