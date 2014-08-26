@@ -36,9 +36,8 @@ public class PdfExporter {
 
     static BaseFont bf;
 
-    private static Font catFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
-    private static Font redFont = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.RED);
-    private static Font subFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
+    private static Font catFont;
+    private static Font subFont;
     private static Font smallNorm;
     private static Font smallBold;
 
@@ -99,6 +98,8 @@ public class PdfExporter {
 
         try {
             bf = BaseFont.createFont("c:/windows/fonts/arialuni.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            catFont = new Font(bf, 18, Font.BOLD);
+            subFont = new Font(bf, 16, Font.BOLD);
             smallBold = new Font(bf, 12, Font.BOLD);
             smallNorm = new Font(bf, 12, Font.NORMAL);
 
@@ -132,7 +133,7 @@ public class PdfExporter {
             else listPara.add(new Phrase(stanc + " Ft", smallNorm));
             addEmptyLine(listPara, 1);
 
-            listPara.add(new Phrase("Mennyiség: ", smallBold));
+            listPara.add(new Phrase("Példányszám: ", smallBold));
             listPara.add(new Phrase(df.format(amount) + " db", smallNorm));
             addEmptyLine(listPara, 1);
 
