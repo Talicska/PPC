@@ -4,7 +4,6 @@
 
 import java.util.ArrayList;
 import java.util.Vector;
-import java.lang.Math;
 
 public class Calculator {
 

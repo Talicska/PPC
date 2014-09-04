@@ -2,8 +2,13 @@
  * Created by Talicska on 2014.07.08..
  */
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -18,12 +23,6 @@ import java.text.NumberFormat;
 import java.util.EventObject;
 import java.util.Locale;
 import java.util.Vector;
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.text.*;
 
 public class Gui extends JFrame implements ActionListener {
 

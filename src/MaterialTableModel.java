@@ -2,11 +2,9 @@
  * Created by Talicska on 2014.07.13..
  */
 
-import javax.sql.RowSetInternal;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
-import java.util.Objects;
 import java.util.Vector;
 
 public class MaterialTableModel extends AbstractTableModel {

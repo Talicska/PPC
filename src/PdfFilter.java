@@ -1,8 +1,9 @@
 /**
  * Created by Prof on 2014.08.07..
  */
+
+import javax.swing.filechooser.FileFilter;
 import java.io.File;
-import javax.swing.filechooser.*;
 
 public class PdfFilter extends FileFilter {
 

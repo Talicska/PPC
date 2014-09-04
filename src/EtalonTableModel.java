@@ -2,10 +2,10 @@
  * Created by Talicska on 2014.07.09..
  */
 
-import java.util.Vector;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import java.util.Vector;
 
 public class EtalonTableModel extends DefaultTableModel {
 
